@@ -1,18 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import firebase from 'firebase';
+import {auth, provider} from './client';
 
-class App extends Component {
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      user: null
+    }
+  }
+
+  async login() {
+    const result = await auth().signInWithPopup(provider)
+    this.setState({user: result.user});
+  }
+
+  logout() {
+    auth().signOut()
+    this.setState({user: null});
+  }
+
   render() {
+    const {user} = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
+        <button onClick={this.login.bind(this)}>
+          Login with Facebook
+        </button>
+
+        <button onClick={this.logout.bind(this)}>
+          Logout
+        </button>
       </div>
     );
   }
