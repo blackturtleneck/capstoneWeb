@@ -36,4 +36,4 @@
 ehthumbs.db
 Thumbs.db
 .gitignore
-/node_module
+	node_modules/
