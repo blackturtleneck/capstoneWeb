@@ -9,12 +9,21 @@ class Messenger extends React.Component {
     this.submitMessage = this.submitMessage.bind(this)
     this.state = {
       message: '',
-      messages: [
-        {id:0, text:'first message'},
-        {id:1, text:'second message'},
-        {id:2, text:'third message'}
-      ]
+      messages: []
     }
+  }
+
+  componentDidMount(){
+    console.log("componentDidMout")
+    firebase.database().ref('messages/').on('value', (snapshot) => {
+      const currentMessages = snapshot.val()
+
+      if(currentMessages != null){
+        this.setState({
+          messages: currentMessages
+        })
+      }
+    })
   }
 
   updateMessage(event){
@@ -30,11 +39,7 @@ class Messenger extends React.Component {
       id: this.state.messages.length,
       text: this.state.message
     }
-    let list = Object.assign([], this.state.messages)
-    list.push(nextMessage)
-    this.setState({
-      messages: list
-    })
+    firebase.database().ref('messages/' + nextMessage.id).set(nextMessage)
   }
 
   render() {
