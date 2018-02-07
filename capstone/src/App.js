@@ -1,37 +1,16 @@
 import React from 'react';
 import firebase from 'firebase';
 import {auth, provider} from './client';
+import Messenger from './Messenger';
+import Login from './Login';
 
 class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      user: null
-    }
-  }
-
-  async login() {
-    const result = await auth().signInWithPopup(provider)
-    this.setState({user: result.user});
-  }
-
-  logout() {
-    auth().signOut()
-    this.setState({user: null});
-  }
 
   render() {
-    const {user} = this.state
     return (
       <div className="App">
-        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
-        <button onClick={this.login.bind(this)}>
-          Login with Facebook
-        </button>
-
-        <button onClick={this.logout.bind(this)}>
-          Logout
-        </button>
+        <Login user="null"> </Login>
+        <Messenger></Messenger>
       </div>
     );
   }
