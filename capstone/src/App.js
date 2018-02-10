@@ -1,8 +1,9 @@
 import React from 'react';
 import firebase from 'firebase';
-import {auth, provider} from './client';
+import {auth, provider} from './FirestoreConfig';
 import Messenger from './Messenger';
 import Login from './Login';
+import Profile from './Profile'
 
 class App extends React.Component {
 
@@ -11,6 +12,7 @@ class App extends React.Component {
       <div className="App">
         <Login user="null"> </Login>
         <Messenger></Messenger>
+        <Profile></Profile>
       </div>
     );
   }
