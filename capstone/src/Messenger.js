@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
-import {auth, provider} from './client';
+import {auth, provider} from './FirestoreConfig';
+import ChatInput from './ChatInput';
 
 class Messenger extends React.Component {
   constructor(props, context){
@@ -50,10 +51,10 @@ class Messenger extends React.Component {
     })
     return (
       <div className="messenger">
+      <ChatInput/>
       <ol>
         {currentMessage}
         </ol>
-        I'm a messenger
         <input onChange={this.updateMessage} type="text" placeholder="message"/>
         <br/>
         <button onClick={this.submitMessage}>Submit Message</button>
