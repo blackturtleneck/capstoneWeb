@@ -14,6 +14,7 @@ class Login extends React.Component {
   async login() {
     const result = await auth().signInWithPopup(provider)
     this.setState({user: result.user});
+    
     // var users = db.CollectionReference('users');
     
     // users.doc('kUEypqhlHUFAn7lJcK6t').set({
