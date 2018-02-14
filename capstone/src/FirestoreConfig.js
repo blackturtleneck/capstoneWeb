@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+require('firebase/firestore')
 
 // Initialize Firebase
 var config = {
@@ -14,4 +15,4 @@ firebase.initializeApp(config);
 export const ref = firebase.database().ref()
 export const auth = firebase.auth
 export const provider = new firebase.auth.FacebookAuthProvider();
-// export const db = firebase.firestore()
+export const db = firebase.firestore();

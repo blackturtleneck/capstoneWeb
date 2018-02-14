@@ -36,5 +36,10 @@
 ehthumbs.db
 Thumbs.db
 
+<<<<<<< HEAD
 /node_modules/
 /functions/
+=======
+node_modules/
+functions/
+>>>>>>> jess
