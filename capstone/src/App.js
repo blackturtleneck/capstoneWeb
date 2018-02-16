@@ -1,8 +1,9 @@
 import React from 'react';
 import firebase from 'firebase';
-import { db, auth, provider } from './FirestoreConfig';
-// import Messenger from './Messenger';
-// import Login from './Login';
+import {auth, provider} from './FirestoreConfig';
+import Messenger from './Messenger';
+import Login from './Login';
+import Dates from './Dates'
 import Profile from './Profile'
 
 class App extends React.Component {
@@ -87,41 +88,14 @@ class App extends React.Component {
     auth().signOut()
     this.setState({ user: null });
   }
-  render() {
-    const  user  = this.state.user
-    const users = this.state.userList;
-    console.log("users", users);
-    const currentMessage = this.state.messages.map((message, i) => {
-      return (
-        <li key={message.id}>{message.text}</li>
-      )
-    })
+  render() {  
     return (
       <div className="App">
-        {/* <Login> </Login> */}
-        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
-        <button onClick={this.login.bind(this)}>
-          Login with Facebook
-        </button>
-        <button onClick={this.logout.bind(this)}>
-          Logout
-        </button>
-        <div className="messenger">
-          <ol>
-            {currentMessage}
-          </ol>
-          <input onChange={this.updateMessage} type="text" placeholder="message" />
-          <br />
-          <button onClick={this.submitMessage}>Submit Message</button>
-
-        </div>
-        {/* <Messenger user={this.state.user}></Messenger> */}
-        {/* <Profile></Profsile> */}
-
-      <div className="friend's list">
-      {users}
-</div>
-
+        <div id="showResult"> </div>
+        <Login user="null"> </Login>
+        <Messenger></Messenger>
+        <Profile></Profile>
+        <Dates></Dates>
       </div>
     );
   }

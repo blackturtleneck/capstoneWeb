@@ -36,7 +36,6 @@
 ehthumbs.db
 Thumbs.db
 .gitignore
-
+../npm-debug.log
 /node_modules/
 /functions/
-

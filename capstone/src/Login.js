@@ -35,9 +35,9 @@ class Login extends React.Component {
 render() {
   const {user} = this.state
 
-    return (
-      <div className="login">
-        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
+    return(
+      <div className = "login">
+            <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
         <button onClick={this.login.bind(this)}>
           Login with Facebook
         </button>
