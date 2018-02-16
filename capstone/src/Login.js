@@ -1,6 +1,8 @@
 import React from 'react';
+
 import firebase from 'firebase';
 import { db, auth, provider } from './FirestoreConfig';
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,6 +14,23 @@ class Login extends React.Component {
 
   async login() {
     const result = await auth().signInWithPopup(provider)
+
+    //this.setState({user: result.user});
+    
+    // var users = db.CollectionReference('users');
+    
+    // users.doc('kUEypqhlHUFAn7lJcK6t').set({
+    //   FName: "sarah",
+    //   LName: "F",
+    //   DOB:'march 5 2020'
+    // })
+    // .then(function() {
+    //   console.log("Document successfully written!");
+    // })
+    // .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    // });
+
     this.setState({ user: result.user });
     console.log("results", result.user.email);
     // Add a new document in collection "cities"
@@ -25,11 +44,34 @@ class Login extends React.Component {
         console.error("Error writing document: ", error);
       });
 
+
   }
 
   logout() {
     auth().signOut()
+    this.setState({user: null});
+  }
+
+
+
+
+  test() {
+    var users = db.collection("users");
+    
+    users.doc('new').set({
+      FName: "sarah",
+      LName: "F",
+      DOB:'march 5 2020',
+      PhotoRef: ''
+    })
+    .then(function() {
+      console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+
     this.setState({ user: null });
+
   }
 
 render() {

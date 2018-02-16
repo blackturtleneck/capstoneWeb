@@ -1,6 +1,6 @@
 import React from 'react';
-import firebase from 'firebase';
-import {auth, provider} from './FirestoreConfig';
+// import firebase from 'firebase';
+// import {auth, provider} from './FirestoreConfig';
 import Messenger from './Messenger';
 import Login from './Login';
 import Dates from './Dates'

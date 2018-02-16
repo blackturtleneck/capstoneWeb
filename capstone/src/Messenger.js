@@ -1,4 +1,5 @@
 import React from 'react';
+
 import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
 import ChatInput from './ChatInput';
