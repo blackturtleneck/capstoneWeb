@@ -1,8 +1,8 @@
 import React from 'react';
+import { Card, ListItem, Button } from 'react'
 // input cuisine preferences
 // finds midpoint location between two people (??)
 // using a 
-
 
 
 
@@ -11,10 +11,17 @@ class Dates extends React.Component {
 		super(props);
     this.restaurantDetails = [];
     this.listOfLocations = [];
+    this.state = {
+      data: null
+    };
   }
+
   // api call - needs to be put in config file
-	componentDidMount() {
-		fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.6535114262&lon=-122.352",{
+	componentWillMount() {
+    this.loadData();
+  }
+  loadData(){
+    fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.6535114262&lon=-122.352",{
 			headers: {
 			    "Accept": "application/json",
 			    "user-key": "1b8bf5702241de94be0cba6b8772d29e"
@@ -23,8 +30,13 @@ class Dates extends React.Component {
 			.then(data => {
         this.extractLocations(data.nearby_restaurants);
         this.extractRestaurantDetails(data.nearby_restaurants);
-			})
+        this.setState({
+          data : data.nearby_restaurants
+        });
+      })
   }
+  
+		
   
   // get the addresses of restuarants to be able to say how close/far they are to you both
    extractLocations = (restaurants) => {
@@ -60,13 +72,34 @@ class Dates extends React.Component {
     }
 
   }
-  render() {
-    return (
-      <div className="dategen">
-        I'm a date generator 
+  render(){
+    if (!this.state.data) {
+      return <div> Your dates are loading! </div>
+    } 
+      return (
+        <div>
+          The following are date spots located halfway between you and your date! Price range is ranked
+          from 1 - 4 (4 being the most expensive).
+        <d1>
+      <dt> {this.restaurantDetails['0'].name} </dt>
+      <dd> Cuisine Type: {this.restaurantDetails['0'].cuisines} </dd>
+      <dd> Price Range: {this.restaurantDetails['0'].price_range} </dd>
+      <dt> {this.restaurantDetails['1'].name} </dt>
+      <dd> Cuisine Type: {this.restaurantDetails['1'].cuisines} </dd>
+      <dd> Price Range: {this.restaurantDetails['1'].price_range} </dd>
+      <dt> {this.restaurantDetails['2'].name} </dt>
+      <dd> Cuisine Type: {this.restaurantDetails['2'].cuisines} </dd>
+      <dd> Price Range: {this.restaurantDetails['2'].price_range} </dd>
+      <dt> {this.restaurantDetails['3'].name} </dt>
+      <dd> Cuisine Type: {this.restaurantDetails['3'].cuisines} </dd>
+      <dd> Price Range: {this.restaurantDetails['3'].price_range} </dd>
+      <dt> {this.restaurantDetails['4'].name} </dt>
+      <dd> Cuisine Type: {this.restaurantDetails['4'].cuisines} </dd>
+      <dd> Price Range: {this.restaurantDetails['4'].price_range} </dd>
+       </d1>
       </div>
-    );
+      );
   }
-}
 
+}
 export default Dates;
