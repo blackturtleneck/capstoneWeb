@@ -32,9 +32,8 @@ class Login extends React.Component {
     this.setState({ user: null });
   }
 
-
-  render() {
-    const { user } = this.state
+render() {
+  const {user} = this.state
 
     return (
       <div className="login">
@@ -42,7 +41,6 @@ class Login extends React.Component {
         <button onClick={this.login.bind(this)}>
           Login with Facebook
         </button>
-
         <button onClick={this.logout.bind(this)}>
           Logout
         </button>
