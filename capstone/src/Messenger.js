@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import {auth, provider} from './client';
+import {auth, provider} from './FirestoreConfig';
 
 class Messenger extends React.Component {
 
