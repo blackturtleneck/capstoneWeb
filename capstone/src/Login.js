@@ -1,7 +1,6 @@
 import React from 'react';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
-
 
 class Login extends React.Component {
   constructor(props){
@@ -45,7 +44,8 @@ class Login extends React.Component {
     users.doc('new').set({
       FName: "sarah",
       LName: "F",
-      DOB:'march 5 2020'
+      DOB:'march 5 2020',
+      PhotoRef: ''
     })
     .then(function() {
       console.log("Document successfully written!");
