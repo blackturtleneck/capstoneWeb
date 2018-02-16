@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
-
+import './Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ render() {
     return (
       <div className="login">
         <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
-        <button onClick={this.login.bind(this)}>
+        <button className="facebook" onClick={this.login.bind(this)}>
           Login with Facebook
         </button>
 
