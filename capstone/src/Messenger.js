@@ -1,16 +1,20 @@
 import React from 'react';
+
 import firebase from 'firebase';
-import {auth, provider} from './FirestoreConfig';
+import {auth, provider, db} from './FirestoreConfig';
 import ChatInput from './ChatInput';
+import Login from './Login';
 
 class Messenger extends React.Component {
   constructor(props, context){
     super(props, context)
+    console.log("this.props", this.props);
     this.updateMessage = this.updateMessage.bind(this)
     this.submitMessage = this.submitMessage.bind(this)
     this.state = {
       message: '',
-      messages: []
+      messages: [],
+      user: this.props.user
     }
   }
 
