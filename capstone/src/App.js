@@ -1,10 +1,11 @@
 import React from 'react';
-// import firebase from 'firebase';
-// import {auth, provider} from './FirestoreConfig';
+import firebase from 'firebase';
+import {auth, provider, db} from './FirestoreConfig';
 import Messenger from './Messenger';
 import Login from './Login';
 import Dates from './Dates'
 import Profile from './Profile'
+// import Dates from './Dates'
 
 class App extends React.Component {
 

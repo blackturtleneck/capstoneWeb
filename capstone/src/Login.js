@@ -1,8 +1,7 @@
 import React from 'react';
-
 import firebase from 'firebase';
-import { db, auth, provider } from './FirestoreConfig';
-
+import {auth, provider, db} from './FirestoreConfig';
+import './Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,23 +13,6 @@ class Login extends React.Component {
 
   async login() {
     const result = await auth().signInWithPopup(provider)
-
-    //this.setState({user: result.user});
-    
-    // var users = db.CollectionReference('users');
-    
-    // users.doc('kUEypqhlHUFAn7lJcK6t').set({
-    //   FName: "sarah",
-    //   LName: "F",
-    //   DOB:'march 5 2020'
-    // })
-    // .then(function() {
-    //   console.log("Document successfully written!");
-    // })
-    // .catch(function(error) {
-    //     console.error("Error writing document: ", error);
-    // });
-
     this.setState({ user: result.user });
     console.log("results", result.user.email);
     // Add a new document in collection "cities"
@@ -44,12 +26,11 @@ class Login extends React.Component {
         console.error("Error writing document: ", error);
       });
 
-
   }
 
   logout() {
     auth().signOut()
-    this.setState({user: null});
+    this.setState({ user: null });
   }
 
 
@@ -61,28 +42,30 @@ class Login extends React.Component {
     users.doc('new').set({
       FName: "sarah",
       LName: "F",
-      DOB:'march 5 2020',
-      PhotoRef: ''
+      DOB:'march 5 2020'
     })
     .then(function() {
       console.log("Document successfully written!");
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
-
-    this.setState({ user: null });
-
+    });
   }
 
 render() {
   const {user} = this.state
 
-    return(
-      <div className = "login">
-            <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
-        <button onClick={this.login.bind(this)}>
+    return (
+      <div className="login">
+        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
+        <button className="facebook" onClick={this.login.bind(this)}>
           Login with Facebook
         </button>
+
+        <button onClick={this.test.bind(this)}>
+          TESTTESTTEST
+        </button>
+
         <button onClick={this.logout.bind(this)}>
           Logout
         </button>
