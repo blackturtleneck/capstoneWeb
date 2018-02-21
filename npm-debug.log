@@ -14,7 +14,6 @@
 12 error errno -2
 13 error syscall open
 14 error enoent ENOENT: no such file or directory, open '/Users/zhannavoloshina/Documents/package.json'
-15 error enoent ENOENT: no such file or directory, open '/Users/zhannavoloshina/Documents/package.json'
 15 error enoent This is most likely not a problem with npm itself
 15 error enoent and is related to npm not being able to find a file.
 16 verbose exit [ -2, true ]
