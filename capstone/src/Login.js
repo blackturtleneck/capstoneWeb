@@ -33,32 +33,12 @@ class Login extends React.Component {
     this.setState({ user: null });
   }
 
-
-
-
-  test() {
-    var users = db.collection("users");
-    
-    users.doc('new').set({
-      FName: "sarah",
-      LName: "F",
-      DOB:'march 5 2020'
-    })
-    .then(function() {
-      console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
-  }
-
 render() {
   const {user} = this.state
-
-    return (
-      <div className="login">
-        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
-        <button className="facebook" onClick={this.login.bind(this)}>
+    return(
+      <div className = "login">
+            <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
+        <button onClick={this.login.bind(this)}>
           Login with Facebook
         </button>
 
