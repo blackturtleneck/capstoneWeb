@@ -56,7 +56,7 @@ class App extends React.Component {
                         </div>
                     :
                         <div className="login">
-                        <p>{user ? `Hi, ${user.displayName}!` : 'Hi!'}</p>
+                        {/* <p>{user ? `Hi, ${user.displayName}!` : 'Welcome to our unamed app'}</p> */}
                         <button className="facebook" onClick={this.login.bind(this)}>
                           Login with Facebook
                         </button>
