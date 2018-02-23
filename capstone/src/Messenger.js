@@ -3,7 +3,6 @@ import React from 'react';
 import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
 import ChatInput from './ChatInput';
-import Login from './Login';
 
 class Messenger extends React.Component {
   constructor(props, context){
