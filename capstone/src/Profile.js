@@ -9,15 +9,29 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user
+            userEmail: this.props.userEmail,
+            userDoc: ''
         };
       }
+
+    componentWillMount() {
+        db.collection("users").doc(this.state.userEmail).get().then(doc => {
+                if (doc.exists) {
+                    this.setState({userDoc: doc.data()});
+                    console.log("Document data:", doc.data().age);
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }
+        );
+    }
 
   render() {
     return (
         <div className="messenger">
             <p>PROFILE</p>
-            <p>{this.state.user.displayName}</p>
+            <p>{this.state.userDoc.age}</p>
             <p>END PROFILE</p>
         </div>
     );

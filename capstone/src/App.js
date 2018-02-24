@@ -60,7 +60,7 @@ class App extends React.Component {
                     (this.state.user ?
                         <div>
                           <button onClick={this.edit.bind(this)}>Edit Profile</button>
-                          <Profile user={this.state.user}/>
+                          <Profile userEmail={this.state.user.email}/>
                           <Messenger/>
                           <Dates/>
                           <button onClick={this.logout.bind(this)}>
