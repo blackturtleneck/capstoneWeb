@@ -4,7 +4,7 @@ import {auth, db, storageRef} from './FirestoreConfig';
 
 // import ImageUploader from 'react-firebase-image-uploader';
 
-class Profile extends React.Component {
+class EditProfile extends React.Component {
 
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ class Profile extends React.Component {
   render() {
     return (
         <div className="messenger">
-            <p>PROFILE</p>
+            <p>EDITPROFILE</p>
             <form onSubmit={this.uploadBio}>
                 <label>
                     Bio:
@@ -83,4 +83,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default EditProfile;

@@ -5,6 +5,8 @@ import Messenger from './Messenger';
 import Dates from './Dates'
 import Profile from './Profile'
 import './Login.css';
+import EditProfile from './EditProfile'
+import ReactDOM from 'react-dom';
 // import Dates from './Dates'
 
 class App extends React.Component {
@@ -46,6 +48,10 @@ class App extends React.Component {
       this.setState({ user: null });
     }
 
+    edit() {
+      ReactDOM.render(<EditProfile />, document.getElementById('root'))
+    }
+
     render() {
       const {user} = this.state;
 
@@ -54,11 +60,14 @@ class App extends React.Component {
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div>
+                          <button onClick={this.edit.bind(this)}>Edit Profile</button>
+                          <Profile/>
                           <Messenger/>
                           <Dates/>
                           <button onClick={this.logout.bind(this)}>
-                          Logout
-                        </button>
+                            Logout
+                          </button>
+                         
                         </div>
                     :
                         <div className="login">

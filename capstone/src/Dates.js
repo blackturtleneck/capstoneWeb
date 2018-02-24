@@ -4,8 +4,6 @@ import { Card, ListItem, Button } from 'react'
 // finds midpoint location between two people (??)
 // using a 
 
-
-
 class Dates extends React.Component {
 	constructor(props) {
 		super(props);
@@ -42,7 +40,7 @@ class Dates extends React.Component {
    extractLocations = (restaurants) => {
     for(let restaurant of restaurants) {
       this.listOfLocations.push(restaurant.restaurant.location);
-      console.log(restaurant.restaurant.location)
+      // console.log(restaurant.restaurant.location)
     }
   }
 
@@ -80,7 +78,7 @@ class Dates extends React.Component {
         <div>
           The following are date spots located halfway between you and your date! Price range is ranked
           from 1 - 4 (4 being the most expensive).
-        <d1>
+        {/* <d1>
       <dt> {this.restaurantDetails['0'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['0'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['0'].price_range} </dd>
@@ -96,7 +94,7 @@ class Dates extends React.Component {
       <dt> {this.restaurantDetails['4'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['4'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['4'].price_range} </dd>
-       </d1>
+       </d1> */}
       </div>
       );
   }
