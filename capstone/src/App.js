@@ -40,7 +40,6 @@ class App extends React.Component {
         .catch(function (error) {
           console.error("Error writing document: ", error);
         });
-  
     }
   
     logout() {
@@ -61,7 +60,7 @@ class App extends React.Component {
                     (this.state.user ?
                         <div>
                           <button onClick={this.edit.bind(this)}>Edit Profile</button>
-                          <Profile/>
+                          <Profile user={this.state.user}/>
                           <Messenger/>
                           <Dates/>
                           <button onClick={this.logout.bind(this)}>
