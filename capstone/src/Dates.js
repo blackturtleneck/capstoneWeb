@@ -1,9 +1,5 @@
 import React from 'react';
 import { Card, ListItem, Button } from 'react'
-// input cuisine preferences
-// finds midpoint location between two people (??)
-// using a 
-
 
 
 class Dates extends React.Component {

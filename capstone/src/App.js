@@ -5,7 +5,7 @@ import Messenger from './Messenger';
 import Dates from './Dates'
 import Profile from './Profile'
 import './Login.css';
-// import Dates from './Dates'
+import MapContainer from './MapContainer'
 
 class App extends React.Component {
 
@@ -48,11 +48,12 @@ class App extends React.Component {
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div>
-                          <Messenger/>
-                          <Dates/>
-                          <button onClick={this.logout.bind(this)}>
+                          {/* <Messenger/>
+                          <Dates/> */}
+                          <MapContainer/>
+                          {/* <button onClick={this.logout.bind(this)}>
                           Logout
-                        </button>
+                        </button> */}
                         </div>
                     :
                         <div className="login">
