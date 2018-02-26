@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, ListItem, Button } from 'react'
 
-
 class Dates extends React.Component {
 	constructor(props) {
 		super(props);
