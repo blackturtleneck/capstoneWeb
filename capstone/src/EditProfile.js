@@ -9,78 +9,83 @@ class EditProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bio: '',
-            photoRef: ''
+            userDoc: this.props.userDoc
         };
-    
-        this.uploadBio = this.uploadBio.bind(this);
-        this.handleBioChange = this.handleBioChange.bind(this);
-        this.handlePhotoChange = this.handlePhotoChange.bind(this);
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
       }
+    //   handleSubmit(event) {
+    //     event.preventDefault();
+    //     console.log("val:"+event.target.value);
+    //     console.log("name:"+event.target.name);
+    //     console.log("type:"+event.target.type);
+    //   }
 
-    uploadBio(e) {
-        e.preventDefault();
-        var users = db.collection("users");
+
+    handleInputChange (e) {
+    // const { name, value } = data
+    e.preventDefault();
+        // console.log("data:"+data);
+        console.log("val:"+e.target.value);
+        console.log("name:"+e.target.name);
+        console.log("type:"+e.target.type);
+        // console.log("nameconst:"+name);
+        // console.log("valueconst:"+value);
+    // ...
+  }
+
+  handleSubmit (e) {
+    // const { name, value } = data
+    e.preventDefault();
+        const target = e.target;
+        // const value = target.type === 'checkbox' ? target.checked : target.value;
+        // const name = target.name;
     
-        users.doc('newest').set({
-          Bio: this.state.bio
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
+        this.setState({
+            userDoc: this.props.userDoc
+            // [name]: value
         });
-    }
-
-    uploadPhoto(e) {
-        e.preventDefault();
-        var users = db.collection("users");
-        
-        users.doc('newest').set({
-          photoRef: this.state.photoRef
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-
-    handleBioChange(e) {
-        this.setState({bio: e.target.value});
-    }
-
-    handlePhotoChange(e) {
-        this.setState({photo: e.target.value});
-    }
-
+      }
 
   render() {
     return (
-        <div className="messenger">
-            <p>EDITPROFILE</p>
-            <form onSubmit={this.uploadBio}>
+        <div >div
+            {/* <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
+            <p>Age: {this.state.userDoc.age}</p>
+            <p>Gender: {this.state.userDoc.gender}</p> */}
+            
+            {/* <form>
                 <label>
                     Bio:
-                    <input type="text" value={this.state.bio} onChange={this.handleBioChange}/>
+                    <input
+                        name="bio"
+                        type="text"
+                        value={this.state.numberOfGuests}
+                        onChange={this.handleInputChange} />
                 </label>
-                <input type="submit" value="Submit" />
-            </form>
 
-            <form onSubmit={this.uploadPhoto}>
+                <input type="submit" value="Submit" />
+            </form> */}
+            {/* <form onSubmit={this.handleInputChange}> */}
+                {/* <input type="text" name="email" value="bio" onChange={}/> */}
+            {/* </form> */}
+
+
+            {/* <form onSubmit={this.uploadPhoto}>
                 <input type="file" 
                         name="pic" 
                         accept="image/*" 
                         value={this.state.photo}
                         onChange={this.handlePhotoChange}/>
                 <input type="submit" value="Submit"/>
-            </form>
-            <p>END PROFILE</p>
+            </form> */}
         </div>
     );
   }
 }
 
 export default EditProfile;
+
+
+// trying to set state of multiple inputs (one for each field in db) by using multiple inputs and on handler function
