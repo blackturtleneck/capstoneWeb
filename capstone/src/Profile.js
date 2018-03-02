@@ -39,10 +39,10 @@ class Profile extends React.Component {
   render() {
     return (
         <div className="profile">
-            <button user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button>
-            <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
-            <p>Age: {this.state.userDoc.age}</p>
-            <p>Gender: {this.state.userDoc.gender}</p>
+            <button className = "button" user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button>
+            <p className = "text">Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
+            <p className = "text">Age: {this.state.userDoc.age}</p>
+            <p className = "text">Gender: {this.state.userDoc.gender}</p>
         </div>
     );
   }

@@ -57,13 +57,13 @@ export default class MultiSelectField extends Component {
   render () {
         return (
             <div className="section">
-                <h3 className="section-heading">{this.props.label}</h3>
-                <button onClick={this.triggerChildAlert}>Click</button>
+                <h3 className="section-heading header">{this.props.label}</h3>
+                <button className = "button" onClick={this.triggerChildAlert}>Click</button>
                 <Select multi joinValues value={this.state.value} placeholder="Select the cuisine(s) you like" options={cuisines} onChange={this.handleSelectChange} />
                <br/>
                <br/>
                 <Dates ref="child" />
-                <button onClick={this.triggerChildAlert}>Click</button>
+                <button className = "button" onClick={this.triggerChildAlert}>Click</button>
             </div>
         );
     }
