@@ -5,7 +5,6 @@ import EditProfile from './EditProfile'
 import ReactDOM from 'react-dom';
 import InlineEdit from 'react-edit-inline'
 
-
 // import ImageUploader from 'react-firebase-image-uploader';
 
 class Profile extends React.Component {
@@ -15,7 +14,7 @@ class Profile extends React.Component {
         this.state = {
             userDoc: ''
         };
-        this.dataChanged = this.dataChanged.bind(this);
+        // this.dataChanged = this.dataChanged.bind(this);
       }
 
     componentWillMount() {
@@ -31,12 +30,10 @@ class Profile extends React.Component {
     }
 
     edit() {
-        ReactDOM.render(<EditProfile />, document.getElementById('root'))
+        ReactDOM.render(<EditProfile userEmail={this.props.userEmail}/>, document.getElementById('root'))
       }
 
-      dataChanged(e) {
-        e.preventDefault();
-      }
+      
 
   render() {
     return (
@@ -45,15 +42,6 @@ class Profile extends React.Component {
             <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
             <p>Age: {this.state.userDoc.age}</p>
             <p>Gender: {this.state.userDoc.gender}</p>
-            <h2>{this.state.message}</h2>
-            <span>Edit me: </span>
-            <InlineEdit
-              validate={this.customValidateText}
-              activeClassName="editing"
-              text="inlineedittext"
-              paramName="message"
-              change={this.dataChanged}
-            />
         </div>
     );
   }
@@ -63,3 +51,13 @@ export default Profile;
 
 // TODO write post-install script to update node-modules
 // https://github.com/kaivi/ReactInlineEdit/pull/41/files/ef233ff37c6857ff270d4a53f2793330bb1c006b
+
+/** 
+  name: result.user.displayName,
+        lName: result.additionalUserInfo.profile.last_name,
+        gender: result.additionalUserInfo.profile.gender,
+        age: result.additionalUserInfo.profile.age_range.min,
+        linkFB: result.additionalUserInfo.profile.link,
+        timeZone: result.additionalUserInfo.profile.timezone,
+        photoURL: result.user.photoURL
+ */
