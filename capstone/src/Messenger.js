@@ -15,7 +15,8 @@ class Messenger extends React.Component {
       messages: [],
       user: this.props.user,
       userEmail: this.props.userEmail,
-      otherUser: this.props.otherUser
+      otherUser: this.props.otherUser,
+      otherUserName: this.props.otherUserName
     }
     // create a collection of message documents between this user and another user
     db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc("0").set({"from":null, id:0, text:""});
@@ -71,12 +72,13 @@ class Messenger extends React.Component {
     })
     return (
       <div className="messenger">
+      <h2>{this.state.otherUserName}</h2>
         <ol>
           {currentMessage}
         </ol>
         <div className="button-input-wrapper">
-        <input onChange={this.updateMessage} type="text" placeholder="message" />
-        <button className="button" onClick={this.submitMessage}>Submit Message</button>
+        <input className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
+        <button className="submit-button" onClick={this.submitMessage}>Send</button>
         </div>
         <br />
       </div>

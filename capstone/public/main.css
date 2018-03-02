@@ -39,3 +39,7 @@ div img{ display: inline-block;}
 .center  {
     display: center;
 }
+
+.send-text{
+    width: 70%;
+}

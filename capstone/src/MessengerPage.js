@@ -21,7 +21,9 @@ class MessengerPage extends React.Component {
         db.collection("users").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
-                curUserList.push({ "email": doc.id, "name": doc.get("name") });
+                if(doc.get("name") !== currentComponent.state.user){
+                    curUserList.push({ "email": doc.id, "name": doc.get("name") });
+                }
             });
             currentComponent.setState({ userList: curUserList })
         });

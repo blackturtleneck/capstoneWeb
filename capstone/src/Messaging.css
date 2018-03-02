@@ -2,6 +2,7 @@
     background-color: #9ba2ff;
     margin-left: 40%;
     text-align: right;
+    color: white;
 }
 .them{
     margin-right: 40%;
@@ -20,7 +21,7 @@
 }
 
 .messenger{
-    padding: 30px;
+    margin-left: 150px;
 }
 
 .button-input-wrapper {
@@ -29,6 +30,35 @@
     align-content: center;
 }
 
-input{
-    width: 80%;
+.send-text{
+    width: 75% !important;
+}
+
+.submit-button{
+    background-color: #9ba2ff; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif, bold;
+    text-transform: uppercase;
+    width: 20%;
+}
+
+h2{
+    font-size: 2vw;
+    padding-left: 40px; 
+}
+
+h1{
+    font-size: 4vw;
+}
+
+button{
+    background: transparent;
+    border: none;
 }
