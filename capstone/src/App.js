@@ -2,10 +2,11 @@ import React from 'react';
 // import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
 import Messenger from './Messenger';
-import Dates from './Dates'
-import Profile from './Profile'
+import Dates from './Dates';
+import Profile from './Profile';
 import './Login.css';
-// import Dates from './Dates'
+import MapContainer from './MapContainer';
+import DatesSelection from './DatesSelection';
 
 class App extends React.Component {
 
@@ -56,12 +57,16 @@ class App extends React.Component {
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div>
+
+                           {/* <Messenger/>   <Dates/> */}
+                         <DatesSelection/>
                           <Profile userEmail={this.state.user.email}/>
                           <Messenger/>
                           <Dates/>
                           <button onClick={this.logout.bind(this)}>
                             Logout
                           </button>
+
                         </div>
                     :
                         <div className="login">

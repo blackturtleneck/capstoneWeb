@@ -1,12 +1,12 @@
 import React from 'react';
-// import { Card, ListItem, Button } from 'react'
-// input cuisine preferences
-// finds midpoint location between two people (??)
-// using a 
+import { Card, ListItem, Button } from 'react'
+import MapContainer from './MapContainer'
+import Slider from 'react-slick'
 
 class Dates extends React.Component {
 	constructor(props) {
-		super(props);
+    super(props);
+    console.log(this.props.selections)
     this.restaurantDetails = [];
     this.listOfLocations = [];
     this.state = {
@@ -19,7 +19,7 @@ class Dates extends React.Component {
     this.loadData();
   }
   loadData(){
-    fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.6535114262&lon=-122.352",{
+    fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.656491&lon=-122.30736",{
 			headers: {
 			    "Accept": "application/json",
 			    "user-key": "1b8bf5702241de94be0cba6b8772d29e"
@@ -34,7 +34,9 @@ class Dates extends React.Component {
       })
   }
   
-		
+  showAlert() {
+    alert('Hello World');
+}
   
   // get the addresses of restuarants to be able to say how close/far they are to you both
    extractLocations = (restaurants) => {
@@ -74,11 +76,31 @@ class Dates extends React.Component {
     if (!this.state.data) {
       return <div> Your dates are loading! </div>
     } 
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+
       return (
         <div>
+
+
+          <MapContainer data = {this.state.data} />
           The following are date spots located halfway between you and your date! Price range is ranked
           from 1 - 4 (4 being the most expensive).
-        {/* <d1>
+
+          <br/>
+          <button type="button"> {this.restaurantDetails['0'].name} </button>
+          <button type="button"> {this.restaurantDetails['1'].name} </button>
+          <button type="button"> {this.restaurantDetails['2'].name} </button>
+          <button type="button"> {this.restaurantDetails['3'].name} </button>
+          <button type="button"> {this.restaurantDetails['4'].name} </button>
+        <d1>
+
+       <d1>
       <dt> {this.restaurantDetails['0'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['0'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['0'].price_range} </dd>
@@ -94,7 +116,7 @@ class Dates extends React.Component {
       <dt> {this.restaurantDetails['4'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['4'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['4'].price_range} </dd>
-       </d1> */}
+       </d1> 
       </div>
       );
   }
