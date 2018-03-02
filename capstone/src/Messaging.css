@@ -1,0 +1,34 @@
+.me{
+    background-color: #9ba2ff;
+    margin-left: 40%;
+    text-align: right;
+}
+.them{
+    margin-right: 40%;
+    background-color: lightgray;
+}
+
+.message-bubble{
+    width: 15%;
+    border-radius: 5px;
+    padding: 5px;
+    padding-right: 10px;
+}
+
+.messenger-page{
+    margin: 0 auto;
+}
+
+.messenger{
+    padding: 30px;
+}
+
+.button-input-wrapper {
+    padding-left: 40px;
+    padding-right: 40%;
+    align-content: center;
+}
+
+input{
+    width: 80%;
+}

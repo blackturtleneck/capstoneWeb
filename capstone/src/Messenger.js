@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import { auth, provider, db } from './FirestoreConfig';
 import UserList from './UserList';
+import './Messaging.css';
 
 class Messenger extends React.Component {
   constructor(props, context) {
@@ -65,7 +66,7 @@ class Messenger extends React.Component {
     console.log("this.state", this.state);
     const currentMessage = this.state.messages.map((message, i) => {
       return (
-        <li key={message.id}>{message.text}</li>
+        <li className={this.state.user === message.from ? "me message-bubble" : "them message-bubble"}  key={message.id}>{message.text}</li>
       )
     })
     return (
@@ -73,8 +74,10 @@ class Messenger extends React.Component {
         <ol>
           {currentMessage}
         </ol>
+        <div className="button-input-wrapper">
         <input onChange={this.updateMessage} type="text" placeholder="message" />
-        <button onClick={this.submitMessage}>Submit Message</button>
+        <button className="button" onClick={this.submitMessage}>Submit Message</button>
+        </div>
         <br />
       </div>
     );
