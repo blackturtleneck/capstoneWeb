@@ -1,4 +1,5 @@
-import firebase, { firestore } from 'firebase';
+// import firebase, { firestore } from 'firebase';
+import firebase from 'firebase';
 require('firebase/firestore');
 
 // Initialize Firebase

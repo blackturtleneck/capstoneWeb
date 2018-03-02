@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Dates from './Dates';
+// import Dates from './Dates';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

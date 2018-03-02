@@ -42,7 +42,7 @@ class Dates extends React.Component {
    extractLocations = (restaurants) => {
     for(let restaurant of restaurants) {
       this.listOfLocations.push(restaurant.restaurant.location);
-      console.log(restaurant.restaurant.location)
+      // console.log(restaurant.restaurant.location)
     }
   }
 
@@ -91,6 +91,7 @@ class Dates extends React.Component {
           <MapContainer data = {this.state.data} />
           The following are date spots located halfway between you and your date! Price range is ranked
           from 1 - 4 (4 being the most expensive).
+
           <br/>
           <button type="button"> {this.restaurantDetails['0'].name} </button>
           <button type="button"> {this.restaurantDetails['1'].name} </button>
@@ -98,6 +99,8 @@ class Dates extends React.Component {
           <button type="button"> {this.restaurantDetails['3'].name} </button>
           <button type="button"> {this.restaurantDetails['4'].name} </button>
         <d1>
+
+       <d1>
       <dt> {this.restaurantDetails['0'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['0'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['0'].price_range} </dd>
@@ -113,7 +116,7 @@ class Dates extends React.Component {
       <dt> {this.restaurantDetails['4'].name} </dt>
       <dd> Cuisine Type: {this.restaurantDetails['4'].cuisines} </dd>
       <dd> Price Range: {this.restaurantDetails['4'].price_range} </dd>
-       </d1>
+       </d1> 
       </div>
       );
   }

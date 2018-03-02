@@ -1,6 +1,11 @@
 import React from 'react';
 // import firebase from 'firebase';
-import {db, storageRef} from './FirestoreConfig';
+import { db } from './FirestoreConfig';
+// import {auth, db, storageRef} from './FirestoreConfig';
+import EditProfile from './EditProfile'
+import ReactDOM from 'react-dom';
+// import InlineEdit from 'react-edit-inline'
+
 // import ImageUploader from 'react-firebase-image-uploader';
 
 class Profile extends React.Component {
@@ -8,77 +13,36 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bio: '',
-            photoRef: ''
+            userDoc: ''
         };
-    
-        this.uploadBio = this.uploadBio.bind(this);
-        this.handleBioChange = this.handleBioChange.bind(this);
-        this.handlePhotoChange = this.handlePhotoChange.bind(this);
+        // this.dataChanged = this.dataChanged.bind(this);
       }
 
-    //   componentWillMount(){
-    //       storageRef.photoRef
-    //   }
-
-    uploadBio(e) {
-        e.preventDefault();
-        var users = db.collection("users");
-    
-        users.doc('newest').set({
-          Bio: this.state.bio
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
+    componentWillMount() {
+        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+                if (doc.exists) {
+                    this.setState({userDoc: doc.data()});
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }
+        );
     }
 
-    uploadPhoto(e) {
-        e.preventDefault();
-        var users = db.collection("users");
-        
-        users.doc('newest').set({
-          photoRef: this.state.photoRef
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
+    edit() {
+        ReactDOM.render(<EditProfile userEmail={this.props.userEmail}/>, document.getElementById('root'))
+      }
 
-    handleBioChange(e) {
-        this.setState({bio: e.target.value});
-    }
-
-    handlePhotoChange(e) {
-        this.setState({photo: e.target.value});
-    }
-
+      
 
   render() {
     return (
-        <div className="messenger">
-            <form onSubmit={this.uploadBio}>
-                <label>
-                    Bio:
-                    <input type="text" value={this.state.bio} onChange={this.handleBioChange}/>
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-
-            <form onSubmit={this.uploadPhoto}>
-                <input type="file" 
-                        name="pic" 
-                        accept="image/*" 
-                        value={this.state.photo}
-                        onChange={this.handlePhotoChange}/>
-                <input type="submit" value="Submit"/>
-            </form>
+        <div className="profile">
+            <button user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button>
+            <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
+            <p>Age: {this.state.userDoc.age}</p>
+            <p>Gender: {this.state.userDoc.gender}</p>
         </div>
     );
   }
@@ -86,10 +50,15 @@ class Profile extends React.Component {
 
 export default Profile;
 
+// TODO write post-install script to update node-modules
+// https://github.com/kaivi/ReactInlineEdit/pull/41/files/ef233ff37c6857ff270d4a53f2793330bb1c006b
 
-/**
- * TODO
- * on login, create storage ref for user
- * add ref to user in database 
- * 
+/** 
+  name: result.user.displayName,
+        lName: result.additionalUserInfo.profile.last_name,
+        gender: result.additionalUserInfo.profile.gender,
+        age: result.additionalUserInfo.profile.age_range.min,
+        linkFB: result.additionalUserInfo.profile.link,
+        timeZone: result.additionalUserInfo.profile.timezone,
+        photoURL: result.user.photoURL
  */
