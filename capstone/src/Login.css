@@ -5,6 +5,8 @@
     height: 40px;
     text-align: center;
     width: 200px;
+    margin: 0 auto;
+    display: block;
 }
 
 ol{
@@ -13,7 +15,5 @@ ol{
 }
 
 .login{
-    margin: 0 auto;
-    display: block;
     padding-top: 40vh;
 }
