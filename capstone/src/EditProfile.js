@@ -74,7 +74,7 @@ class EditProfile extends React.Component {
     render() {
         return (
             <div >
-                <p>Click to edit a field!</p>
+                <p className = "text">Click to edit a field!</p>
                 <InlineEdit
                 validate={this.customValidateText}
                 activeClassName="editing"
