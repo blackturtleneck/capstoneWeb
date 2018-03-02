@@ -1,8 +1,7 @@
 import React from 'react';
-import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
-import Messenger from './Messenger';
-import Dates from './Dates'
+import MessengerPage from './MessengerPage';
+// import Dates from './Dates'
 import Profile from './Profile'
 import './Login.css';
 // import Dates from './Dates'
@@ -41,15 +40,13 @@ class App extends React.Component {
     }
 
     render() {
-      const {user} = this.state;
-
         return (
             <div className="">
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div>
-                          <Messenger/>
-                          <Dates/>
+                          <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
+                          {/* <Dates/> */}
                           <button onClick={this.logout.bind(this)}>
                           Logout
                         </button>

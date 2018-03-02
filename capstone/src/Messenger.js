@@ -1,43 +1,60 @@
 import React from 'react';
-
 import firebase from 'firebase';
-import {auth, provider, db} from './FirestoreConfig';
-import ChatInput from './ChatInput';
+import { auth, provider, db } from './FirestoreConfig';
+import UserList from './UserList';
+// import ChatInput from './ChatInput';
 
 class Messenger extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
+    console.log("this.props messenger", props);
     super(props, context)
-    console.log("this.props", this.props);
     this.updateMessage = this.updateMessage.bind(this)
     this.submitMessage = this.submitMessage.bind(this)
     this.state = {
       message: '',
       messages: [],
-      user: this.props.user
+      user: this.props.user,
+      userEmail: this.props.userEmail,
+      otherUser: this.props.otherUser
     }
+    
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log("componentDidMout")
-    firebase.database().ref('messages/').on('value', (snapshot) => {
-      const currentMessages = snapshot.val()
+    // firebase.database().ref('messages/').on('value', (snapshot) => {
+    //   const currentMessages = snapshot.val()
 
-      if(currentMessages != null){
-        this.setState({
-          messages: currentMessages
-        })
-      }
-    })
+    //   if (currentMessages != null) {
+    //     this.setState({
+    //       messages: currentMessages
+    //     })
+    //   }
+
+    // })
+    let currentComponent = this;
+    let curUserList = [];
+    db.collection("users").get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        // doc.data() is never undefined for query doc snapshots
+        curUserList.push({"email":doc.id, "name":doc.get("name")});
+        console.log("doc.itd", doc.id + " "+ doc.get("name"))
+      });
+      console.log("curUserList", curUserList);
+      currentComponent.setState({userList:curUserList})
+
+    });
+    console.log("this.state", this.state)
   }
 
-  updateMessage(event){
+  updateMessage(event) {
     console.log('updateMessage:' + event.target.value);
     this.setState({
       message: event.target.value
     })
   }
 
-  submitMessage(event){
+  submitMessage(event) {
     console.log('submitMessage: ' + this.state.message)
     const nextMessage = {
       id: this.state.messages.length,
@@ -47,6 +64,7 @@ class Messenger extends React.Component {
   }
 
   render() {
+    console.log("this.state", this.state);
     const currentMessage = this.state.messages.map((message, i) => {
       return (
         <li key={message.id}>{message.text}</li>
@@ -54,13 +72,14 @@ class Messenger extends React.Component {
     })
     return (
       <div className="messenger">
-      <ChatInput/>
-      <ol>
-        {currentMessage}
+        <ol>
+          {currentMessage}
         </ol>
-        <input onChange={this.updateMessage} type="text" placeholder="message"/>
-        <br/>
+        <input onChange={this.updateMessage} type="text" placeholder="message" />
+        <br />
         <button onClick={this.submitMessage}>Submit Message</button>
+{this.state.userList !==undefined && this.state.userList !== [] ?     <UserList curUserList={this.state.userList}/>
+: <div>loading</div>}        <button onClick={this.pullUsers}>Pull Users</button>
       </div>
     );
   }
