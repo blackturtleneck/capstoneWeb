@@ -56,7 +56,6 @@ class App extends React.Component {
                         <div> 
                          <DatesSelection/>
                           <Profile userEmail={this.state.user.email}/>
-                          <Dates/>
                           <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
                           <button onClick={this.logout.bind(this)}>
                             Logout
