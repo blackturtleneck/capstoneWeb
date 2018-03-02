@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "firebase": "^4.9.1",
+    "react-edit-inline": "^1.0.8",
     "react-scripts": "1.1.1"
   },
   "scripts": {
@@ -17,3 +18,4 @@
     "eject": "react-scripts eject"
   }
 }
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import {auth, provider, db} from './FirestoreConfig';
 import Messenger from './Messenger';
 import Dates from './Dates'
@@ -21,19 +21,27 @@ class App extends React.Component {
     async login() {
       const result = await auth().signInWithPopup(provider)
       this.setState({ user: result.user });
-      console.log("results", result.user.email);
-      // Add a new document in collection "cities"
-      db.collection("users").doc(result.user.email).set({
-        name: result.user.displayName,
-      })
-        .then(function () {
-          console.log("Document successfully written!");
+      // Add a new document in collection "users"
+      // if(!db.collection("users").doc(result.user.email).get()) {
+        db.collection("users").doc(result.user.email).set({
+          name: result.user.displayName,
+          fName: result.additionalUserInfo.profile.first_name,
+          lName: result.additionalUserInfo.profile.last_name,
+          gender: result.additionalUserInfo.profile.gender,
+          age: result.additionalUserInfo.profile.age_range.min,
+          linkFB: result.additionalUserInfo.profile.link,
+          timeZone: result.additionalUserInfo.profile.timezone,
+          photoURL: result.user.photoURL,
+          icons:{"first":"abc","sec":"def"}
         })
-        .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
-  
-    }
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      }
+    // }
   
     logout() {
       auth().signOut()
@@ -48,11 +56,12 @@ class App extends React.Component {
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div>
+                          <Profile userEmail={this.state.user.email}/>
                           <Messenger/>
                           <Dates/>
                           <button onClick={this.logout.bind(this)}>
-                          Logout
-                        </button>
+                            Logout
+                          </button>
                         </div>
                     :
                         <div className="login">
@@ -64,8 +73,7 @@ class App extends React.Component {
                     )
                 :
                 <div></div>
-                }
-                    
+                }        
                 
             </div>
         );
