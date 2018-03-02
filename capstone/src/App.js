@@ -21,23 +21,25 @@ class App extends React.Component {
     async login() {
       const result = await auth().signInWithPopup(provider)
       this.setState({ user: result.user });
-      // Add a new document in collection "cities"n
-      db.collection("users").doc(result.user.email).set({
-        name: result.user.displayName,
-        fName: result.additionalUserInfo.profile.first_name,
-        lName: result.additionalUserInfo.profile.last_name,
-        gender: result.additionalUserInfo.profile.gender,
-        age: result.additionalUserInfo.profile.age_range.min,
-        linkFB: result.additionalUserInfo.profile.link,
-        timeZone: result.additionalUserInfo.profile.timezone,
-        photoURL: result.user.photoURL
-      })
-        .then(function () {
-          console.log("Document successfully written!");
+      // Add a new document in collection "users"
+      if(!db.collection("users").doc(result.user.email).get()) {
+        db.collection("users").doc(result.user.email).set({
+          name: result.user.displayName,
+          fName: result.additionalUserInfo.profile.first_name,
+          lName: result.additionalUserInfo.profile.last_name,
+          gender: result.additionalUserInfo.profile.gender,
+          age: result.additionalUserInfo.profile.age_range.min,
+          linkFB: result.additionalUserInfo.profile.link,
+          timeZone: result.additionalUserInfo.profile.timezone,
+          photoURL: result.user.photoURL
         })
-        .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      }
     }
   
     logout() {
