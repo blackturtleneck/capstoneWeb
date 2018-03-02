@@ -17,7 +17,9 @@ class Messenger extends React.Component {
       userEmail: this.props.userEmail,
       otherUser: this.props.otherUser
     }
-    
+    db.collection("users").doc(this.state.user).collection("messages").doc(this.state.otherUser).set({0:""});
+    db.collection("users").doc(this.state.otherUser).collection("messages").doc(this.state.user).set({0:""});
+
   }
 
   componentDidMount() {
@@ -77,9 +79,6 @@ class Messenger extends React.Component {
         </ol>
         <input onChange={this.updateMessage} type="text" placeholder="message" />
         <br />
-        <button onClick={this.submitMessage}>Submit Message</button>
-{this.state.userList !==undefined && this.state.userList !== [] ?     <UserList curUserList={this.state.userList}/>
-: <div>loading</div>}        <button onClick={this.pullUsers}>Pull Users</button>
       </div>
     );
   }

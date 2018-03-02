@@ -7,15 +7,15 @@ class MessengerPage extends React.Component {
     constructor(props, context) {
         console.log("this.props messenger", props);
         super(props, context)
-        this.updateMessage = this.updateMessage.bind(this)
-        this.submitMessage = this.submitMessage.bind(this)
+        // this.updateMessage = this.updateMessage.bind(this)
+        // this.submitMessage = this.submitMessage.bind(this)
         this.state = {
             message: '',
             messages: [],
             user: this.props.user,
-            userEmail: this.props.userEmail
+            userEmail: this.props.userEmail,
         }
-
+        console.log(this.state);
     }
 
     componentDidMount() {
@@ -45,21 +45,21 @@ class MessengerPage extends React.Component {
         console.log("this.state", this.state)
     }
 
-    updateMessage(event) {
-        console.log('updateMessage:' + event.target.value);
-        this.setState({
-            message: event.target.value
-        })
-    }
+    // updateMessage(event) {
+    //     console.log('updateMessage:' + event.target.value);
+    //     this.setState({
+    //         message: event.target.value
+    //     })
+    // }
 
-    submitMessage(event) {
-        console.log('submitMessage: ' + this.state.message)
-        const nextMessage = {
-            id: this.state.messages.length,
-            text: this.state.message
-        }
-        firebase.database().ref('messages/' + nextMessage.id).set(nextMessage)
-    }
+    // submitMessage(event) {
+    //     console.log('submitMessage: ' + this.state.message)
+    //     const nextMessage = {
+    //         id: this.state.messages.length,
+    //         text: this.state.message
+    //     }
+    //     //ref('messages/' + nextMessage.id).set(nextMessage)
+    // }
 
     render() {
         console.log("this.state", this.state);
@@ -69,13 +69,13 @@ class MessengerPage extends React.Component {
             )
         })
         return (
-            <div className="messenger">
-                <ol>
+            <div className="messenger-page">
+                {/* <ol>
                     {currentMessage}
                 </ol>
                 <input onChange={this.updateMessage} type="text" placeholder="message" />
                 <br />
-                <button onClick={this.submitMessage}>Submit Message</button>
+                <button onClick={this.submitMessage}>Submit Message</button> */}
                 {this.state.userList ? 
                 <UserList user={this.props.userEmail} curUserList={this.state.userList} />
                     : 

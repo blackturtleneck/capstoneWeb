@@ -8,7 +8,6 @@ class UserListComponent extends Component {
         this.chooseUser = this.chooseUser.bind(this)
         this.state = {
             user:this.props.user,
-            otherUser: ""
         }
     }
 
@@ -19,10 +18,11 @@ class UserListComponent extends Component {
         })
     }
     render() {
+        console.log(this.state);
         return (
             <div>
                 <button onClick={this.chooseUser}>{this.props.name}</button>
-                {this.state.otherUser ? <Messenger user={this.state.user} otherUser={this.state.email}/>:
+                {this.state.otherUser !== undefined ? <Messenger user={this.state.user} otherUser={this.props.email}/>:
             <div/>}
             </div>
         )
