@@ -27,17 +27,6 @@ class Messenger extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("componentDidMout")
-    // firebase.database().ref('messages/').on('value', (snapshot) => {
-    //   const currentMessages = snapshot.val()
-
-    //   if (currentMessages != null) {
-    //     this.setState({
-    //       messages: currentMessages
-    //     })
-    //   }
-
-    // })
     let currentComponent = this;
     let curMessage = []
 
@@ -47,35 +36,9 @@ class Messenger extends React.Component {
       querySnapshot.forEach(function(doc) {
           curMessages.push(doc.data());
       });
-    // .onSnapshot(function (doc) {
-    //   console.log("doc data", doc.data());
-    //   for (let i = 0; i < doc.data().length; i++) {
-    //     console.log("data", doc.data()[i])
-    //     curMessage.push(doc.data()[i])
-    //   }
       currentComponent.setState({ messages: curMessages });
     });
-    // querySnapshot.forEach(function(doc) {
-    //     // doc.data() is never undefined for query doc snapshots
-    //     console.log(doc.id, " => ", doc.data());
-    // });
-
   }
-
-
-  //   db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).get().then(function (querySnapshot) {
-  //     querySnapshot.forEach(function (doc) {
-  //       console.log("this worked?!")
-  //       // doc.data() is never undefined for query doc snapshots
-  //       curUserList.push({ "email": doc.id, "name": doc.get("name") });
-  //       console.log("doc.itd", doc.id + " " + doc.get("name"))
-  //     });
-  //     console.log("curUserList", curUserList);
-  //     currentComponent.setState({ userList: curUserList })
-
-  //   });
-  //   console.log("this.state", this.state)
-  // }
 
   updateMessage(event) {
     console.log('updateMessage:' + event.target.value);
@@ -94,7 +57,6 @@ class Messenger extends React.Component {
       text: this.state.message,
       from: this.state.user
     }
-    // firebase.database().ref('messages/' + nextMessage.id).set(nextMessage)
     db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
     db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
   }

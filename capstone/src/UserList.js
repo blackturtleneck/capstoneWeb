@@ -13,7 +13,7 @@ class UserList extends React.Component {
 
           return(
               <div>
-              user list
+              <h1>Friends</h1>
               {
                   this.props.curUserList.map((item, index) => {
                      return <UserListComponent user={this.props.user}name={item.name} email={item.email}/>
