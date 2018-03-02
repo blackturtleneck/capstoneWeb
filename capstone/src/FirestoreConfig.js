@@ -1,5 +1,4 @@
-import firebase from 'firebase';
-require('firebase/firestore');
+import firebase, { firestore } from 'firebase';
 
 // Initialize Firebase
 var config = {
