@@ -1,9 +1,10 @@
 import React from 'react';
-import firebase from 'firebase';
-import {auth, db, storageRef} from './FirestoreConfig';
+// import firebase from 'firebase';
+import { db } from './FirestoreConfig';
+// import {auth, db, storageRef} from './FirestoreConfig';
 import EditProfile from './EditProfile'
 import ReactDOM from 'react-dom';
-import InlineEdit from 'react-edit-inline'
+// import InlineEdit from 'react-edit-inline'
 
 // import ImageUploader from 'react-firebase-image-uploader';
 
