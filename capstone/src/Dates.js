@@ -98,7 +98,7 @@ class Dates extends React.Component {
           <button type="button"> {this.restaurantDetails['2'].name} </button>
           <button type="button"> {this.restaurantDetails['3'].name} </button>
           <button type="button"> {this.restaurantDetails['4'].name} </button>
-        <d1>
+    
 
        <d1>
       <dt> {this.restaurantDetails['0'].name} </dt>

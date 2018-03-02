@@ -1,4 +1,5 @@
 import firebase, { firestore } from 'firebase';
+require('firebase/firestore');
 
 // Initialize Firebase
 var config = {
