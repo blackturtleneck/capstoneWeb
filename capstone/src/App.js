@@ -5,7 +5,8 @@ import Messenger from './Messenger';
 import Dates from './Dates';
 import Profile from './Profile';
 import './Login.css';
-import MapContainer from './MapContainer'
+import MapContainer from './MapContainer';
+import DatesSelection from './DatesSelection';
 
 class App extends React.Component {
 
@@ -49,9 +50,10 @@ class App extends React.Component {
                     (this.state.user ?
                         <div>
                            {/* <Messenger/>   <Dates/> */}
-                        
-                          <MapContainer/>
-                          <Dates/>
+                         <DatesSelection/>
+                          
+                         
+                          
                   {/* <button onClick={this.logout.bind(this)}>
                           Logout
                         </button> */}
