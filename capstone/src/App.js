@@ -22,7 +22,7 @@ class App extends React.Component {
       const result = await auth().signInWithPopup(provider)
       this.setState({ user: result.user });
       // Add a new document in collection "users"
-      if(!db.collection("users").doc(result.user.email).get()) {
+      // if(!db.collection("users").doc(result.user.email).get()) {
         db.collection("users").doc(result.user.email).set({
           name: result.user.displayName,
           fName: result.additionalUserInfo.profile.first_name,
@@ -31,7 +31,8 @@ class App extends React.Component {
           age: result.additionalUserInfo.profile.age_range.min,
           linkFB: result.additionalUserInfo.profile.link,
           timeZone: result.additionalUserInfo.profile.timezone,
-          photoURL: result.user.photoURL
+          photoURL: result.user.photoURL,
+          icons:{"first":"abc","sec":"def"}
         })
           .then(function () {
             console.log("Document successfully written!");
@@ -40,7 +41,7 @@ class App extends React.Component {
             console.error("Error writing document: ", error);
           });
       }
-    }
+    // }
   
     logout() {
       auth().signOut()

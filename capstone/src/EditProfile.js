@@ -14,6 +14,7 @@ class EditProfile extends React.Component {
         };
 
         this.dataChanged = this.dataChanged.bind(this);
+        this.addIcon = this.addIcon.bind(this);
     }
 
     componentWillMount() {
@@ -53,10 +54,26 @@ class EditProfile extends React.Component {
         });
     }
 
+    addIcon(){
+        // console.log()
+        console.log(db.collection("users").doc(this.props.userEmail).get().icons)
+        // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
+            db.collection("users").doc(this.props.userEmail).update({
+                "icons": {"new":"nextChosenIcon"}
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+        // }
+    }
 
     render() {
         return (
             <div >
+                <p>Click to edit a field!</p>
                 <InlineEdit
                 validate={this.customValidateText}
                 activeClassName="editing"
@@ -64,6 +81,7 @@ class EditProfile extends React.Component {
                 paramName="fName"
                 change={this.dataChanged}
                 />
+                <br />
                 <InlineEdit
                 validate={this.customValidateText}
                 activeClassName="editing"
@@ -71,6 +89,7 @@ class EditProfile extends React.Component {
                 paramName="lName"
                 change={this.dataChanged}
                 />
+                <br />                
                 <InlineEdit
                 validate={this.customValidateText}
                 activeClassName="editing"
@@ -78,6 +97,7 @@ class EditProfile extends React.Component {
                 paramName="age"
                 change={this.dataChanged}
                 />
+                <br />                
                 <InlineEdit
                 validate={this.customValidateText}
                 activeClassName="editing"
@@ -85,6 +105,8 @@ class EditProfile extends React.Component {
                 paramName="gender"
                 change={this.dataChanged}
                 />
+                <br />                
+                {/* <button onClick={this.addIcon}>Add icon</button> */}
             </div>
         );
     }
