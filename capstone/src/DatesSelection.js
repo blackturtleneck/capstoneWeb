@@ -4,6 +4,7 @@ import MapContainer from './MapContainer'
 import Slider from 'react-slick'
 import MultiSelectField from './MultiSelectField'
 import Dates from './Dates'
+import Scheduler from './Scheduler'
 
 class DatesSelection extends React.Component {
 
@@ -11,6 +12,7 @@ class DatesSelection extends React.Component {
     return (
         <div>
         <MultiSelectField/>
+        <Scheduler/>
         <form>
   <label>
     Name:
