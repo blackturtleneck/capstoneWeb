@@ -51,13 +51,44 @@ class Messenger extends React.Component {
     const otherUser = db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages");
 
     console.log('submitMessage: ' + this.state.message)
+    const time = new Date();
+
+    let month = time.getMonth();
+    let formattedMonth = "";
+    if(month < 10){
+      formattedMonth = "0" +( month + 1);
+    } else {
+      formattedMonth = (month + 1) + "";
+    }
+
+    let day = time.getDate();
+    let formattedDay = "";
+    if(day < 10){
+      formattedDay = "0" + day;
+    } else {
+      formattedDay = day + "";
+    }
+
+    let seconds = time.getSeconds();
+    let formattedSeconds = "";
+    if(seconds < 10){
+      formattedSeconds = "0" + seconds;
+    } else {
+      formattedSeconds = seconds + "";
+    }
+
+   
+
+    console.log(time.getFullYear() + "" + time.getMonth() + "" + time.getDate())
+    const timeStamp = time.getFullYear() + ":" + formattedMonth + ":" + formattedDay+ ":" + time.getSeconds() + ":" + time.getMilliseconds()
+    console.log(time)
     const nextMessage = {
-      id: this.state.messages.length,
+      id: time,
       text: this.state.message,
       from: this.state.user
     }
-    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
-    db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
+    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(timeStamp).set(nextMessage);
+    db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(timeStamp).set(nextMessage);
   }
 
   render() {
