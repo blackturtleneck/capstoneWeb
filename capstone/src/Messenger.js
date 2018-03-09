@@ -18,9 +18,6 @@ class Messenger extends React.Component {
       otherUser: this.props.otherUser,
       otherUserName: this.props.otherUserName
     }
-    // create a collection of message documents between this user and another user
-    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages")//.doc("0").set({"from":null, id:0, text:""});
-    db.collection("users")//.doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc("0").set({"from":null, id:0, text:""});
     ;
   
 
