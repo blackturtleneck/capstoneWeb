@@ -93,7 +93,7 @@ class Messenger extends React.Component {
       formattedSeconds = seconds + "";
     }
 
-    const timeStamp = time.getFullYear() + ":" + formattedMonth + ":" + formattedDay+ ":" + formattedHours + ": " + formattedMinutes + ":" + time.getSeconds() + ":" + time.getMilliseconds()
+    const timeStamp = time.getFullYear() + ":" + formattedMonth + ":" + formattedDay+ ":" + formattedHours + ":" + formattedMinutes + ":" + formattedSeconds + ":" + time.getMilliseconds()
     const nextMessage = {
       id: time,
       text: this.state.message,
