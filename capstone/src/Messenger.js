@@ -77,11 +77,7 @@ class Messenger extends React.Component {
       formattedSeconds = seconds + "";
     }
 
-   
-
-    console.log(time.getFullYear() + "" + time.getMonth() + "" + time.getDate())
     const timeStamp = time.getFullYear() + ":" + formattedMonth + ":" + formattedDay+ ":" + time.getSeconds() + ":" + time.getMilliseconds()
-    console.log(time)
     const nextMessage = {
       id: time,
       text: this.state.message,
@@ -89,6 +85,8 @@ class Messenger extends React.Component {
     }
     db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(timeStamp).set(nextMessage);
     db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(timeStamp).set(nextMessage);
+
+    document.getElementById('message-box').value = '';
   }
 
   render() {
@@ -105,7 +103,7 @@ class Messenger extends React.Component {
           {currentMessage}
         </ol>
         <div className="button-input-wrapper">
-        <input className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
+        <input id="message-box" className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
         <button className="submit-button" onClick={this.submitMessage}>Send</button>
         </div>
         <br />
