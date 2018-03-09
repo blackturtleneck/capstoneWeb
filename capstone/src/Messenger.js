@@ -69,6 +69,22 @@ class Messenger extends React.Component {
       formattedDay = day + "";
     }
 
+    let hours = time.getHours();
+    let formattedHours = "";
+    if(hours < 10){
+      formattedHours = "0" + hours;
+    } else {
+      formattedHours = hours + "";
+    }
+
+    let minutes = time.getMinutes();
+    let formattedMinutes = "";
+    if(minutes < 10){
+      formattedMinutes = "0" + minutes;
+    } else {
+      formattedMinutes = minutes + "";
+    }
+
     let seconds = time.getSeconds();
     let formattedSeconds = "";
     if(seconds < 10){
