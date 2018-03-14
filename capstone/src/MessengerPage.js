@@ -29,7 +29,7 @@ class MessengerPage extends React.Component {
             currentComponent.setState({ userList: curUserList })
         });
     }
-d
+
     chooseUser = (curOtherUser) =>{
         console.log("curOtherUser", curOtherUser)
         if(curOtherUser !== null){
@@ -46,6 +46,7 @@ d
     }
 
     render() {
+        console.log("messenger page state", this.state)
         return (
             <div className="messenger-page">
                 {this.state.userList ?
