@@ -31,24 +31,27 @@ class Messenger extends React.Component {
     this.submitMessage = this.submitMessage.bind(this)
   }
 
+  componentWillMount() {
+        // pull down previous messages
+        let currentComponent = this;
+        let prevMessages = [];
+        db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").get().then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            prevMessages.push(doc.data)
+          });
+          currentComponent.setState({
+            messages: prevMessages
+          })
+        });
+        console.log(currentComponent.state)
+  }
+
+
   componentDidMount() {
     let currentComponent = this;
     let curMessage = []
-
-    // pull down previous messages
-    let prevMessages = [];
-    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        prevMessages.push(doc.data)
-      });
-      currentComponent.setState({
-        messages: prevMessages
-      })
-    });
-
-
     db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages")
       .onSnapshot(function (querySnapshot) {
         var curMessages = [];
@@ -67,10 +70,6 @@ class Messenger extends React.Component {
   }
 
   submitMessage(event) {
-    const thisUser = db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages");
-    console.log(thisUser)
-    const otherUser = db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages");
-
     console.log('submitMessage: ' + this.state.message)
     const nextMessage = {
       id: this.state.messages.length,
@@ -82,24 +81,27 @@ class Messenger extends React.Component {
   }
 
   render() {
-    console.log("this.state", this.state);
+    console.log("this.state.messages", this.state.messages);
     // const currentMessage = {}
     // if (this.state.messages) {
-       const currentMessage = this.state.messages.map((message, i) => {
-        return (
-          <li className={this.state.user === message.from ? "me message-bubble" : "them message-bubble"} key={message.id}>{message.text}</li>
-        )
-      })
+      //  const currentMessage = this.state.messages.map((message, i) => {
+      //   return (
+      //     <li className={this.state.user === message.from ? "me message-bubble" : "them message-bubble"} key={message.id}>{message.text}</li>
+      //   )
+      // })
     // }
 
     return (
       <div className="messenger">
         <h2>{this.state.otherUserName}</h2>
-        {this.state.messages  && currentMessage ?
           <ol>
-            {currentMessage}
+            {this.state.messages ? this.state.messages.map((message, i) => {
+         
+          <li className={this.state.user === message.from ? "me message-bubble" : "them message-bubble"} key={message.id}>{message.text}</li>
+        
+      }) : <p>loading</p>}
           </ol>
-          : <div>loading</div>}
+
         <div className="button-input-wrapper">
           <input className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
           <button className="submit-button" onClick={this.submitMessage}>Send</button>
