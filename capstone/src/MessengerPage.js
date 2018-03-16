@@ -30,6 +30,14 @@ class MessengerPage extends React.Component {
     }
 
     render() {
+
+        // console.log("this.state", this.state);
+        const currentMessage = this.state.messages.map((message, i) => {
+            return (
+                <li key={message.id}>{message.text}</li>
+            )
+        })
+
         return (
             <div className="messenger-page">
                 {this.state.userList ? 
