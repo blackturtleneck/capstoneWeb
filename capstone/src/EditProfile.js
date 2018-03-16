@@ -1,10 +1,6 @@
 import React from 'react';
-// import firebase from 'firebase';
 import { db } from './FirestoreConfig';
-// import {auth, db, storageRef} from './FirestoreConfig';
 import InlineEdit from 'react-edit-inline'
-
-// import ImageUploader from 'react-firebase-image-uploader';
 
 class EditProfile extends React.Component {
 
@@ -76,36 +72,36 @@ class EditProfile extends React.Component {
             <div >
                 <p className = "text">Click to edit a field!</p>
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.fName}
-                paramName="fName"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.fName}
+                    paramName="fName"
+                    change={this.dataChanged}
+                    />
                 <br />
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.lName}
-                paramName="lName"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.lName}
+                    paramName="lName"
+                    change={this.dataChanged}
+                    />
                 <br />                
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.age}
-                paramName="age"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.age}
+                    paramName="age"
+                    change={this.dataChanged}
+                    />
                 <br />                
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.gender}
-                paramName="gender"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.gender}
+                    paramName="gender"
+                    change={this.dataChanged}
+                    />
                 <br />                
                 {/* <button onClick={this.addIcon}>Add icon</button> */}
             </div>

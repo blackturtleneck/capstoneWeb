@@ -1,6 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
-import { auth, provider, db } from './FirestoreConfig';
+import { db } from './FirestoreConfig';
 import UserList from './UserList';
 import './Messaging.css';
 
@@ -22,7 +21,6 @@ class Messenger extends React.Component {
     db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc("0").set({"from":null, id:0, text:""});
     db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc("0").set({"from":null, id:0, text:""});
     ;
-  
 
     this.updateMessage = this.updateMessage.bind(this)
     this.submitMessage = this.submitMessage.bind(this)
