@@ -4,6 +4,8 @@ import { db } from './FirestoreConfig';
 // import {auth, db, storageRef} from './FirestoreConfig';
 import EditProfile from './EditProfile'
 import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom'
+  
 // import InlineEdit from 'react-edit-inline'
 
 // import ImageUploader from 'react-firebase-image-uploader';
@@ -19,7 +21,7 @@ class Profile extends React.Component {
       }
 
     componentWillMount() {
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
                 if (doc.exists) {
                     this.setState({userDoc: doc.data()});
                 } else {
@@ -31,15 +33,20 @@ class Profile extends React.Component {
     }
 
     edit() {
-        ReactDOM.render(<EditProfile userEmail={this.props.userEmail}/>, document.getElementById('root'))
+        // ReactDOM.render(<EditProfile userEmail={this.props.match.params.userEmail}/>, document.getElementById('root'))
       }
 
-      
+    componentDidMount() {
+        console.log("profile rendered");
+    }  
 
   render() {
     return (
         <div className="profile">
-            <button user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button>
+        <Link to={`/edit/${this.props.match.params.userEmail}`}>
+            <button>Edit Profile</button>
+        </Link>
+            {/* <button user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button> */}
             <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
             <p>Age: {this.state.userDoc.age}</p>
             <p>Gender: {this.state.userDoc.gender}</p>
@@ -47,6 +54,7 @@ class Profile extends React.Component {
     );
   }
 }
+{/* <Link to={`/profile/${this.state.user.email}`}>View My Profile</Link> */}
 
 export default Profile;
 

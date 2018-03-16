@@ -6,9 +6,19 @@ import Profile from './Profile'
 import './Login.css';
 import MapContainer from './MapContainer';
 import DatesSelection from './DatesSelection';
+import {
+  // BrowserRouter as Router,
+  // Route,
+  Link
+} from 'react-router-dom'
+
+const userProfile = (props) => {
+  return (
+    <Profile userEmail={App.state.user.email} {...props} />
+  )
+}
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -48,14 +58,20 @@ class App extends React.Component {
       this.setState({ user: null });
     }
 
+    componentDidMount() {
+      console.log("app rendered");
+    }
+
+    
+
     render() {
         return (
             <div className="">
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div> 
-                         <DatesSelection/>
-                          <Profile userEmail={this.state.user.email}/>
+                         {/* <DatesSelection/> */}
+                          <Link to={`/profile/${this.state.user.email}`}>View My Profile</Link>
                           <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
                           <button onClick={this.logout.bind(this)}>
                             Logout
@@ -71,11 +87,15 @@ class App extends React.Component {
                     )
                 :
                 <div></div>
-                }        
-                
-            </div>
+                }                        
+              </div>
+
         );
     }
 }
 
-export default App;
+export {App, userProfile};
+
+
+
+// /Users/jessicalibman/Desktop/Past/SUMMER2017/tasksheriff/mobile-react/resources/assets/js/App.js

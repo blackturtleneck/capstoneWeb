@@ -42,7 +42,7 @@ class MessengerPage extends React.Component {
             currentComponent.setState({ userList: curUserList })
 
         });
-        console.log("this.state", this.state)
+        // console.log("this.state", this.state)
     }
 
     // updateMessage(event) {
@@ -62,7 +62,7 @@ class MessengerPage extends React.Component {
     // }
 
     render() {
-        console.log("this.state", this.state);
+        // console.log("this.state", this.state);
         const currentMessage = this.state.messages.map((message, i) => {
             return (
                 <li key={message.id}>{message.text}</li>

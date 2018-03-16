@@ -19,7 +19,7 @@ class EditProfile extends React.Component {
     }
 
     componentWillMount() {
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
             if (doc.exists) {
                 this.setState({userDoc: doc.data()});
             } else {
@@ -34,7 +34,7 @@ class EditProfile extends React.Component {
         console.log();
         var field = Object.keys(data)[0].toString();
         // console.log(typeof(data[field]))
-        db.collection("users").doc(this.props.userEmail).update({
+        db.collection("users").doc(this.props.match.params.userEmail).update({
             [field]: data[field]
         })
         .then(function () {
@@ -45,7 +45,7 @@ class EditProfile extends React.Component {
         });
 
         //update state
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
             if (doc.exists) {
                 this.setState({userDoc: doc.data()});
             } else {
@@ -57,7 +57,7 @@ class EditProfile extends React.Component {
 
     addIcon(){
         // console.log()
-        console.log(db.collection("users").doc(this.props.userEmail).get().icons)
+        console.log(db.collection("users").doc(this.props.match.params.userEmail).get().icons)
         // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
             db.collection("users").doc(this.props.userEmail).update({
                 "icons": {"new":"nextChosenIcon"}
