@@ -1,22 +1,10 @@
 import React from 'react';
 import {auth, provider, db} from './FirestoreConfig';
 import MessengerPage from './MessengerPage';
-import Dates from './Dates'
-import Profile from './Profile'
 import './Login.css';
 import MapContainer from './MapContainer';
 import DatesSelection from './DatesSelection';
-import {
-  // BrowserRouter as Router,
-  // Route,
-  Link
-} from 'react-router-dom'
-
-const userProfile = (props) => {
-  return (
-    <Profile userEmail={App.state.user.email} {...props} />
-  )
-}
+import { Link } from 'react-router-dom'
 
 class App extends React.Component {
     constructor(props) {
@@ -51,18 +39,11 @@ class App extends React.Component {
             console.error("Error writing document: ", error);
           });
       }
-    // }
   
     logout() {
       auth().signOut()
       this.setState({ user: null });
     }
-
-    componentDidMount() {
-      console.log("app rendered");
-    }
-
-    
 
     render() {
         return (
@@ -71,7 +52,7 @@ class App extends React.Component {
                     (this.state.user ?
                         <div> 
                           <Link to={`/profile/${this.state.user.email}`}>View My Profile</Link>
-                          <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
+                          {/* <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/> */}
                            <DatesSelection/>
                            <button onClick={this.logout.bind(this)}>
                               Logout
@@ -94,7 +75,7 @@ class App extends React.Component {
     }
 }
 
-export {App, userProfile};
+export default App;
 
 
 

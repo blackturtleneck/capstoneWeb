@@ -3,18 +3,12 @@ import {
     BrowserRouter as Router,
     Route
 } from 'react-router-dom'
-import {App} from './App'
-import {userProfile} from './App'
+import App from './App'
 import Profile from './Profile'
 import EditProfile from './EditProfile'
 
 class Routes extends Component {
-    componentDidMount() {
-        console.log("routes mounted")
-    }
-    componentWillMount() {
-        console.log("routes will mount")
-    }
+
     render() {
         return (
             <Router>
