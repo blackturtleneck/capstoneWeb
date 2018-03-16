@@ -1,0 +1,45 @@
+div img{ display: inline-block;}
+
+.button {
+    background-color: #9ba2ff; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif, bold;
+    text-transform: uppercase;
+}
+.icon {
+    padding: 0px 10px; 
+}
+.logo {
+    font-family: 'Josefin Sans', sans-serif, bold;
+    text-align: center;
+}
+
+.header  {
+    font-family: 'Lato', sans-serif, bold;
+
+}
+
+.text {
+    font-family: 'Lato', sans-serif;
+}
+
+.nav {
+    background-color: #9ba2ff;
+    font-family: 'Josefin Sans', sans-serif, bold;
+    color: white;
+}
+
+.center  {
+    display: center;
+}
+
+.send-text{
+    width: 70%;
+}

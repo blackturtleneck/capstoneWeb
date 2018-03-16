@@ -22,7 +22,7 @@ class UserListComponent extends Component {
         return (
             <div>
                 <button onClick={this.chooseUser}>{this.props.name}</button>
-                {this.state.otherUser !== undefined ? <Messenger user={this.state.user} otherUser={this.props.email}/>:
+                {this.state.otherUser !== undefined ? <Messenger otherUserName={this.props.name} user={this.state.user} otherUser={this.props.email}/>:
             <div/>}
             </div>
         )

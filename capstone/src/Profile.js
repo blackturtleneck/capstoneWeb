@@ -43,13 +43,13 @@ class Profile extends React.Component {
   render() {
     return (
         <div className="profile">
-        <Link to={`/edit/${this.props.match.params.userEmail}`}>
-            <button>Edit Profile</button>
-        </Link>
-            {/* <button user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button> */}
+            <Link to={`/edit/${this.props.match.params.userEmail}`}>
+                <button>Edit Profile</button>
+            </Link>
             <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
             <p>Age: {this.state.userDoc.age}</p>
             <p>Gender: {this.state.userDoc.gender}</p>
+
         </div>
     );
   }
