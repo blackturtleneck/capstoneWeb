@@ -52,11 +52,12 @@ class EditProfile extends React.Component {
     }
 
     addIcon(){
+        var newIcon = document.getElementsByName("newIcon").text;
         // console.log()
         console.log(db.collection("users").doc(this.props.match.params.userEmail).get().icons)
         // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
             db.collection("users").doc(this.props.userEmail).update({
-                "icons": {"new":"nextChosenIcon"}
+                "icons": {newIcon:newIcon}
             })
             .then(function () {
                 console.log("Document successfully written!");
@@ -102,8 +103,14 @@ class EditProfile extends React.Component {
                     paramName="gender"
                     change={this.dataChanged}
                     />
-                <br />                
-                {/* <button onClick={this.addIcon}>Add icon</button> */}
+                <br />    
+                <button onClick={this.addIcon}>Add icon</button>
+                <form>
+                    <label>
+                        new icon:
+                        <input type="text" name="newIcon" />
+                    </label>
+                </form>
             </div>
         );
     }
