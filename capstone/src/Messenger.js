@@ -127,7 +127,7 @@ class Messenger extends React.Component {
   }
 
   render() {
-    console.log("this.state.messages", this.state.messages);
+    console.log("this.state", this.state);
     // const currentMessage = {}
     // if (this.state.messages) {
        const currentMessage = this.state.messages.map((message, i) => {
