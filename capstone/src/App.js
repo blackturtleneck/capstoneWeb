@@ -52,7 +52,7 @@ class App extends React.Component {
                     (this.state.user ?
                         <div> 
                           <Link to={`/profile/${this.state.user.email}`}>View My Profile</Link>
-                          {/* <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/> */}
+                          <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
                            <DatesSelection/>
                            <button onClick={this.logout.bind(this)}>
                               Logout
