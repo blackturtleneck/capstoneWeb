@@ -17,9 +17,6 @@ class Messenger extends React.Component {
       otherUser: this.props.otherUser,
       otherUserName: this.props.otherUserName
     }
-    // create a collection of message documents between this user and another user
-    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc("0").set({"from":null, id:0, text:""});
-    db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc("0").set({"from":null, id:0, text:""});
     ;
 
     this.updateMessage = this.updateMessage.bind(this)
@@ -52,13 +49,58 @@ class Messenger extends React.Component {
     const otherUser = db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages");
 
     console.log('submitMessage: ' + this.state.message)
+    const time = new Date();
+
+    let month = time.getMonth();
+    let formattedMonth = "";
+    if(month < 10){
+      formattedMonth = "0" +( month + 1);
+    } else {
+      formattedMonth = (month + 1) + "";
+    }
+
+    let day = time.getDate();
+    let formattedDay = "";
+    if(day < 10){
+      formattedDay = "0" + day;
+    } else {
+      formattedDay = day + "";
+    }
+
+    let hours = time.getHours();
+    let formattedHours = "";
+    if(hours < 10){
+      formattedHours = "0" + hours;
+    } else {
+      formattedHours = hours + "";
+    }
+
+    let minutes = time.getMinutes();
+    let formattedMinutes = "";
+    if(minutes < 10){
+      formattedMinutes = "0" + minutes;
+    } else {
+      formattedMinutes = minutes + "";
+    }
+
+    let seconds = time.getSeconds();
+    let formattedSeconds = "";
+    if(seconds < 10){
+      formattedSeconds = "0" + seconds;
+    } else {
+      formattedSeconds = seconds + "";
+    }
+
+    const timeStamp = time.getFullYear() + ":" + formattedMonth + ":" + formattedDay+ ":" + formattedHours + ":" + formattedMinutes + ":" + formattedSeconds + ":" + time.getMilliseconds()
     const nextMessage = {
-      id: this.state.messages.length,
+      id: time,
       text: this.state.message,
       from: this.state.user
     }
-    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
-    db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(this.state.messages.length + "").set(nextMessage);
+    db.collection("users").doc(this.props.user).collection("messages").doc(this.state.otherUser).collection("messages").doc(timeStamp).set(nextMessage);
+    db.collection("users").doc(this.props.otherUser).collection("messages").doc(this.state.user).collection("messages").doc(timeStamp).set(nextMessage);
+
+    document.getElementById('message-box').value = '';
   }
 
   render() {
@@ -75,7 +117,7 @@ class Messenger extends React.Component {
           {currentMessage}
         </ol>
         <div className="button-input-wrapper">
-        <input className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
+        <input id="message-box" className="send-text" onChange={this.updateMessage} type="text" placeholder="message" />
         <button className="submit-button" onClick={this.submitMessage}>Send</button>
         </div>
         <br />
