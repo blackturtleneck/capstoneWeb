@@ -20,43 +20,6 @@ class Messenger extends React.Component {
     this.submitMessage = this.submitMessage.bind(this);
   }
 
-  // componentWillMount() {
-  //       // pull down previous messages
-  //       let currentComponent = this;
-  //       let prevMessages = [];
-  //       db.collection("users").doc(this.state.userEmail).collection("messages").doc(this.state.otherUser).collection("messages").get().then(function (querySnapshot) {
-  //         querySnapshot.forEach(function (doc) {
-  //           // doc.data() is never undefined for query doc snapshots
-  //           console.log(doc.id, " => ", doc.data());
-  //           prevMessages.push(doc.data)
-  //         });
-  //         currentComponent.setState({
-  //           messages: prevMessages
-  //         })
-  //       });
-  //       console.log(currentComponent.state)
-  // }
-
-  // componentDidMount() {
-  //   console.log("component did mont");
-  //   let currentComponent = this;
-  //   let curMessage = [];
-  //   db
-  //     .collection("users")
-  //     .doc(this.props.userEmail)
-  //     .collection("messages")
-  //     .doc(this.state.otherUser)
-  //     .collection("messages")
-  //     .onSnapshot(function(querySnapshot) {
-  //       var curMessages = [];
-  //       querySnapshot.forEach(function(doc) {
-  //         console.log("doc.data", doc.data());
-  //         curMessages.push(doc.data());
-  //       });
-  //       currentComponent.setState({ messages: curMessages });
-  //     });
-  // }
-
   componentWillReceiveProps(newProps) {
     this.setState({
       otherUser: newProps.otherUser
@@ -179,8 +142,6 @@ class Messenger extends React.Component {
 
   render() {
     console.log("messenger this.state", this.state);
-    // const currentMessage = {}
-    // if (this.state.messages) {
     const currentMessage = this.state.messages.map((message, i) => {
       return (
         <li
@@ -200,14 +161,7 @@ class Messenger extends React.Component {
     return (
       <div className="messenger">
         <h2>{this.state.otherUserName}</h2>
-        <ol>
-          {currentMessage}
-          {/* {this.state.messages !== undefined ? this.state.messages.map((message, i) => {
-              {console.log("message",message.text)};
-          <li className={this.state.userEmail === message.from ? "me message-bubble" : "them message-bubble"} key={message.id}>{message.text}</li>
-        
-      }) : <li>loading</li>} */}
-        </ol>
+        <ol>{currentMessage}</ol>
 
         <div className="button-input-wrapper">
           <input
