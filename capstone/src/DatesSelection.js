@@ -8,18 +8,18 @@ import Dates from './Dates'
 class DatesSelection extends React.Component {
 
     render(){
-    return (
-        <div>
-        <MultiSelectField/>
-        <form>
-  <label>
-    Name:
-    <input type="text" name="name" />
-  </label>
-  <input type="submit" value="Submit" />
-</form>
-        </div>
-    );
+        return (
+            <div>
+            <MultiSelectField />
+            <form>
+                <label>
+                    Name:
+                    <input type="text" name="name" />
+                </label>
+                <input type="submit" value="Submit" />
+                </form>
+            </div>
+        );
     }
 }
 

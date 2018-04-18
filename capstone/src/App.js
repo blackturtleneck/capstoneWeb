@@ -1,14 +1,12 @@
 import React from 'react';
 import {auth, provider, db} from './FirestoreConfig';
 import MessengerPage from './MessengerPage';
-import Dates from './Dates'
-import Profile from './Profile'
 import './Login.css';
 import MapContainer from './MapContainer';
 import DatesSelection from './DatesSelection';
+import { Link } from 'react-router-dom'
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -41,7 +39,6 @@ class App extends React.Component {
             console.error("Error writing document: ", error);
           });
       }
-    // }
   
     logout() {
       auth().signOut()
@@ -54,13 +51,12 @@ class App extends React.Component {
                 {this.state.authenticated ?
                     (this.state.user ?
                         <div> 
-                           <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
-                         <DatesSelection/>
-                          <Profile userEmail={this.state.user.email}/>
-                         
-                          <button onClick={this.logout.bind(this)}>
-                            Logout
-                          </button>
+                          <Link to={`/profile/${this.state.user.email}`}>View My Profile</Link>
+                          <MessengerPage user={this.state.user.displayName} userEmail={this.state.user.email}/>
+                           <DatesSelection/>
+                           <button onClick={this.logout.bind(this)}>
+                              Logout
+                           </button>
                         </div>
                     :
                         <div className="login">
@@ -72,11 +68,15 @@ class App extends React.Component {
                     )
                 :
                 <div></div>
-                }        
-                
-            </div>
+                }                        
+              </div>
+
         );
     }
 }
 
 export default App;
+
+
+
+// /Users/jessicalibman/Desktop/Past/SUMMER2017/tasksheriff/mobile-react/resources/assets/js/App.js

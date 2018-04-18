@@ -1,10 +1,6 @@
 import React from 'react';
-// import firebase from 'firebase';
 import { db } from './FirestoreConfig';
-// import {auth, db, storageRef} from './FirestoreConfig';
 import InlineEdit from 'react-edit-inline'
-
-// import ImageUploader from 'react-firebase-image-uploader';
 
 class EditProfile extends React.Component {
 
@@ -19,7 +15,7 @@ class EditProfile extends React.Component {
     }
 
     componentWillMount() {
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
             if (doc.exists) {
                 this.setState({userDoc: doc.data()});
             } else {
@@ -34,7 +30,7 @@ class EditProfile extends React.Component {
         console.log();
         var field = Object.keys(data)[0].toString();
         // console.log(typeof(data[field]))
-        db.collection("users").doc(this.props.userEmail).update({
+        db.collection("users").doc(this.props.match.params.userEmail).update({
             [field]: data[field]
         })
         .then(function () {
@@ -45,7 +41,7 @@ class EditProfile extends React.Component {
         });
 
         //update state
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
             if (doc.exists) {
                 this.setState({userDoc: doc.data()});
             } else {
@@ -56,11 +52,12 @@ class EditProfile extends React.Component {
     }
 
     addIcon(){
+        var newIcon = document.getElementsByName("newIcon").text;
         // console.log()
-        console.log(db.collection("users").doc(this.props.userEmail).get().icons)
+        console.log(db.collection("users").doc(this.props.match.params.userEmail).get().icons)
         // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
             db.collection("users").doc(this.props.userEmail).update({
-                "icons": {"new":"nextChosenIcon"}
+                "icons": {newIcon:newIcon}
             })
             .then(function () {
                 console.log("Document successfully written!");
@@ -76,38 +73,44 @@ class EditProfile extends React.Component {
             <div >
                 <p className = "text">Click to edit a field!</p>
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.fName}
-                paramName="fName"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.fName}
+                    paramName="fName"
+                    change={this.dataChanged}
+                    />
                 <br />
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.lName}
-                paramName="lName"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.lName}
+                    paramName="lName"
+                    change={this.dataChanged}
+                    />
                 <br />                
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.age}
-                paramName="age"
-                change={this.dataChanged}
-                />
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.age}
+                    paramName="age"
+                    change={this.dataChanged}
+                    />
                 <br />                
                 <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.userDoc.gender}
-                paramName="gender"
-                change={this.dataChanged}
-                />
-                <br />                
-                {/* <button onClick={this.addIcon}>Add icon</button> */}
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={this.state.userDoc.gender}
+                    paramName="gender"
+                    change={this.dataChanged}
+                    />
+                <br />    
+                <button onClick={this.addIcon}>Add icon</button>
+                <form>
+                    <label>
+                        new icon:
+                        <input type="text" name="newIcon" />
+                    </label>
+                </form>
             </div>
         );
     }

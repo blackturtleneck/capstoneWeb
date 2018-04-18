@@ -1,13 +1,7 @@
 import React from 'react';
-// import firebase from 'firebase';
 import { db } from './FirestoreConfig';
-// import {auth, db, storageRef} from './FirestoreConfig';
-import EditProfile from './EditProfile'
-import ReactDOM from 'react-dom';
-// import InlineEdit from 'react-edit-inline'
-
-// import ImageUploader from 'react-firebase-image-uploader';
-
+import {Link} from 'react-router-dom'
+  
 class Profile extends React.Component {
 
     constructor(props) {
@@ -15,11 +9,10 @@ class Profile extends React.Component {
         this.state = {
             userDoc: ''
         };
-        // this.dataChanged = this.dataChanged.bind(this);
-      }
+    }
 
     componentWillMount() {
-        db.collection("users").doc(this.props.userEmail).get().then(doc => {
+        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
                 if (doc.exists) {
                     this.setState({userDoc: doc.data()});
                 } else {
@@ -30,35 +23,23 @@ class Profile extends React.Component {
         );
     }
 
-    edit() {
-        ReactDOM.render(<EditProfile userEmail={this.props.userEmail}/>, document.getElementById('root'))
-      }
+    render() {
+        return (
+            <div className="profile">
+                <Link to={`/edit/${this.props.match.params.userEmail}`}>
+                    <button>Edit Profile</button>
+                </Link>
+                <p>Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
+                <p>Age: {this.state.userDoc.age}</p>
+                <p>Gender: {this.state.userDoc.gender}</p>
+                <Link to='/'>home</Link>
 
-      
-
-  render() {
-    return (
-        <div className="profile">
-            <button className = "button" user={this.state.userDoc} onClick={this.edit.bind(this)}>Edit Profile</button>
-            <p className = "text">Name: {this.state.userDoc.fName} {this.state.userDoc.lName}</p>
-            <p className = "text">Age: {this.state.userDoc.age}</p>
-            <p className = "text">Gender: {this.state.userDoc.gender}</p>
-        </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 export default Profile;
 
 // TODO write post-install script to update node-modules
 // https://github.com/kaivi/ReactInlineEdit/pull/41/files/ef233ff37c6857ff270d4a53f2793330bb1c006b
-
-/** 
-  name: result.user.displayName,
-        lName: result.additionalUserInfo.profile.last_name,
-        gender: result.additionalUserInfo.profile.gender,
-        age: result.additionalUserInfo.profile.age_range.min,
-        linkFB: result.additionalUserInfo.profile.link,
-        timeZone: result.additionalUserInfo.profile.timezone,
-        photoURL: result.user.photoURL
- */

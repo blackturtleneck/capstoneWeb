@@ -33,6 +33,8 @@ class MessengerPage extends React.Component {
       });
   }
 
+  componentWillMount() {}
+
   // chooseUser = (curOtherUser) =>{
   //     console.log("curOtherUser", curOtherUser)
   //     if(curOtherUser !== null){
@@ -50,8 +52,12 @@ class MessengerPage extends React.Component {
 
   chooseUser(e) {
     // e.preventDefault();
-    console.log(e);
-    this.setState({ otherUser: e });
+    console.log("e,", e);
+    let component = this;
+    this.setState({ otherUser: e }, function() {
+      console.log("state after choose user", this.state);
+    });
+    this.forceUpdate();
   }
 
   render() {
