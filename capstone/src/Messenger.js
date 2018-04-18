@@ -37,27 +37,30 @@ class Messenger extends React.Component {
   //       console.log(currentComponent.state)
   // }
 
-  componentDidMount() {
-    console.log("component did mont");
-    let currentComponent = this;
-    let curMessage = [];
-    db
-      .collection("users")
-      .doc(this.props.userEmail)
-      .collection("messages")
-      .doc(this.state.otherUser)
-      .collection("messages")
-      .onSnapshot(function(querySnapshot) {
-        var curMessages = [];
-        querySnapshot.forEach(function(doc) {
-          console.log("doc.data", doc.data());
-          curMessages.push(doc.data());
-        });
-        currentComponent.setState({ messages: curMessages });
-      });
-  }
+  // componentDidMount() {
+  //   console.log("component did mont");
+  //   let currentComponent = this;
+  //   let curMessage = [];
+  //   db
+  //     .collection("users")
+  //     .doc(this.props.userEmail)
+  //     .collection("messages")
+  //     .doc(this.state.otherUser)
+  //     .collection("messages")
+  //     .onSnapshot(function(querySnapshot) {
+  //       var curMessages = [];
+  //       querySnapshot.forEach(function(doc) {
+  //         console.log("doc.data", doc.data());
+  //         curMessages.push(doc.data());
+  //       });
+  //       currentComponent.setState({ messages: curMessages });
+  //     });
+  // }
 
   componentWillReceiveProps(newProps) {
+    this.setState({
+      otherUser: newProps.otherUser
+    });
     console.log("component will receive props");
     console.log("props", this.props);
     console.log("new props are : ", newProps);
@@ -91,6 +94,8 @@ class Messenger extends React.Component {
 
   submitMessage(event) {
     console.log("submitMessage: " + this.state.message);
+    console.log("this.state ", this.state);
+    console.log("this.props:", this.props);
     const time = new Date();
 
     let month = time.getMonth();
