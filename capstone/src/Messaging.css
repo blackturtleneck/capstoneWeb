@@ -1,67 +1,73 @@
-.me{
-    background-color: #9ba2ff;
-    margin-left: 40%;
-    text-align: right;
-    color: white;
-    margin-bottom: 5px;
-
+.me {
+  background-color: #9ba2ff;
+  margin-left: 40%;
+  text-align: right;
+  color: white;
+  margin-bottom: 5px;
 }
-.them{
-    margin-right: 40%;
-    background-color: lightgray;
-    margin-bottom: 5px;
-}
-
-.message-bubble{
-    width: 15%;
-    border-radius: 5px;
-    padding: 5px;
-    padding-right: 10px;
+.them {
+  margin-right: 40%;
+  background-color: lightgray;
+  margin-bottom: 5px;
 }
 
-.messenger-page{
-    margin: 0 auto;
+.message-bubble {
+  width: 15%;
+  border-radius: 5px;
+  padding: 5px;
+  padding-right: 10px;
 }
 
-.messenger{
-    margin-left: 150px;
+.messenger-page {
+  margin: 0 auto;
+}
+
+.messenger {
+  display: inline-block;
+  vertical-align: top;
+  width: 60vw;
+  margin-left: 20px;
+  height: 100vh;
 }
 
 .button-input-wrapper {
-    padding-left: 40px;
-    padding-right: 40%;
-    align-content: center;
+  padding-left: 40px;
+  padding-right: 40%;
+  align-content: center;
+  /* padding-top: 60vh; */
+  width: 60vw;
 }
 
-.send-text{
-    width: 75% !important;
+input.send-text {
+  width: 30vw !important;
+  /* display: inline-block; */
 }
 
-.submit-button{
-    background-color: #9ba2ff; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 12px;
-    font-size: 12px;
-    font-family: 'Lato', sans-serif, bold;
-    text-transform: uppercase;
-    width: 20%;
+.submit-button {
+  background-color: #9ba2ff; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: "Lato", sans-serif, bold;
+  text-transform: uppercase;
+  width: 20%;
 }
 
-h2{
-    font-size: 2vw;
-    padding-left: 40px; 
+h2 {
+  font-size: 2vw;
+  padding-left: 40px;
 }
 
-h1{
-    font-size: 4vw;
+h1 {
+  font-size: 4vw;
 }
 
-button{
-    background: transparent;
-    border: none;
+button {
+  background: transparent;
+  border: none;
 }
