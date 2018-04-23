@@ -1,61 +1,78 @@
 import React from "react";
-import { auth, provider, db } from "./FirestoreConfig";
+import { Redirect } from "react-router-dom";
+import { storageRef, auth, provider, db } from "./FirestoreConfig";
+import { Routes, PageContent } from "./Enums";
 import PageContainer from "./PageContainer";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      authenticated: true,
+      authenticated: false,
       user: null
     };
+    console.log("state", this.state);
   }
 
-  async login() {
-    const result = await auth().signInWithPopup(provider);
-    this.setState({ user: result.user });
-    // Add a new document in collection "users"
-    // if(!db.collection("users").doc(result.user.email).get()) {
-    db
-      .collection("users")
-      .doc(result.user.email)
-      .set({
-        name: result.user.displayName,
-        fName: result.additionalUserInfo.profile.first_name,
-        lName: result.additionalUserInfo.profile.last_name,
-        gender: result.additionalUserInfo.profile.gender,
-        age: result.additionalUserInfo.profile.age_range.min,
-        linkFB: result.additionalUserInfo.profile.link,
-        timeZone: result.additionalUserInfo.profile.timezone,
-        photoURL: result.user.photoURL,
-        icons: { first: "abc", sec: "def" }
-      })
-      .then(function() {
-        console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
+  componentDidMount() {
+    // check whether user is logged in
+    auth.onAuthStateChanged(
+      function(user) {
+        console.log("user", user);
+        if (user) {
+          this.setState({
+            authenticated: true,
+            user: {
+              displayName: user.displayname,
+              email: user.email
+            }
+          });
+        } else {
+          this.setState({
+            authenticated: true,
+            account: null
+          });
+        }
+      }.bind(this)
+    );
   }
 
   render() {
+    let path = window.location.href.split("/")[3];
+    let content = "";
+    switch (path) {
+      case Routes.PROFILE:
+        content = PageContent.PROFILE;
+        break;
+      case Routes.DATE_SELCTION:
+        content = PageContent.DATE_SELECTION;
+        break;
+      default:
+        content = PageContent.MESSENGER;
+        break;
+    }
+    console.log("content", content);
+    console.log("path", path);
     return (
       <div className="">
         {this.state.authenticated ? (
           this.state.user ? (
-            <PageContainer user={this.state.user} />
+            <div>
+              <PageContainer user={this.state.user} content={content} />
+              {!path ? <Redirect to={"/messenger"} /> : null}
+            </div>
           ) : (
             <div className="login">
-              {/* <p>{user ? `Hi, ${user.displayName}!` : 'Welcome to our unamed app'}</p> */}
-              <button className="facebook" onClick={this.login.bind(this)}>
-                Login with Facebook
-              </button>
+              <Redirect to={"/"} />
+              <Login />
             </div>
           )
         ) : (
+          // if login hasn't mounted
           <div />
         )}
       </div>
