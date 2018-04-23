@@ -21,13 +21,17 @@
 .messenger-page {
   margin: 0 auto;
   height: 80vh;
+  overflow: hidden;
 }
 
 .messenger {
   display: inline-block;
   vertical-align: top;
   width: 50vw;
-  height: 80vh;
+  height: 89.7vh;
+  bottom: 0;
+  position: absolute;
+  border-right: 1px solid lightgray;
 }
 
 .button-input-wrapper {
@@ -83,7 +87,6 @@ button {
 
 .messenger-wrapper {
   margin-left: 20vw;
-  border-right: 1px solid lightgray;
   height: 80vh;
   width: 50vw;
   position: absolute;

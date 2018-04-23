@@ -6,7 +6,6 @@ import "./Messaging.css";
 class Messenger extends React.Component {
   constructor(props, context) {
     super(props, context);
-    console.log("this.props messenger", props);
     this.state = {
       message: "",
       messages: [],
@@ -18,6 +17,7 @@ class Messenger extends React.Component {
 
     this.updateMessage = this.updateMessage.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
+    this.submitMessageEnter = this.submitMessageEnter.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -47,6 +47,12 @@ class Messenger extends React.Component {
     this.setState({
       message: event.target.value
     });
+  }
+
+  submitMessageEnter(event) {
+    if (event.key === "Enter") {
+      this.submitMessage();
+    }
   }
 
   submitMessage(event) {
@@ -163,6 +169,7 @@ class Messenger extends React.Component {
                 onChange={this.updateMessage}
                 type="text"
                 placeholder="message"
+                onKeyPress={this.submitMessageEnter}
               />
               <button className="submit-button" onClick={this.submitMessage}>
                 Send
