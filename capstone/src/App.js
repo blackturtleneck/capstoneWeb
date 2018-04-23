@@ -20,10 +20,8 @@ class App extends React.Component {
 
   componentDidMount() {
     // check whether user is logged in
-    console.log("state change");
-
-    auth.onAuthStateChanged(
-      function(user) {
+    auth
+      .onAuthStateChanged(user => {
         if (user) {
           this.setState({
             authenticated: true,
@@ -35,11 +33,11 @@ class App extends React.Component {
         } else {
           this.setState({
             authenticated: true,
-            account: null
+            user: null
           });
         }
-      }.bind(this)
-    );
+      })
+      .bind(this);
   }
 
   render() {
@@ -66,8 +64,8 @@ class App extends React.Component {
             </div>
           ) : (
             <div className="login">
-              <Redirect to={"/"} />
               <Login />
+              <Redirect to={"/"} />
             </div>
           )
         ) : (

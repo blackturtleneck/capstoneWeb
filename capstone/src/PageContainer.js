@@ -18,18 +18,13 @@ class PageContainer extends React.Component {
       user: this.props.user,
       content: this.props.content
     };
-    console.log("this.props", this.props);
   }
 
-  logout(event) {
-    console.log("log out");
-    event.preventDefault();
+  logout() {
     auth.signOut();
-    this.setState({ user: null });
   }
 
   render() {
-    console.log("in page container");
     return (
       <div>
         <Header userEmail={this.state.user.email} />
