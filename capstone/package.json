@@ -8,6 +8,7 @@
     "react-dom": "^16.2.0",
     "react-geolocation": "^1.0.3",
     "react-responsive-carousel": "^3.1.33",
+    "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
     "react-slick": "^0.19.0"
   },
