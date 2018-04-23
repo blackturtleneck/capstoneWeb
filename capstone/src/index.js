@@ -17,6 +17,7 @@ ReactDOM.render(
       <Route exact path="/" component={App} />{" "}
       <Route path="/messenger" component={App} />
       <Route path="/profile/:userEmail" component={App} />
+      <Route path="/date-selection" component={App} />
       <Route path="/edit/:userEmail" component={App} />
     </div>
   </Router>,

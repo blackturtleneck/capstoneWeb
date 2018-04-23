@@ -48,7 +48,8 @@ class App extends React.Component {
       case Routes.PROFILE:
         content = PageContent.PROFILE;
         break;
-      case Routes.DATE_SELCTION:
+      case Routes.DATE_SELECTION:
+        console.log("date selection?");
         content = PageContent.DATE_SELECTION;
         break;
       default:

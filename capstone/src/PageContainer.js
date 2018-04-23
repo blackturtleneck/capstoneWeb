@@ -18,6 +18,7 @@ class PageContainer extends React.Component {
       user: this.props.user,
       content: this.props.content
     };
+    console.log("this.props", this.props);
   }
 
   logout(event) {
