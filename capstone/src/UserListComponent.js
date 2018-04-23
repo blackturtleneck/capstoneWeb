@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Messenger from "./Messenger";
+import "./UserList.css";
 
 class UserListComponent extends Component {
   constructor(props) {
@@ -19,7 +20,12 @@ class UserListComponent extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.chooseUser.bind(this)}>{this.props.name}</button>
+        <button
+          className="user-list-component"
+          onClick={this.chooseUser.bind(this)}
+        >
+          {this.props.name}
+        </button>
         {/* {this.state.otherUser !== undefined ? <Messenger otherUserName={this.props.name} user={this.state.user} otherUser={this.props.email}/>: */}
         <div />
       </div>

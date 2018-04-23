@@ -1,10 +1,10 @@
 import React from "react";
 import UserListComponent from "./UserListComponent";
+import "./UserList.css";
 
 class UserList extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.chooseUser);
     this.state = {};
   }
 
@@ -14,8 +14,7 @@ class UserList extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Matches</h1>
+      <div className="user-list-wrapper">
         {this.props.curUserList.map((item, index) => {
           return (
             <UserListComponent

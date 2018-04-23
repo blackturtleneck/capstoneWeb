@@ -32,8 +32,8 @@ class PageContainer extends React.Component {
         <Link to={`/messenger`}>Messenger</Link> */}
         {this.state.content === PageContent.MESSENGER && (
           <MessengerPage
-            user={this.props.user.displayName}
-            userEmail={this.props.user.email}
+            user={this.state.user.displayName}
+            userEmail={this.state.user.email}
           />
         )}
         {this.state.content === PageContent.DATE_SELECTION && (
@@ -41,7 +41,7 @@ class PageContainer extends React.Component {
         )}
 
         {this.state.content === PageContent.PROFILE && (
-          <Profile userEmail={this.props.userEmail} />
+          <Profile userEmail={this.state.userEmail} />
         )}
         <button onClick={this.logout.bind(this)}>Logout</button>
       </div>

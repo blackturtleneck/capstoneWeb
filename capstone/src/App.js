@@ -26,7 +26,7 @@ class App extends React.Component {
           this.setState({
             authenticated: true,
             user: {
-              displayName: user.displayname,
+              displayName: user.displayName,
               email: user.email
             }
           });
