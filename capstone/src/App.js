@@ -20,9 +20,10 @@ class App extends React.Component {
 
   componentDidMount() {
     // check whether user is logged in
+    console.log("state change");
+
     auth.onAuthStateChanged(
       function(user) {
-        console.log("user", user);
         if (user) {
           this.setState({
             authenticated: true,
@@ -49,15 +50,12 @@ class App extends React.Component {
         content = PageContent.PROFILE;
         break;
       case Routes.DATE_SELECTION:
-        console.log("date selection?");
         content = PageContent.DATE_SELECTION;
         break;
       default:
         content = PageContent.MESSENGER;
         break;
     }
-    console.log("content", content);
-    console.log("path", path);
     return (
       <div className="">
         {this.state.authenticated ? (

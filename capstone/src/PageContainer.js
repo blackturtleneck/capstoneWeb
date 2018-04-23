@@ -1,5 +1,5 @@
 import React from "react";
-import { auth, provider, db } from "./FirestoreConfig";
+import { auth } from "./FirestoreConfig";
 import MessengerPage from "./MessengerPage";
 import "./Login.css";
 import { PageContent } from "./Enums";
@@ -22,9 +22,10 @@ class PageContainer extends React.Component {
   }
 
   logout(event) {
+    console.log("log out");
     event.preventDefault();
     auth.signOut();
-    this.setState({ user: null, authenticated: false });
+    this.setState({ user: null });
   }
 
   render() {
@@ -47,7 +48,7 @@ class PageContainer extends React.Component {
         {this.state.content === PageContent.PROFILE && (
           <Profile userEmail={this.props.userEmail} />
         )}
-        <button handler={this.logout.bind(this)}>Logout</button>
+        <button onClick={this.logout.bind(this)}>Logout</button>
       </div>
     );
   }
