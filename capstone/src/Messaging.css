@@ -92,3 +92,9 @@ button {
   position: absolute;
   bottom: 0;
 }
+
+.select {
+  margin-top: 40vh;
+  width: 50vw;
+  text-align: center;
+}

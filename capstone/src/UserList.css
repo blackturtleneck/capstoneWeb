@@ -7,6 +7,8 @@
   vertical-align: top;
   border-right: 1px lightgray solid;
   height: 90vh;
+  bottom: 0;
+  position: absolute;
 }
 
 .user-list-component {

@@ -177,7 +177,11 @@ class Messenger extends React.Component {
             </div>
             <br />
           </div>
-        ) : null}
+        ) : (
+          <div className="messenger">
+            <p className="select">Select a match to start messaging!</p>
+          </div>
+        )}
       </div>
     );
   }
