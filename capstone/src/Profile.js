@@ -36,7 +36,6 @@ class Profile extends React.Component {
         </p>
         <p>Age: {this.state.userDoc.age}</p>
         <p>Gender: {this.state.userDoc.gender}</p>
-        <Link to="/">home</Link>
       </div>
     );
   }
