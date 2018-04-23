@@ -24,9 +24,6 @@ class Messenger extends React.Component {
     this.setState({
       otherUser: newProps.otherUser
     });
-    console.log("component will receive props");
-    console.log("props", this.props);
-    console.log("new props are : ", newProps);
     if (newProps.otherUser !== this.props.otherUser) {
       let currentComponent = this;
       let curMessage = [];
@@ -39,26 +36,20 @@ class Messenger extends React.Component {
         .onSnapshot(function(querySnapshot) {
           var curMessages = [];
           querySnapshot.forEach(function(doc) {
-            console.log("doc.data", doc.data());
             curMessages.push(doc.data());
           });
           currentComponent.setState({ messages: curMessages });
-          console.log("this.state.messages", currentComponent.state.messages);
         });
     }
   }
 
   updateMessage(event) {
-    console.log("updateMessage:" + event.target.value);
     this.setState({
       message: event.target.value
     });
   }
 
   submitMessage(event) {
-    console.log("submitMessage: " + this.state.message);
-    console.log("this.state ", this.state);
-    console.log("this.props:", this.props);
     const time = new Date();
 
     let month = time.getMonth();
@@ -141,7 +132,6 @@ class Messenger extends React.Component {
   }
 
   render() {
-    console.log("messenger this.state", this.state);
     const currentMessage = this.state.messages.map((message, i) => {
       return (
         <li
@@ -156,26 +146,31 @@ class Messenger extends React.Component {
         </li>
       );
     });
-    // }
 
     return (
-      <div className="messenger">
-        <h2>{this.state.otherUserName}</h2>
-        <ol>{currentMessage}</ol>
+      <div className="messenger-wrapper">
+        {this.state.otherUser !== undefined && this.state.otherUser !== null ? (
+          <div className="messenger">
+            <h2>{this.state.otherUserName}</h2>
+            <ol className="messages" id="message-list">
+              {currentMessage}
+            </ol>
 
-        <div className="button-input-wrapper">
-          <input
-            id="message-box"
-            className="send-text"
-            onChange={this.updateMessage}
-            type="text"
-            placeholder="message"
-          />
-          <button className="submit-button" onClick={this.submitMessage}>
-            Send
-          </button>
-        </div>
-        <br />
+            <div className="button-input-wrapper">
+              <input
+                id="message-box"
+                className="send-text"
+                onChange={this.updateMessage}
+                type="text"
+                placeholder="message"
+              />
+              <button className="submit-button" onClick={this.submitMessage}>
+                Send
+              </button>
+            </div>
+            <br />
+          </div>
+        ) : null}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 .me {
   background-color: #9ba2ff;
-  margin-left: 40%;
+  margin-left: 76%;
   text-align: right;
   color: white;
   margin-bottom: 5px;
@@ -20,34 +20,35 @@
 
 .messenger-page {
   margin: 0 auto;
+  height: 80vh;
 }
 
 .messenger {
   display: inline-block;
   vertical-align: top;
-  width: 60vw;
-  margin-left: 20px;
-  height: 100vh;
+  width: 50vw;
+  height: 80vh;
 }
 
 .button-input-wrapper {
-  padding-left: 40px;
-  padding-right: 40%;
   align-content: center;
-  /* padding-top: 60vh; */
-  width: 60vw;
+  width: 50vw;
+  bottom: 0;
+  position: absolute;
 }
 
 input.send-text {
-  width: 30vw !important;
-  /* display: inline-block; */
+  width: 40vw !important;
+  margin-left: 10px !important;
+  padding-left: 10px !important;
 }
 
 .submit-button {
   background-color: #9ba2ff; /* Green */
   border: none;
   color: white;
-  padding: 10px 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -55,7 +56,7 @@ input.send-text {
   font-size: 12px;
   font-family: "Lato", sans-serif, bold;
   text-transform: uppercase;
-  width: 20%;
+  width: 7vw;
 }
 
 h2 {
@@ -70,4 +71,21 @@ h1 {
 button {
   background: transparent;
   border: none;
+}
+
+.messages {
+  bottom: 15vh;
+  position: absolute;
+  width: 50vw;
+  height: 73vh;
+  overflow-y: scroll;
+}
+
+.messenger-wrapper {
+  margin-left: 20vw;
+  border-right: 1px solid lightgray;
+  height: 80vh;
+  width: 50vw;
+  position: absolute;
+  bottom: 0;
 }

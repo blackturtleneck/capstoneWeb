@@ -18,6 +18,6 @@ ol {
 }
 
 .logout {
-  margin-top: 50vh;
-  margin-left: 10px;
+  position: absolute;
+  bottom: 0px;
 }

@@ -53,15 +53,11 @@ class MessengerPage extends React.Component {
         ) : (
           <div>loading</div>
         )}
-        {this.state.otherUser !== undefined && this.state.otherUser !== null ? (
-          <Messenger
-            user={this.state.user}
-            userEmail={this.state.userEmail}
-            otherUser={this.state.otherUser}
-          />
-        ) : (
-          <p>Choose a match to start chatting</p>
-        )}
+        <Messenger
+          user={this.state.user}
+          userEmail={this.state.userEmail}
+          otherUser={this.state.otherUser}
+        />
       </div>
     );
   }
