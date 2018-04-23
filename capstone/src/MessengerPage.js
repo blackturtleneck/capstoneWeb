@@ -19,6 +19,7 @@ class MessengerPage extends React.Component {
   componentDidMount() {
     let currentComponent = this;
     let curUserList = [];
+    console.log("this.state", this.state);
     db
       .collection("users")
       .get()
@@ -33,30 +34,9 @@ class MessengerPage extends React.Component {
       });
   }
 
-  componentWillMount() {}
-
-  // chooseUser = (curOtherUser) =>{
-  //     console.log("curOtherUser", curOtherUser)
-  //     if(curOtherUser !== null){
-  //         console.log("curOtherUser", curOtherUser)
-  //         this.setState({
-  //             otherUser:curOtherUser
-  //         })
-  //         console.log("this.state in chooseUser", this.state)
-
-  //     } else {
-  //         console.log("component has not mounted :(")
-  //     }
-
-  // }
-
   chooseUser(e) {
-    // e.preventDefault();
-    console.log("e,", e);
     let component = this;
-    this.setState({ otherUser: e }, function() {
-      console.log("state after choose user", this.state);
-    });
+    this.setState({ otherUser: e }, function() {});
     this.forceUpdate();
   }
 
@@ -67,7 +47,7 @@ class MessengerPage extends React.Component {
         {this.state.userList ? (
           <UserList
             chooseUser={this.chooseUser.bind(this)}
-            user={this.props.userEmail}
+            user={this.state.userEmail}
             curUserList={this.state.userList}
           />
         ) : (

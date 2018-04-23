@@ -5,7 +5,6 @@ import "./UserList.css";
 class UserList extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.chooseUser);
     this.state = {};
   }
 
