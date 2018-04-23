@@ -11,3 +11,7 @@ script:
 - npm run lint-functions
  notifications:
     slack: blackturtleneck:EW3d3bAeZV1dX5JISpUrQT19
+  # deploy:
+  #   provider: firebase
+  #   token:
+  #     secure: "YOUR ENCRYPTED token"
