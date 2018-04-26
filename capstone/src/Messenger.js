@@ -20,6 +20,15 @@ class Messenger extends React.Component {
     this.submitMessageEnter = this.submitMessageEnter.bind(this);
   }
 
+  componentDidMount() {
+    //doesnt werk..?
+    if (document.getElementById("message-list") != null) {
+      var list = document.getElementById("message-list");
+      list.scrollTop = list.scrollHeight;
+      list.animate({ scrollTop: list.scrollHeight });
+    }
+  }
+
   componentWillReceiveProps(newProps) {
     this.setState({
       otherUser: newProps.otherUser

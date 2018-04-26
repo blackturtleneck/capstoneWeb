@@ -1,10 +1,11 @@
 .me {
   background-color: #9ba2ff;
-  margin-left: 76%;
+  margin-left: auto;
   text-align: right;
   color: white;
   margin-bottom: 5px;
 }
+
 .them {
   margin-right: 40%;
   background-color: lightgray;
@@ -12,7 +13,7 @@
 }
 
 .message-bubble {
-  width: 15%;
+  width: 45%;
   border-radius: 5px;
   padding: 5px;
   padding-right: 10px;
@@ -98,3 +99,11 @@ button {
   width: 50vw;
   text-align: center;
 }
+
+#message-list {
+  padding-right: 40px;
+  /* height: 100%; */
+  /* overflow: auto; */
+}
+
+/* TODO wrap text by size with 45% width max */
