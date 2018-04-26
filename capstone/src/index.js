@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import Profile from "./Profile";
-import EditProfile from "./EditProfile";
+import Profile from "./Profile/Profile";
+import EditProfile from "./Profile/EditProfile";
 import MessengerPage from "./MessengerPage";
 import registerServiceWorker from "./registerServiceWorker";
 

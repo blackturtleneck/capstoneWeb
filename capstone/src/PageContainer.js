@@ -7,7 +7,7 @@ import MapContainer from "./MapContainer";
 import DatesSelection from "./DatesSelection";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 
 class PageContainer extends React.Component {
   constructor(props) {
