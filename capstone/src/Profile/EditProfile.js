@@ -1,6 +1,8 @@
 import React from "react";
 import { db } from "../FirestoreConfig";
 import InlineEdit from "react-edit-inline";
+import "./profile.css";
+import { Icons } from "../Enums";
 
 class EditProfile extends React.Component {
   constructor(props) {
@@ -14,9 +16,21 @@ class EditProfile extends React.Component {
   }
 
   componentWillMount() {
+    // db
+    //   .collection("users")
+    //   .doc(this.props.match.params.userEmail)
+    //   .get()
+    //   .then(doc => {
+    //     if (doc.exists) {
+    //       this.setState({ userDoc: doc.data() });
+    //     } else {
+    //       // doc.data() will be undefined in this case
+    //       console.log("No such document!");
+    //     }
+    //   });
     db
       .collection("users")
-      .doc(this.props.match.params.userEmail)
+      .doc("greenrocksjl@hotmail.com")
       .get()
       .then(doc => {
         if (doc.exists) {
@@ -32,23 +46,10 @@ class EditProfile extends React.Component {
     //update user's field
     var field = Object.keys(data)[0].toString();
     // console.log(typeof(data[field]))
-    db
-      .collection("users")
-      .doc(this.props.match.params.userEmail)
-      .update({
-        [field]: data[field]
-      })
-      .then(function() {
-        console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
 
-    //update state
     db
       .collection("users")
-      .doc(this.props.match.params.userEmail)
+      .doc("greenrocksjl@hotmail.com")
       .get()
       .then(doc => {
         if (doc.exists) {
@@ -58,6 +59,45 @@ class EditProfile extends React.Component {
           console.log("No such document!");
         }
       });
+
+    db
+      .collection("users")
+      .doc("greenrocksjl@hotmail.com")
+      .update({
+        [field]: data[field]
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+    // db
+    //   .collection("users")
+    //   .doc(this.props.match.params.userEmail)
+    //   .update({
+    //     [field]: data[field]
+    //   })
+    //   .then(function() {
+    //     console.log("Document successfully written!");
+    //   })
+    //   .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    //   });
+
+    //update state
+    // db
+    //   .collection("users")
+    //   .doc(this.props.match.params.userEmail)
+    //   .get()
+    //   .then(doc => {
+    //     if (doc.exists) {
+    //       this.setState({ userDoc: doc.data() });
+    //     } else {
+    //       // doc.data() will be undefined in this case
+    //       console.log("No such document!");
+    //     }
+    //   });
   }
 
   addIcon() {
@@ -66,13 +106,15 @@ class EditProfile extends React.Component {
     console.log(
       db
         .collection("users")
-        .doc(this.props.match.params.userEmail)
+        // .doc(this.props.match.params.userEmail)
+        .doc("greenrocksjl@hotmail.com")
         .get().icons
     );
     // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
     db
       .collection("users")
-      .doc(this.props.userEmail)
+      // .doc(this.props.userEmail)
+      .doc("greenrocksjl@hotmail.com")
       .update({
         icons: { newIcon: newIcon }
       })
@@ -87,7 +129,7 @@ class EditProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="edit-profile">
         <p className="text">Click to edit a field!</p>
         <InlineEdit
           validate={this.customValidateText}

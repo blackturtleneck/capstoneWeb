@@ -8,6 +8,7 @@ import DatesSelection from "./DatesSelection";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Profile from "./Profile/Profile";
+import EditProfile from "./Profile/EditProfile";
 
 class PageContainer extends React.Component {
   constructor(props) {
@@ -39,9 +40,11 @@ class PageContainer extends React.Component {
         {this.state.content === PageContent.DATE_SELECTION && (
           <DatesSelection />
         )}
-
         {this.state.content === PageContent.PROFILE && (
           <Profile userEmail={this.state.userEmail} />
+        )}
+        {this.state.content === PageContent.EDIT_PROFILE && (
+          <EditProfile userEmail={this.state.userEmail} />
         )}
         <button onClick={this.logout.bind(this)}>Logout</button>
       </div>

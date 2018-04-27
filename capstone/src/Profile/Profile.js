@@ -1,6 +1,8 @@
 import React from "react";
 import { db } from "../FirestoreConfig";
 import { Link } from "react-router-dom";
+import "./profile.css";
+import { Icons } from "../Enums";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -39,18 +41,26 @@ class Profile extends React.Component {
   }
 
   render() {
+    const a = "ANIMALS";
+
     return (
-      <div className="profile">
+      <div id="profile">
         {/* <Link to={`/edit/${this.props.match.params.userEmail}`}>
           <button>Edit Profile</button>
         </Link> */}
+        <Link to={`/edit/greenrocksjl@hotmail.com`}>
+          <button>Edit Profile</button>
+        </Link>
+
         <p>
           Name: {this.state.userDoc.fName} {this.state.userDoc.lName}
         </p>
         <p>Age: {this.state.userDoc.age}</p>
         <p>Gender: {this.state.userDoc.gender}</p>
         <div id="my-availability">availability</div>
-        <div id="my-icons">icons</div>
+        <div id="my-icons">
+          <i className={Icons[a]} />
+        </div>
       </div>
     );
   }

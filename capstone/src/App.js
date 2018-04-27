@@ -50,6 +50,9 @@ class App extends React.Component {
       case Routes.DATE_SELECTION:
         content = PageContent.DATE_SELECTION;
         break;
+      case Routes.EDIT_PROFILE:
+        content = PageContent.EDIT_PROFILE;
+        break;
       default:
         content = PageContent.MESSENGER;
         break;
