@@ -19,7 +19,8 @@ class Login extends React.Component {
         linkFB: result.additionalUserInfo.profile.link,
         timeZone: result.additionalUserInfo.profile.timezone,
         photoURL: result.user.photoURL,
-        icons: { first: "abc", sec: "def" }
+        icons: { first: "abc", sec: "def" },
+        onBoarding: false
       })
       .then(function() {
         console.log("Document successfully written!");

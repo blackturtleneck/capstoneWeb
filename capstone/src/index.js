@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import MessengerPage from "./MessengerPage";
 import registerServiceWorker from "./registerServiceWorker";
+import SignUpController from "./SignUp/SignUpController";
 
 ReactDOM.render(
   <Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/profile/:userEmail" component={App} />
       <Route path="/date-selection" component={App} />
       <Route path="/edit/:userEmail" component={App} />
+      <Route path="/signup" component={SignUpController} />
     </div>
   </Router>,
   document.getElementById("root")
