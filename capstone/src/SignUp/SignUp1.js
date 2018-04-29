@@ -121,6 +121,7 @@ class SignUp1 extends React.Component {
               <option value="31">31</option>
             </select>
             <select
+              required
               name="year"
               className="inline-form custom-select form-input year"
               defaultValue={this.props.fieldValues.year}

@@ -78,3 +78,24 @@
 .year {
   margin-right: 0px;
 }
+
+.tagline-2 {
+  display: block;
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.back-2 {
+  margin-top: -10px;
+}
+.next-2 {
+  margin-top: 10px;
+}
+.back:hover {
+  cursor: pointer;
+}
+
+.next-hover:hover {
+  cursor: pointer;
+}

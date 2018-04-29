@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "google-maps-react": "^1.1.2",
+    "rc-slider": "^8.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-geolocation": "^1.0.3",
