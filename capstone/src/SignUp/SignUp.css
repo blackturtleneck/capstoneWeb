@@ -99,3 +99,11 @@
 .next-hover:hover {
   cursor: pointer;
 }
+
+.distance-wrapper {
+  margin-top: 50px;
+}
+
+.margin {
+  margin-bottom: 30px;
+}
