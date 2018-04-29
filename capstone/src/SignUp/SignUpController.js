@@ -9,7 +9,8 @@ let fieldValues = {
   education: null,
   religion: null,
   occupation: null,
-  location: null
+  location: null,
+  birthday: null
 };
 
 class SignUpInController extends Component {
