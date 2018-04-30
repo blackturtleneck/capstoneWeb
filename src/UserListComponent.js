@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Messenger from './Messenger';
 
 class UserListComponent extends Component {
     constructor(props) {

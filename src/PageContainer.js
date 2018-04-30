@@ -3,9 +3,8 @@ import { auth } from './FirestoreConfig';
 import MessengerPage from './MessengerPage';
 import './Login.css';
 import { PageContent } from './Enums';
-import MapContainer from './MapContainer';
 import DatesSelection from './DatesSelection';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import Profile from './Profile';
 

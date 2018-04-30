@@ -1,6 +1,6 @@
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React from 'react';
-import Dates from './Dates';
+// import Dates from './Dates';
 
 export class MapContainer extends React.Component {
     constructor(props) {

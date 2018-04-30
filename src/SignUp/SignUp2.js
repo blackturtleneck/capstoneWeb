@@ -1,6 +1,5 @@
 import React from 'react';
 import { auth } from '../FirestoreConfig';
-import { Link } from 'react-router-dom';
 import './SignUp.css';
 import next from '../img/next.svg';
 import back from '../img/back.svg';
@@ -10,7 +9,6 @@ import Tooltip from 'rc-tooltip';
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const RangeConst = createSliderWithTooltip(Slider.Range);
 const Handle = Slider.Handle;
 
 class SignUp2 extends React.Component {
@@ -68,6 +66,7 @@ class SignUp2 extends React.Component {
                     src={back}
                     className="back back-2"
                     onClick={this.props.previousStep}
+                    alt="back"
                 />
                 <form className="form" onSubmit={this.nextStep}>
                     <div className="next-step next">
@@ -75,6 +74,7 @@ class SignUp2 extends React.Component {
                             type="image"
                             className="next next-2"
                             src={next}
+                            alt="next"
                         />
                     </div>
                     <label className="signup-label" for="matchGender">

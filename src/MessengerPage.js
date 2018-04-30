@@ -34,7 +34,6 @@ class MessengerPage extends React.Component {
     }
 
     chooseUser(e) {
-        let component = this;
         this.setState({ otherUser: e }, function() {
             console.log('state after choose user', this.state);
         });

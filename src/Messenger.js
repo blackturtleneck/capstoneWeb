@@ -1,6 +1,5 @@
 import React from 'react';
 import { db } from './FirestoreConfig';
-import UserList from './UserList';
 import './Messaging.css';
 
 class Messenger extends React.Component {
@@ -25,7 +24,6 @@ class Messenger extends React.Component {
         });
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
-            let curMessage = [];
             db
                 .collection('users')
                 .doc(this.props.userEmail)

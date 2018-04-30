@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, ListItem, Button } from 'react';
+// import { Card, ListItem, Button } from 'react';
 import MapContainer from './MapContainer';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 
 class Dates extends React.Component {
     constructor(props) {
@@ -92,13 +92,13 @@ class Dates extends React.Component {
         if (!this.state.data) {
             return <div> Your dates are loading! </div>;
         }
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        };
+        // const settings = {
+        //     dots: true,
+        //     infinite: true,
+        //     speed: 500,
+        //     slidesToShow: 1,
+        //     slidesToScroll: 1
+        // };
 
         return (
             <div>

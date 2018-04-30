@@ -68,7 +68,7 @@ class SignUpInController extends Component {
         }
     }
     render() {
-        let progress = this.state.step * 25;
+        // let progress = this.state.step * 25;
         return (
             <div className="signup-wrapper">
                 <div role="progressbar" className="progress-bar" />

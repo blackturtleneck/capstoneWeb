@@ -1,10 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { storageRef, auth, provider, db } from './FirestoreConfig';
+import { auth } from './FirestoreConfig';
 import { Routes, PageContent } from './Enums';
 import PageContainer from './PageContainer';
 import './Login.css';
-import { Link } from 'react-router-dom';
 import Login from './Login';
 
 class App extends React.Component {

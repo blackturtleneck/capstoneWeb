@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { auth, provider, db } from './FirestoreConfig';
 
-class Login extends React.Component {
+class Login extends Component {
     async login() {
         const result = await auth.signInWithPopup(provider);
         this.setState({ user: result.user });

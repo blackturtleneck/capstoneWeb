@@ -1,9 +1,7 @@
 import React from 'react';
 import { auth } from '../FirestoreConfig';
-import { Link } from 'react-router-dom';
 import './SignUp.css';
 import next from '../img/next.svg';
-import back from '../img/back.svg';
 
 class SignUp1 extends React.Component {
     constructor(props) {
@@ -32,7 +30,12 @@ class SignUp1 extends React.Component {
 
                 <form className="form" onSubmit={this.nextStep}>
                     <div className="next-step next">
-                        <input type="image" className="next" src={next} />
+                        <input
+                            type="image"
+                            className="next"
+                            src={next}
+                            alt="next"
+                        />
                     </div>
                     <label className="signup-label" for="name">
                         NAME
