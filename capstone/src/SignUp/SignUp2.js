@@ -20,13 +20,32 @@ class SignUp2 extends React.Component {
     this.state = {
       authenticated: true,
       user: this.props.user,
-      content: this.props.content
+      content: this.props.content,
+      ageRange: [25, 30],
+      distance: 10
     };
+    this.onRangeChange = this.onRangeChange.bind(this);
+    this.onSliderChange = this.onSliderChange.bind(this);
+    this.nextStep = this.nextStep.bind(this);
   }
 
   logout() {
     auth.signOut();
   }
+
+  onRangeChange = value => {
+    console.log(value);
+    this.setState({
+      ageRange: value
+    });
+  };
+
+  onSliderChange = value => {
+    console.log(value);
+    this.setState({
+      distance: value
+    });
+  };
 
   render() {
     const handle = props => {
@@ -77,7 +96,7 @@ class SignUp2 extends React.Component {
             <Range
               min={18}
               max={55}
-              defaultValue={[25, 30]}
+              defaultValue={this.state.ageRange}
               handle={handle}
               trackStyle={[
                 { backgroundColor: "#828282" },
@@ -87,9 +106,7 @@ class SignUp2 extends React.Component {
                 { backgroundColor: "#9BA2FF", borderColor: "#9BA2FF" },
                 { backgroundColor: "#9BA2FF", borderColor: "#9BA2FF" }
               ]}
-              //   onChange={v => this.handleChange("name", v)}
-              //   //     console.log(this.state.maxValue);
-              //   //   }
+              onChange={this.onRangeChange}
             />
           </div>
           <label className="signup-label distance-wrapper" for="distance">
@@ -99,13 +116,13 @@ class SignUp2 extends React.Component {
             <Slider
               min={0}
               max={50}
-              defaultValue={10}
+              defaultValue={this.state.distance}
               handle={handle}
               trackStyle={[{ backgroundColor: "#828282" }]}
               handleStyle={[
                 { backgroundColor: "#9BA2FF", borderColor: "#9BA2FF" }
               ]}
-              onChange={v => this.handleChange("name", v)}
+              onChange={this.onSliderChange}
             />
           </div>
         </form>
@@ -114,17 +131,15 @@ class SignUp2 extends React.Component {
   }
 
   nextStep(e) {
-    let currentComponent = this;
     e.preventDefault();
-    console.log("document.getelemnt", document.getElementsByTagName("Range"));
     var data = {
       matchGender: e.target.matchGender.value,
-      ageRange: e.target.ageRange.value,
-      distance: e.target.distance.value
+      ageRange: this.state.ageRange,
+      distance: this.state.distance
     };
     console.log("data", data);
-    currentComponent.props.saveValues(data);
-    currentComponent.props.nextStep();
+    this.props.saveValues(data);
+    this.props.nextStep();
   }
 }
 
