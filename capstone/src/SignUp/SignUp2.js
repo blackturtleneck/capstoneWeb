@@ -87,9 +87,9 @@ class SignUp2 extends React.Component {
                 { backgroundColor: "#9BA2FF", borderColor: "#9BA2FF" },
                 { backgroundColor: "#9BA2FF", borderColor: "#9BA2FF" }
               ]}
-              onChange={v => this.handleChange("name", v)}
-              //     console.log(this.state.maxValue);
-              //   }
+              //   onChange={v => this.handleChange("name", v)}
+              //   //     console.log(this.state.maxValue);
+              //   //   }
             />
           </div>
           <label className="signup-label distance-wrapper" for="distance">
