@@ -44,3 +44,8 @@ div img {
 .send-text {
   width: 70%;
 }
+
+.dropdown-item,
+.dropdown-divider {
+  color: black;
+}
