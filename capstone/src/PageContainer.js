@@ -6,8 +6,9 @@ import { PageContent } from "./Enums";
 import MapContainer from "./MapContainer";
 import DatesSelection from "./DatesSelection";
 import { Link } from "react-router-dom";
-import Header from "./Header";
+import Header from "./navBar/Header";
 import Profile from "./Profile";
+import EditProfile from "./EditProfile";
 
 class PageContainer extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class PageContainer extends React.Component {
     };
   }
 
-  logout() {
-    auth.signOut();
-  }
+  // logout() {
+  //   auth.signOut();
+  // }
 
   render() {
     return (
@@ -36,6 +37,7 @@ class PageContainer extends React.Component {
             userEmail={this.state.user.email}
           />
         )}
+
         {this.state.content === PageContent.DATE_SELECTION && (
           <DatesSelection />
         )}
@@ -43,7 +45,12 @@ class PageContainer extends React.Component {
         {this.state.content === PageContent.PROFILE && (
           <Profile userEmail={this.state.userEmail} />
         )}
-        <button onClick={this.logout.bind(this)}>Logout</button>
+
+        {this.state.content === PageContent.EDIT_PROFILE && (
+          <EditProfile userEmail={this.state.userEmail} />
+        )}
+
+        {/* <button onClick={this.logout.bind(this)}>Logout</button> */}
       </div>
     );
   }

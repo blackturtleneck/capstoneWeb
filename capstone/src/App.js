@@ -78,5 +78,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// /Users/jessicalibman/Desktop/Past/SUMMER2017/tasksheriff/mobile-react/resources/assets/js/App.js
