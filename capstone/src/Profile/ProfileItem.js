@@ -1,5 +1,5 @@
 import React from "react";
-import { db } from "./FirestoreConfig";
+import { db } from "../FirestoreConfig";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
