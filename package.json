@@ -32,6 +32,6 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "lint": "eslint src/ --ext .js",
-        "lint-functions": "cd functions && npm run lint"
+        "lint-functions": "cd capstone && npm run lint"
     }
 }
