@@ -8,7 +8,6 @@ import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 
 // found here http://react-component.github.io/slider/examples/handle.html
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Handle = Slider.Handle;
 
 class SignUp2 extends React.Component {
