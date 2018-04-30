@@ -10,3 +10,12 @@ script:
 - npm test
 - npm run build
 - npm run lint-functions
+- run:
+    name: update yarn
+    command: |
+      # remove default yarn
+      sudo rm -rf $(dirname $(which yarn))/yarn*
+      # download latest
+      rm -rf ~/.yarn
+      curl -o- -L https://yarnpkg.com/install.sh | bash
+      echo 'export PATH="${PATH}:${HOME}/.yarn/bin"' >> $BASH_ENV
