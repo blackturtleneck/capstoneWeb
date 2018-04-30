@@ -1,9 +1,8 @@
 import React from 'react';
 import { db } from './FirestoreConfig';
-import InlineEdit from 'react-edit-inline'
+import InlineEdit from 'react-edit-inline';
 
 class EditProfile extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -15,14 +14,18 @@ class EditProfile extends React.Component {
     }
 
     componentWillMount() {
-        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
-            if (doc.exists) {
-                this.setState({userDoc: doc.data()});
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        });
+        db
+            .collection('users')
+            .doc(this.props.match.params.userEmail)
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    this.setState({ userDoc: doc.data() });
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log('No such document!');
+                }
+            });
     }
 
     dataChanged(data) {
@@ -30,55 +33,70 @@ class EditProfile extends React.Component {
         console.log();
         var field = Object.keys(data)[0].toString();
         // console.log(typeof(data[field]))
-        db.collection("users").doc(this.props.match.params.userEmail).update({
-            [field]: data[field]
-        })
-        .then(function () {
-            console.log("Document successfully written!");
-        })
-        .catch(function (error) {
-            console.error("Error writing document: ", error);
-        });
+        db
+            .collection('users')
+            .doc(this.props.match.params.userEmail)
+            .update({
+                [field]: data[field]
+            })
+            .then(function() {
+                console.log('Document successfully written!');
+            })
+            .catch(function(error) {
+                console.error('Error writing document: ', error);
+            });
 
         //update state
-        db.collection("users").doc(this.props.match.params.userEmail).get().then(doc => {
-            if (doc.exists) {
-                this.setState({userDoc: doc.data()});
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        });
+        db
+            .collection('users')
+            .doc(this.props.match.params.userEmail)
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    this.setState({ userDoc: doc.data() });
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log('No such document!');
+                }
+            });
     }
 
-    addIcon(){
-        var newIcon = document.getElementsByName("newIcon").text;
+    addIcon() {
+        var newIcon = document.getElementsByName('newIcon').text;
         // console.log()
-        console.log(db.collection("users").doc(this.props.match.params.userEmail).get().icons)
+        console.log(
+            db
+                .collection('users')
+                .doc(this.props.match.params.userEmail)
+                .get().icons
+        );
         // if(!db.collection("users").doc(this.props.userEmail).collection("icons").get()) {
-            db.collection("users").doc(this.props.userEmail).update({
-                "icons": {newIcon:newIcon}
+        db
+            .collection('users')
+            .doc(this.props.userEmail)
+            .update({
+                icons: { newIcon: newIcon }
             })
-            .then(function () {
-                console.log("Document successfully written!");
+            .then(function() {
+                console.log('Document successfully written!');
             })
-            .catch(function (error) {
-                console.error("Error writing document: ", error);
+            .catch(function(error) {
+                console.error('Error writing document: ', error);
             });
         // }
     }
 
     render() {
         return (
-            <div >
-                <p className = "text">Click to edit a field!</p>
+            <div>
+                <p className="text">Click to edit a field!</p>
                 <InlineEdit
                     validate={this.customValidateText}
                     activeClassName="editing"
                     text={this.state.userDoc.fName}
                     paramName="fName"
                     change={this.dataChanged}
-                    />
+                />
                 <br />
                 <InlineEdit
                     validate={this.customValidateText}
@@ -86,24 +104,24 @@ class EditProfile extends React.Component {
                     text={this.state.userDoc.lName}
                     paramName="lName"
                     change={this.dataChanged}
-                    />
-                <br />                
+                />
+                <br />
                 <InlineEdit
                     validate={this.customValidateText}
                     activeClassName="editing"
                     text={this.state.userDoc.age}
                     paramName="age"
                     change={this.dataChanged}
-                    />
-                <br />                
+                />
+                <br />
                 <InlineEdit
                     validate={this.customValidateText}
                     activeClassName="editing"
                     text={this.state.userDoc.gender}
                     paramName="gender"
                     change={this.dataChanged}
-                    />
-                <br />    
+                />
+                <br />
                 <button onClick={this.addIcon}>Add icon</button>
                 <form>
                     <label>
@@ -117,4 +135,3 @@ class EditProfile extends React.Component {
 }
 
 export default EditProfile;
-

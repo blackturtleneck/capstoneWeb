@@ -6,7 +6,6 @@ import './Messaging.css';
 class Messenger extends React.Component {
     constructor(props, context) {
         super(props, context);
-        console.log('this.props messenger', props);
         this.state = {
             message: '',
             messages: [],
@@ -24,9 +23,6 @@ class Messenger extends React.Component {
         this.setState({
             otherUser: newProps.otherUser
         });
-        console.log('component will receive props');
-        console.log('props', this.props);
-        console.log('new props are : ', newProps);
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
             let curMessage = [];
@@ -39,29 +35,20 @@ class Messenger extends React.Component {
                 .onSnapshot(function(querySnapshot) {
                     var curMessages = [];
                     querySnapshot.forEach(function(doc) {
-                        console.log('doc.data', doc.data());
                         curMessages.push(doc.data());
                     });
                     currentComponent.setState({ messages: curMessages });
-                    console.log(
-                        'this.state.messages',
-                        currentComponent.state.messages
-                    );
                 });
         }
     }
 
     updateMessage(event) {
-        console.log('updateMessage:' + event.target.value);
         this.setState({
             message: event.target.value
         });
     }
 
     submitMessage(event) {
-        console.log('submitMessage: ' + this.state.message);
-        console.log('this.state ', this.state);
-        console.log('this.props:', this.props);
         const time = new Date();
 
         let month = time.getMonth();
@@ -144,7 +131,6 @@ class Messenger extends React.Component {
     }
 
     render() {
-        console.log('messenger this.state', this.state);
         const currentMessage = this.state.messages.map((message, i) => {
             return (
                 <li
@@ -159,7 +145,6 @@ class Messenger extends React.Component {
                 </li>
             );
         });
-        // }
 
         return (
             <div className="messenger">
