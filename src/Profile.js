@@ -1,45 +1,45 @@
-import React from "react";
-import { db } from "./FirestoreConfig";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { db } from './FirestoreConfig';
+import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userDoc: ""
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            userDoc: ''
+        };
+    }
 
-  //   componentWillMount() {
-  //     db
-  //       .collection("users")
-  //       .doc(this.props.match.params.userEmail)
-  //       .get()
-  //       .then(doc => {
-  //         if (doc.exists) {
-  //           this.setState({ userDoc: doc.data() });
-  //         } else {
-  //           // doc.data() will be undefined in this case
-  //           console.log("No such document!");
-  //         }
-  //       });
-  //   }
+    //   componentWillMount() {
+    //     db
+    //       .collection("users")
+    //       .doc(this.props.match.params.userEmail)
+    //       .get()
+    //       .then(doc => {
+    //         if (doc.exists) {
+    //           this.setState({ userDoc: doc.data() });
+    //         } else {
+    //           // doc.data() will be undefined in this case
+    //           console.log("No such document!");
+    //         }
+    //       });
+    //   }
 
-  render() {
-    return (
-      <div className="profile">
-        {/* <Link to={`/edit/${this.props.match.params.userEmail}`}>
+    render() {
+        return (
+            <div className="profile">
+                {/* <Link to={`/edit/${this.props.match.params.userEmail}`}>
           <button>Edit Profile</button>
         </Link> */}
-        <p>
-          Name: {this.state.userDoc.fName} {this.state.userDoc.lName}
-        </p>
-        <p>Age: {this.state.userDoc.age}</p>
-        <p>Gender: {this.state.userDoc.gender}</p>
-        <Link to="/">home</Link>
-      </div>
-    );
-  }
+                <p>
+                    Name: {this.state.userDoc.fName} {this.state.userDoc.lName}
+                </p>
+                <p>Age: {this.state.userDoc.age}</p>
+                <p>Gender: {this.state.userDoc.gender}</p>
+                <Link to="/">home</Link>
+            </div>
+        );
+    }
 }
 
 export default Profile;
