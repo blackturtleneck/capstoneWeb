@@ -1,30 +1,36 @@
 {
-  "name": "capstone",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "google-maps-react": "^1.1.2",
-    "prop-types": "^15.6.1",
-    "rc-slider": "^8.6.1",
-    "react": "16.0.0-alpha.12",
-    "react-dom": "^16.2.0",
-    "react-geolocation": "^1.0.3",
-    "react-responsive-carousel": "^3.1.33",
-    "react-router-dom": "^4.2.2",
-    "react-select": "^1.2.1",
-    "react-slick": "^0.19.0"
-  },
-  "devDependencies": {
-    "firebase": "^4.9.1",
-    "install-peers": "^1.0.2",
-    "react-edit-inline": "^1.0.8",
-    "react-scripts": "1.1.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint.js"
-  }
+    "name": "capstone",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "google-maps-react": "^1.1.2",
+        "prop-types": "^15.6.1",
+        "rc-slider": "^8.6.1",
+        "react": "16.0.0-alpha.12",
+        "react-dom": "^16.2.0",
+        "react-geolocation": "^1.0.3",
+        "react-responsive-carousel": "^3.1.33",
+        "react-router-dom": "^4.2.2",
+        "react-select": "^1.2.1",
+        "react-slick": "^0.19.0"
+    },
+    "devDependencies": {
+        "eslint-config-standard": "^11.0.0",
+        "eslint-plugin-import": "^2.11.0",
+        "eslint-plugin-node": "^6.0.1",
+        "eslint-plugin-promise": "^3.7.0",
+        "eslint-plugin-standard": "^3.1.0",
+        "firebase": "^4.9.1",
+        "install-peers": "^1.0.2",
+        "react-edit-inline": "^1.0.8",
+        "react-scripts": "1.1.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "lint": "eslint src/ --ext .js",
+        "lint-functions": "cd functions && npm run lint"
+    }
 }
