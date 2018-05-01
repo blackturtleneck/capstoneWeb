@@ -1,6 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
-import { auth, provider, db } from './FirestoreConfig';
+import { db } from './FirestoreConfig';
 import UserList from './UserList';
 import Messenger from './Messenger';
 import './Messaging.css';
@@ -38,7 +37,6 @@ class MessengerPage extends React.Component {
     }
 
     chooseUser(e) {
-        let component = this;
         this.setState({ otherUser: e }, function() {});
         this.forceUpdate();
     }

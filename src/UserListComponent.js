@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Messenger from './Messenger';
 import './UserList.css';
 
 class UserListComponent extends Component {
@@ -12,10 +11,10 @@ class UserListComponent extends Component {
         };
     }
 
-    chooseUser = () => {
+    chooseUser() {
         let curOtherUser = this.state.otherUser;
         this.props.chooseUser(curOtherUser);
-    };
+    }
 
     render() {
         return (

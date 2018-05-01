@@ -3,9 +3,7 @@ import { auth } from './FirestoreConfig';
 import MessengerPage from './MessengerPage';
 import './Login.css';
 import { PageContent } from './Enums';
-import MapContainer from './MapContainer';
 import DatesSelection from './DatesSelection';
-import { Link } from 'react-router-dom';
 import Header from './Header';
 import Profile from './Profile';
 
@@ -28,8 +26,6 @@ class PageContainer extends React.Component {
         return (
             <div>
                 <Header userEmail={this.state.user.email} />
-                {/* <Link to={`/profile/${this.props.user.email}`}>View My Profile</Link>
-        <Link to={`/messenger`}>Messenger</Link> */}
                 {this.state.content === PageContent.MESSENGER && (
                     <MessengerPage
                         user={this.state.user.displayName}

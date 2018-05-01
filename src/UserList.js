@@ -8,9 +8,9 @@ class UserList extends React.Component {
         this.state = {};
     }
 
-    chooseUser = curOtherUser => {
+    chooseUser(curOtherUser) {
         this.props.chooseUser(curOtherUser);
-    };
+    }
 
     render() {
         return (
