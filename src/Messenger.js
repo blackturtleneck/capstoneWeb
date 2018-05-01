@@ -34,7 +34,6 @@ class Messenger extends React.Component {
         });
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
-            let curMessage = [];
             db
                 .collection('users')
                 .doc(this.props.userEmail)
