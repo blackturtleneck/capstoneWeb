@@ -1,9 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { auth } from './FirestoreConfig';
+import { storageRef, auth, provider, db } from './FirestoreConfig';
 import { Routes, PageContent } from './Enums';
 import PageContainer from './PageContainer';
 import './Login.css';
+import { Link } from 'react-router-dom';
 import Login from './Login';
 
 class App extends React.Component {
@@ -14,6 +15,7 @@ class App extends React.Component {
             authenticated: false,
             user: null
         };
+        console.log('state', this.state);
     }
 
     componentDidMount() {
@@ -24,7 +26,7 @@ class App extends React.Component {
                     this.setState({
                         authenticated: true,
                         user: {
-                            displayName: user.displayname,
+                            displayName: user.displayName,
                             email: user.email
                         }
                     });
@@ -79,5 +81,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// /Users/jessicalibman/Desktop/Past/SUMMER2017/tasksheriff/mobile-react/resources/assets/js/App.js

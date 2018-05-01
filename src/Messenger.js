@@ -1,5 +1,6 @@
 import React from 'react';
 import { db } from './FirestoreConfig';
+import UserList from './UserList';
 import './Messaging.css';
 
 class Messenger extends React.Component {
@@ -16,6 +17,16 @@ class Messenger extends React.Component {
 
         this.updateMessage = this.updateMessage.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
+        this.submitMessageEnter = this.submitMessageEnter.bind(this);
+    }
+
+    componentDidMount() {
+        //doesnt werk..?
+        if (document.getElementById('message-list') != null) {
+            var list = document.getElementById('message-list');
+            list.scrollTop = list.scrollHeight;
+            list.animate({ scrollTop: list.scrollHeight });
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -24,6 +35,7 @@ class Messenger extends React.Component {
         });
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
+            let curMessage = [];
             db
                 .collection('users')
                 .doc(this.props.userEmail)
@@ -44,6 +56,12 @@ class Messenger extends React.Component {
         this.setState({
             message: event.target.value
         });
+    }
+
+    submitMessageEnter(event) {
+        if (event.key === 'Enter') {
+            this.submitMessage();
+        }
     }
 
     submitMessage(event) {
@@ -145,26 +163,40 @@ class Messenger extends React.Component {
         });
 
         return (
-            <div className="messenger">
-                <h2>{this.state.otherUserName}</h2>
-                <ol>{currentMessage}</ol>
+            <div className="messenger-wrapper">
+                {this.state.otherUser !== undefined &&
+                this.state.otherUser !== null ? (
+                        <div className="messenger">
+                            <h2>{this.state.otherUserName}</h2>
+                            <ol className="messages" id="message-list">
+                                {currentMessage}
+                            </ol>
 
-                <div className="button-input-wrapper">
-                    <input
-                        id="message-box"
-                        className="send-text"
-                        onChange={this.updateMessage}
-                        type="text"
-                        placeholder="message"
-                    />
-                    <button
-                        className="submit-button"
-                        onClick={this.submitMessage}
-                    >
-                        Send
-                    </button>
-                </div>
-                <br />
+                            <div className="button-input-wrapper">
+                                <input
+                                    id="message-box"
+                                    className="send-text"
+                                    onChange={this.updateMessage}
+                                    type="text"
+                                    placeholder="message"
+                                    onKeyPress={this.submitMessageEnter}
+                                />
+                                <button
+                                    className="submit-button"
+                                    onClick={this.submitMessage}
+                                >
+                                Send
+                                </button>
+                            </div>
+                            <br />
+                        </div>
+                    ) : (
+                        <div className="messenger">
+                            <p className="select">
+                            Select a match to start messaging!
+                            </p>
+                        </div>
+                    )}
             </div>
         );
     }
