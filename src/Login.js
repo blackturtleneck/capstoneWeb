@@ -19,8 +19,7 @@ class Login extends Component {
                 linkFB: result.additionalUserInfo.profile.link,
                 timeZone: result.additionalUserInfo.profile.timezone,
                 photoURL: result.user.photoURL,
-                icons: { first: 'abc', sec: 'def' },
-                onBoarding: false
+                icons: { first: 'abc', sec: 'def' }
             })
             .then(function() {
                 // eslint-disable-line no-console
