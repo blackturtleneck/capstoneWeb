@@ -11,19 +11,43 @@ let fieldValues = {
     religion: null,
     occupation: null,
     location: null,
-    birthday: null,
+    birthday: {
+        month: null,
+        day: null,
+        year: null
+    },
 
     matchGender: null,
     matchAgeMin: null,
     matchAgeMax: null,
-    matchDistance: null
+    matchDistance: null,
+
+    dates: {
+        coffee: null,
+        dinner: null,
+        drinks: null,
+        museum: null,
+        show: null,
+        park: null
+    },
+    topics: {
+        travel: null,
+        food: null,
+        music: null,
+        sports: null,
+        movies: null,
+        gaming: null,
+        nature: null,
+        animals: null,
+        tech: null
+    }
 };
 
 class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 2
+            step: 3
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -57,7 +81,7 @@ class SignUpInController extends Component {
                     fieldValues={fieldValues}
                 />
             );
-        case 1:
+        case 2:
             return (
                 <SignUp2
                     nextStep={this.nextStep}
@@ -66,7 +90,7 @@ class SignUpInController extends Component {
                     fieldValues={fieldValues}
                 />
             );
-        case 2:
+        case 3:
             return (
                 <SignUp3
                     nextStep={this.nextStep}
@@ -78,10 +102,15 @@ class SignUpInController extends Component {
         }
     }
     render() {
-        // let progress = this.state.step * 25;
+        let progress = this.state.step * 33.333;
         return (
             <div className="signup-wrapper">
-                <div role="progressbar" className="progress-bar" />
+                <div
+                    style={{ width: progress + 'vw' }}
+                    className="progress-bar"
+                >
+                    {' '}
+                </div>
                 {this.showStep()}
             </div>
         );

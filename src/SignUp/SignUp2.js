@@ -59,7 +59,7 @@ class SignUp2 extends React.Component {
         };
 
         return (
-            <div class="signup-page">
+            <div className="signup-page">
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
                 <img
                     src={back}
@@ -68,14 +68,12 @@ class SignUp2 extends React.Component {
                     alt="back"
                 />
                 <form className="form" onSubmit={this.nextStep}>
-                    <div className="next-step next">
-                        <input
-                            type="image"
-                            className="next next-2"
-                            src={next}
-                            alt="next"
-                        />
-                    </div>
+                    <input
+                        type="image"
+                        className="next next-2"
+                        src={next}
+                        alt="next"
+                    />
                     <label className="signup-label" for="matchGender">
                         I'M LOOKING FOR...
                     </label>
@@ -88,6 +86,7 @@ class SignUp2 extends React.Component {
                         <option selected />
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
+                        <option value="both">BOTH</option>
                     </select>
 
                     <label className="signup-label" for="match-age">

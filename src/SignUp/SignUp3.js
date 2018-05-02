@@ -120,16 +120,14 @@ class SignUp3 extends React.Component {
 
     render() {
         return (
-            <div class="signup-page">
+            <div className="signup-page">
                 <img
                     src={back}
                     className="back back-3"
                     onClick={this.props.previousStep}
                     alt="back"
                 />
-                <div className="next-step next next-3">
-                    <img className="next next-3" src={next} alt="next" />
-                </div>
+                <img className="next" src={next} alt="next" />
                 <div className="tagline-3">PICK YOUR DATE PREFERENCES</div>
                 <div className="date-header">
                     ON A FIRST DATE I'D LIKE TO...
@@ -303,13 +301,29 @@ class SignUp3 extends React.Component {
 
     nextStep(e) {
         e.preventDefault();
-        // var data = {
-        //     matchGender: e.target.matchGender.value,
-        //     ageRange: this.state.ageRange,
-        //     distance: this.state.distance
-        // };
-        // console.log('data', data);
-        // this.props.saveValues(data);
+        var data = {
+            dates: {
+                coffee: this.props.dates.coffee,
+                dinner: this.props.dates.dinner,
+                drinks: this.props.dates.drinks,
+                museum: this.props.dates.museum,
+                show: this.props.dates.show,
+                park: this.props.dates.park
+            },
+            topics: {
+                travel: this.props.topics.travel,
+                food: this.props.topics.food,
+                music: this.props.topics.music,
+                sports: this.props.sports,
+                movies: this.props.topics.movies,
+                gaming: this.props.topics.gaming,
+                nature: this.props.topics.nature,
+                animals: this.props.topics.animals,
+                tech: this.props.topics.tech
+            }
+        };
+        console.log('data', data);
+        this.props.saveValues(data);
         this.props.nextStep();
     }
 }
