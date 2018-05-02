@@ -6,7 +6,6 @@ import { PageContent } from './Enums';
 import DatesSelection from './DatesSelection';
 import Header from './Header';
 import Profile from './Profile';
-import { Redirect } from 'react-router-dom';
 import SignUpController from './SignUp/SignUpController';
 
 class PageContainer extends React.Component {
