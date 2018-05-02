@@ -13,22 +13,22 @@ class SignUp3 extends React.Component {
             user: this.props.user,
             content: this.props.content,
 
-            coffee: false,
-            dinner: false,
-            drinks: false,
-            museum: false,
-            show: false,
-            park: false,
+            coffee: this.props.fieldValues.dates.coffee,
+            dinner: this.props.fieldValues.dates.dinner,
+            drinks: this.props.fieldValues.dates.drinks,
+            museum: this.props.fieldValues.dates.museum,
+            show: this.props.fieldValues.dates.show,
+            park: this.props.fieldValues.dates.park,
 
-            travel: false,
-            food: false,
-            music: false,
-            sports: false,
-            movies: false,
-            tech: false,
-            gaming: false,
-            nature: false,
-            animals: false
+            travel: this.props.fieldValues.topics.travel,
+            food: this.props.fieldValues.topics.food,
+            music: this.props.fieldValues.topics.music,
+            sports: this.props.fieldValues.sports,
+            movies: this.props.fieldValues.topics.movies,
+            gaming: this.props.fieldValues.topics.gaming,
+            nature: this.props.fieldValues.topics.nature,
+            animals: this.props.fieldValues.topics.animals,
+            tech: this.props.fieldValues.topics.tech
         };
         this.nextStep = this.nextStep.bind(this);
 
@@ -127,7 +127,12 @@ class SignUp3 extends React.Component {
                     onClick={this.props.previousStep}
                     alt="back"
                 />
-                <img className="next" src={next} alt="next" />
+                <img
+                    className="next"
+                    src={next}
+                    alt="next"
+                    onClick={this.nextStep}
+                />
                 <div className="tagline-3">PICK YOUR DATE PREFERENCES</div>
                 <div className="date-header">
                     ON A FIRST DATE I'D LIKE TO...
@@ -303,28 +308,28 @@ class SignUp3 extends React.Component {
         e.preventDefault();
         var data = {
             dates: {
-                coffee: this.props.dates.coffee,
-                dinner: this.props.dates.dinner,
-                drinks: this.props.dates.drinks,
-                museum: this.props.dates.museum,
-                show: this.props.dates.show,
-                park: this.props.dates.park
+                coffee: this.state.coffee,
+                dinner: this.state.dinner,
+                drinks: this.state.drinks,
+                museum: this.state.museum,
+                show: this.state.show,
+                park: this.state.park
             },
             topics: {
-                travel: this.props.topics.travel,
-                food: this.props.topics.food,
-                music: this.props.topics.music,
-                sports: this.props.sports,
-                movies: this.props.topics.movies,
-                gaming: this.props.topics.gaming,
-                nature: this.props.topics.nature,
-                animals: this.props.topics.animals,
-                tech: this.props.topics.tech
+                travel: this.state.travel,
+                food: this.state.food,
+                music: this.state.music,
+                sports: this.state.sports,
+                movies: this.state.movies,
+                gaming: this.state.gaming,
+                nature: this.state.nature,
+                animals: this.state.animals,
+                tech: this.state.tech
             }
         };
         console.log('data', data);
         this.props.saveValues(data);
-        this.props.nextStep();
+        this.props.submitRegistration();
     }
 }
 

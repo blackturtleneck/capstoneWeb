@@ -7,6 +7,7 @@ import DatesSelection from './DatesSelection';
 import Header from './Header';
 import Profile from './Profile';
 import { Redirect } from 'react-router-dom';
+import SignUpController from './SignUp/SignUpController';
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class PageContainer extends React.Component {
         return (
             <div>
                 {!this.state.onBoarding ? (
-                    <Redirect to={'/signup'} />
+                    <SignUpController user={this.state.user} />
                 ) : (
                     <div>
                         <Header userEmail={this.state.user.email} />

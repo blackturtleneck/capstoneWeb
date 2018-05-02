@@ -17,7 +17,7 @@ ReactDOM.render(
             <Route path="/profile/:userEmail" component={App} />
             <Route path="/date-selection" component={App} />
             <Route path="/edit/:userEmail" component={App} />
-            <Route path="/signup" component={SignUpController} />
+            <Route path="/signup" component={App} />
         </div>
     </Router>,
     document.getElementById('root')

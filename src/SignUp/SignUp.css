@@ -176,3 +176,25 @@ i {
   overflow: hidden;
   border: none;
 }
+
+.complete {
+  text-align: center;
+  padding-top: 100px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+}
+.complete-button {
+  margin: 0 auto;
+  text-align: center;
+}
+.button {
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 10px 20px;
+}
+.start-matching {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+}
