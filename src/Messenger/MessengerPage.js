@@ -1,5 +1,5 @@
 import React from 'react';
-import { db } from './FirestoreConfig';
+import { db } from '../FirestoreConfig';
 import UserList from './UserList';
 import Messenger from './Messenger';
 import './Messaging.css';

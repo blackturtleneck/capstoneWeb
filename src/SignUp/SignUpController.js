@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SignUp.css';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
+import SignUp3 from './SignUp3';
 
 let fieldValues = {
     name: null,
@@ -22,7 +23,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: 2
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -59,6 +60,15 @@ class SignUpInController extends Component {
         case 1:
             return (
                 <SignUp2
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
+                    saveValues={this.saveValues}
+                    fieldValues={fieldValues}
+                />
+            );
+        case 2:
+            return (
+                <SignUp3
                     nextStep={this.nextStep}
                     previousStep={this.previousStep}
                     saveValues={this.saveValues}

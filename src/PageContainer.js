@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth, db } from './FirestoreConfig';
-import MessengerPage from './MessengerPage';
+import MessengerPage from './Messenger/MessengerPage';
 import './Login.css';
 import { PageContent } from './Enums';
 import DatesSelection from './DatesSelection';

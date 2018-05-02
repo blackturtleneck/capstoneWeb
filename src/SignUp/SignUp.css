@@ -107,3 +107,58 @@
 .margin {
   margin-bottom: 30px;
 }
+
+.back-3 {
+  padding-top: 20px;
+  margin-top: 0px;
+}
+.next-3 {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+.date-header {
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+}
+
+.date-row {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  width: 50vw;
+}
+.date-type {
+  display: inline-block;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.tagline-3 {
+  display: block;
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.date-icon {
+  padding: 0px;
+  font-size: 50px;
+  text-align: center;
+}
+
+i {
+  padding-bottom: 10px !important;
+}
+
+.date-type:hover {
+  cursor: pointer;
+}
+
+.active {
+  color: #9ba2ff;
+}

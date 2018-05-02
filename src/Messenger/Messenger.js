@@ -1,5 +1,5 @@
 import React from 'react';
-import { db } from './FirestoreConfig';
+import { db } from '../FirestoreConfig';
 import './Messaging.css';
 
 class Messenger extends React.Component {
