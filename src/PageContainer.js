@@ -29,7 +29,9 @@ class PageContainer extends React.Component {
         db
             .collection('users')
             .doc(this.state.user.email)
-            .onSnapshot(function(doc) {
+            .get()
+            .then(function(doc) {
+                // .onSnapshot(function(doc) {
                 console.log('doc', doc.data());
                 if (!doc.data().onBoarding) {
                     component.setState({
@@ -49,7 +51,7 @@ class PageContainer extends React.Component {
             <div>
                 {!this.state.onBoarding ? (
                     <div>
-                        <Redirect to={'/signup'} />
+                        {/* <Redirect to={'/signup'} /> */}
                         {this.state.content === PageContent.SIGN_UP && (
                             <SignUpController user={this.state.user} />
                         )}
