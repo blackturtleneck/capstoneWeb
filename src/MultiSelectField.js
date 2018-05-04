@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import Dates from './Dates';
@@ -22,47 +22,54 @@ const cuisines = [
     { label: 'Teriyaki', value: '16' },
     { label: 'Thai', value: '17' },
     { label: 'Vegetarian', value: '18' },
-    { label: 'Vietnamese', value: '19' },
+    { label: 'Vietnamese', value: '19' }
 ];
 
-
-
 export default class MultiSelectField extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      crazy: false,
-      value: [],
-    };
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            crazy: false,
+            value: []
+        };
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+    }
 
-  handleSelectChange(value) {
-    console.log('You have selected: ', value);
-    this.setState({ value });
-  }
+    handleSelectChange(value) {
+        console.log('You have selected: ', value);
+        this.setState({ value });
+    }
 
-  static propTypes = {
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.object,
-    ])
-  }
-  
-  triggerChildAlert(){
-    this.refs.child.showAlert();
-}
+    static propTypes() {
+        PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
+        ]);
+    }
 
-  render () {
+    triggerChildAlert() {
+        this.refs.child.showAlert();
+    }
+
+    render() {
         return (
             <div className="section">
                 <h3 className="section-heading header">{this.props.label}</h3>
-                <Select multi joinValues value={this.state.value} placeholder="What else are you feeling for your next date?" options={cuisines} onChange={this.handleSelectChange} />
-               <br/>
-               <br/>
+                <Select
+                    multi
+                    joinValues
+                    value={this.state.value}
+                    placeholder="What else are you feeling for your next date?"
+                    options={cuisines}
+                    onChange={this.handleSelectChange}
+                />
+                <br />
+                <br />
                 <Dates ref="child" />
-                <button className = "button" onClick={this.triggerChildAlert}>Click</button>
+                <button className="button" onClick={this.triggerChildAlert}>
+                    Click
+                </button>
             </div>
         );
     }
