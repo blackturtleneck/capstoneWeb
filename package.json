@@ -8,6 +8,7 @@
         "prop-types": "^15.6.1",
         "rc-slider": "^8.6.1",
         "react": "16.0.0-alpha.12",
+        "react-available-times": "^1.2.0",
         "react-dom": "^16.2.0",
         "react-geolocation": "^1.0.3",
         "react-responsive-carousel": "^3.1.33",

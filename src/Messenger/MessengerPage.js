@@ -3,6 +3,7 @@ import { db } from '../FirestoreConfig';
 import UserList from './UserList';
 import Messenger from './Messenger';
 import './Messaging.css';
+import DatesSelection from '../DatesSelection';
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
@@ -59,6 +60,7 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
+                <DatesSelection />
             </div>
         );
     }

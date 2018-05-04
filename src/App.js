@@ -52,6 +52,9 @@ class App extends React.Component {
         case Routes.SIGN_UP:
             content = PageContent.SIGN_UP;
             break;
+        case Routes.EDIT_PROFILE:
+            content = PageContent.EDIT_PROFILE;
+            break;
         default:
             content = PageContent.MESSENGER;
             break;

@@ -5,8 +5,8 @@ import './Login.css';
 import { PageContent } from './Enums';
 import { Redirect } from 'react-router-dom';
 import DatesSelection from './DatesSelection';
-import Header from './Header';
-import Profile from './Profile';
+import Header from './navBar/Header';
+import Profile from './Profile/Profile';
 import SignUpController from './SignUp/SignUpController';
 
 class PageContainer extends React.Component {
@@ -76,7 +76,6 @@ class PageContainer extends React.Component {
                         )}
                     </div>
                 )}
-                <button onClick={this.logout.bind(this)}>Logout</button>
             </div>
         );
     }
