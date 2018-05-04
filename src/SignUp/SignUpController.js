@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { db } from '../FirestoreConfig';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './SignUp.css';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
@@ -76,6 +76,7 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
+        console.log('props', this.props);
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
             name: fieldValues.name,
@@ -133,7 +134,7 @@ class SignUpInController extends Component {
         case 4:
             return <SignUpComplete nextStep={this.nextStep} />;
         case 5:
-            return <Redirect to={'/messenger'} />;
+            return <Link to={'/messenger'} />;
         }
     }
     render() {

@@ -49,6 +49,9 @@ class App extends React.Component {
         case Routes.DATE_SELECTION:
             content = PageContent.DATE_SELECTION;
             break;
+        case Routes.SIGN_UP:
+            content = PageContent.SIGN_UP;
+            break;
         default:
             content = PageContent.MESSENGER;
             break;

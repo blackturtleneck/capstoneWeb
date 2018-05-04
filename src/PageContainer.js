@@ -3,6 +3,7 @@ import { auth, db } from './FirestoreConfig';
 import MessengerPage from './Messenger/MessengerPage';
 import './Login.css';
 import { PageContent } from './Enums';
+import { Redirect } from 'react-router-dom';
 import DatesSelection from './DatesSelection';
 import Header from './Header';
 import Profile from './Profile';
@@ -28,8 +29,7 @@ class PageContainer extends React.Component {
         db
             .collection('users')
             .doc(this.state.user.email)
-            .get()
-            .then(function(doc) {
+            .onSnapshot(function(doc) {
                 console.log('doc', doc.data());
                 if (!doc.data().onBoarding) {
                     component.setState({
@@ -48,9 +48,15 @@ class PageContainer extends React.Component {
         return (
             <div>
                 {!this.state.onBoarding ? (
-                    <SignUpController user={this.state.user} />
+                    <div>
+                        <Redirect to={'/signup'} />
+                        {this.state.content === PageContent.SIGN_UP && (
+                            <SignUpController user={this.state.user} />
+                        )}
+                    </div>
                 ) : (
                     <div>
+                        {/* <Redirect to={'/messenger'} /> */}
                         <Header userEmail={this.state.user.email} />
                         {this.state.content === PageContent.MESSENGER && (
                             <MessengerPage
@@ -58,6 +64,7 @@ class PageContainer extends React.Component {
                                 userEmail={this.state.user.email}
                             />
                         )}
+
                         {this.state.content === PageContent.DATE_SELECTION && (
                             <DatesSelection />
                         )}

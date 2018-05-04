@@ -23,7 +23,7 @@ class SignUp3 extends React.Component {
             travel: this.props.fieldValues.topics.travel,
             food: this.props.fieldValues.topics.food,
             music: this.props.fieldValues.topics.music,
-            sports: this.props.fieldValues.sports,
+            sports: this.props.fieldValues.topics.sports,
             movies: this.props.fieldValues.topics.movies,
             gaming: this.props.fieldValues.topics.gaming,
             nature: this.props.fieldValues.topics.nature,
