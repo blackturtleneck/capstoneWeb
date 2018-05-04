@@ -61,8 +61,6 @@ export default class MultiSelectField extends Component {
                 <Select multi joinValues value={this.state.value} placeholder="What else are you feeling for your next date?" options={cuisines} onChange={this.handleSelectChange} />
                <br/>
                <br/>
-                <Dates ref="child" />
-                <button className = "button" onClick={this.triggerChildAlert}>Click</button>
             </div>
         );
     }
