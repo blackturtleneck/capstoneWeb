@@ -5,8 +5,12 @@ node_js:
 cache:
   directories:
   - node_modules
+install:
+  - npm install
 script:
 - npm run lint
 - npm test
 - npm run build
 - npm run lint-functions
+notifications:
+  slack: blackturtleneck:EVLbkltY4ixRldvU557yRFpb
