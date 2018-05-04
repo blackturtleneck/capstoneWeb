@@ -31,7 +31,6 @@ class PageContainer extends React.Component {
             .doc(this.state.user.email)
             .get()
             .then(function(doc) {
-                // .onSnapshot(function(doc) {
                 console.log('doc', doc.data());
                 if (!doc.data().onBoarding) {
                     component.setState({
@@ -46,36 +45,37 @@ class PageContainer extends React.Component {
     }
 
     render() {
-        console.log('state', this.state);
+        console.log('state in page container', this.state);
         return (
             <div>
-                {!this.state.onBoarding ? (
+                {this.state.onBoarding && (
                     <div>
-                        {/* <Redirect to={'/signup'} /> */}
-                        {this.state.content === PageContent.SIGN_UP && (
-                            <SignUpController user={this.state.user} />
-                        )}
-                    </div>
-                ) : (
-                    <div>
-                        {/* <Redirect to={'/messenger'} /> */}
                         <Header userEmail={this.state.user.email} />
-                        {this.state.content === PageContent.MESSENGER && (
-                            <MessengerPage
-                                user={this.state.user.displayName}
-                                userEmail={this.state.user.email}
-                            />
-                        )}
-
-                        {this.state.content === PageContent.DATE_SELECTION && (
-                            <DatesSelection />
-                        )}
-
-                        {this.state.content === PageContent.PROFILE && (
-                            <Profile userEmail={this.state.userEmail} />
-                        )}
+                        {/* <Redirect to={'/messenger'} /> */}
                     </div>
                 )}
+                {this.state.content === PageContent.SIGN_UP && (
+                    <div>
+                        <SignUpController user={this.state.user} />
+                    </div>
+                )}
+                <div>
+                    {/* <Redirect to={'/messenger'} /> */}
+                    {this.state.content === PageContent.MESSENGER && (
+                        <MessengerPage
+                            user={this.state.user.displayName}
+                            userEmail={this.state.user.email}
+                        />
+                    )}
+
+                    {this.state.content === PageContent.DATE_SELECTION && (
+                        <DatesSelection />
+                    )}
+
+                    {this.state.content === PageContent.PROFILE && (
+                        <Profile userEmail={this.state.userEmail} />
+                    )}
+                </div>
             </div>
         );
     }

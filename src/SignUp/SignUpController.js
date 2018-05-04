@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { db } from '../FirestoreConfig';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './SignUp.css';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
@@ -134,7 +134,7 @@ class SignUpInController extends Component {
         case 4:
             return <SignUpComplete nextStep={this.nextStep} />;
         case 5:
-            return <Link to={'/messenger'} />;
+            return <Redirect to={'/messenger'} />;
         }
     }
     render() {

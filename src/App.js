@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { auth } from './FirestoreConfig';
+import { auth, db } from './FirestoreConfig';
 import { Routes, PageContent } from './Enums';
 import PageContainer from './PageContainer';
 import './Login.css';
@@ -18,6 +18,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        let component = this;
+
         // check whether user is logged in
         auth
             .onAuthStateChanged(user => {
@@ -29,6 +31,23 @@ class App extends React.Component {
                             email: user.email
                         }
                     });
+                    db
+                        .collection('users')
+                        .doc(this.state.user.email)
+                        .onSnapshot(function(doc) {
+                            console.log('this.state', component.state);
+
+                            console.log('doc', doc.data());
+                            if (!doc.data().onBoarding) {
+                                component.setState({
+                                    onBoarding: false
+                                });
+                            } else {
+                                component.setState({
+                                    onBoarding: true
+                                });
+                            }
+                        });
                 } else {
                     this.setState({
                         authenticated: true,
@@ -59,6 +78,8 @@ class App extends React.Component {
             content = PageContent.MESSENGER;
             break;
         }
+        console.log('state', this.state);
+
         return (
             <div className="">
                 {this.state.authenticated ? (
@@ -68,6 +89,9 @@ class App extends React.Component {
                                 user={this.state.user}
                                 content={content}
                             />
+                            {/* {!this.state.onBoarding && (
+                                <Redirect to={'/signup'} />
+                            )} */}
                             {!path ? <Redirect to={'/messenger'} /> : null}
                         </div>
                     ) : (
