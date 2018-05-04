@@ -1,48 +1,45 @@
-import React from 'react';
-import { auth } from './FirestoreConfig';
-import MessengerPage from './MessengerPage';
-import './Login.css';
-import { PageContent } from './Enums';
-import DatesSelection from './DatesSelection';
-import Header from './Header';
-import Profile from './Profile';
+import React from "react";
+import { auth } from "./FirestoreConfig";
+import MessengerPage from "./MessengerPage";
+import "./Login.css";
+import { PageContent } from "./Enums";
+import MapContainer from "./MapContainer";
+import DatesSelection from "./DatesSelection";
+import { Link } from "react-router-dom";
+import Header from "./navBar/Header";
+import Profile from "./Profile/Profile";
 
 class PageContainer extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            authenticated: true,
-            user: this.props.user,
-            content: this.props.content
-        };
-    }
+    this.state = {
+      authenticated: true,
+      user: this.props.user,
+      content: this.props.content
+    };
+  }
 
-    logout() {
-        auth.signOut();
-    }
+  render() {
+    return (
+      <div>
+        <Header userEmail={this.state.user.email} />
+        {this.state.content === PageContent.MESSENGER && (
+          <MessengerPage
+            user={this.state.user.displayName}
+            userEmail={this.state.user.email}
+          />
+        )}
 
-    render() {
-        return (
-            <div>
-                <Header userEmail={this.state.user.email} />
-                {this.state.content === PageContent.MESSENGER && (
-                    <MessengerPage
-                        user={this.state.user.displayName}
-                        userEmail={this.state.user.email}
-                    />
-                )}
-                {this.state.content === PageContent.DATE_SELECTION && (
-                    <DatesSelection />
-                )}
-
-                {this.state.content === PageContent.PROFILE && (
-                    <Profile userEmail={this.state.userEmail} />
-                )}
-                <button onClick={this.logout.bind(this)}>Logout</button>
-            </div>
-        );
-    }
+        {this.state.content === PageContent.DATE_SELECTION && (
+          <DatesSelection />
+        )}
+        {this.state.content === PageContent.PROFILE && (
+          <Profile userEmail={this.state.userEmail} />
+        )}
+      </div>
+    );
+  }
 }
 
 export default PageContainer;
