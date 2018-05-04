@@ -1,3 +1,5 @@
+/* TODO update all cascading styles here */
+
 .App {
   text-align: center;
 }
@@ -20,4 +22,14 @@
 
 .App-intro {
   font-size: large;
+}
+
+button,
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Lato";
+  text-transform: uppercase;
+  font-weight: bold;
 }

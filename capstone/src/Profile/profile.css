@@ -1,0 +1,30 @@
+#profile {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.profile-item {
+  border: 1px gray;
+  background-color: lightgray;
+  font-weight: lighter;
+  padding: 15px;
+  padding-top: 5px;
+  margin: 10px;
+}
+
+.labelPI {
+  position: relative;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+
+.contentPI {
+  background-color: white;
+  position: relative;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+}

@@ -1,0 +1,23 @@
+.facebook {
+  background: #4267b2;
+  border-radius: 5px;
+  color: white;
+  height: 40px;
+  text-align: center;
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+ol {
+  list-style: none;
+}
+
+.login {
+  padding-top: 40vh;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+}
