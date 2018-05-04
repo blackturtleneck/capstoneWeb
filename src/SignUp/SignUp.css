@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:700|Lato");
+
+* {
+  font-family: "Lato", sans-serif;
+}
+.signup-header-welcome {
+  font-size: 24px;
+  text-align: center;
+}
+
+.signup-header-amp {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+}
+
+.signup-header {
+  margin: 0 auto;
+  display: block;
+  width: 100vw;
+  text-align: center;
+}
+
+.signup-page {
+  margin: 30px;
+}
+.form {
+  width: 50vw;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.custom-select {
+  display: unset !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  background-color: #f2f2f2 !important;
+  border-radius: 5px !important;
+  border: none !important;
+  padding-left: 10px !important;
+  height: 30px !important;
+  margin-bottom: 15px !important;
+}
+
+.signup-label {
+  color: black;
+}
+
+.next {
+  float: right;
+  margin-top: -70px;
+  margin-right: -90px;
+  width: 40px;
+}
+
+.back {
+  width: 30px;
+  margin-top: -195px;
+  margin-left: 10px;
+}
+
+.progress-bar {
+  background-color: #9ba2ff;
+}
+
+.next-step {
+  display: hidden;
+}
+
+.inline-form {
+  width: 31%;
+  margin-right: 3.5%;
+}
+.year {
+  margin-right: 0px;
+}
+
+.tagline-2 {
+  display: block;
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.back-2 {
+  margin-top: -10px;
+}
+.next-2 {
+  margin-top: 10px;
+}
+.back:hover {
+  cursor: pointer;
+}
+
+.next-hover:hover {
+  cursor: pointer;
+}
+
+.distance-wrapper {
+  margin-top: 50px;
+}
+
+.margin {
+  margin-bottom: 30px;
+}
