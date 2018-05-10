@@ -5,3 +5,12 @@
 .scheduler{
     padding-left: 65%;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Lato";
+  text-transform: uppercase;
+  font-weight: bold;
+}

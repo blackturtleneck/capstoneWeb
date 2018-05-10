@@ -10,7 +10,9 @@ export class MapContainer extends React.Component {
     this.state = {
       latitude1: this.props.data['0'].restaurant.location.latitude,
       longitude1: this.props.data['0'].restaurant.location.longitude,
-      name1: this.props.data['0'].restaurant.name
+      name1: this.props.data['0'].restaurant.name,
+      lat: props.lat, lon: props.lon,
+      data: props.data
     }
   }
 
@@ -20,6 +22,7 @@ export class MapContainer extends React.Component {
   }
 
   render() {
+    console.log("MAP TEST", this.state.data)
     const { props, state } = this,
       { googleMapsApi, mapStyles, ...otherProps } = props;
     let myComponent;
@@ -29,13 +32,18 @@ export class MapContainer extends React.Component {
     }
     myComponent = <Map google={this.props.google} styles={mapStyles}
       initialCenter={{
-        lat: 47.6564,
-        lng: -122.3073
+        lat: this.state.lat,
+        lng: this.state.lon
       }}
       zoom={12}>
       <Marker
         name={this.state.name1}
-        position={{ lat: this.state.latitude1, lng: this.state.longitude1 }} />
+        position={{ lat: this.state.data['0'].restaurant.location.latitude, lng: this.state.data['0'].restaurant.location.longitude}} />
+      <Marker />
+
+            <Marker
+        name={this.state.data['1'].restaurant.name}
+        position={{ lat: this.state.data['1'].restaurant.location.latitude, lng: this.state.data['1'].restaurant.location.longitude}} />
       <Marker />
     </Map>
     //  }
@@ -101,7 +109,7 @@ MapContainer.defaultProps = {
         "elementType": "all",
         "stylers": [
           {
-            "color": "#b9bdff"
+            "color": "#D1C4E9"
           }
         ]
       },
@@ -110,7 +118,7 @@ MapContainer.defaultProps = {
         "elementType": "geometry",
         "stylers": [
           {
-            "color": "#0c4152"
+            "color": "#e3dbf1"
           },
           {
             "lightness": 5
@@ -122,7 +130,7 @@ MapContainer.defaultProps = {
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#000000"
+            "color": "#bcb0d1"
           }
         ]
       },
@@ -131,7 +139,7 @@ MapContainer.defaultProps = {
         "elementType": "geometry.stroke",
         "stylers": [
           {
-            "color": "#d7d9ff"
+            "color": "#686274"
           },
           {
             "lightness": 25
@@ -143,7 +151,7 @@ MapContainer.defaultProps = {
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#000000"
+            "color": "#534e5d"
           }
         ]
       },
@@ -152,7 +160,7 @@ MapContainer.defaultProps = {
         "elementType": "geometry.stroke",
         "stylers": [
           {
-            "color": "#0b3d51"
+            "color": "#534e5d"
           },
           {
             "lightness": 16
@@ -173,7 +181,7 @@ MapContainer.defaultProps = {
         "elementType": "all",
         "stylers": [
           {
-            "color": "#146474"
+            "color": "#a79cba"
           }
         ]
       },
@@ -182,7 +190,7 @@ MapContainer.defaultProps = {
         "elementType": "all",
         "stylers": [
           {
-            "color": "#F5F5F5"
+            "color": "#d3eafc"
           }
         ]
       }

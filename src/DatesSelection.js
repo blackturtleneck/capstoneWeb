@@ -8,10 +8,30 @@ import "./DatesSelection.css"
 import AvailableTimes from 'react-available-times';
 
 class DatesSelection extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          lat: null,
+          lon: null
+        };
+      }
+
+      componentDidMount() {
+        navigator.geolocation.getCurrentPosition(function (location) {
+          this.setState({
+            lat: location.coords.latitude,
+            lon: location.coords.longitude 
+          })
+        }.bind(this));
+    }
 
     render() {
+        console.log(this.state.lat);
+        console.log(this.state.lon);    
         return (
             <div className="right-side">
+                <h5> LETS SET UP A DATE </h5>
+                <p> Pick times that you'd be free to start your date </p>
                 <AvailableTimes classname="scheduler"
                     weekStartsOn="monday"
                     calendars={[
@@ -42,6 +62,7 @@ class DatesSelection extends React.Component {
                     availableDays={['monday', 'tuesday', 'wednesday', 'thursday', 'friday']}
                     availableHourRange={{ start: 9, end: 19 }}
                 />
+
                 <MultiSelectField />
                 <form>
                     <label>
@@ -50,7 +71,9 @@ class DatesSelection extends React.Component {
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
-                <Dates ref="child" />
+                {/* Pass in location into Dates */}
+
+                <Dates ref="child" lat = {this.state.lat} lon = {this.state.lon}/>
             </div>
         );
     }

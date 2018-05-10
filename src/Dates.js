@@ -6,7 +6,6 @@ import Slider from 'react-slick'
 class Dates extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.selections)
     this.restaurantDetails = [];
     this.listOfLocations = [];
     this.state = {
@@ -16,14 +15,19 @@ class Dates extends React.Component {
 
   // api call - needs to be put in config file
   componentWillMount() {
-    //  this.getLocation();
-    this.loadData();
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({lat: newProps.lat, lon: newProps.lon});
+    this.loadData();
+}
+
   loadData() {
-    fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.656491&lon=-122.30736", {
-      //position.coords.latitude
-      //position.coords.longitude
+    console.log("LOAD DATA CHECK", this.state.lon);
+    var lat = this.state.lat;
+    var lon = this.state.lon;
+    var sentence = "https://developers.zomato.com/api/v2.1/geocode?lat=47.3536&lon=" + lon
+    fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.659728&lon=-122.317068", {
       headers: {
         "Accept": "application/json",
         "user-key": "1b8bf5702241de94be0cba6b8772d29e"
@@ -36,10 +40,6 @@ class Dates extends React.Component {
           data: data.nearby_restaurants
         });
       })
-  }
-
-  showAlert() {
-    alert('Hello World');
   }
 
   // get the addresses of restuarants to be able to say how close/far they are to you both
@@ -77,6 +77,8 @@ class Dates extends React.Component {
 
   }
   render() {
+    console.log("TEST", this.state.lat)
+    console.log("TEST2", this.state.lon)
     if (!this.state.data) {
       return <div> Your dates are loading! </div>
     }
@@ -92,7 +94,7 @@ class Dates extends React.Component {
       <div>
 
 
-        <MapContainer data={this.state.data} />
+        <MapContainer data={this.state.data} lat ={this.state.lat} lon = {this.state.lon} />
         The following are date spots located halfway between you and your date! Price range is ranked
         from 1 - 4 (4 being the most expensive).
 
