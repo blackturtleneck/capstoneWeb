@@ -57,6 +57,8 @@ export default class MultiSelectField extends Component {
   render () {
         return (
             <div className="section">
+            <p> You both said you're down for drinks and dinner for a date - here's some spots we think
+              both of you would like that are in a good location! </p>
                 <h3 className="section-heading header">{this.props.label}</h3>
                 <Select multi joinValues value={this.state.value} placeholder="What else are you feeling for your next date?" options={cuisines} onChange={this.handleSelectChange} />
                <br/>
