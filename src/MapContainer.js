@@ -28,24 +28,26 @@ export class MapContainer extends React.Component {
 
     var myComponent;
 
+    const style = {
+      width: '100vw',
+      height: '100vh'
+    }
+
     return (
-      <div>
+      <div style={style}>
             <Map google={this.props.google} styles={mapStyles} 
           initialCenter={{
             lat: this.state.lat,
             lng: this.state.lon
-        }}
+          }}
           zoom={12}>
           <Marker
             name={this.state.name1}
             position={{ lat: this.state.data['0'].restaurant.location.latitude, lng: this.state.data['0'].restaurant.location.longitude}}
             />
-          <Marker />
-
           <Marker
             name={this.state.data['1'].restaurant.name}
             position={{ lat: this.state.data['1'].restaurant.location.latitude, lng: this.state.data['1'].restaurant.location.longitude}} />
-          <Marker />
         </Map>
       </div>
     );
@@ -190,7 +192,7 @@ MapContainer.defaultProps = {
         "elementType": "all",
         "stylers": [
           {
-            "color": "#d3eafc"
+            "color": "#f1f8fe"
           }
         ]
       }

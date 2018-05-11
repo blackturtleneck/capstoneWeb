@@ -77,13 +77,6 @@ class DatesSelection extends React.Component {
       </div>
 
                 <MultiSelectField />
-                <form>
-                    <label>
-                        Name:
-                    <input type="text" name="name" />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
                 {/* Pass in location into Dates */}
             <div id="test">
                 <Dates ref="child" lat = {this.state.lat} lon = {this.state.lon}/>
