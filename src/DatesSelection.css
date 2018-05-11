@@ -14,3 +14,30 @@ h4 {
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.request {
+  background-color: #9ba2ff; /* Green */
+  border: none;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: "Lato", sans-serif, bold;
+  text-transform: uppercase;
+  width: 7vw;
+  margin-top: 50px;
+  margin-left: 30%;
+}
+
+
+#map {
+  height: 400px;
+}
+
+.test{
+  width:2px;
+}

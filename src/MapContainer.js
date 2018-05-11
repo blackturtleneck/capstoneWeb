@@ -1,7 +1,7 @@
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React from 'react';
 import Dates from './Dates';
-
+import "./DatesSelection.css";
 
 export class MapContainer extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export class MapContainer extends React.Component {
       longitude1: this.props.data['0'].restaurant.location.longitude,
       name1: this.props.data['0'].restaurant.name,
       lat: props.lat, lon: props.lon,
-      data: props.data
+      data: props.data,
     }
   }
 
@@ -25,31 +25,28 @@ export class MapContainer extends React.Component {
     console.log("MAP TEST", this.state.data)
     const { props, state } = this,
       { googleMapsApi, mapStyles, ...otherProps } = props;
-    let myComponent;
-    const style = {
-      width: '500px',
-      height: '500px'
-    }
-    myComponent = <Map google={this.props.google} styles={mapStyles}
-      initialCenter={{
-        lat: this.state.lat,
-        lng: this.state.lon
-      }}
-      zoom={12}>
-      <Marker
-        name={this.state.name1}
-        position={{ lat: this.state.data['0'].restaurant.location.latitude, lng: this.state.data['0'].restaurant.location.longitude}} />
-      <Marker />
 
-            <Marker
-        name={this.state.data['1'].restaurant.name}
-        position={{ lat: this.state.data['1'].restaurant.location.latitude, lng: this.state.data['1'].restaurant.location.longitude}} />
-      <Marker />
-    </Map>
-    //  }
+    var myComponent;
+
     return (
-      <div style={{ height: '400px', width: '400px' }}>
-        {myComponent}
+      <div>
+            <Map google={this.props.google} styles={mapStyles} 
+          initialCenter={{
+            lat: this.state.lat,
+            lng: this.state.lon
+        }}
+          zoom={12}>
+          <Marker
+            name={this.state.name1}
+            position={{ lat: this.state.data['0'].restaurant.location.latitude, lng: this.state.data['0'].restaurant.location.longitude}}
+            />
+          <Marker />
+
+          <Marker
+            name={this.state.data['1'].restaurant.name}
+            position={{ lat: this.state.data['1'].restaurant.location.latitude, lng: this.state.data['1'].restaurant.location.longitude}} />
+          <Marker />
+        </Map>
       </div>
     );
   }
@@ -58,7 +55,10 @@ export class MapContainer extends React.Component {
 
 MapContainer.defaultProps = {
   mapStyles:
-    [
+    [{
+      height: '200px',
+      border: '5px solid pink'
+    },
       {
         "featureType": "all",
         "elementType": "labels.text.fill",

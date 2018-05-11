@@ -12,8 +12,14 @@ class DatesSelection extends React.Component {
         super(props);
         this.state = {
           lat: null,
-          lon: null
-        };
+          lon: null,
+          isHidden: true
+        }
+      }
+      toggleHidden () {
+        this.setState({
+          isHidden: !this.state.isHidden
+        })
       }
 
       componentDidMount() {
@@ -26,13 +32,19 @@ class DatesSelection extends React.Component {
     }
 
     render() {
+
+
         console.log(this.state.lat);
         console.log(this.state.lon);    
         return (
             <div className="right-side">
-                <h5> LETS SET UP A DATE </h5>
-                <p> Pick times that you'd be free to start your date </p>
-                <AvailableTimes classname="scheduler"
+         
+            <div>
+        <button className = "request" onClick={this.toggleHidden.bind(this)} >
+            Request a Date
+        </button>
+
+        {!this.state.isHidden && <AvailableTimes classname="scheduler"
                     weekStartsOn="monday"
                     calendars={[
                         {
@@ -61,7 +73,8 @@ class DatesSelection extends React.Component {
                     recurring={false}
                     availableDays={['monday', 'tuesday', 'wednesday', 'thursday', 'friday']}
                     availableHourRange={{ start: 9, end: 19 }}
-                />
+                />}
+      </div>
 
                 <MultiSelectField />
                 <form>
@@ -72,8 +85,9 @@ class DatesSelection extends React.Component {
                     <input type="submit" value="Submit" />
                 </form>
                 {/* Pass in location into Dates */}
-
+            <div id="test">
                 <Dates ref="child" lat = {this.state.lat} lon = {this.state.lon}/>
+                </div>
             </div>
         );
     }

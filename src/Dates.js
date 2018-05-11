@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, ListItem, Button } from 'react'
 import MapContainer from './MapContainer'
 import Slider from 'react-slick'
+import "./DatesSelection.css"
 
 class Dates extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class Dates extends React.Component {
     console.log("LOAD DATA CHECK", this.state.lon);
     var lat = this.state.lat;
     var lon = this.state.lon;
-    var sentence = "https://developers.zomato.com/api/v2.1/geocode?lat=47.3536&lon=" + lon
+    // if longitude is a minus, then change sentence and pass sentence 
+    var sentence = "https://developers.zomato.com/api/v2.1/geocode?lat=" + lat + "&lon=" + lon
     fetch("https://developers.zomato.com/api/v2.1/geocode?lat=47.659728&lon=-122.317068", {
       headers: {
         "Accept": "application/json",
@@ -92,9 +94,9 @@ class Dates extends React.Component {
 
     return (
       <div>
-
-
+      <div id="map">
         <MapContainer data={this.state.data} lat ={this.state.lat} lon = {this.state.lon} />
+      </div>
         The following are date spots located halfway between you and your date! Price range is ranked
         from 1 - 4 (4 being the most expensive).
 
