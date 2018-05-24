@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from '../FirestoreConfig';
 import './Profile.css';
+import placeholder from './placeholder.svg'
 
 class SideProf extends React.Component {
     constructor(props) {
@@ -14,7 +15,6 @@ class SideProf extends React.Component {
     componentWillReceiveProps(newProps) {
         this.setState({ newProps: newProps })
         if (newProps.otherUser !== this.props.otherUser) {
-            let currentComponent = this;
             db
                 .collection('users')
                 .doc(newProps.otherUser)
@@ -29,11 +29,19 @@ class SideProf extends React.Component {
                     }
                 });
         }
+        console.log(this.state.userDoc.photos.data)
+        let images;
+        {
+            this.state.userDoc.photos.data.map((photo, i) => {
+                images.push(
+                    <p key={i}>{photo.id}</p>)
 
+            })
+        }
+        this.setState({ images: images });
     }
 
     UNSAFE_componentWillMount() {
-        let currentComponent = this;
         db
             .collection('users')
             .doc(this.props.otherUser)
@@ -50,16 +58,18 @@ class SideProf extends React.Component {
     }
 
     render() {
-        // console.log(this.props.otherUser)
+        console.log(this.state.images)
         return (
             <div>
-                {
-                    this.state.userDoc !== '' ? (
-                        <div>{this.state.userDoc.name}</div>
-                    ) : (
-                            <div>side</div>
-                        )
-                }
+
+                <p>{this.state.userDoc.name}</p>
+                <p> {this.state.userDoc.age}</p>
+                <p> {this.state.userDoc.gender}</p>
+                <p> {this.state.userDoc.photoURL}</p>
+                <img src={placeholder} alt="pic placeholder" />
+                {this.state.images}
+
+
             </div>
         )
     }

@@ -126,7 +126,7 @@ class Dates extends React.Component {
                     {' '}
                     {this.restaurantDetails['4'].name}{' '}
                 </button>
-                <d1>
+                <dl>
                     <dt> {this.restaurantDetails['0'].name} </dt>
                     <dd>
                         {' '}
@@ -192,7 +192,7 @@ class Dates extends React.Component {
                             this.restaurantDetails['4'].price_range
                         }{' '}
                     </dd>
-                </d1>
+                </dl>
             </div>
         );
     }
