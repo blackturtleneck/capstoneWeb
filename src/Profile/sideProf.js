@@ -5,10 +5,34 @@ import './Profile.css';
 class SideProf extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userDoc: '',
+            newProps: ''
+        }
     }
 
-    componentDidMount() {
-        // this.forceUpdate();
+    componentWillReceiveProps(newProps) {
+        this.setState({ newProps: newProps })
+        if (newProps.otherUser !== this.props.otherUser) {
+            let currentComponent = this;
+            db
+                .collection('users')
+                .doc(newProps.otherUser)
+                .get()
+                .then(doc => {
+                    if (doc.exists) {
+                        // console.log("other user doc:", doc.data())
+                        this.setState({ userDoc: doc.data() });
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log('No such document!');
+                    }
+                });
+        }
+
+    }
+
+    UNSAFE_componentWillMount() {
         let currentComponent = this;
         db
             .collection('users')
@@ -16,7 +40,7 @@ class SideProf extends React.Component {
             .get()
             .then(doc => {
                 if (doc.exists) {
-                    console.log("other user doc:", doc.data())
+                    // console.log("other user doc:", doc.data())
                     this.setState({ userDoc: doc.data() });
                 } else {
                     // doc.data() will be undefined in this case
@@ -26,7 +50,18 @@ class SideProf extends React.Component {
     }
 
     render() {
-        return (<div>{this.props.otherUser.user}</div>)
+        // console.log(this.props.otherUser)
+        return (
+            <div>
+                {
+                    this.state.userDoc !== '' ? (
+                        <div>{this.state.userDoc.name}</div>
+                    ) : (
+                            <div>side</div>
+                        )
+                }
+            </div>
+        )
     }
 }
 export default SideProf;
