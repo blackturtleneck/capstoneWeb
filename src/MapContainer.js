@@ -5,7 +5,6 @@ import React from 'react';
 export class MapContainer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.data['0'].restaurant.name);
         this.state = {
             latitude1: this.props.data['0'].restaurant.location.latitude,
             longitude1: this.props.data['0'].restaurant.location.longitude,
@@ -15,7 +14,6 @@ export class MapContainer extends React.Component {
 
     handleChange(event) {
         this.setState({ data: this.props.locations });
-        console.log(this.data);
     }
 
     render() {

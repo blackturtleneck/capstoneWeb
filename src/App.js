@@ -14,7 +14,6 @@ class App extends React.Component {
             authenticated: false,
             user: null
         };
-        console.log('state', this.state);
     }
 
     componentDidMount() {
@@ -43,18 +42,18 @@ class App extends React.Component {
         let path = window.location.href.split('/')[3];
         let content = '';
         switch (path) {
-        case Routes.PROFILE:
-            content = PageContent.PROFILE;
-            break;
-        case Routes.DATE_SELECTION:
-            content = PageContent.DATE_SELECTION;
-            break;
-        case Routes.EDIT_PROFILE:
-            content = PageContent.EDIT_PROFILE;
-            break;
-        default:
-            content = PageContent.MESSENGER;
-            break;
+            case Routes.PROFILE:
+                content = PageContent.PROFILE;
+                break;
+            case Routes.DATE_SELECTION:
+                content = PageContent.DATE_SELECTION;
+                break;
+            case Routes.EDIT_PROFILE:
+                content = PageContent.EDIT_PROFILE;
+                break;
+            default:
+                content = PageContent.MESSENGER;
+                break;
         }
         return (
             <div className="">
@@ -68,15 +67,15 @@ class App extends React.Component {
                             {!path ? <Redirect to={'/messenger'} /> : null}
                         </div>
                     ) : (
-                        <div className="login">
-                            <Login />
-                            <Redirect to={'/'} />
-                        </div>
-                    )
+                            <div className="login">
+                                <Login />
+                                <Redirect to={'/'} />
+                            </div>
+                        )
                 ) : (
-                    // if login hasn't mounted
-                    <div />
-                )}
+                        // if login hasn't mounted
+                        <div />
+                    )}
             </div>
         );
     }

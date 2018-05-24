@@ -7,24 +7,21 @@ import DatesSelection from './DatesSelection';
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
-        console.log('this.props messenger', props);
         super(props, context);
         this.state = {
             user: this.props.user,
             userEmail: this.props.userEmail
         };
-        console.log(this.state);
     }
 
     componentDidMount() {
         let currentComponent = this;
         let curUserList = [];
-        console.log('this.state', this.state);
         db
             .collection('users')
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
                     // doc.data() is never undefined for query doc snapshots
                     if (doc.get('name') !== currentComponent.state.user) {
                         curUserList.push({
@@ -38,12 +35,11 @@ class MessengerPage extends React.Component {
     }
 
     chooseUser(e) {
-        this.setState({ otherUser: e }, function() {});
+        this.setState({ otherUser: e }, function () { });
         this.forceUpdate();
     }
 
     render() {
-        console.log('messenger page state', this.state);
         return (
             <div className="messenger-page">
                 {this.state.userList ? (
@@ -53,14 +49,14 @@ class MessengerPage extends React.Component {
                         curUserList={this.state.userList}
                     />
                 ) : (
-                    <div>loading</div>
-                )}
+                        <div>loading</div>
+                    )}
                 <Messenger
                     user={this.state.user}
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                <DatesSelection />
+                <DatesSelection otherUser={this.state.otherUser} />
             </div>
         );
     }

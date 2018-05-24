@@ -6,7 +6,6 @@ import MapContainer from './MapContainer';
 class Dates extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.selections);
         this.restaurantDetails = [];
         this.listOfLocations = [];
         this.state = {
