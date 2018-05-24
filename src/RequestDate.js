@@ -3,6 +3,7 @@ import {Button} from 'react-bootstrap';
 import MultiSelectField from './MultiSelectField'
 import "./DatesSelection.css"
 import Availability from"./Availability"
+import DateNames from './DateNames'
 
 class RequestDate extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class RequestDate extends Component {
     
       _onButtonClick() {
         this.setState({
-          showComponent: true,
+          showComponent: false,
           componentTwo: true
         });
       }
@@ -25,14 +26,16 @@ class RequestDate extends Component {
         return (
           <div>
             <Button id = "request" onClick={this._onButtonClick}>Request a Date</Button>
+            {this.state.componentTwo ?
+               <DateNames /> :
+               null
+            }
+
             {this.state.showComponent ?
                <Availability /> :
                null
             }
-            {this.state.componentTwo ?
-               <MultiSelectField /> :
-               null
-            }
+
           </div>
         );
       }

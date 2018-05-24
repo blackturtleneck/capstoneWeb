@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from './FirestoreConfig';
 import './Messaging.css';
+import RequestDate from './RequestDate';
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -170,6 +171,10 @@ class Messenger extends React.Component {
                                 {currentMessage}
                             </ol>
 
+                            <div className="date-button-wrapper">
+                            <RequestDate/>
+                            </div>
+
                             <div className="button-input-wrapper">
                                 <input
                                     id="message-box"
@@ -185,6 +190,7 @@ class Messenger extends React.Component {
                                 >
                                 Send
                                 </button>
+
                             </div>
                             <br />
                         </div>
@@ -194,7 +200,9 @@ class Messenger extends React.Component {
                             Select a match to start messaging!
                             </p>
                         </div>
-                    )}
+                    )
+                    }
+                                    
             </div>
         );
     }

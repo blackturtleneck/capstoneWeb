@@ -64,6 +64,31 @@ input.send-text {
   width: 7vw;
 }
 
+.date-button-wrapper {
+  align-content: center;
+  width: 50vw;
+  bottom: 0;
+  position: absolute;
+  margin-bottom: 80px;
+  margin-left: 655px;
+}
+
+.request-button{
+  background-color: #9ba2ff; /* Green */
+  border: none;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: "Lato", sans-serif, bold;
+  text-transform: uppercase;
+  width: 7vw;
+}
+
 h2 {
   font-size: 2vw;
   padding-left: 40px;

@@ -61,7 +61,7 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                <RequestDate />
+                
             </div>
         );
     }

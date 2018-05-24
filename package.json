@@ -8,7 +8,6 @@
         "rc-slider": "^8.6.1",
         "react": "16.0.0-alpha.12",
         "react-available-times": "^1.2.0",
-        "react-bootstrap": "^0.32.1",
         "react-datetime": "^2.14.0",
         "react-dom": "^16.2.0",
         "react-geolocation": "^1.0.3",
@@ -27,6 +26,7 @@
         "firebase": "^4.9.1",
         "install-peers": "^1.0.2",
         "jest-cli": "^22.4.3",
+        "react-bootstrap": "^0.32.1",
         "react-edit-inline": "^1.0.8",
         "react-scripts": "1.1.1"
     },
