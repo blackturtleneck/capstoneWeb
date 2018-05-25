@@ -23,7 +23,6 @@ class SideProf extends React.Component {
                 .get()
                 .then(doc => {
                     if (doc.exists) {
-                        // console.log("other user doc:", doc.data())
                         this.setState({ userDoc: doc.data() });
                         let images = [];
                         {
@@ -49,7 +48,6 @@ class SideProf extends React.Component {
             .get()
             .then(doc => {
                 if (doc.exists) {
-                    // console.log("other user doc:", doc.data())
                     this.setState({ userDoc: doc.data() });
                     let images = [];
                     {
@@ -71,7 +69,7 @@ class SideProf extends React.Component {
     render() {
         return (
             <div className="otherProfile-container">
-                <h3 className="other-header">{this.state.userDoc.name} </h3>
+                <h4 className="other-header">{this.state.userDoc.name} </h4>
                 <p>{this.state.userDoc.age}</p>
                 <img className="otherProfile-img" src={placeholder} alt="pic placeholder" />
                 <p className="otherProfile-info-type" >Occupation</p>

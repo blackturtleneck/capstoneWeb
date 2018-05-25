@@ -32,7 +32,7 @@ class PageContainer extends React.Component {
                     <DatesSelection />
                 )}
                 {this.state.content === PageContent.PROFILE && (
-                    <Profile userEmail={this.state.userEmail} />
+                    <Profile user={this.state.user.displayName} userEmail={this.state.user.email} />
                 )}
             </div>
         );

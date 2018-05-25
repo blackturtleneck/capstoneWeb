@@ -15,7 +15,7 @@ class Profile extends React.Component {
     componentWillMount() {
         db
             .collection('users')
-            .doc('greenrocksjl@hotmail.com')
+            .doc(this.props.userEmail)
             .get()
             .then(doc => {
                 if (doc.exists) {
@@ -34,30 +34,26 @@ class Profile extends React.Component {
 
     chandddge(e) {
         e.preventDefault();
-        // console.log(e);
         this.setState({ age: e.value });
 
         // var field = Object.keys(data)[0].toString();
 
-        // console.log(this);
     }
 
     change(data) {
         data.preventDefault();
         //update user's field
-        // console.log();
         var field = Object.keys(data)[0].toString();
-        // console.log(typeof(data[field]))
         db
             .collection('users')
             .doc('greenrocksjl@hotmail.com')
             .update({
                 [field]: data[field]
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully written!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.error('Error writing document: ', error);
             });
 
@@ -81,7 +77,6 @@ class Profile extends React.Component {
                 {/* <Link to={`/edit/${this.props.match.params.userEmail}`}>
           <button>Edit Profile</button>
         </Link> */}
-
                 <p>
                     {this.state.userDoc.fName} {this.state.userDoc.lName}
                 </p>

@@ -31,11 +31,11 @@ class Header extends Component {
                                 aria-haspopup="true"
                                 aria-expanded="false"
                             >
-                                <li className="right">
-                                    <i className="medium material-icons">
-                                        person
+                                {/* <li className="right"> */}
+                                <i className="medium material-icons">
+                                    person
                                     </i>
-                                </li>
+                                {/* </li> */}
                             </a>
 
                             <div
@@ -43,9 +43,9 @@ class Header extends Component {
                                 aria-labelledby="navbarDropdown"
                             >
                                 <Link to={'/profile'}>
-                                    <a className="dropdown-item">
+                                    <p className="dropdown-item">
                                         View My Profile
-                                    </a>
+                                    </p>
                                 </Link>
                                 {/* <div className="dropdown-divider" /> */}
                                 <a

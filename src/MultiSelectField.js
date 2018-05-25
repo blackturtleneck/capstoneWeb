@@ -36,7 +36,6 @@ export default class MultiSelectField extends Component {
     }
 
     handleSelectChange(value) {
-        console.log('You have selected: ', value);
         this.setState({ value });
     }
 

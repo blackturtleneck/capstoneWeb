@@ -45,7 +45,6 @@ class Dates extends React.Component {
     extractLocations(restaurants) {
         for (let restaurant of restaurants) {
             this.listOfLocations.push(restaurant.restaurant.location);
-            // console.log(restaurant.restaurant.location)
         }
     }
 
