@@ -28,6 +28,7 @@
         "jest-cli": "^22.4.3",
         "react-bootstrap": "^0.32.1",
         "react-edit-inline": "^1.0.8",
+        "react-google-maps": "^9.4.5",
         "react-scripts": "1.1.1"
     },
     "scripts": {

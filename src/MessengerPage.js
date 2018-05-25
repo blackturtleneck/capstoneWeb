@@ -5,6 +5,7 @@ import Messenger from './Messenger';
 import './Messaging.css';
 import DatesSelection from './DatesSelection';
 import RequestDate from './RequestDate';
+import ColorMap from './ColorMap';
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
@@ -61,7 +62,6 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                
             </div>
         );
     }

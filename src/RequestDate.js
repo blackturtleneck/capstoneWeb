@@ -10,29 +10,39 @@ class RequestDate extends Component {
         super(props);
         this.state = {
           showComponent: false,
-          componentTwo: false
+          componentTwo: false,
+          textValue: "Request a Date"
         };
         this._onButtonClick = this._onButtonClick.bind(this);
+        this._submit = this._submit.bind(this);
       }
     
       _onButtonClick() {
-        this.setState({
+        this.setState(prevState => ({
+          showComponent: true,
+          componentTwo: true,
+          textValue:""
+        }));
+      }
+
+      _submit() {
+        this.setState(prevState => ({
           showComponent: false,
-          componentTwo: true
-        });
+          componentTwo: false,
+          textValue:"Request a Date"
+        }));
       }
     
       render() {
         return (
           <div>
-            <Button id = "request" onClick={this._onButtonClick}>Request a Date</Button>
+            <Button id = "request" onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
                <DateNames /> :
                null
             }
-
             {this.state.showComponent ?
-               <Availability /> :
+               <Button id = "submit" onClick={this._submit}> Submit </Button> :
                null
             }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, Button, Popover } from 'react-bootstrap';
 import "./DatesSelection.css"
+import ColorMap from "./ColorMap.js"
+import Availability from "./Availability.js"
 
 const popoverHoverFocus = (
     <Popover id="freBrew" title="Fremont Brewery">
@@ -44,6 +46,30 @@ const popoverHoverFocus2 = (
 
   
 class DateNames extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          showComponent: false,
+          availability: false
+        };
+        this._onButtonClick = this._onButtonClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+      }
+    
+      _onButtonClick() {
+        this.setState(prevState => ({
+            showComponent: !prevState.showComponent,
+            availability: false
+          }));
+      }
+    
+      handleClick() {
+        this.setState(oldState => ({
+            showComponent: false,
+            availability: !oldState.availability
+          }));
+      }
+
   render () {
         return (
             <div>
@@ -82,9 +108,18 @@ class DateNames extends Component {
             <Button id = "datefour">THE BARREL THIEF</Button>
             </OverlayTrigger>
 
-            <Button> View on Map </Button>
+           <Button id ="mapview" onClick={this._onButtonClick}> View on Map </Button>
+            {this.state.showComponent ?
+               <ColorMap /> :
+               null
+            }
 
-            <Button> Next </Button>
+            <Button id ="next" onClick={this.handleClick}> Next </Button>
+            {this.state.availability ?
+               <Availability /> :
+               null
+            }
+
             </div>
             </div>
         );
