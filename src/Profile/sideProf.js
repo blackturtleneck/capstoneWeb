@@ -25,19 +25,21 @@ class SideProf extends React.Component {
                     if (doc.exists) {
                         // console.log("other user doc:", doc.data())
                         this.setState({ userDoc: doc.data() });
+                        let images = [];
+                        {
+                            this.state.userDoc.photos.data.forEach(function (photo) {
+                                images.push(photo);
+                            })
+                        }
+                        this.setState({ images: images });
                     } else {
                         // doc.data() will be undefined in this case
                         console.log('No such document!');
                     }
                 });
+
+
         }
-        let images = [];
-        {
-            this.state.userDoc.photos.data.forEach(function (photo) {
-                images.push(photo);
-            })
-        }
-        this.setState({ images: images });
     }
 
     UNSAFE_componentWillMount() {
@@ -49,35 +51,45 @@ class SideProf extends React.Component {
                 if (doc.exists) {
                     // console.log("other user doc:", doc.data())
                     this.setState({ userDoc: doc.data() });
+                    let images = [];
+                    {
+                        this.state.userDoc.photos.data.forEach(function (photo) {
+                            images.push(photo);
+                        })
+                    }
+                    this.setState({ images: images });
                 } else {
                     // doc.data() will be undefined in this case
                     console.log('No such document!');
                 }
             });
-        if (this.state.userDoc !== '') {
-            let images = [];
-            {
-                this.state.userDoc.photos.data.forEach(function (photo) {
-                    images.push(photo);
-                })
-            }
-            this.setState({ images: images });
-        }
+        // if (this.state.userDoc !== '') {
+
+        // }
     }
 
     render() {
         return (
-            <div className="otherProfile">
-                <p>{this.state.userDoc.name}</p>
-                <p> {this.state.userDoc.age}</p>
-                <p> {this.state.userDoc.gender}</p>
+            <div className="otherProfile-container">
+                <h3 className="other-header">{this.state.userDoc.name} </h3>
+                <p>{this.state.userDoc.age}</p>
+                <img className="otherProfile-img" src={placeholder} alt="pic placeholder" />
+                <p className="otherProfile-info-type" >Occupation</p>
+                <p className="otherProfile-info" >job title</p>
+                <p className="otherProfile-info-type" >Education</p>
+                <p className="otherProfile-info" >school </p>
+                <p className="otherProfile-info-type" >Religion</p>
+                <p className="otherProfile-info" >type of religion</p>
+
                 <p> {this.state.userDoc.photoURL}</p>
-                <img src={placeholder} alt="pic placeholder" />
                 {this.state.images !== '' ? (
                     this.state.images.map((photo, i) => {
                         return (
                             // <p key={i}>{photo.id}</p>
-                            <div><img src={placeholder} alt="pic placeholder" /></div>);
+                            <div>
+                                <img className="otherProfile-img" src={placeholder} alt="pic placeholder" />
+                                <p className="otherProfile-info" >some text or question</p>
+                            </div>);
                     })
                 ) : (
                         <p>no images</p>

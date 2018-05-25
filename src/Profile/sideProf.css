@@ -1,8 +1,29 @@
-.otherProfile {
+.otherProfile-container {
     overflow-y:auto;
     height: 100%;
+    position: absolute;
+    text-transform: uppercase;
+    text-align: center;
+    width:30%;
+    padding:10px;
 }
-html, body {
+/* html, body {
     height: 100%;
     margin: 0px;
+} */
+
+.otherProfile-img {
+    position: relative;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.other-header {
+    font-family: "Lato", sans-serif, bold;
+}
+
+.otherProfile-info-type {
+    color: #828282;
+    font-size: 10px;
 }

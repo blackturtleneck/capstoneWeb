@@ -1,6 +1,6 @@
 .right-side{
-   padding-left: 74%; 
-   height: 100%;
+    float: right;
+    width: 30%;
 }
 
 .scheduler{
