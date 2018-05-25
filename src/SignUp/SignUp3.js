@@ -4,8 +4,9 @@ import './SignUp.css';
 import next from '../img/next.svg';
 import back from '../img/back.svg';
 import Tooltip from 'rc-tooltip';
+import { Icons } from '../Enums'
 
-class SignUp2 extends React.Component {
+class SignUp3 extends React.Component {
     constructor(props) {
         super(props);
 
@@ -33,23 +34,8 @@ class SignUp2 extends React.Component {
     }
 
     render() {
-        // const handle = props => {
-        //     const { value, dragging, index, ...restProps } = props;
-        //     return (
-        //         <Tooltip
-        //             prefixCls="rc-slider-tooltip"
-        //             overlay={value}
-        //             visible={true}
-        //             placement="top"
-        //             key={index}
-        //         >
-        //             <Handle value={value} {...restProps} />
-        //         </Tooltip>
-        //     );
-        // };
-
-        // const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
-        // const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
+        const dateicons = ["COFFEE", "DRINKS", "DINNER", "MUSEUM", "SHOW", "PARK"]
+        const talkToMeIcons = ["ANIMALS", "TRAVEL", "FOOD", "MUSIC", "SPORTS", "MOVIES", "TECH", "GAMING", "NATURE"]
         return (
             <div className="signup-page">
 
@@ -72,8 +58,26 @@ class SignUp2 extends React.Component {
 
                 </form>
                 <div className="tagline-3">ON A FIRST DATE, I LIKE TO...</div>
-
+                {dateicons.map((icon, index) => {
+                    return (
+                        <div>
+                            <i key={index} className={Icons[icon]} />
+                            <p>{icon}</p>
+                        </div>
+                    );
+                })}
                 <div className="tagline-3">TALK TO ME ABOUT...</div>
+
+                {talkToMeIcons.map((icon, index) => {
+                    return (
+                        <div>
+                            <i key={index} className={Icons[icon]} />
+                            <p>{icon}</p>
+                        </div>
+                    );
+                })}
+
+
 
 
             </div>
@@ -81,6 +85,6 @@ class SignUp2 extends React.Component {
     }
 }
 
-export default SignUp2;
+export default SignUp3;
 
 // try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile
