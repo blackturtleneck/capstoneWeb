@@ -6,11 +6,13 @@ exports.PageContent = {
     MESSENGER: 'messenger',
     PROFILE: 'profile',
     //   temp
-    DATE_SELECTION: 'date selection'
+    DATE_SELECTION: 'date selection',
+    SIGN_UP: 'signup'
 };
 
 exports.Routes = {
     MESSENGER: 'messenger',
     PROFILE: 'profile',
-    DATE_SELECTION: 'date-selection'
+    DATE_SELECTION: 'date-selection', 
+    SIGN_UP: 'signup'
 };

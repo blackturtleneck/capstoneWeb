@@ -2,10 +2,12 @@
 
 * {
   font-family: "Lato", sans-serif;
+  margin-top: 0px;
 }
 .signup-header-welcome {
   font-size: 24px;
   text-align: center;
+  padding-top: 30px;
 }
 
 .signup-header-amp {
@@ -23,6 +25,7 @@
 
 .signup-page {
   margin: 30px;
+  margin-top: 0px;
 }
 .form {
   width: 50vw;
@@ -52,23 +55,41 @@
 
 .next {
   float: right;
-  margin-top: -70px;
-  margin-right: -90px;
   width: 40px;
+  position: absolute;
+  margin-left: 61%;
+  margin-top: -5vh;
+  /* messing up signup3 arrow */
 }
 
-.back {
-  width: 30px;
-  margin-top: -195px;
-  margin-left: 10px;
+.next-1 {
+  margin-left: 62%;
+  margin-top: -190px;
 }
+
+.next-2 {
+  margin-top: -2.7vh;
+}
+
+.next-3 {
+  margin-left: 83%;
+  margin-top: 6.7vh;
+}
+.back {
+  width: 40px;
+  position: absolute;
+  margin-left: 30px;
+  padding-top: 6vh;
+}
+
+.back-2 {
+  padding-top: 0px;
+  margin-top: -2.7vh;
+}
+
 
 .progress-bar {
   background-color: #9ba2ff;
-}
-
-.next-step {
-  display: hidden;
 }
 
 .inline-form {
@@ -81,23 +102,16 @@
 
 .tagline-2 {
   display: block;
-  margin-top: 50px;
+  padding-top: 50px;
   font-size: 20px;
   text-align: center;
 }
 .tagline-3 {
   display: block;
-  margin-top: 25px;
   font-size: 18px;
   text-align: center;
 }
 
-.back-2 {
-  margin-top: -10px;
-}
-.next-2 {
-  margin-top: 10px;
-}
 .back:hover {
   cursor: pointer;
 }
@@ -148,4 +162,83 @@ input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checke
 .gen-availability {
   margin-left: 90px;
   display: inline-block;
+}
+.date-header {
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+}
+
+.date-row {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  width: 50vw;
+}
+.date-type {
+  display: inline-block;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.tagline-3 {
+  display: block;
+  padding-top: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.date-icon {
+  padding: 0px;
+  font-size: 50px;
+  text-align: center;
+}
+
+i {
+  padding-bottom: 10px !important;
+}
+
+.date-type:hover {
+  cursor: pointer;
+}
+
+.active {
+  color: #9ba2ff;
+}
+
+.progress-bar {
+  margin-top: -5px;
+  /* width: 25vw; */
+  height: 20px;
+  padding-bottom: 10px;
+  background-color: #9ba2ff;
+  position: absolute;
+  overflow: hidden;
+  border: none;
+}
+
+.complete {
+  text-align: center;
+  padding-top: 100px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+}
+.complete-button {
+  margin: 0 auto;
+  text-align: center;
+}
+.button {
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 10px 20px;
+}
+.start-matching {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
 }

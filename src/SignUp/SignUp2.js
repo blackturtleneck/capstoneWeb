@@ -81,7 +81,6 @@ class SignUp2 extends React.Component {
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
         return (
             <div className="signup-page">
-
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
                 <img
                     src={back}
@@ -110,6 +109,7 @@ class SignUp2 extends React.Component {
                         <option selected value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
+                        <option value="both">BOTH</option>
                     </select>
 
                     <label className="signup-label" htmlFor="match-age">
@@ -259,6 +259,8 @@ class SignUp2 extends React.Component {
         );
     }
 }
+
+
 
 export default SignUp2;
 
