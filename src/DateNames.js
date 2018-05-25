@@ -13,8 +13,6 @@ const popoverHoverFocus = (
     </Popover>
   );
 
-
-
 const popoverHoverFocus2 = (
     <Popover id="schilling" title="Schilling Ciderhouse">
       <strong>0.2 miles from you</strong> <br />
@@ -23,8 +21,6 @@ const popoverHoverFocus2 = (
       Cozy tasting bar with 30+ craft ciders, on tap and in bottles. 
     </Popover>
   );
-
-
 
   const popoverHoverFocus3 = (
     <Popover id="bakdoor" title="The Backdoor">
@@ -50,7 +46,10 @@ class DateNames extends Component {
         super(props);
         this.state = {
           showComponent: false,
-          availability: false
+          availability: false,
+          datesShown: true,
+          mapButtonText: "View on Map",
+          location: ""
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -59,21 +58,48 @@ class DateNames extends Component {
       _onButtonClick() {
         this.setState(prevState => ({
             showComponent: !prevState.showComponent,
-            availability: false
+            availability: false,
+            datesShown: true,
+            mapButtonText: "View on Map",
+            location: prevState.location
           }));
       }
     
       handleClick() {
         this.setState(oldState => ({
             showComponent: false,
-            availability: !oldState.availability
+            availability: true,
+            datesShown: false,
+            mapButtonText: "",
+            location: "Fremont Brewery"
           }));
       }
 
   render () {
         return (
             <div>
-            <p> Let's meet halfway! </p>
+            {this.state.datesShown && <Child />}
+            <div class="btn-group-vertical">
+           <Button id ="mapview" onClick={this._onButtonClick}> {this.state.mapButtonText} </Button>
+            {this.state.showComponent ?
+               <ColorMap /> :
+               null
+            }
+
+            <Button id ="next" onClick={this.handleClick}> Next </Button>
+            {this.state.availability ?
+               <Availability /> :
+               null
+            }
+            </div>
+            </div>
+        );
+    }
+}
+
+const Child = () => (
+    <div>
+         <p> Let's meet halfway! </p>
             <div class="btn-group-vertical">
             <OverlayTrigger
                 trigger={['hover', 'focus']}
@@ -107,23 +133,8 @@ class DateNames extends Component {
             >
             <Button id = "datefour">THE BARREL THIEF</Button>
             </OverlayTrigger>
-
-           <Button id ="mapview" onClick={this._onButtonClick}> View on Map </Button>
-            {this.state.showComponent ?
-               <ColorMap /> :
-               null
-            }
-
-            <Button id ="next" onClick={this.handleClick}> Next </Button>
-            {this.state.availability ?
-               <Availability /> :
-               null
-            }
-
             </div>
-            </div>
-        );
-    }
-}
+      </div>
+    )
 
 export default DateNames;

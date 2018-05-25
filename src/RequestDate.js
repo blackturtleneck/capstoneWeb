@@ -4,6 +4,7 @@ import MultiSelectField from './MultiSelectField'
 import "./DatesSelection.css"
 import Availability from"./Availability"
 import DateNames from './DateNames'
+import './Messaging.css';
 
 class RequestDate extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class RequestDate extends Component {
         this.setState(prevState => ({
           showComponent: true,
           componentTwo: true,
-          textValue:""
+          textValue:"Cancel"
         }));
       }
 

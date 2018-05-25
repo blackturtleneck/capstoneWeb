@@ -33,13 +33,7 @@ class Availability extends Component {
                 foregroundColor: '#ff00ff',
                 backgroundColor: '#f0f0f0',
                 selected: true,
-                },
-                {
-                id: 'private',
-                title: 'My private cal',
-                foregroundColor: '#666',
-                backgroundColor: '#f3f3f3',
-                },
+                }
             ]}
             onChange={(selections) => {
                 selections.forEach(({ start, end }) => {
