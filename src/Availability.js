@@ -9,9 +9,11 @@ class Availability extends Component {
         super(props);
         this.state = {
           showComponent: false,
-          arr: []
+          start: [],
+          end: []
         };
         this._onButtonClick = this._onButtonClick.bind(this);
+        this.demoMethod = this.demoMethod.bind(this);
       }
     
       _onButtonClick() {
@@ -20,6 +22,9 @@ class Availability extends Component {
         });
       }
 
+      demoMethod(start, end) {
+        this.props.sendData(start, end);
+      }
       render() {
         return (
           <div>
@@ -38,12 +43,17 @@ class Availability extends Component {
             onChange={(selections) => {
                 selections.forEach(({ start, end }) => {
                     this.setState({
-                        arr: this.state.arr.concat(start)
+                        start: this.state.start.concat(start),
+                        end: this.state.end.concat(end)
                     }) 
                     console.log('Start:', start, 'End:', end);
-                    console.log(this.state.arr)
+                    console.log(this.state.start)
+                    console.log(this.state.end)
                 })
-            }}
+                this.demoMethod(this.state.start, this.state.end)  
+            }
+        }
+            
             onEventsRequested={({ calendarId, start, end, callback }) => {
             }}
             initialSelections={[

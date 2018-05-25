@@ -54,6 +54,7 @@ class DateNames extends Component {
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.getData = this.getData.bind(this);
       }
     
       _onButtonClick() {
@@ -79,6 +80,11 @@ class DateNames extends Component {
           }));
       }
 
+      getData(startArr, endArr){
+        console.log("Start DateNames Array", startArr);
+        this.props.sendData(startArr);
+      }
+
   render () {
         return (
             <div id = "datebackground">
@@ -92,7 +98,7 @@ class DateNames extends Component {
 
             <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
             {this.state.availability ?
-               <Availability /> :
+               <Availability sendData={this.getData} /> :
                null
             }
             </div>

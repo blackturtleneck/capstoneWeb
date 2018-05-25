@@ -172,7 +172,7 @@ class Messenger extends React.Component {
                             </ol>
 
                             <div className="date-button-wrapper">
-                            <RequestDate/>
+                            <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser}/>
                             </div>
 
                             <div className="button-input-wrapper">
