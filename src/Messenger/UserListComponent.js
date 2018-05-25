@@ -18,13 +18,14 @@ class UserListComponent extends Component {
     render() {
         return (
             <div>
-                <button
-                    className="user-list-component"
-                    onClick={this.chooseUser.bind(this)}
-                >
-                    {this.props.name}
-                </button>
-                {/* {this.state.otherUser !== undefined ? <Messenger otherUserName={this.props.name} user={this.state.user} otherUser={this.props.email}/>: */}
+                {this.state.user !== this.state.otherUser && (
+                    <button
+                        className="user-list-component"
+                        onClick={this.chooseUser.bind(this)}
+                    >
+                        {this.props.name}
+                    </button>
+                )}
                 <div />
             </div>
         );

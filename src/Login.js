@@ -7,11 +7,13 @@ class Login extends Component {
         this.setState({ user: result.user });
         // Add a new document in collection "users"
         // if(!db.collection("users").doc(result.user.email).get()) {
+        console.log('result.user', result.user);
         db
             .collection('users')
             .doc(result.user.email)
             .set({
                 name: result.user.displayName,
+                uid: result.user.uid,
                 fName: result.additionalUserInfo.profile.first_name,
                 lName: result.additionalUserInfo.profile.last_name,
                 gender: result.additionalUserInfo.profile.gender,
@@ -19,8 +21,7 @@ class Login extends Component {
                 linkFB: result.additionalUserInfo.profile.link,
                 timeZone: result.additionalUserInfo.profile.timezone,
                 photoURL: result.user.photoURL,
-                icons: { first: 'abc', sec: 'def' },
-                onBoarding: false
+                icons: { first: 'abc', sec: 'def' }
             })
             .then(function() {
                 // eslint-disable-line no-console
