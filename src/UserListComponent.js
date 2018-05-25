@@ -4,7 +4,6 @@ import './UserList.css';
 class UserListComponent extends Component {
     constructor(props) {
         super(props);
-        console.log('list componenet props', this.props);
         this.state = {
             user: this.props.user,
             otherUser: this.props.email

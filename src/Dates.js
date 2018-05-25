@@ -6,7 +6,6 @@ import MapContainer from './MapContainer';
 class Dates extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.selections);
         this.restaurantDetails = [];
         this.listOfLocations = [];
         this.state = {
@@ -46,7 +45,6 @@ class Dates extends React.Component {
     extractLocations(restaurants) {
         for (let restaurant of restaurants) {
             this.listOfLocations.push(restaurant.restaurant.location);
-            // console.log(restaurant.restaurant.location)
         }
     }
 
@@ -127,7 +125,7 @@ class Dates extends React.Component {
                     {' '}
                     {this.restaurantDetails['4'].name}{' '}
                 </button>
-                <d1>
+                <dl>
                     <dt> {this.restaurantDetails['0'].name} </dt>
                     <dd>
                         {' '}
@@ -193,7 +191,7 @@ class Dates extends React.Component {
                             this.restaurantDetails['4'].price_range
                         }{' '}
                     </dd>
-                </d1>
+                </dl>
             </div>
         );
     }

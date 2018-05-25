@@ -150,7 +150,6 @@ class SignUp2 extends React.Component {
             ageRange: this.state.ageRange,
             distance: this.state.distance
         };
-        console.log('data', data);
         this.props.saveValues(data);
         this.props.nextStep();
     }
