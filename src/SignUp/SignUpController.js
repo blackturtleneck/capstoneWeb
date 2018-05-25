@@ -29,7 +29,7 @@ class SignUpInController extends Component {
         this.previousStep = this.previousStep.bind(this);
     }
     saveValues(fields) {
-        return (function() {
+        return (function () {
             fieldValues = Object.assign({}, fieldValues, fields);
         })();
     }
@@ -48,23 +48,23 @@ class SignUpInController extends Component {
 
     showStep() {
         switch (this.state.step) {
-        default:
-            return (
-                <SignUp1
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                />
-            );
-        case 1:
-            return (
-                <SignUp2
-                    nextStep={this.nextStep}
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                />
-            );
+            default:
+                return (
+                    <SignUp1
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                    />
+                );
+            case 1:
+                return (
+                    <SignUp2
+                        nextStep={this.nextStep}
+                        previousStep={this.previousStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                    />
+                );
         }
     }
     render() {

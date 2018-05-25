@@ -107,3 +107,39 @@
 .margin {
   margin-bottom: 30px;
 }
+
+input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  opacity: 100;
+}
+
+#availability-wrapper {
+  margin-top: 40px;
+  align-content: center;
+}
+
+.avail-checkbox {
+  display: inline;
+  margin: 31px;
+}
+
+.weekday-label{
+  margin: 20px;
+}
+
+.weekday-time {
+  display: block;
+  line-height: 1.6;
+}
+
+.avail-left, .avail-right {
+  display: inline-block
+}
+
+.avail-left {
+  text-align: right;
+}
+
+.gen-availability {
+  margin-left: 90px;
+  display: inline-block;
+}
