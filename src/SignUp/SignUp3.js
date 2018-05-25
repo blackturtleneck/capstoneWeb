@@ -128,7 +128,7 @@ class SignUp3 extends React.Component {
                     alt="back"
                 />
                 <img
-                    className="next"
+                    className="next next-3"
                     src={next}
                     alt="next"
                     onClick={this.nextStep}
