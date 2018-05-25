@@ -50,7 +50,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 2
+            step: 1
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
