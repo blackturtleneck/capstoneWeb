@@ -31,20 +31,6 @@ class SignUp2 extends React.Component {
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
         this.nextStep = this.nextStep.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-
-    handleInputChange(event) {
-        console.log(event)
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const key = target.key;
-        const time = target.time;
-
-        console.log(this)
-        //     this.setState({
-        //         [name]: value
-        //     });
     }
 
     logout() {
@@ -68,7 +54,8 @@ class SignUp2 extends React.Component {
         var data = {
             matchGender: e.target.matchGender.value,
             ageRange: this.state.ageRange,
-            distance: this.state.distance
+            distance: this.state.distance,
+            availability: this.state.availability
         };
         this.props.saveValues(data);
         this.props.nextStep();
