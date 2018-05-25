@@ -12,17 +12,20 @@ class RequestDate extends Component {
         this.state = {
           showComponent: false,
           componentTwo: false,
-          textValue: "Request a Date"
+          textValue: "Request a Date",
+          buttonid: "request"
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._submit = this._submit.bind(this);
+        this.submitDate = this.submitDate.bind(this);
       }
     
       _onButtonClick() {
         this.setState(prevState => ({
-          showComponent: true,
+          showComponent: false,
           componentTwo: true,
-          textValue:"Cancel"
+          textValue:"",
+          buttonid: "dateRequested"
         }));
       }
 
@@ -30,16 +33,26 @@ class RequestDate extends Component {
         this.setState(prevState => ({
           showComponent: false,
           componentTwo: false,
-          textValue:"Request a Date"
+          textValue:"Request a Date",
+          buttonid: "request"
         }));
+      }
+
+      submitDate() {
+        this.setState({
+          showComponent: true,
+          componentTwo: true,
+          textValue:"Request a Date",
+          buttonid: "dateRequested"
+        });
       }
     
       render() {
         return (
           <div>
-            <Button id = "request" onClick={this._onButtonClick}>{this.state.textValue}</Button>
+            <Button id = {this.state.buttonid} onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
-               <DateNames /> :
+               <DateNames submitDate={this.submitDate} /> :
                null
             }
             {this.state.showComponent ?

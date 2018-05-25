@@ -39,7 +39,6 @@ const popoverHoverFocus2 = (
       Inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes.
     </Popover>
   );
-
   
 class DateNames extends Component {
     constructor(props) {
@@ -49,7 +48,9 @@ class DateNames extends Component {
           availability: false,
           datesShown: true,
           mapButtonText: "View on Map",
-          location: ""
+          location: "",
+          nextButton: "next",
+          nextButtonValue: "Next"
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -59,25 +60,28 @@ class DateNames extends Component {
         this.setState(prevState => ({
             showComponent: !prevState.showComponent,
             availability: false,
-            datesShown: true,
-            mapButtonText: "View on Map",
+            datesShown: !prevState.datesShown,
+            mapButtonText: "Return to List",
             location: prevState.location
           }));
       }
     
       handleClick() {
+        this.props.submitDate();
         this.setState(oldState => ({
             showComponent: false,
             availability: true,
             datesShown: false,
             mapButtonText: "",
-            location: "Fremont Brewery"
+            location: "Fremont Brewery",
+            nextButton: "nextClicked",
+            nextButtonValue: ""
           }));
       }
 
   render () {
         return (
-            <div>
+            <div id = "datebackground">
             {this.state.datesShown && <Child />}
             <div class="btn-group-vertical">
            <Button id ="mapview" onClick={this._onButtonClick}> {this.state.mapButtonText} </Button>
@@ -86,7 +90,7 @@ class DateNames extends Component {
                null
             }
 
-            <Button id ="next" onClick={this.handleClick}> Next </Button>
+            <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
             {this.state.availability ?
                <Availability /> :
                null
@@ -99,7 +103,7 @@ class DateNames extends Component {
 
 const Child = () => (
     <div>
-         <p> Let's meet halfway! </p>
+         <h3 id = "halfwayText"> Let's meet halfway! </h3>
             <div class="btn-group-vertical">
             <OverlayTrigger
                 trigger={['hover', 'focus']}

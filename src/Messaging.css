@@ -73,12 +73,12 @@ input.send-text {
   margin-left: 655px;
 }
 
-.request{
+#request{
   background-color: #9ba2ff; /* Green */
   border: none;
   color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -86,7 +86,7 @@ input.send-text {
   font-size: 12px;
   font-family: "Lato", sans-serif, bold;
   text-transform: uppercase;
-  width: 7vw;
+  width: 10vw;
 }
 
 h2 {

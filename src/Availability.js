@@ -23,7 +23,7 @@ class Availability extends Component {
       render() {
         return (
           <div>
-              <p> Finalize the times that you'd want to go on a date this week. </p>
+              <h4 id = "timeFrame"> Pick a timeframe that you like. </h4>
             <AvailableTimes
             weekStartsOn="monday"
             calendars={[
