@@ -103,11 +103,18 @@ class RequestDate extends Component {
             ':' +
             time.getMilliseconds();
 
-      const nextDate = {
+      const sendDate = {
           id: time,
           startTime: this.state.startArr,
-          location: this.state.location
+          location: this.state.location,
+          sent: true
       };
+      const receiveDate = {
+        id: time,
+        startTime: this.state.startArr,
+        location: this.state.location,
+        sent: false
+    };
       db
           .collection('users')
           .doc(this.props.user)
@@ -115,18 +122,19 @@ class RequestDate extends Component {
           .doc(this.props.otherUser)
           .collection('dates')
           .doc(timeStamp)
-          .set(nextDate);
-
-     db
+          .set(sendDate);
+        
+      db
           .collection('users')
           .doc(this.props.otherUser)
           .collection('messages')
           .doc(this.props.user)
           .collection('dates')
           .doc(timeStamp)
-          .set(nextDate);
+          .set(receiveDate);
     
-      }
+    }
+   
 
       submitDate() {
         this.setState({

@@ -78,7 +78,7 @@ class DateNames extends Component {
             availability: true,
             datesShown: false,
             mapButtonText: "",
-            location: "Fremont Brewery",
+            location : oldState.location,
             nextButton: "nextClicked",
             nextButtonValue: ""
           }));

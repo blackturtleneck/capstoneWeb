@@ -2,6 +2,7 @@ import React from 'react';
 import { db } from './FirestoreConfig';
 import './Messaging.css';
 import RequestDate from './RequestDate';
+import ReceiveRequest from './ReceiveRequest';
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -173,10 +174,12 @@ class Messenger extends React.Component {
 
                             <div className="date-button-wrapper">
                             <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser}/>
+                            <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser}/>
                             </div>
 
                             <div className="button-input-wrapper">
                                 <input
+
                                     id="message-box"
                                     className="send-text"
                                     onChange={this.updateMessage}
