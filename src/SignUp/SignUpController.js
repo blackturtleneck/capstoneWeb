@@ -5,6 +5,7 @@ import './SignUp.css';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
 import SignUp3 from './SignUp3';
+import SignUp4 from './SignUp4';
 import SignUpComplete from './SignUpComplete';
 
 let fieldValues = {
@@ -50,7 +51,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: 4
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -130,15 +131,23 @@ class SignUpInController extends Component {
                         fieldValues={fieldValues}
                     />
                 );
-
             case 4:
-                return <SignUpComplete nextStep={this.nextStep} />;
+                return (
+                    <SignUp4
+                        submitRegistration={this.submitRegistration}
+                        previousStep={this.previousStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                    />
+                );
             case 5:
+                return <SignUpComplete nextStep={this.nextStep} />;
+            case 6:
                 return <Redirect to={'/messenger'} />;
         }
     }
     render() {
-        let progress = this.state.step * 33.333;
+        let progress = this.state.step * 25;
         return (
             <div className="signup-wrapper">
                 <div

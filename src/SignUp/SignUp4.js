@@ -1,0 +1,266 @@
+import React from 'react';
+import { auth } from '../FirestoreConfig';
+import './SignUp.css';
+import next from '../img/next.svg';
+import back from '../img/back.svg';
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import Tooltip from 'rc-tooltip';
+import Checkbox from 'muicss/lib/react/checkbox';
+
+
+// found here http://react-component.github.io/slider/examples/handle.html
+const Handle = Slider.Handle;
+
+class SignUp4 extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            authenticated: true,
+            user: this.props.user,
+            content: this.props.content,
+            priceRange: [2, 3],
+            dietaryPref: { "VEGETARIAN": false, "GLUTEN-FREE": false, "VEGAN": false, "DAIRY-FREE": false, "NO RED MEAT": false, "KOSHER": false, "PALEO": false, "RAW": false },
+            neighborhoods: { "BALLARD": false, "BELLTOWN": false, "CAPITOL HILL": false, "DOWNTOWN": false, "INTERNATIONAL DISTRICT": false, "FIRST HILL": false, "FREMONT": false, "GEORGETOWN": false, "PIONEER SQUARE": false, "QUEEN ANNE": false, "SODO": false, "SOUTH LAKE UNION": false, "WALLINGFORD": false, "WEST SEATTLE": false, "UDISTRICT": false },
+            foodTypeLIKE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
+            foodTypeHATE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
+            music: { "POP": false, "COUNTRY": false, "EDM": false, "R&B": false, "LATIN": false, "HIP HOP": false, "ALTERNATIVE": false, "CLASSICAL": false, "INDIE": false, "FOLK": false, "JAZZ": false, "ROCK": false, "SOUL": false, "PUNK": false, "REGGAE": false }
+        };
+        this.onRangeChange = this.onRangeChange.bind(this);
+        this.onSliderChange = this.onSliderChange.bind(this);
+        this.nextStep = this.nextStep.bind(this);
+    }
+
+    logout() {
+        auth.signOut();
+    }
+
+    onRangeChange(value) {
+        this.setState({
+            ageRange: value
+        });
+    }
+
+    onSliderChange(value) {
+        this.setState({
+            distance: value
+        });
+    }
+
+    nextStep(e) {
+        e.preventDefault();
+        var data = {
+            matchGender: e.target.matchGender.value,
+            ageRange: this.state.ageRange,
+            distance: this.state.distance,
+            availability: this.state.availability
+        };
+        this.props.saveValues(data);
+        this.props.nextStep();
+    }
+
+    render() {
+        const handle = props => {
+            const { value, dragging, index, ...restProps } = props;
+            return (
+                <Tooltip
+                    prefixCls="rc-slider-tooltip"
+                    overlay={value}
+                    visible={true}
+                    placement="top"
+                    key={index}
+                >
+                    <Handle value={value} {...restProps} />
+                </Tooltip>
+            );
+        };
+        const foodPref = ["VEGETARIAN", "GLUTEN-FREE", "VEGAN", "DAIRY-FREE", "NO RED MEAT", "KOSHER", "PALEO", "RAW"];
+        const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
+        const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
+        const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
+        console.log(this.state)
+        return (
+
+            <div className="signup-page">
+                <div className="tagline-2">TELL US MORE &amp; GET BETTER DATES</div>
+                <img
+                    src={back}
+                    className="back back-2"
+                    onClick={this.props.previousStep}
+                    alt="back"
+                />
+                <img
+                    className="next next-3"
+                    src={next}
+                    alt="next"
+                    onClick={this.nextStep}
+                />
+                <div id="signup4" >
+                    <div id="foodAllergies">
+                        <label className="signup-label signup4-header" htmlFor="foodPreferencesAllergies">
+                            FOOD PREFERENCES / ALLERGIES
+                    </label>
+
+                        {foodPref.map((item, index) => {
+                            return (
+                                <Checkbox
+                                    className="pref-checkbox"
+                                    key={index}
+                                    label={item}
+                                    onChange={() => {
+                                        let foodTemp = this.state.dietaryPref;
+                                        if (foodTemp[item]) {
+                                            foodTemp[item] = false;
+                                        } else {
+                                            foodTemp[item] = true;
+                                        }
+                                        this.setState({ dietaryPref: foodTemp })
+
+                                    }}
+                                />);
+                        })}
+                    </div>
+
+                    <div id="priceRange">
+                        <label className="signup-label" htmlFor="datePrice">
+                            DATE PRICE PREFERENCE
+                        </label>
+                        <Range
+                            min={1}
+                            max={5}
+                            defaultValue={this.state.priceRange}
+                            handle={handle}
+                            trackStyle={[
+                                { backgroundColor: '#828282' },
+                                { backgroundColor: '#828282' }
+                            ]}
+                            handleStyle={[
+                                {
+                                    backgroundColor: '#9BA2FF',
+                                    borderColor: '#9BA2FF'
+                                },
+                                {
+                                    backgroundColor: '#9BA2FF',
+                                    borderColor: '#9BA2FF'
+                                }
+                            ]}
+                            onChange={this.onRangeChange}
+                        />
+                    </div>
+
+                    <div id="neighborhoodLike">
+                        <label className="signup-label signup4-header" htmlFor="Neighborhoods">
+                            NEIGHBORHOODS I LIKE
+                    </label>
+                        <br />
+                        {neighborhoods.map((neighborhood, index) => {
+                            return (
+                                <button
+                                    className={
+                                        this.state.neighborhoods[neighborhood] ? 'pref-button active' : 'pref-button'
+                                    }
+                                    key={index}
+                                    onClick={() => {
+                                        let n = this.state.neighborhoods;
+                                        if (n[neighborhood]) {
+                                            n[neighborhood] = false;
+                                        } else {
+                                            n[neighborhood] = true;
+                                        }
+                                        this.setState({ neighborhoods: n })
+
+                                    }}
+                                >{neighborhood}</button>);
+                        })}
+                    </div>
+                    <br />
+                    <div id="foodLike" >
+                        <label className="signup-label signup4-header" htmlFor="CuisinesYes">
+                            CUISINES I LIKE
+                    </label>
+                        <br />
+                        {foodTypes.map((food, index) => {
+                            return (
+                                <button
+                                    className={
+                                        this.state.foodTypeLIKE[food] ? 'pref-button active' : 'pref-button'
+                                    }
+                                    key={index}
+                                    onClick={() => {
+                                        let f = this.state.foodTypeLIKE;
+                                        if (f[food]) {
+                                            f[food] = false;
+                                        } else {
+                                            f[food] = true;
+                                        }
+                                        this.setState({ foodTypeLIKE: f })
+
+                                    }}
+                                >{food}</button>);
+                        })}
+                    </div>
+                    <div id="foodHate" >
+                        <br />
+                        <label className="signup-label signup4-header" htmlFor="CuisinesNo">
+                            CUISINES I HATE
+                    </label>
+                        <br />
+                        {foodTypes.map((food, index) => {
+                            return (
+                                <button
+                                    className={
+                                        this.state.foodTypeHATE[food] ? 'pref-button active' : 'pref-button'
+                                    }
+                                    key={index}
+                                    onClick={() => {
+                                        let f = this.state.foodTypeHATE;
+                                        if (f[food]) {
+                                            f[food] = false;
+                                        } else {
+                                            f[food] = true;
+                                        }
+                                        this.setState({ foodTypeHATE: f })
+
+                                    }}
+                                >{food}</button>);
+                        })}
+                    </div>
+                    <div id="musicLike">
+                        <br />
+                        <label className="signup-label signup4-header" htmlFor="Music">
+                            MUSIC PREFERENCES
+                    </label>
+                        <br />
+                        {music.map((genre, index) => {
+                            return (
+                                <button
+                                    className={
+                                        this.state.music[genre] ? 'pref-button active' : 'pref-button'
+                                    }
+                                    key={index}
+                                    onClick={() => {
+                                        let m = this.state.music;
+                                        if (m[genre]) {
+                                            m[genre] = false;
+                                        } else {
+                                            m[genre] = true;
+                                        }
+                                        this.setState({ music: m })
+
+                                    }}
+                                >{genre}</button>);
+                        })}
+                    </div>
+                </div>
+                {/* </form> */}
+            </div >
+        );
+    }
+}
+
+
+
+export default SignUp4;
+
+// try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile
