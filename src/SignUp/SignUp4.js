@@ -80,6 +80,22 @@ class SignUp4 extends React.Component {
         const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
         const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
         console.log(this.state)
+        {/*<Checkbox
+                                    className="pref-checkbox"
+                                    key={index}
+                                    label={item}
+                                    onChange={() => {
+                                        let foodTemp = this.state.dietaryPref;
+                                        if (foodTemp[item]) {
+                                            foodTemp[item] = false;
+                                        } else {
+                                            foodTemp[item] = true;
+                                        }
+                                        this.setState({ dietaryPref: foodTemp })
+
+                                    }}
+                                />);
+                                */}
         return (
 
             <div className="signup-page">
@@ -104,21 +120,22 @@ class SignUp4 extends React.Component {
 
                         {foodPref.map((item, index) => {
                             return (
-                                <Checkbox
-                                    className="pref-checkbox"
-                                    key={index}
-                                    label={item}
-                                    onChange={() => {
-                                        let foodTemp = this.state.dietaryPref;
-                                        if (foodTemp[item]) {
-                                            foodTemp[item] = false;
-                                        } else {
-                                            foodTemp[item] = true;
-                                        }
-                                        this.setState({ dietaryPref: foodTemp })
 
-                                    }}
-                                />);
+                                <div className="boxes">
+                                    <input type="checkbox" id={"box" + index}
+                                        onChange={() => {
+                                            let foodTemp = this.state.dietaryPref;
+                                            if (foodTemp[item]) {
+                                                foodTemp[item] = false;
+                                            } else {
+                                                foodTemp[item] = true;
+                                            }
+                                            this.setState({ dietaryPref: foodTemp })
+
+                                        }} />
+                                    <label for={"box" + index}>{item}</label>
+                                </div>
+                            );
                         })}
                     </div>
 

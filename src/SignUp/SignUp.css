@@ -270,13 +270,16 @@ background-color: white;
   margin-top: 50px;
   text-align: center;
 }
-
-#foodAllergies  > label {
+.pref-checkbox {
+  line-height: 2;
+}
+.pref-checkbox  > label {
   color:black;
+  font-size: 1rem;
 }
 
 #priceRange {
-  width:70%;
+  width:90%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -286,10 +289,15 @@ background-color: white;
   border: 1px solid #333333;
   box-sizing: border-box;
   border-radius: 10px;
+  margin: 10px;
+  width: 130px;
+  height: 50px;
 }
 
 
 #signup4{
-  margin-left: 300px;
-  margin-right: 300px;
+  margin-left: 350px;
+  margin-right: 350px;
 }
+
+input[type="checkbox"] { display: none; }
