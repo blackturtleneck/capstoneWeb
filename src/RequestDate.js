@@ -15,7 +15,8 @@ class RequestDate extends Component {
           componentTwo: false,
           textValue: "Request a Date",
           buttonid: "request",
-          startArr: []
+          startArr: [],
+          location: ""
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._submit = this._submit.bind(this);
@@ -43,6 +44,7 @@ class RequestDate extends Component {
         console.log("USER PROPS", this.props.user)
         console.log("OTHER USER PROPS", this.props.otherUser)
         console.log("START ARR", this.state.startArr)
+        console.log("FINAL LOC", this.state.location)
 
 
         const time = new Date();
@@ -103,7 +105,8 @@ class RequestDate extends Component {
 
       const nextDate = {
           id: time,
-          startTime: this.state.startArr
+          startTime: this.state.startArr,
+          location: this.state.location
       };
       db
           .collection('users')
@@ -113,6 +116,16 @@ class RequestDate extends Component {
           .collection('dates')
           .doc(timeStamp)
           .set(nextDate);
+
+     db
+          .collection('users')
+          .doc(this.props.otherUser)
+          .collection('messages')
+          .doc(this.props.user)
+          .collection('dates')
+          .doc(timeStamp)
+          .set(nextDate);
+    
       }
 
       submitDate() {
@@ -124,11 +137,13 @@ class RequestDate extends Component {
         });
       }
     
-      getData(start){
+      getData(start, location){
         console.log("Start FINAL Array", start);
+        console.log("LOCATION NAME", location)
         this.setState({
-          startArr :  start
-        });
+            startArr: start,
+            location: location
+          });
       }
 
       render() {

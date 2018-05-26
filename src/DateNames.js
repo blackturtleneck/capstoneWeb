@@ -55,6 +55,10 @@ class DateNames extends Component {
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.getData = this.getData.bind(this);
+        this.buttonOneClick = this.buttonOneClick.bind(this);
+        this.buttonTwoClick = this.buttonTwoClick.bind(this);
+        this.buttonThreeClick = this.buttonThreeClick.bind(this);
+        this.buttonFourClick = this.buttonFourClick.bind(this);
       }
     
       _onButtonClick() {
@@ -82,13 +86,78 @@ class DateNames extends Component {
 
       getData(startArr, endArr){
         console.log("Start DateNames Array", startArr);
-        this.props.sendData(startArr);
+        console.log("Start LocationDatenames", this.state.location);
+        this.props.sendData(startArr, this.state.location);
+      }
+
+      buttonOneClick(){
+        console.log("oneclick")
+        this.setState({
+          location : "Fremont Brewery"
+        });
+      }
+
+      buttonTwoClick(){
+        console.log("twoclick")
+        this.setState({
+          location : "Schilling Ciderhouse"
+        });
+      }
+
+      buttonThreeClick(){
+        this.setState({
+          location : "The Backdoor"
+        });
+      }
+
+      buttonFourClick(){
+        this.setState({
+          location : "The Barrel Thief"
+        });
       }
 
   render () {
         return (
             <div id = "datebackground">
-            {this.state.datesShown && <Child />}
+            {this.state.datesShown && 
+             <div>
+             <h3 id = "halfwayText"> Let's meet halfway! </h3>
+                <div class="btn-group-vertical">
+                <OverlayTrigger
+                    trigger={['hover', 'focus']}
+                    placement="bottom"
+                      overlay={popoverHoverFocus}
+                >
+                     <Button id = "dateone" onClick={this.buttonOneClick} >FREMONT BREWERY</Button>
+                </OverlayTrigger>
+    
+                <OverlayTrigger
+                trigger={['hover', 'focus']}
+                placement="bottom"
+                overlay={popoverHoverFocus2}
+                >
+                <Button id ="datetwo" onClick={this.buttonTwoClick}>SCHILLING CIDERHOUSE</Button>
+                </OverlayTrigger>
+    
+    
+                <OverlayTrigger
+                trigger={['hover', 'focus']}
+                placement="bottom"
+                overlay={popoverHoverFocus3}
+                >
+                <Button id = "datethree" onClick={this.buttonThreeClick}>THE BACKDOOR</Button>
+                </OverlayTrigger>
+    
+                <OverlayTrigger
+                trigger={['hover', 'focus']}
+                placement="bottom"
+                overlay={popoverHoverFocus}
+                >
+                <Button id = "datefour" onClick={this.buttonFourClick}>THE BARREL THIEF</Button>
+                </OverlayTrigger>
+                </div>
+          </div>}
+
             <div class="btn-group-vertical">
            <Button id ="mapview" onClick={this._onButtonClick}> {this.state.mapButtonText} </Button>
             {this.state.showComponent ?
@@ -106,45 +175,5 @@ class DateNames extends Component {
         );
     }
 }
-
-const Child = () => (
-    <div>
-         <h3 id = "halfwayText"> Let's meet halfway! </h3>
-            <div class="btn-group-vertical">
-            <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="bottom"
-                  overlay={popoverHoverFocus}
-            >
-                 <Button id = "dateone" >FREMONT BREWERY</Button>
-            </OverlayTrigger>
-
-            <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="bottom"
-            overlay={popoverHoverFocus2}
-            >
-            <Button id ="datetwo">SCHILLING CIDERHOUSE</Button>
-            </OverlayTrigger>
-
-
-            <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="bottom"
-            overlay={popoverHoverFocus3}
-            >
-            <Button id = "datethree">THE BACKDOOR</Button>
-            </OverlayTrigger>
-
-            <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="bottom"
-            overlay={popoverHoverFocus}
-            >
-            <Button id = "datefour">THE BARREL THIEF</Button>
-            </OverlayTrigger>
-            </div>
-      </div>
-    )
 
 export default DateNames;
