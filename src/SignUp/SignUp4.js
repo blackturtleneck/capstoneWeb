@@ -12,6 +12,8 @@ import Checkbox from 'muicss/lib/react/checkbox';
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
 
+// Cool checkboxes here https://codepen.io/valerypatorius/pen/oXGMGL/
+
 class SignUp4 extends React.Component {
     constructor(props) {
         super(props);
@@ -83,22 +85,6 @@ class SignUp4 extends React.Component {
         const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
         const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
         const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
-        {/*<Checkbox
-                                    className="pref-checkbox"
-                                    key={index}
-                                    label={item}
-                                    onChange={() => {
-                                        let foodTemp = this.state.dietaryPref;
-                                        if (foodTemp[item]) {
-                                            foodTemp[item] = false;
-                                        } else {
-                                            foodTemp[item] = true;
-                                        }
-                                        this.setState({ dietaryPref: foodTemp })
-
-                                    }}
-                                />);
-                                */}
         return (
 
             <div className="signup-page">
@@ -141,7 +127,7 @@ class SignUp4 extends React.Component {
                             );
                         })}
                     </div>
-
+                    {/* TODO: make range is slider of prices ($$$), not numbers */}
                     <div id="priceRange">
                         <label className="signup-label" htmlFor="datePrice">
                             DATE PRICE PREFERENCE
