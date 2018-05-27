@@ -69,6 +69,7 @@ input.send-text {
   width: 50vw;
   bottom: 0;
   position: absolute;
+  margin-bottom: 80px;
   margin-left: 655px;
 }
 

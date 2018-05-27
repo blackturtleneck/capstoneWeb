@@ -73,7 +73,6 @@ class Messenger extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        this.testTimeStamp();
         this.setState({
             otherUser: newProps.otherUser,
             newDateRequest: null
@@ -112,6 +111,7 @@ class Messenger extends React.Component {
                 });
                 });
         }
+        this.testTimeStamp();
 
 
     }
@@ -293,10 +293,8 @@ class Messenger extends React.Component {
             }
         }
         if(this.state.dates.length != 0) {
-            console.log(this.state.dates[0].response, " HERE I CHECK IF I WANT TO RENDER A DATE OR NO")
             this.setState({
-                dateExists : true,
-                dateResponse : this.state.dates[0].response
+                dateExists : true
             })
         } else {
             this.setState({
@@ -352,16 +350,10 @@ class Messenger extends React.Component {
                             </ol>
     
                             <div className="date-button-wrapper">
-                        {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
+                            <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>
 
-                         {  this.state.newDateRequest != null || this.state.dateExists == true ? (
-                            <div>
-                                          {this.state.dateResponse == false ?
-                                             <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser}/> :
-                                            null
-                                            }
-           
-                           </div>
+                            {this.state.newDateRequest != null || this.state.dateExists == true ? (
+                           <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser}/>
                             ) : null }
                             </div>
 
