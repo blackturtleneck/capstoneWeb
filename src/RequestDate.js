@@ -70,7 +70,7 @@ class RequestDate extends Component {
         this.setState(prevState => ({
           showComponent: false,
           componentTwo: true,
-          textValue:"",
+          textValue:"Cancel",
           buttonid: "dateRequested"
         }));
       }
@@ -153,7 +153,8 @@ class RequestDate extends Component {
           location: this.state.location,
           sent: true,
           response: false,
-          confirm: false
+          confirm: false,
+          timeConfirmed: null
       };
       const receiveDate = {
         id: time,
@@ -161,7 +162,8 @@ class RequestDate extends Component {
         location: this.state.location,
         sent: false,
         response: false,
-        confirm: false
+        confirm: false,
+        timeConfirmed: null
     };
       db
           .collection('users')
@@ -208,7 +210,7 @@ class RequestDate extends Component {
       render() {
           console.log("AVAILABLE", this.state.userAvailability)
         return (
-          <div>
+          <div id = "buttons">
             <Button id = {this.state.buttonid} onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
                <DateNames userEmail= {this.props.user} submitDate={this.submitDate} sendData={this.getData} availability={this.state.userAvailability} /> :

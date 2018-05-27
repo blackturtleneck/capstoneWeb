@@ -1,6 +1,6 @@
 .table-drag-select td  {
     border: 0.1rem solid transparent;
-    font-size: 12px;
+    font-size: 9px;
     font: "Lato";
     -o-text-overflow: clip;
        text-overflow: clip; 
@@ -10,7 +10,8 @@
     /* Remove empty space at top of table */
     border-top: 0;
     line-height: 2px;
-    padding: 10px;
+    padding: 5px;
+
 }
 
 .table-drag-select {
@@ -18,7 +19,7 @@
 }
 
 .timeLabel {
-    text-align: right
+    text-align: left;
 }
 
 .availabilityRow:nth-child(odd) {
@@ -26,7 +27,8 @@
 }
 
 .availabilityTableDragDown{
-    width: 700px;
+    width: 55vh;
+    margin-top: 50px;
 }
 
 .table-drag-select td.cell-being-selected {
@@ -41,7 +43,7 @@
 @media only screen and (max-width : 1043px)  {
 
     .availabilityTableDragDown{
-        width: 100%;
+        width: 300px;
     }
     
 }

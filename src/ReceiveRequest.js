@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
 import { db } from './FirestoreConfig';
 import "./DatesSelection.css";
+import ColorMap from './ColorMap.js';
+import Availability2 from './Availability2.js';
+
 
 class ReceiveRequest extends Component {
     constructor(props, context) {
@@ -18,7 +21,8 @@ class ReceiveRequest extends Component {
             finalDateArray: [],
             finalLocation: '',
             dateConfirmed : false,
-            timeStampFinal : null
+            timeStampFinal : null,
+            mapShowing : false
         };
         this.test = this.test.bind(this);
         this.confirmDate = this.confirmDate.bind(this);
@@ -26,6 +30,7 @@ class ReceiveRequest extends Component {
         this.respond = this.respond.bind(this);
         this.otherUserRespond = this.otherUserRespond.bind(this);
         this.timeConfirm = this.timeConfirm.bind(this);
+        this.showMap = this.showMap.bind(this);
     } 
 
    componentWillMount(){
@@ -45,7 +50,7 @@ class ReceiveRequest extends Component {
                     console.log(doc.id, " => ", doc.data());
                     console.log(doc.data());
                     currDates.push(doc.data());
-                    ready : true
+                    ready : !currDates[0].confirm
                 });
             })
             .catch(function(error) {
@@ -87,7 +92,8 @@ class ReceiveRequest extends Component {
                 }).then(function(currDates) {
                     currentComponent.setState(prevState =>({
                         dateDetails : currDates,
-                        ready : !prevState
+                        ready : !currDates[0].confirm,
+                        timeConfirmed :  currDates[0].timeConfirmed
                     }));
                 })
                 .catch(function(error) {
@@ -124,12 +130,14 @@ class ReceiveRequest extends Component {
                 querySnapshot.docs.map(function(doc) {
                     console.log(doc.id, " => ", doc.data());
                     console.log(doc.data());
-                    currDates.push(doc.data())
+                    currDates.push(doc.data());
+                    console.log("IMPORTANT CURR DATES", currDates[0].confirm)
                 }); return currDates
             }).then(function(currDates) {
                 currentComponent.setState(prevState =>({
                     dateDetails : currDates,
-                    ready : true
+                    ready : !currDates[0].confirm,
+                    timeConfirmed :  currDates[0].timeConfirmed
                 }));
             })
             .catch(function(error) {
@@ -162,7 +170,11 @@ class ReceiveRequest extends Component {
         }
         
     confirmDate(){
-        console.log(this.props.timeStamp + "DOUBLE CHECKING")
+        this.setState({
+            dateConfirmed : true
+        })
+        console.log(this.state.dateConfirmed, "UGH")
+
         this.otherUserConfirm();
         var dateInfo = db
         .collection('users')
@@ -172,8 +184,8 @@ class ReceiveRequest extends Component {
         .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
-            confirm: true,
-            timeConfirmed : this.state.timeConfirmed
+           confirm: true,
+           timeConfirmed : this.state.timeConfirmed,
         })
         .then(function() {
             console.log("Document successfully updated!");
@@ -182,9 +194,14 @@ class ReceiveRequest extends Component {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-        this.setState({
-            dateConfirmed : true
-        })
+
+    }
+
+    showMap() {
+        console.log(this.state.mapShowing)
+        this.setState(prevState => ({
+            mapShowing : !prevState.mapShowing
+        }));    
     }
 
     otherUserConfirm(){
@@ -206,11 +223,22 @@ class ReceiveRequest extends Component {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
+
+        this.setState({
+            dateConfirmed : true
+        })
+        console.log("DOES THIS WORK" , this.state.dateConfirmed)
     }
 
     respond(){
+        this.setState({
+            availabilityCalendar : true
+        });
+        this.setState({
+            dateConfirmed : true
+        });
         console.log(this.props.timeStamp + "DOUBLE CHECKING")
-        this.otherUserConfirm();
+        this.otherUserRespond();
         var dateInfo = db
         .collection('users')
         .doc(this.props.userEmail)
@@ -383,218 +411,57 @@ class ReceiveRequest extends Component {
           }
         }
 
-       /*  const dateTimesNumeric = [];
-        let dateTimes = [];
-        let dateOg = [];
-        var day = '';
-        var days = [];
-
-            if (this.state.dateDetails.length != 0) {
-                dateOg = this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].startTime;
-                console.log("I'm here", dateOg)
-                 dateTimes = dateOg.filter(function(elem, index, self) {
-                    return index === self.indexOf(elem);
-                })
-                console.log("I'm here again", dateTimes);
-                dateTimes.sort();
-                var finalDateTimes = [];
-                var num = '';
-                // Monday Dates
-                for (var i = 0; i < dateTimes.length; i++) {
-                    if(dateTimes[i] <= 660) {
-                         day = "Monday"
-                         num = dateTimes[i] / 60;
-                         finalDateTimes.push([day,num]);     
-                    }
-                    // Tuesday Dates
-                   else if(dateTimes[i] > 660 && dateTimes[i] <=2100){
-                        day = "Tuesday"
-
-                        if(dateTimes[i] == 1620){
-                            num = 3;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1680){
-                            num = 4;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1740){
-                            num = 5;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1800){
-                            num = 6;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1860){
-                            num = 7;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1920){
-                            num = 8;
-                            finalDateTimes.push([day,num]);
-                        }
-                        else if(dateTimes[i] <= 1980){
-                            num = 9;
-                            finalDateTimes.push([day,num]);
-                        }   
-                        else if(dateTimes[i] >= 2040){
-                            num = 10;
-                            finalDateTimes.push([day,num]);
-                        }
-                    }
-
-                    // Wednesday Dates
-                    else if(dateTimes[i] > 2100 && dateTimes[i] <= 3540 ){
-                        day = "Wednesday"
-                        days.push(day)
-
-                        if(dateTimes[i] == 4500){
-                            num = 3;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4560){
-                            num = 4;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4620){
-                            num = 5;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4680){
-                            num = 6;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4740){
-                            num = 7;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4800){
-                            num = 8;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4860){
-                            num = 9;
-                            finalDateTimes.push([day,num]);
-                        }   
-                        if(dateTimes[i] == 4920){
-                            num = 10;
-                            finalDateTimes.push([day,num]);
-                        }
-                    }
-
-                    // This is so inefficient but Thursday Dates
-                    else if(dateTimes[i] > 3540 && dateTimes[i] <= 4980 ){
-                        day = "Thursday"
-                        days.push(day)
-
-                        if(dateTimes[i] == 4500){
-                            num = 3;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4650){
-                            num = 4;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4680){
-                            num = 5;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4740){
-                            num = 6;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4800){
-                            num = 7;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4860){
-                            num = 8;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 4920){
-                            num = 9;
-                            finalDateTimes.push([day,num]);
-                        }   
-                        if(dateTimes[i] == 4980){
-                            num = 10;
-                            finalDateTimes.push([day,num]);
-                        }
-                    }
- */
-                  /*   // Friday dates lol
-                   else if(dateTimes[i]> 4980 && dateTimes[i] <= 6420 ){
-                        day = "Friday"
-                        days.push(day)
-
-                        if(dateTimes[i] == 5940){
-                            num = 3;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6000){
-                            num = 4;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6060){
-                            num = 5;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6120){
-                            num = 6;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6180){
-                            num = 7;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6240){
-                            num = 8;
-                            finalDateTimes.push([day,num]);
-                        }
-                        if(dateTimes[i] == 6300){
-                            num = 9;
-                            finalDateTimes.push([day,num]);
-                        }   
-                        if(dateTimes[i] == 6360){
-                            num = 10;
-                            finalDateTimes.push([day,num]);
-                        } */
-                   // }
-     /*                console.log("ARRAY CHECK", finalDateTimes);
-                    }   
-                dateTimes = finalDateTimes;
-                
-                console.log("finaldatetimes", dateTimes);
-            } else {
-                dateTimes = null
-            }
-    */
-
     return(
         <div>
            {this.state.ready  ?
-                <div id = "datebackground">
-                    {this.state.userReceiving == false && this.state.dateDetails != null ?           
-                    <div>                       
-                        <h3 id = "halfwayText">
-                            Hey, want to go to {locationArr+ " "}
-                            this week? </h3> 
-                            <p>
-                            It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. <br/>
-                            <Button id ="locview">Here's where it is.</Button> <br/>
-                            
-                            Let me know if any of these times work for you! 
-                            {finalDateButton.map(time => 
-                            <Button id = {time} value={time} onClick ={(event)=>this.timeConfirm(event)}>  {time} </Button>)} 
-                        </p> 
 
-                        <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
-                        <Button id = "confirm" onClick = {this.respond}> Another Time?</Button>
+                <div id = "datebackground">
+
+                    {this.state.userReceiving == false && this.state.dateDetails != null ?           
+                    <div>    
+                          
+                          {this.state.dateConfirmed == false ?
+                           <div>
+                           <h3 id = "letsdate">
+                           Hey, <br/>want to go to {locationArr+ " "}
+                           this week? </h3> 
+                           <p>
+                           It's got inventive codadcktails and small plates in a warm, eco-friendly setting with regular tastings and classes. <br/></p>
+                           <Button id ="locview" onClick = {this.showMap} >Here's where it is.</Button> <br/>
+                             
+                             {this.state.mapShowing ?
+                                 <ColorMap /> :
+                                 null
+                                 }
+
+                            <p> Let me know if any of these times work for you! </p>
+                              
+                            {finalDateButton.map(time => 
+                            <Button id = {time} value={time} onClick ={(event)=>this.timeConfirm(event)}>  {time} </Button>)}          
+                      
+                            <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
+                            <Button id = "confirm" onClick = {this.respond}> Another Time?</Button>
+                        </div>       
+                              :
+                               
+                              <div> You have an upcoming date at {locationArr} at {this.state.timeConfirmed}
+
+                              {this.state.availabilityCalendar ?
+                                  <div>  <Availability2 /> <Button> Send Availability </Button> </div> :
+                                    null
+                                    }
+                              
+                                </div> 
+                            
+                            
+                            }                   
+
+                          
                       </div>
                     
               
                             :
-                            <div>  <h3 id = "halfwayText">
+                            <div>  <h3 id = "letsDate">
                             Hey, want to go to 
                             {" " + locationArr+ " "} this week? </h3> 
                             <p>
@@ -610,7 +477,7 @@ class ReceiveRequest extends Component {
                         }
                         </div>
                 :
-               null
+               <div>   <div> You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> </div> </div>
             }
         </div>
     );
