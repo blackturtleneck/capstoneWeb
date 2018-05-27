@@ -53,8 +53,8 @@ class SignUp2 extends React.Component {
         e.preventDefault();
         var data = {
             matchGender: e.target.matchGender.value,
-            ageRange: this.state.ageRange,
-            distance: this.state.distance,
+            matchAgeMin: this.state.ageRange[0],
+            matchAgeMax: this.state.ageRange[1],
             availability: this.state.availability
         };
         this.props.saveValues(data);

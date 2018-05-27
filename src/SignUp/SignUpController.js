@@ -24,7 +24,13 @@ let fieldValues = {
     matchGender: null,
     matchAgeMin: null,
     matchAgeMax: null,
-    matchDistance: null,
+    distance: null,
+
+    availability: {
+        "MORNING": [false, false, false, false, false, false, false],
+        "AFTERNOON": [false, false, false, false, false, false, false],
+        "EVENING": [false, false, false, false, false, false, false]
+    },
 
     dates: {
         coffee: null,
@@ -44,6 +50,85 @@ let fieldValues = {
         nature: null,
         animals: null,
         tech: null
+    },
+
+    dietaryPref: {
+        "VEGETARIAN": false,
+        "GLUTEN-FREE": false,
+        "VEGAN": false,
+        "DAIRY-FREE": false,
+        "NO RED MEAT": false,
+        "KOSHER": false,
+        "PALEO": false,
+        "RAW": false
+    },
+    neighborhoods: {
+        "BALLARD": false,
+        "BELLTOWN": false,
+        "CAPITOL HILL": false,
+        "DOWNTOWN": false,
+        "INTERNATIONAL DISTRICT": false,
+        "FIRST HILL": false,
+        "FREMONT": false,
+        "GEORGETOWN": false,
+        "PIONEER SQUARE": false,
+        "QUEEN ANNE": false,
+        "SODO": false,
+        "SOUTH LAKE UNION": false,
+        "WALLINGFORD": false,
+        "WEST SEATTLE": false,
+        "UDISTRICT": false
+    },
+    foodTypeLIKE: {
+        "AMERICAN": false,
+        "FRENCH": false,
+        "CHINESE": false,
+        "DESSERT": false,
+        "GREEK": false,
+        "HALAL": false,
+        "INDIAN": false,
+        "ITALIAN": false,
+        "JAPANESE": false,
+        "KOREAN": false,
+        "MEDITERRANEAN": false,
+        "MEXICAN": false,
+        "PIZZA": false,
+        "THAI": false,
+        "MIDDLE EASTERN": false
+    },
+    foodTypeHATE: {
+        "AMERICAN": false,
+        "FRENCH": false,
+        "CHINESE": false,
+        "DESSERT": false,
+        "GREEK": false,
+        "HALAL": false,
+        "INDIAN": false,
+        "ITALIAN": false,
+        "JAPANESE": false,
+        "KOREAN": false,
+        "MEDITERRANEAN": false,
+        "MEXICAN": false,
+        "PIZZA": false,
+        "THAI": false,
+        "MIDDLE EASTERN": false
+    },
+    music: {
+        "POP": false,
+        "COUNTRY": false,
+        "EDM": false,
+        "R&B": false,
+        "LATIN": false,
+        "HIP HOP": false,
+        "ALTERNATIVE": false,
+        "CLASSICAL": false,
+        "INDIE": false,
+        "FOLK": false,
+        "JAZZ": false,
+        "ROCK": false,
+        "SOUL": false,
+        "PUNK": false,
+        "REGGAE": false
     }
 };
 
@@ -51,7 +136,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 4
+            step: 1
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -68,6 +153,7 @@ class SignUpInController extends Component {
         this.setState(prevState => {
             return { step: prevState.step + 1 };
         });
+        console.log("fieldValues", fieldValues)
     }
 
     previousStep() {
@@ -95,9 +181,17 @@ class SignUpInController extends Component {
             matchAgeMin: fieldValues.matchAgeMin,
             matchAgeMax: fieldValues.matchAgeMax,
             matchDistance: fieldValues.matchDistance,
+            availability: fieldValues.availability,
 
             dates: fieldValues.dates,
             topics: fieldValues.topics,
+
+            foodPref: fieldValues.foodPref,
+            neighborhoods: fieldValues.neighborhoods,
+            foodTypeLIKE: fieldValues.foodTypeLIKE,
+            foodTypeHATE: fieldValues.foodTypeHATE,
+            music: fieldValues.music,
+
             onBoarding: true
         });
         this.nextStep();
@@ -134,6 +228,7 @@ class SignUpInController extends Component {
             case 4:
                 return (
                     <SignUp4
+                        nextStep={this.nextStep}
                         submitRegistration={this.submitRegistration}
                         previousStep={this.previousStep}
                         saveValues={this.saveValues}

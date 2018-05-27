@@ -257,27 +257,36 @@ background-color: white;
   font-size: 20px;
 }
 
-#foodAllergies {
+#foodAllergies:not(div.boxes) {
   text-align:center;
+}
+
+.boxes {
+  margin-left: 360px;
 }
 
 #foodAllergies > label > input[type="checkbox"] {
   padding-left: 90%;
   position: relative;
 }
-
+#neighborhoodLike {
+  margin-top: 30px;
+}
 #neighborhoodLike, #foodLike, #foodHate, #musicLike{
-  margin-top: 50px;
   text-align: center;
 }
 .pref-checkbox {
   line-height: 2;
-}
-.pref-checkbox  > label {
   color:black;
   font-size: 1rem;
 }
-
+/* .pref-checkbox  > label {
+  color:black;
+  font-size: 1rem;
+} */
+.foodPref-label {
+  text-align: center;
+}
 #priceRange {
   width:90%;
   margin-left: auto;
@@ -301,3 +310,5 @@ background-color: white;
 }
 
 input[type="checkbox"] { display: none; }
+
+/* #foodAllergies > div:nth-child(2) */

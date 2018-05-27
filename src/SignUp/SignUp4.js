@@ -21,8 +21,8 @@ class SignUp4 extends React.Component {
             user: this.props.user,
             content: this.props.content,
             priceRange: [2, 3],
-            dietaryPref: { "VEGETARIAN": false, "GLUTEN-FREE": false, "VEGAN": false, "DAIRY-FREE": false, "NO RED MEAT": false, "KOSHER": false, "PALEO": false, "RAW": false },
-            neighborhoods: { "BALLARD": false, "BELLTOWN": false, "CAPITOL HILL": false, "DOWNTOWN": false, "INTERNATIONAL DISTRICT": false, "FIRST HILL": false, "FREMONT": false, "GEORGETOWN": false, "PIONEER SQUARE": false, "QUEEN ANNE": false, "SODO": false, "SOUTH LAKE UNION": false, "WALLINGFORD": false, "WEST SEATTLE": false, "UDISTRICT": false },
+            dietaryPref: this.props.fieldValues.dietaryPref,
+            neighborhoods: this.props.fieldValues.neighborhoods,
             foodTypeLIKE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
             foodTypeHATE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
             music: { "POP": false, "COUNTRY": false, "EDM": false, "R&B": false, "LATIN": false, "HIP HOP": false, "ALTERNATIVE": false, "CLASSICAL": false, "INDIE": false, "FOLK": false, "JAZZ": false, "ROCK": false, "SOUL": false, "PUNK": false, "REGGAE": false }
@@ -51,11 +51,15 @@ class SignUp4 extends React.Component {
     nextStep(e) {
         e.preventDefault();
         var data = {
-            matchGender: e.target.matchGender.value,
-            ageRange: this.state.ageRange,
-            distance: this.state.distance,
-            availability: this.state.availability
+            priceRange: this.state.priceRange,
+            dietaryPref: this.state.dietaryPref,
+            neighborhoods: this.state.neighborhoods,
+            foodTypeLIKE: this.state.foodTypeLIKE,
+            foodTypeHATE: this.state.foodTypeHATE,
+            music: this.state.music
         };
+
+
         this.props.saveValues(data);
         this.props.nextStep();
     }
@@ -113,16 +117,16 @@ class SignUp4 extends React.Component {
                     onClick={this.nextStep}
                 />
                 <div id="signup4" >
-                    <div id="foodAllergies">
+                    <div className="foodPref-label">
                         <label className="signup-label signup4-header" htmlFor="foodPreferencesAllergies">
                             FOOD PREFERENCES / ALLERGIES
-                    </label>
-
+                        </label>
+                    </div>
+                    <div id="foodAllergies">
                         {foodPref.map((item, index) => {
                             return (
-
-                                <div className="boxes">
-                                    <input type="checkbox" id={"box" + index}
+                                <div className="boxes" key={index}>
+                                    <input type="checkbox" id={"box" + index} className="pref-checkbox"
                                         onChange={() => {
                                             let foodTemp = this.state.dietaryPref;
                                             if (foodTemp[item]) {
@@ -133,7 +137,7 @@ class SignUp4 extends React.Component {
                                             this.setState({ dietaryPref: foodTemp })
 
                                         }} />
-                                    <label for={"box" + index}>{item}</label>
+                                    <label htmlFor={"box" + index}>{item}</label>
                                 </div>
                             );
                         })}
