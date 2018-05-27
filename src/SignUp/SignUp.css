@@ -130,7 +130,6 @@
 
 input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
   opacity: 100;
-  position: initial;
 }
 
 #availability-wrapper {
@@ -309,6 +308,6 @@ background-color: white;
   margin-right: 350px;
 }
 
-input[type="checkbox"] { display: none; }
+.boxes input[type="checkbox"] { display: none; }
 
 /* #foodAllergies > div:nth-child(2) */
