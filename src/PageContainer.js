@@ -67,6 +67,7 @@ class PageContainer extends React.Component {
                         <MessengerPage
                             user={this.state.user.displayName}
                             userEmail={this.state.user.email}
+                            token={this.props.token}
                         />
                     )}
                 </div>

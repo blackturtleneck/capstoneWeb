@@ -60,7 +60,9 @@ class DatesSelection extends React.Component {
                         </form>
                     </div>
                 ) : (
-                        <SideProf otherUser={this.props.otherUser} />
+                        <SideProf
+                            otherUser={this.props.otherUser}
+                            token={this.props.token} />
                     )}
             </div>
         );

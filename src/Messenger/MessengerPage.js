@@ -56,7 +56,8 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                <DatesSelection otherUser={this.state.otherUser} />
+                <DatesSelection otherUser={this.state.otherUser}
+                    token={this.props.token} />
             </div>
         );
     }

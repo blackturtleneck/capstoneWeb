@@ -35,8 +35,6 @@ class SideProf extends React.Component {
                         console.log('No such document!');
                     }
                 });
-
-
         }
     }
 

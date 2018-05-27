@@ -245,7 +245,7 @@ class SignUpInController extends Component {
             music: fieldValues.music,
 
             onBoarding: true
-        });
+        }, { merge: true });
         this.nextStep();
     }
 
