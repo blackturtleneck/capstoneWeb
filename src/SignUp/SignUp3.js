@@ -329,7 +329,7 @@ class SignUp3 extends React.Component {
         };
         console.log('data', data);
         this.props.saveValues(data);
-        this.props.submitRegistration();
+        this.props.nextStep();
     }
 }
 

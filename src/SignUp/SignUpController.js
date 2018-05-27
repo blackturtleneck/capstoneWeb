@@ -5,6 +5,7 @@ import './SignUp.css';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
 import SignUp3 from './SignUp3';
+import SignUp4 from './SignUp4';
 import SignUpComplete from './SignUpComplete';
 
 let fieldValues = {
@@ -25,6 +26,12 @@ let fieldValues = {
     matchAgeMax: null,
     matchDistance: null,
 
+    availability: {
+        "MORNING": [false, false, false, false, false, false, false],
+        "AFTERNOON": [false, false, false, false, false, false, false],
+        "EVENING": [false, false, false, false, false, false, false]
+    },
+
     dates: {
         coffee: null,
         dinner: null,
@@ -43,6 +50,85 @@ let fieldValues = {
         nature: null,
         animals: null,
         tech: null
+    },
+
+    dietaryPref: {
+        "VEGETARIAN": false,
+        "GLUTEN-FREE": false,
+        "VEGAN": false,
+        "DAIRY-FREE": false,
+        "NO RED MEAT": false,
+        "KOSHER": false,
+        "PALEO": false,
+        "RAW": false
+    },
+    neighborhoods: {
+        "BALLARD": false,
+        "BELLTOWN": false,
+        "CAPITOL HILL": false,
+        "DOWNTOWN": false,
+        "INTERNATIONAL DISTRICT": false,
+        "FIRST HILL": false,
+        "FREMONT": false,
+        "GEORGETOWN": false,
+        "PIONEER SQUARE": false,
+        "QUEEN ANNE": false,
+        "SODO": false,
+        "SOUTH LAKE UNION": false,
+        "WALLINGFORD": false,
+        "WEST SEATTLE": false,
+        "UDISTRICT": false
+    },
+    foodTypeLIKE: {
+        "AMERICAN": false,
+        "FRENCH": false,
+        "CHINESE": false,
+        "DESSERT": false,
+        "GREEK": false,
+        "HALAL": false,
+        "INDIAN": false,
+        "ITALIAN": false,
+        "JAPANESE": false,
+        "KOREAN": false,
+        "MEDITERRANEAN": false,
+        "MEXICAN": false,
+        "PIZZA": false,
+        "THAI": false,
+        "MIDDLE EASTERN": false
+    },
+    foodTypeHATE: {
+        "AMERICAN": false,
+        "FRENCH": false,
+        "CHINESE": false,
+        "DESSERT": false,
+        "GREEK": false,
+        "HALAL": false,
+        "INDIAN": false,
+        "ITALIAN": false,
+        "JAPANESE": false,
+        "KOREAN": false,
+        "MEDITERRANEAN": false,
+        "MEXICAN": false,
+        "PIZZA": false,
+        "THAI": false,
+        "MIDDLE EASTERN": false
+    },
+    music: {
+        "POP": false,
+        "COUNTRY": false,
+        "EDM": false,
+        "R&B": false,
+        "LATIN": false,
+        "HIP HOP": false,
+        "ALTERNATIVE": false,
+        "CLASSICAL": false,
+        "INDIE": false,
+        "FOLK": false,
+        "JAZZ": false,
+        "ROCK": false,
+        "SOUL": false,
+        "PUNK": false,
+        "REGGAE": false
     }
 };
 
@@ -60,7 +146,10 @@ class SignUpInController extends Component {
     saveValues(fields) {
         return (function () {
             fieldValues = Object.assign({}, fieldValues, fields);
+            console.log("fieldValues", fieldValues)
         })();
+
+
     }
 
     nextStep() {
@@ -76,7 +165,7 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
-        console.log('props', this.props);
+        console.log('props', this.props.user);
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
             name: fieldValues.name,
@@ -94,9 +183,17 @@ class SignUpInController extends Component {
             matchAgeMin: fieldValues.matchAgeMin,
             matchAgeMax: fieldValues.matchAgeMax,
             matchDistance: fieldValues.matchDistance,
+            availability: fieldValues.availability,
 
             dates: fieldValues.dates,
             topics: fieldValues.topics,
+
+            dietaryPref: fieldValues.dietaryPref,
+            neighborhoods: fieldValues.neighborhoods,
+            foodTypeLIKE: fieldValues.foodTypeLIKE,
+            foodTypeHATE: fieldValues.foodTypeHATE,
+            music: fieldValues.music,
+
             onBoarding: true
         });
         this.nextStep();
@@ -124,21 +221,30 @@ class SignUpInController extends Component {
             case 3:
                 return (
                     <SignUp3
-                        submitRegistration={this.submitRegistration}
                         previousStep={this.previousStep}
+                        nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
                     />
                 );
-
             case 4:
-                return <SignUpComplete nextStep={this.nextStep} />;
+                return (
+                    <SignUp4
+                        previousStep={this.previousStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                        submitRegistration={this.submitRegistration}
+
+                    />
+                );
             case 5:
+                return <SignUpComplete nextStep={this.nextStep} />;
+            case 6:
                 return <Redirect to={'/messenger'} />;
         }
     }
     render() {
-        let progress = this.state.step * 33.333;
+        let progress = this.state.step * 25;
         return (
             <div className="signup-wrapper">
                 <div

@@ -163,12 +163,16 @@ input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checke
   margin-left: 90px;
   display: inline-block;
 }
-.date-header {
+.date-header, .signup4-header {
   margin: 0 auto;
   text-align: center;
   padding: 30px;
   font-size: 20px;
+  color:black;
 }
+/* .signup4-header {
+  text-align: center;
+} */
 
 .date-row {
   display: block;
@@ -210,6 +214,15 @@ i {
   color: #9ba2ff;
 }
 
+.pref-button active {
+  background: #9ba2ff 
+}
+
+
+#signup4 > div > button:focus {
+background-color: white;
+}
+
 .progress-bar {
   margin-top: -5px;
   /* width: 25vw; */
@@ -242,3 +255,59 @@ i {
   text-align: center;
   font-size: 20px;
 }
+
+#foodAllergies:not(div.boxes) {
+  text-align:center;
+}
+
+.boxes {
+  margin-left: 360px;
+}
+
+#foodAllergies > label > input[type="checkbox"] {
+  padding-left: 90%;
+  position: relative;
+}
+#neighborhoodLike {
+  margin-top: 30px;
+}
+#neighborhoodLike, #foodLike, #foodHate, #musicLike{
+  text-align: center;
+}
+.pref-checkbox {
+  line-height: 2;
+  color:black;
+  font-size: 1rem;
+}
+/* .pref-checkbox  > label {
+  color:black;
+  font-size: 1rem;
+} */
+.foodPref-label {
+  text-align: center;
+}
+#priceRange {
+  width:90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.pref-button{
+  border: 1px solid #333333;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 10px;
+  width: 130px;
+  height: 50px;
+}
+
+
+#signup4{
+  margin-left: 350px;
+  margin-right: 350px;
+}
+
+.boxes input[type="checkbox"] { display: none; }
+
+/* #foodAllergies > div:nth-child(2) */
