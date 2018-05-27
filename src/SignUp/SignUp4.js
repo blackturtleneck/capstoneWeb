@@ -59,9 +59,9 @@ class SignUp4 extends React.Component {
             music: this.state.music
         };
 
-
         this.props.saveValues(data);
-        this.props.nextStep();
+        this.props.submitRegistration();
+
     }
 
     render() {
@@ -83,7 +83,6 @@ class SignUp4 extends React.Component {
         const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
         const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
         const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
-        console.log(this.state)
         {/*<Checkbox
                                     className="pref-checkbox"
                                     key={index}

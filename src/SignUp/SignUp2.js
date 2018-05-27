@@ -21,7 +21,7 @@ class SignUp2 extends React.Component {
             user: this.props.user,
             content: this.props.content,
             ageRange: [25, 30],
-            distance: 10,
+            matchDistance: 10,
             availability: {
                 "MORNING": [false, false, false, false, false, false, false],
                 "AFTERNOON": [false, false, false, false, false, false, false],
@@ -45,7 +45,7 @@ class SignUp2 extends React.Component {
 
     onSliderChange(value) {
         this.setState({
-            distance: value
+            matchDistance: value
         });
     }
 
@@ -55,6 +55,7 @@ class SignUp2 extends React.Component {
             matchGender: e.target.matchGender.value,
             matchAgeMin: this.state.ageRange[0],
             matchAgeMax: this.state.ageRange[1],
+            matchDistance: this.state.matchDistance,
             availability: this.state.availability
         };
         this.props.saveValues(data);
@@ -104,9 +105,9 @@ class SignUp2 extends React.Component {
                         required
                         className="custom-select margin"
                         name="matchGender"
-                        value={this.props.fieldValues.matchGender}
+                        defaultValue={this.props.fieldValues.matchGender}
                     >
-                        <option selected value="select">select</option>
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                         <option value="both">BOTH</option>
@@ -148,7 +149,7 @@ class SignUp2 extends React.Component {
                         <Slider
                             min={0}
                             max={50}
-                            defaultValue={this.state.distance}
+                            defaultValue={this.state.matchDistance}
                             handle={handle}
                             trackStyle={[{ backgroundColor: '#828282' }]}
                             handleStyle={[

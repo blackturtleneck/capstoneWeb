@@ -24,7 +24,7 @@ let fieldValues = {
     matchGender: null,
     matchAgeMin: null,
     matchAgeMax: null,
-    distance: null,
+    matchDistance: null,
 
     availability: {
         "MORNING": [false, false, false, false, false, false, false],
@@ -136,7 +136,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: 3
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -146,14 +146,16 @@ class SignUpInController extends Component {
     saveValues(fields) {
         return (function () {
             fieldValues = Object.assign({}, fieldValues, fields);
+            console.log("fieldValues", fieldValues)
         })();
+
+
     }
 
     nextStep() {
         this.setState(prevState => {
             return { step: prevState.step + 1 };
         });
-        console.log("fieldValues", fieldValues)
     }
 
     previousStep() {
@@ -163,7 +165,7 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
-        console.log('props', this.props);
+        console.log('props', this.props.user);
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
             name: fieldValues.name,
@@ -219,8 +221,8 @@ class SignUpInController extends Component {
             case 3:
                 return (
                     <SignUp3
-                        submitRegistration={this.submitRegistration}
                         previousStep={this.previousStep}
+                        nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
                     />
@@ -228,11 +230,11 @@ class SignUpInController extends Component {
             case 4:
                 return (
                     <SignUp4
-                        nextStep={this.nextStep}
-                        submitRegistration={this.submitRegistration}
                         previousStep={this.previousStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
+                        submitRegistration={this.submitRegistration}
+
                     />
                 );
             case 5:
