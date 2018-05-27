@@ -2,10 +2,19 @@
 
 * {
   font-family: "Lato", sans-serif;
+  margin-top: 0px;
 }
 .signup-header-welcome {
   font-size: 24px;
   text-align: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.signup-header-welcome-profile {
+  font-size: 24px;
+  text-align: center;
+  
 }
 
 .signup-header-amp {
@@ -23,6 +32,7 @@
 
 .signup-page {
   margin: 30px;
+  margin-top: 0px;
 }
 .form {
   width: 50vw;
@@ -52,23 +62,41 @@
 
 .next {
   float: right;
-  margin-top: -70px;
-  margin-right: -90px;
   width: 40px;
+  position: absolute;
+  margin-left: 61%;
+  margin-top: -5vh;
+  /* messing up signup3 arrow */
 }
 
-.back {
-  width: 30px;
-  margin-top: -195px;
-  margin-left: 10px;
+.next-1 {
+  margin-left: 62%;
+  margin-top: -190px;
 }
+
+.next-2 {
+  margin-top: -2.7vh;
+}
+
+.next-3 {
+  margin-left: 83%;
+  margin-top: 6.7vh;
+}
+.back {
+  width: 40px;
+  position: absolute;
+  margin-left: 30px;
+  padding-top: 6vh;
+}
+
+.back-2 {
+  padding-top: 0px;
+  margin-top: -2.7vh;
+}
+
 
 .progress-bar {
   background-color: #9ba2ff;
-}
-
-.next-step {
-  display: hidden;
 }
 
 .inline-form {
@@ -79,19 +107,25 @@
   margin-right: 0px;
 }
 
-.tagline-2 {
+.tagline-1 {
   display: block;
-  margin-top: 50px;
+  padding-top: 50px;
   font-size: 20px;
   text-align: center;
 }
 
-.back-2 {
-  margin-top: -10px;
+.tagline-2 {
+  display: block;
+  padding-top: 50px;
+  font-size: 24px;
+  text-align: center;
 }
-.next-2 {
-  margin-top: 10px;
+.tagline-3 {
+  display: block;
+  font-size: 24px;
+  text-align: center;
 }
+
 .back:hover {
   cursor: pointer;
 }
@@ -107,3 +141,185 @@
 .margin {
   margin-bottom: 30px;
 }
+
+input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  opacity: 100;
+}
+
+#availability-wrapper {
+  margin-top: 40px;
+  align-content: center;
+}
+
+.avail-checkbox {
+  display: inline;
+  margin: 31px;
+}
+
+.weekday-label{
+  margin: 20px;
+}
+
+.weekday-time {
+  display: block;
+  line-height: 1.6;
+}
+
+.avail-left, .avail-right {
+  display: inline-block
+}
+
+.avail-left {
+  text-align: right;
+}
+
+.gen-availability {
+  margin-left: 90px;
+  display: inline-block;
+}
+.date-header, .signup4-header {
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+  color:black;
+  font-weight: 700;
+}
+
+.date-row {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  width: 50vw;
+}
+.date-type {
+  display: inline-block;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.tagline-3 {
+  display: block;
+  padding-top: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.date-icon {
+  padding: 0px;
+  font-size: 50px;
+  text-align: center;
+}
+
+i {
+  padding-bottom: 10px !important;
+}
+
+.date-type:hover {
+  cursor: pointer;
+}
+
+.active {
+  color: #9ba2ff;
+}
+
+.pref-button active {
+  background: #9ba2ff 
+}
+
+
+#signup4 > div > button:focus {
+background-color: white;
+}
+
+.progress-bar {
+  margin-top: -5px;
+  /* width: 25vw; */
+  height: 20px;
+  padding-bottom: 10px;
+  background-color: #9ba2ff;
+  position: absolute;
+  overflow: hidden;
+  border: none;
+}
+
+.complete {
+  text-align: center;
+  padding-top: 100px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+}
+.complete-button {
+  margin: 0 auto;
+  text-align: center;
+}
+.button {
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 10px 20px;
+}
+.start-matching {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+}
+
+#foodAllergies:not(div.boxes) {
+  text-align:center;
+}
+
+.boxes {
+  margin-left: 360px;
+}
+
+#foodAllergies > label > input[type="checkbox"] {
+  padding-left: 90%;
+  position: relative;
+}
+#neighborhoodLike {
+  margin-top: 30px;
+}
+#neighborhoodLike, #foodLike, #foodHate, #musicLike{
+  text-align: center;
+}
+.pref-checkbox {
+  line-height: 2;
+  color:black;
+  font-size: 1rem;
+}
+/* .pref-checkbox  > label {
+  color:black;
+  font-size: 1rem;
+} */
+.foodPref-label {
+  text-align: center;
+}
+#priceRange {
+  width:90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.pref-button{
+  border: 1px solid #333333;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 10px;
+  width: 130px;
+  height: 50px;
+}
+
+
+#signup4{
+  margin-left: 350px;
+  margin-right: 350px;
+}
+
+.boxes input[type="checkbox"] { display: none; }
+
+/* #foodAllergies > div:nth-child(2) */

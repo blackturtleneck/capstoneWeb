@@ -4,27 +4,19 @@ import Dates from './Dates';
 import "./DatesSelection.css";
 
 export class MapContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props.data['0'].restaurant.name)
-    this.state = {
-      latitude1: this.props.data['0'].restaurant.location.latitude,
-      longitude1: this.props.data['0'].restaurant.location.longitude,
-      name1: this.props.data['0'].restaurant.name,
-      lat: props.lat, lon: props.lon,
-      data: props.data,
+    constructor(props) {
+        super(props);
+        this.state = {
+            latitude1: this.props.data['0'].restaurant.location.latitude,
+            longitude1: this.props.data['0'].restaurant.location.longitude,
+            name1: this.props.data['0'].restaurant.name
+        };
     }
   }
 
-  handleChange(event) {
-    this.setState({ data: this.props.locations });
-    console.log(this.data)
-  }
-
-  render() {
-    console.log("MAP TEST", this.state.data)
-    const { props, state } = this,
-      { googleMapsApi, mapStyles, ...otherProps } = props;
+    handleChange(event) {
+        this.setState({ data: this.props.locations });
+    }
 
     var myComponent;
 

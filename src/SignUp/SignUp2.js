@@ -6,6 +6,7 @@ import back from '../img/back.svg';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
+import Checkbox from 'muicss/lib/react/checkbox';
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
@@ -18,8 +19,9 @@ class SignUp2 extends React.Component {
             authenticated: true,
             user: this.props.user,
             content: this.props.content,
-            ageRange: [25, 30],
-            distance: 10
+            ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
+            matchDistance: this.props.fieldValues.matchDistance,
+            availability: this.props.fieldValues.availability
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -38,8 +40,21 @@ class SignUp2 extends React.Component {
 
     onSliderChange(value) {
         this.setState({
-            distance: value
+            matchDistance: value
         });
+    }
+
+    nextStep(e) {
+        e.preventDefault();
+        var data = {
+            matchGender: e.target.matchGender.value,
+            matchAgeMin: this.state.ageRange[0],
+            matchAgeMax: this.state.ageRange[1],
+            matchDistance: this.state.matchDistance,
+            availability: this.state.availability
+        };
+        this.props.saveValues(data);
+        this.props.nextStep();
     }
 
     render() {
@@ -58,8 +73,11 @@ class SignUp2 extends React.Component {
             );
         };
 
+
+        const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+        const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
         return (
-            <div class="signup-page">
+            <div className="signup-page">
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
                 <img
                     src={back}
@@ -76,21 +94,22 @@ class SignUp2 extends React.Component {
                             alt="next"
                         />
                     </div>
-                    <label className="signup-label" for="matchGender">
+                    <label className="signup-label" htmlFor="matchGender">
                         I'M LOOKING FOR...
                     </label>
                     <select
                         required
                         className="custom-select margin"
                         name="matchGender"
-                        value={this.props.fieldValues.matchGender}
+                        defaultValue={this.props.fieldValues.matchGender}
                     >
-                        <option selected />
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
+                        <option value="both">BOTH</option>
                     </select>
 
-                    <label className="signup-label" for="match-age">
+                    <label className="signup-label" htmlFor="match-age">
                         AGE
                     </label>
                     <div id="ageRange">
@@ -118,7 +137,7 @@ class SignUp2 extends React.Component {
                     </div>
                     <label
                         className="signup-label distance-wrapper"
-                        for="distance"
+                        htmlFor="distance"
                     >
                         DISTANCE
                     </label>
@@ -126,7 +145,7 @@ class SignUp2 extends React.Component {
                         <Slider
                             min={0}
                             max={50}
-                            defaultValue={this.state.distance}
+                            defaultValue={this.state.matchDistance}
                             handle={handle}
                             trackStyle={[{ backgroundColor: '#828282' }]}
                             handleStyle={[
@@ -138,22 +157,108 @@ class SignUp2 extends React.Component {
                             onChange={this.onSliderChange}
                         />
                     </div>
+                    <div id="availability-wrapper">
+                        <div className="tagline-2">I'M GENERALLY AVAILABLE...</div>
+                        <br />
+                        <div className="gen-availability">
+                            <div className="avail-left">
+                                <br />
+                                {weekdayRows.map((time, index) => {
+                                    return (
+                                        <span className="weekday-time" key={index}>{time}</span>
+                                    );
+                                })}
+                            </div>
+                            <div className="avail-right">
+                                {weekdays.map((day, index) => {
+                                    return (
+                                        <span className="weekday-label" key={index}>{day}</span>
+                                    );
+                                })}
+                                <div className="morning">
+
+                                    {this.state.availability.MORNING.map((day, index) => {
+                                        return (
+                                            <Checkbox
+                                                className="avail-checkbox"
+                                                time="morning"
+                                                key={index}
+                                                label="e"
+                                                checked={this.state.availability.MORNING[index]}
+                                                onChange={() => {
+                                                    let tempMorn = this.state.availability.MORNING;
+                                                    tempMorn[index] = !tempMorn[index];
+                                                    let nextState = {
+                                                        "MORNING": tempMorn,
+                                                        "AFTERNOON": this.state.availability.AFTERNOON,
+                                                        "EVENING": this.state.availability.EVENING
+                                                    }
+                                                    this.setState({ availability: nextState })
+                                                }}
+                                            />
+                                        );
+                                    })}
+
+                                </div>
+
+                                <div className="afternoon">
+                                    {this.state.availability.AFTERNOON.map((day, index) => {
+                                        return (
+                                            <Checkbox
+                                                className="avail-checkbox"
+                                                time="afternoon"
+                                                key={index}
+                                                label="e"
+                                                checked={this.state.availability.AFTERNOON[index]}
+                                                onChange={() => {
+                                                    let tempAft = this.state.availability.AFTERNOON;
+                                                    tempAft[index] = !tempAft[index];
+                                                    let nextState = {
+                                                        "MORNING": this.state.availability.MORNING,
+                                                        "AFTERNOON": tempAft,
+                                                        "EVENING": this.state.availability.EVENING
+                                                    }
+                                                    this.setState({ availability: nextState })
+                                                }}
+                                            />
+
+                                        );
+                                    })}
+                                </div>
+                                <div className="evening">
+                                    {this.state.availability.EVENING.map((day, index) => {
+                                        return (
+                                            <Checkbox
+                                                className="avail-checkbox"
+                                                time="evening"
+                                                key={index}
+                                                label="e"
+                                                checked={this.state.availability.EVENING[index]}
+                                                onChange={() => {
+                                                    let tempEve = this.state.availability.EVENING;
+                                                    tempEve[index] = !tempEve[index];
+                                                    let nextState = {
+                                                        "MORNING": this.state.availability.MORNING,
+                                                        "AFTERNOON": this.state.availability.AFTERNOON,
+                                                        "EVENING": tempEve
+                                                    }
+                                                    this.setState({ availability: nextState })
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         );
     }
-
-    nextStep(e) {
-        e.preventDefault();
-        var data = {
-            matchGender: e.target.matchGender.value,
-            ageRange: this.state.ageRange,
-            distance: this.state.distance
-        };
-        console.log('data', data);
-        this.props.saveValues(data);
-        this.props.nextStep();
-    }
 }
 
+
+
 export default SignUp2;
+
+// try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile

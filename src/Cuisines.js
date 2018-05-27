@@ -45,10 +45,8 @@ class Cuisines extends Component {
         formSubmitEvent.preventDefault();
 
         for (const checkbox of this.selectedCheckboxes) {
-            console.log(checkbox, 'is selected.');
             this.selections.push(checkbox);
         }
-        console.log(this.selections);
     }
 
     createCheckbox(label) {

@@ -19,15 +19,46 @@ class SignUp1 extends React.Component {
         auth.signOut();
     }
 
+    nextStep(e) {
+        e.preventDefault();
+        var data = {
+            name: e.target.name.value,
+            gender: e.target.gender.value,
+            occupation: e.target.occupation.value,
+            education: e.target.education.value,
+            religion: e.target.religion.value,
+            location: e.target.location.value,
+            birthday: {
+                month: e.target.month.value,
+                day: e.target.day.value,
+                year: e.target.year.value
+            }
+        };
+
+        this.props.saveValues(data);
+        this.props.nextStep();
+    }
     render() {
-        return (
-            <div class="signup-page">
-                <div className="signup-header">
+        const header = this.props.existingUser ?
+            (
+                <div>
+                    <div className="signup-header-welcome"> EDIT YOUR </div>
+                    <div className="signup-header-amp">A M P R</div>
+                    <div className="signup-header-welcome-profile">PROFILE</div>
+                </div>
+            ) : (
+                <div>
                     <div className="signup-header-welcome"> WELCOME TO </div>
                     <div className="signup-header-amp">A M P R</div>
-                    <div className="tagline">TELL US ABOUT YOURSELF</div>
                 </div>
+            )
 
+        return (
+            <div className="signup-page">
+                <div className="signup-header">
+                    {header}
+                    <div className="tagline-1">TELL US ABOUT YOURSELF</div>
+                </div>
                 <form className="form" onSubmit={this.nextStep}>
                     <div className="next-step next">
                         <input
@@ -37,7 +68,7 @@ class SignUp1 extends React.Component {
                             alt="next"
                         />
                     </div>
-                    <label className="signup-label" for="name">
+                    <label className="signup-label" htmlFor="name">
                         NAME
                     </label>
                     <input
@@ -47,7 +78,7 @@ class SignUp1 extends React.Component {
                         className="form-input"
                         required
                     />
-                    <label className="signup-label" for="gender">
+                    <label className="signup-label" htmlFor="gender">
                         GENDER
                     </label>
                     <select
@@ -56,21 +87,21 @@ class SignUp1 extends React.Component {
                         className="form-input custom-select"
                         required
                     >
-                        <option selected />
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                     </select>
-                    <label className="signup-label" for="birthday">
+                    <label className="signup-label" htmlFor="birthday">
                         BIRTHDAY
                     </label>
                     <div className="birthday-wrapper" name="birthday">
                         <select
-                            defaultValue={this.props.fieldValues.month}
+                            defaultValue={this.props.fieldValues.birthday.month}
                             name="month"
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected />
+                            <option value="select">select</option>
                             <option value="january">JANUARY</option>
                             <option value="february">FEBRUARY</option>
                             <option value="march">MARCH</option>
@@ -85,12 +116,12 @@ class SignUp1 extends React.Component {
                             <option value="december">DECEMBER</option>
                         </select>
                         <select
-                            defaultValue={this.props.fieldValues.day}
+                            defaultValue={this.props.fieldValues.birthday.day}
                             name="day"
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected />
+                            <option value="select">select</option>
                             <option value="1">01</option>
                             <option value="2">02</option>
                             <option value="3">03</option>
@@ -127,9 +158,9 @@ class SignUp1 extends React.Component {
                             required
                             name="year"
                             className="inline-form custom-select form-input year"
-                            defaultValue={this.props.fieldValues.year}
+                            defaultValue={this.props.fieldValues.birthday.year}
                         >
-                            <option selected />
+                            <option value="select">select</option>
                             <option value="1963">1963</option>
                             <option value="1964">1964</option>
                             <option value="1965">1965</option>
@@ -170,7 +201,7 @@ class SignUp1 extends React.Component {
                             <option value="2000">2000</option>
                         </select>
                     </div>
-                    <label className="signup-label" for="education">
+                    <label className="signup-label" htmlFor="education">
                         EDUCATION
                     </label>
                     <input
@@ -179,7 +210,7 @@ class SignUp1 extends React.Component {
                         type="text"
                         className="form-input"
                     />
-                    <label className="signup-label" for="religion">
+                    <label className="signup-label" htmlFor="religion">
                         RELIGION
                     </label>
                     <input
@@ -188,7 +219,7 @@ class SignUp1 extends React.Component {
                         type="text"
                         className="form-input"
                     />
-                    <label className="signup-label" for="occupation">
+                    <label className="signup-label" htmlFor="occupation">
                         OCCUPATION
                     </label>
                     <input
@@ -197,7 +228,7 @@ class SignUp1 extends React.Component {
                         type="text"
                         className="form-input"
                     />
-                    <label className="signup-label" for="location">
+                    <label className="signup-label" htmlFor="location">
                         LOCATION
                     </label>
                     <input
@@ -211,25 +242,6 @@ class SignUp1 extends React.Component {
         );
     }
 
-    nextStep(e) {
-        e.preventDefault();
-        var data = {
-            name: e.target.name.value,
-            gender: e.target.gender.value,
-            occupation: e.target.occupation.value,
-            education: e.target.education.value,
-            religion: e.target.religion.value,
-            location: e.target.location.value,
-            birthday: {
-                month: e.target.month.value,
-                day: e.target.day.value,
-                year: e.target.year.value
-            }
-        };
-
-        this.props.saveValues(data);
-        this.props.nextStep();
-    }
 }
 
 export default SignUp1;

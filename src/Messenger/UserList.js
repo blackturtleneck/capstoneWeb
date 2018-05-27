@@ -22,6 +22,7 @@ class UserList extends React.Component {
                             user={this.props.user}
                             name={item.name}
                             email={item.email}
+                            key={index}
                         />
                     );
                 })}

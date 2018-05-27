@@ -1,5 +1,5 @@
 import React from 'react';
-import { db } from './FirestoreConfig';
+import { db } from '../FirestoreConfig';
 import './Messaging.css';
 import RequestDate from './RequestDate';
 import ReceiveRequest from './ReceiveRequest';
@@ -86,9 +86,9 @@ class Messenger extends React.Component {
                 .collection('messages')
                 .doc(newProps.otherUser)
                 .collection('messages')
-                .onSnapshot(function(querySnapshot) {
+                .onSnapshot(function (querySnapshot) {
                     var curMessages = [];
-                    querySnapshot.forEach(function(doc) {
+                    querySnapshot.forEach(function (doc) {
                         curMessages.push(doc.data());
                     });
                     currentComponent.setState({ messages: curMessages });
@@ -344,7 +344,7 @@ class Messenger extends React.Component {
         return (
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
-                this.state.otherUser !== null ? (
+                    this.state.otherUser !== null ? (
                         <div className="messenger">
                             <h2>{this.state.otherUserName}</h2>
                             <ol className="messages" id="message-list">
@@ -379,7 +379,7 @@ class Messenger extends React.Component {
                                     className="submit-button"
                                     onClick={this.submitMessage}
                                 >
-                                Send
+                                    Send
                                 </button>
 
                             </div>
@@ -388,7 +388,7 @@ class Messenger extends React.Component {
                     ) : (
                         <div className="messenger">
                             <p className="select">
-                            Select a match to start messaging!
+                                Select a match to start messaging!
                             </p>
                         </div>
                     )

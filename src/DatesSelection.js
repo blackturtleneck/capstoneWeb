@@ -6,6 +6,7 @@ import MultiSelectField from './MultiSelectField'
 import Dates from './Dates'
 import "./DatesSelection.css"
 import AvailableTimes from 'react-available-times';
+import SideProf from './SignUp/Profile/sideProf';
 
 class DatesSelection extends React.Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class DatesSelection extends React.Component {
         console.log(this.state.lon);    
         return (
             <div className="right-side">
+<<<<<<< HEAD
          
             <div>
         <button className = "request" onClick={this.toggleHidden.bind(this)} >
@@ -81,6 +83,62 @@ class DatesSelection extends React.Component {
             <div id="test">
                 <Dates ref="child" lat = {this.state.lat} lon = {this.state.lon}/>
                 </div>
+=======
+                {!this.props.otherUser ? (
+                    <div>
+                        <AvailableTimes
+                            classname="scheduler"
+                            weekStartsOn="monday"
+                            calendars={[
+                                {
+                                    id: 'me',
+                                    title: 'My Schedule',
+                                    foregroundColor: '#cd0ff',
+                                    backgroundColor: '#f0f0f0',
+                                    selected: true
+                                },
+                                {
+                                    id: 'date',
+                                    title: 'My dates cal',
+                                    foregroundColor: '#666',
+                                    backgroundColor: '#f3f3f3'
+                                }
+                            ]}
+                            onChange={selections => {
+                                selections.forEach(({ start, end }) => {
+                                    console.log('Start:', start, 'End:', end);
+                                });
+                            }}
+                            onEventsRequested={({
+                                calendarId,
+                                start,
+                                end,
+                                callback
+                            }) => { }}
+                            height={600}
+                            recurring={false}
+                            availableDays={[
+                                'monday',
+                                'tuesday',
+                                'wednesday',
+                                'thursday',
+                                'friday'
+                            ]}
+                            availableHourRange={{ start: 9, end: 19 }}
+                        />
+                        <MultiSelectField />
+                        <form>
+                            <label>
+                                Name:
+                        <input type="text" name="name" />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                ) : (
+                        <SideProf otherUser={this.props.otherUser} />
+                    )}
+>>>>>>> 0b82c18795dcf8b4afed44ae8de4c3af07c16ea5
             </div>
         );
     }
