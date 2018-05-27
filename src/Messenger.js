@@ -69,7 +69,7 @@ class Messenger extends React.Component {
     }
 
     componentWillMount() {
-
+        this.testTimeStamp();
     }
 
     componentWillReceiveProps(newProps) {
@@ -217,13 +217,81 @@ class Messenger extends React.Component {
     }
 
     update(timestamp){
+        console.log("update", timestamp)
         this.setState({
             dateRequestTimeStamp: timestamp
         })
     }
 
     testTimeStamp(){
-        console.log(this.state.dates)
+        console.log(this.state.dates[this.state.dates.length-1])
+        const data = this.state.dates[this.state.dates.length-1];
+        for (var key in data) {
+            if (key == 'id'){
+                var fullTimeStamp = data[key]
+
+                    let month = fullTimeStamp.getMonth();
+                    let formattedMonth = '';
+                    if (month < 10) {
+                        formattedMonth = '0' + (month + 1);
+                    } else {
+                        formattedMonth = month + 1 + '';
+                    }
+
+                    let day = fullTimeStamp.getDate();
+                    let formattedDay = '';
+                    if (day < 10) {
+                        formattedDay = '0' + day;
+                    } else {
+                        formattedDay = day + '';
+                    }
+
+                    let hours = fullTimeStamp.getHours();
+                    let formattedHours = '';
+                    if (hours < 10) {
+                        formattedHours = '0' + hours;
+                    } else {
+                        formattedHours = hours + '';
+                    }
+
+                    let minutes = fullTimeStamp.getMinutes();
+                    let formattedMinutes = '';
+                    if (minutes < 10) {
+                        formattedMinutes = '0' + minutes;
+                    } else {
+                        formattedMinutes = minutes + '';
+                    }
+
+                    let seconds = fullTimeStamp.getSeconds();
+                    let formattedSeconds = '';
+                    if (seconds < 10) {
+                        formattedSeconds = '0' + seconds;
+                    } else {
+                        formattedSeconds = seconds + '';
+                    }
+
+
+                    const timeStampDate =
+                    fullTimeStamp.getFullYear() +
+                    ':' +
+                    formattedMonth +
+                    ':' +
+                    formattedDay +
+                    ':' +
+                    formattedHours +
+                    ':' +
+                    formattedMinutes +
+                    ':' +
+                    formattedSeconds +
+                    ':' +
+                    fullTimeStamp.getMilliseconds();
+
+             this.setState({
+                dateRequestTimeStamp : timeStampDate
+             })
+             console.log(data[key]);
+            }
+        }
         if(this.state.dates.length != 0) {
             this.setState({
                 dateExists : true

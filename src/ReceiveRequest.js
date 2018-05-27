@@ -16,13 +16,16 @@ class ReceiveRequest extends Component {
             ready : false,
             userReceiving : false,
             finalDateArray: [],
-            finalLocation: ''
+            finalLocation: '',
+            dateConfirmed : false,
+            timeStampFinal : null
         };
         this.test = this.test.bind(this);
         this.confirmDate = this.confirmDate.bind(this);
         this.otherUserConfirm = this.otherUserConfirm.bind(this);
         this.respond = this.respond.bind(this);
         this.otherUserRespond = this.otherUserRespond.bind(this);
+        this.timeConfirm = this.timeConfirm.bind(this);
     } 
 
    componentWillMount(){
@@ -48,6 +51,16 @@ class ReceiveRequest extends Component {
             .catch(function(error) {
                 console.log("Error getting documents: ", error);
             });
+
+        const data=this.state.dateDetails[this.state.dateDetails.length-1];
+            console.log(typeof data)
+            for (var key in data) {
+               if (key == 'id'){
+                   this.setState({
+                    timeStampFinal : data[key]
+                   });             
+               }
+            }
 
     }
 
@@ -82,11 +95,22 @@ class ReceiveRequest extends Component {
                 });
         }
         this.componentDidMount();
+
+        const data=this.state.dateDetails[this.state.dateDetails.length-1];
+        console.log(typeof data)
+        for (var key in data) {
+           if (key == 'id'){
+               this.setState({
+                timeStampFinal : data[key]
+               });             
+           }
+        }
+
     }
 
 
     componentDidMount(){
-        console.log(this.props.otherUser)
+        console.log(this.props.timeStamp, "time props")
         let currentComponent = this;
         var currDates = [];
         db
@@ -112,6 +136,20 @@ class ReceiveRequest extends Component {
                 console.log("Error getting documents: ", error);
             });
 
+            const data=this.state.dateDetails[this.state.dateDetails.length-1];
+            console.log(typeof data)
+            for (var key in data) {
+               if (key == 'id'){
+                   this.setState({
+                    timeStampFinal : data[key]
+                   });             
+               }
+            }
+
+    }
+
+    timeConfirm(){
+        
     }
 
     test() {
@@ -127,7 +165,7 @@ class ReceiveRequest extends Component {
         .doc(this.props.userEmail)
         .collection('messages')
         .doc(this.props.otherUser)
-        .collection('dates').doc(this.props.timeStamp)
+        .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
             confirm: true
@@ -139,16 +177,19 @@ class ReceiveRequest extends Component {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
+        this.setState({
+            dateConfirmed : true
+        })
     }
 
     otherUserConfirm(){
+        console.log(this.state.timeStampFinal)
         var dateInfo = db
         .collection('users')
         .doc(this.props.otherUser)
         .collection('messages')
         .doc(this.props.userEmail)
-        .collection('dates').doc(this.props.timeStamp)
-
+        .collection('dates').doc(String(this.props.timeStamp))
         return dateInfo.update({
             confirm: true
         })
@@ -169,7 +210,7 @@ class ReceiveRequest extends Component {
         .doc(this.props.userEmail)
         .collection('messages')
         .doc(this.props.otherUser)
-        .collection('dates').doc(this.props.timeStamp)
+        .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
             confirm: false,
@@ -190,7 +231,7 @@ class ReceiveRequest extends Component {
         .doc(this.props.otherUser)
         .collection('messages')
         .doc(this.props.userEmail)
-        .collection('dates').doc(this.props.timeStamp)
+        .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
             confirm: false,
@@ -527,8 +568,8 @@ class ReceiveRequest extends Component {
         <div>
            {this.state.ready  ?
                 <div id = "datebackground">
-                    {this.state.userReceiving == false && this.state.dateDetails != null ?        
-                    <div>  
+                    {this.state.userReceiving == false && this.state.dateDetails != null ?           
+                    <div>                       
                         <h3 id = "halfwayText">
                             Hey, want to go to {locationArr+ " "}
                             this week? </h3> 
@@ -538,21 +579,22 @@ class ReceiveRequest extends Component {
                             
                             Let me know if any of these times work for you! 
                             {finalDateButton.map(time => 
-                            <Button id = "times"> {time} </Button>)} 
+                            <Button id = {time} onclick = {this.timeConfirm}> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
                         <Button id = "confirm" onClick = {this.respond}> Another Time?</Button>
                       </div>
-                            
+                    
+              
                             :
                             <div>  <h3 id = "halfwayText">
                             Hey, want to go to 
-                            {this.state.finalLocation} this week? </h3> 
+                            {" " + locationArr+ " "} this week? </h3> 
                             <p>
                             It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. Let me know which of these times work best for you!
                             {finalDateButton.map(time => 
-                            <Button id = "times"> {time} </Button>)} 
+                            <Button id = {time}> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Waiting for {this.props.otherUserName} to respond </Button>
