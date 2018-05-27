@@ -8,7 +8,6 @@ import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 import Checkbox from 'muicss/lib/react/checkbox';
 
-
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
 
@@ -20,13 +19,9 @@ class SignUp2 extends React.Component {
             authenticated: true,
             user: this.props.user,
             content: this.props.content,
-            ageRange: [25, 30],
-            matchDistance: 10,
-            availability: {
-                "MORNING": [false, false, false, false, false, false, false],
-                "AFTERNOON": [false, false, false, false, false, false, false],
-                "EVENING": [false, false, false, false, false, false, false]
-            }
+            ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
+            matchDistance: this.props.fieldValues.matchDistance,
+            availability: this.props.fieldValues.availability
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -77,6 +72,7 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
+
 
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
@@ -188,6 +184,7 @@ class SignUp2 extends React.Component {
                                                 time="morning"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.MORNING[index]}
                                                 onChange={() => {
                                                     let tempMorn = this.state.availability.MORNING;
                                                     tempMorn[index] = !tempMorn[index];
@@ -197,7 +194,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": this.state.availability.EVENING
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
                                         );
@@ -213,6 +209,7 @@ class SignUp2 extends React.Component {
                                                 time="afternoon"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.AFTERNOON[index]}
                                                 onChange={() => {
                                                     let tempAft = this.state.availability.AFTERNOON;
                                                     tempAft[index] = !tempAft[index];
@@ -222,7 +219,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": this.state.availability.EVENING
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
 
@@ -237,6 +233,7 @@ class SignUp2 extends React.Component {
                                                 time="evening"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.EVENING[index]}
                                                 onChange={() => {
                                                     let tempEve = this.state.availability.EVENING;
                                                     tempEve[index] = !tempEve[index];
@@ -246,7 +243,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": tempEve
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
                                         );

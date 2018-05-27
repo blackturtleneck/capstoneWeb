@@ -38,14 +38,26 @@ class SignUp1 extends React.Component {
         this.props.saveValues(data);
         this.props.nextStep();
     }
-
     render() {
+        const header = this.props.existingUser ?
+            (
+                <div>
+                    <div className="signup-header-welcome"> EDIT YOUR </div>
+                    <div className="signup-header-amp">A M P R</div>
+                    <div className="signup-header-welcome-profile">PROFILE</div>
+                </div>
+            ) : (
+                <div>
+                    <div className="signup-header-welcome"> WELCOME TO </div>
+                    <div className="signup-header-amp">A M P R</div>
+                </div>
+            )
+
         return (
             <div className="signup-page">
                 <div className="signup-header">
-                    <div className="signup-header-welcome"> WELCOME TO </div>
-                    <div className="signup-header-amp">A M P R</div>
-                    <div className="tagline">TELL US ABOUT YOURSELF</div>
+                    {header}
+                    <div className="tagline-1">TELL US ABOUT YOURSELF</div>
                 </div>
                 <form className="form" onSubmit={this.nextStep}>
                     <div className="next-step next">
@@ -75,7 +87,7 @@ class SignUp1 extends React.Component {
                         className="form-input custom-select"
                         required
                     >
-                        <option selected value="select">select</option>
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                     </select>
@@ -89,7 +101,7 @@ class SignUp1 extends React.Component {
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="january">JANUARY</option>
                             <option value="february">FEBRUARY</option>
                             <option value="march">MARCH</option>
@@ -109,7 +121,7 @@ class SignUp1 extends React.Component {
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="1">01</option>
                             <option value="2">02</option>
                             <option value="3">03</option>
@@ -148,7 +160,7 @@ class SignUp1 extends React.Component {
                             className="inline-form custom-select form-input year"
                             defaultValue={this.props.fieldValues.birthday.year}
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="1963">1963</option>
                             <option value="1964">1964</option>
                             <option value="1965">1965</option>

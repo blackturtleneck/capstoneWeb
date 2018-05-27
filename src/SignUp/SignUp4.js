@@ -6,8 +6,6 @@ import back from '../img/back.svg';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
-import Checkbox from 'muicss/lib/react/checkbox';
-
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
@@ -22,12 +20,12 @@ class SignUp4 extends React.Component {
             authenticated: true,
             user: this.props.user,
             content: this.props.content,
-            priceRange: [2, 3],
+            priceRange: [this.props.fieldValues.priceMin, this.props.fieldValues.priceMax],
             dietaryPref: this.props.fieldValues.dietaryPref,
             neighborhoods: this.props.fieldValues.neighborhoods,
-            foodTypeLIKE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
-            foodTypeHATE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
-            music: { "POP": false, "COUNTRY": false, "EDM": false, "R&B": false, "LATIN": false, "HIP HOP": false, "ALTERNATIVE": false, "CLASSICAL": false, "INDIE": false, "FOLK": false, "JAZZ": false, "ROCK": false, "SOUL": false, "PUNK": false, "REGGAE": false }
+            foodTypeLIKE: this.props.fieldValues.foodTypeLIKE,
+            foodTypeHATE: this.props.fieldValues.foodTypeHATE,
+            music: this.props.fieldValues.music
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -40,7 +38,7 @@ class SignUp4 extends React.Component {
 
     onRangeChange(value) {
         this.setState({
-            ageRange: value
+            priceRange: value
         });
     }
 
@@ -53,7 +51,8 @@ class SignUp4 extends React.Component {
     nextStep(e) {
         e.preventDefault();
         var data = {
-            priceRange: this.state.priceRange,
+            priceMin: this.state.priceRange[0],
+            priceMax: this.state.priceRange[1],
             dietaryPref: this.state.dietaryPref,
             neighborhoods: this.state.neighborhoods,
             foodTypeLIKE: this.state.foodTypeLIKE,
@@ -81,12 +80,8 @@ class SignUp4 extends React.Component {
                 </Tooltip>
             );
         };
-        const foodPref = ["VEGETARIAN", "GLUTEN-FREE", "VEGAN", "DAIRY-FREE", "NO RED MEAT", "KOSHER", "PALEO", "RAW"];
-        const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
-        const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
-        const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
-        return (
 
+        return (
             <div className="signup-page">
                 <div className="tagline-2">TELL US MORE &amp; GET BETTER DATES</div>
                 <img
@@ -108,10 +103,14 @@ class SignUp4 extends React.Component {
                         </label>
                     </div>
                     <div id="foodAllergies">
-                        {foodPref.map((item, index) => {
+                        {Object.keys(this.props.fieldValues.dietaryPref).map((item, index) => {
                             return (
                                 <div className="boxes" key={index}>
-                                    <input type="checkbox" id={"box" + index} className="pref-checkbox"
+                                    <input
+                                        type="checkbox"
+                                        id={"box" + index}
+                                        className="pref-checkbox"
+                                        checked={this.state.dietaryPref[item]}
                                         onChange={() => {
                                             let foodTemp = this.state.dietaryPref;
                                             if (foodTemp[item]) {
@@ -127,7 +126,10 @@ class SignUp4 extends React.Component {
                             );
                         })}
                     </div>
-                    {/* TODO: make range is slider of prices ($$$), not numbers */}
+                    {/* TODO signup: 
+                    - make range is slider of prices ($$$), not numbers 
+                    - fix next arrows to be consistent
+                    - signup3 bottom section shouldnt need to scroll down*/}
                     <div id="priceRange">
                         <label className="signup-label" htmlFor="datePrice">
                             DATE PRICE PREFERENCE
@@ -160,7 +162,7 @@ class SignUp4 extends React.Component {
                             NEIGHBORHOODS I LIKE
                     </label>
                         <br />
-                        {neighborhoods.map((neighborhood, index) => {
+                        {Object.keys(this.props.fieldValues.neighborhoods).map((neighborhood, index) => {
                             return (
                                 <button
                                     className={
@@ -186,7 +188,7 @@ class SignUp4 extends React.Component {
                             CUISINES I LIKE
                     </label>
                         <br />
-                        {foodTypes.map((food, index) => {
+                        {Object.keys(this.props.fieldValues.foodTypeLIKE).map((food, index) => {
                             return (
                                 <button
                                     className={
@@ -212,7 +214,7 @@ class SignUp4 extends React.Component {
                             CUISINES I HATE
                     </label>
                         <br />
-                        {foodTypes.map((food, index) => {
+                        {Object.keys(this.props.fieldValues.foodTypeHATE).map((food, index) => {
                             return (
                                 <button
                                     className={
@@ -238,7 +240,7 @@ class SignUp4 extends React.Component {
                             MUSIC PREFERENCES
                     </label>
                         <br />
-                        {music.map((genre, index) => {
+                        {Object.keys(this.props.fieldValues.music).map((genre, index) => {
                             return (
                                 <button
                                     className={

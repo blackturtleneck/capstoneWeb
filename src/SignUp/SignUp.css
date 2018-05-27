@@ -8,6 +8,13 @@
   font-size: 24px;
   text-align: center;
   padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.signup-header-welcome-profile {
+  font-size: 24px;
+  text-align: center;
+  
 }
 
 .signup-header-amp {
@@ -100,15 +107,22 @@
   margin-right: 0px;
 }
 
-.tagline-2 {
+.tagline-1 {
   display: block;
   padding-top: 50px;
   font-size: 20px;
   text-align: center;
 }
+
+.tagline-2 {
+  display: block;
+  padding-top: 50px;
+  font-size: 24px;
+  text-align: center;
+}
 .tagline-3 {
   display: block;
-  font-size: 18px;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -169,10 +183,8 @@ input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checke
   padding: 30px;
   font-size: 20px;
   color:black;
+  font-weight: 700;
 }
-/* .signup4-header {
-  text-align: center;
-} */
 
 .date-row {
   display: block;

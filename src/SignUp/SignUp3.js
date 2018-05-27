@@ -327,7 +327,6 @@ class SignUp3 extends React.Component {
                 tech: this.state.tech
             }
         };
-        console.log('data', data);
         this.props.saveValues(data);
         this.props.nextStep();
     }

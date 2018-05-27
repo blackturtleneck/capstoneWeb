@@ -2,7 +2,7 @@ import React from 'react';
 import MultiSelectField from './MultiSelectField';
 import './DatesSelection.css';
 import AvailableTimes from 'react-available-times';
-import SideProf from './Profile/sideProf';
+import SideProf from './SignUp/Profile/sideProf';
 
 class DatesSelection extends React.Component {
     render() {
