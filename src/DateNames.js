@@ -50,7 +50,8 @@ class DateNames extends Component {
           mapButtonText: "View on Map",
           location: "",
           nextButton: "next",
-          nextButtonValue: "Next"
+          nextButtonValue: "Next",
+          dateAvailability: [3060, 3360, 6240]
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -167,7 +168,7 @@ class DateNames extends Component {
 
             <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
             {this.state.availability ?
-               <Availability sendData={this.getData} /> :
+               <Availability sendData={this.getData} initialStart = {this.state.dateAvailability}/> :
                null
             }
             </div>

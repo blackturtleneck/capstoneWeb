@@ -132,7 +132,8 @@ class RequestDate extends Component {
           .collection('dates')
           .doc(timeStamp)
           .set(receiveDate);
-    
+          
+    this.props.action();
     }
    
 

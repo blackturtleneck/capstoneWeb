@@ -9,11 +9,13 @@ class Availability extends Component {
         super(props);
         this.state = {
           showComponent: false,
-          start: [],
+          start: this.props.initialStart,
           end: []
         };
+        this.baseState
         this._onButtonClick = this._onButtonClick.bind(this);
         this.demoMethod = this.demoMethod.bind(this);
+        this.reset = this.reset.bind(this);
       }
     
       _onButtonClick() {
@@ -25,10 +27,17 @@ class Availability extends Component {
       demoMethod(start, end) {
         this.props.sendData(start, end);
       }
+
+      reset(){
+          this.setState({
+              start: [],
+              end: []
+          })
+      }
       render() {
         return (
           <div>
-              <h4 id = "timeFrame"> Pick a timeframe that you like. </h4>
+              <h4 id = "timeFrame"> Pick a few times you'd like to go on the date. </h4>
             <AvailableTimes
             weekStartsOn="monday"
             calendars={[
@@ -42,12 +51,13 @@ class Availability extends Component {
             ]}
             onChange={(selections) => {
                 selections.forEach(({ start, end }) => {
+                    this.reset();
                     this.setState({
                         start: this.state.start.concat(start),
                         end: this.state.end.concat(end)
                     }) 
                     console.log('Start:', start, 'End:', end);
-                    console.log(this.state.start)
+                    console.log("START ARR IN AVAILA", this.state.start)
                     console.log(this.state.end)
                 })
                 this.demoMethod(this.state.start, this.state.end)  
@@ -57,14 +67,15 @@ class Availability extends Component {
             onEventsRequested={({ calendarId, start, end, callback }) => {
             }}
             initialSelections={[
-                { start: 1980, end: 2040 },
-                { start: 540, end: 795}
+                { start: 3060, end: 3400 },
+                { start: 3360, end: 3240},
+                { start: 6240, end: 6300}
                 
             ]}
             height={400}
             recurring={true}
-            availableDays={['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']}
-            availableHourRange={{ start: 9, end: 19 }}
+            availableDays={['monday', 'tuesday', 'wednesday', 'thursday', 'friday']}
+            availableHourRange={{ start: 3, end: 11 }}
             />
             </div>
         );

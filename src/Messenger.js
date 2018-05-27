@@ -13,12 +13,15 @@ class Messenger extends React.Component {
             user: this.props.user,
             userEmail: this.props.userEmail,
             otherUser: this.props.otherUser,
-            otherUserName: this.props.otherUserName
+            otherUserName: this.props.otherUserName,
+            newDateRequest: null
         };
 
         this.updateMessage = this.updateMessage.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
         this.submitMessageEnter = this.submitMessageEnter.bind(this);
+        this.dateRequestHandler = this.dateRequestHandler.bind(this);
+        this.update = this.update.bind(this);
     }
 
     componentDidMount() {
@@ -32,7 +35,8 @@ class Messenger extends React.Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            otherUser: newProps.otherUser
+            otherUser: newProps.otherUser,
+            newDateRequest: null
         });
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
@@ -146,6 +150,16 @@ class Messenger extends React.Component {
         document.getElementById('message-box').value = '';
     }
 
+    dateRequestHandler() {
+        this.setState({
+            newDateRequest: true
+        });
+    }
+
+    update(){
+
+    }
+
     render() {
         const currentMessage = this.state.messages.map((message, i) => {
             return (
@@ -173,8 +187,11 @@ class Messenger extends React.Component {
                             </ol>
 
                             <div className="date-button-wrapper">
-                            <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser}/>
+                            <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>
+
+                            {this.state.newDateRequest != null ? (
                             <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser}/>
+                            ) : null }
                             </div>
 
                             <div className="button-input-wrapper">
