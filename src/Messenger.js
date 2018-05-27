@@ -10,11 +10,14 @@ class Messenger extends React.Component {
         this.state = {
             message: '',
             messages: [],
+            dates:[],
             user: this.props.user,
             userEmail: this.props.userEmail,
             otherUser: this.props.otherUser,
             otherUserName: this.props.otherUserName,
-            newDateRequest: null
+            newDateRequest: null,
+            dateRequestTimeStamp : null,
+            dateExists : false
         };
 
         this.updateMessage = this.updateMessage.bind(this);
@@ -31,6 +34,41 @@ class Messenger extends React.Component {
             list.scrollTop = list.scrollHeight;
             list.animate({ scrollTop: list.scrollHeight });
         }
+
+
+        if (this.props.otherUser != null) {
+        let currentComponent = this;
+        var currDates = [];
+        db
+            .collection('users')
+            .doc(this.props.userEmail)
+            .collection('messages')
+            .doc(this.props.otherUser)
+            .collection('dates')
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.docs.map(function(doc) {
+                    console.log(doc.id, " => ", doc.data());
+                    console.log(doc.data());
+                    currDates.push(doc.data())
+                }); return currDates
+            }).then(function(currDates) {
+                currentComponent.setState(prevState =>({
+                    dates : currDates,
+                    dateExists : false
+                }));
+
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+        }
+        this.testTimeStamp();
+
+    }
+
+    componentWillMount() {
+
     }
 
     componentWillReceiveProps(newProps) {
@@ -54,6 +92,27 @@ class Messenger extends React.Component {
                     currentComponent.setState({ messages: curMessages });
                 });
         }
+
+        if (newProps.otherUser !== this.props.otherUser) {
+            let currentComponent2 = this;
+            db
+                .collection('users')
+                .doc(this.props.userEmail)
+                .collection('messages')
+                .doc(newProps.otherUser)
+                .collection('dates')
+                .onSnapshot(function(querySnapshot) {
+                    var currDates = [];
+                    querySnapshot.forEach(function(doc) {
+                        currDates.push(doc.data());
+                    });
+                    currentComponent2.setState({ dates: currDates
+                });
+                });
+        }
+        this.testTimeStamp();
+
+
     }
 
     updateMessage(event) {
@@ -156,8 +215,38 @@ class Messenger extends React.Component {
         });
     }
 
-    update(){
+    update(timestamp){
+        this.setState({
+            dateRequestTimeStamp: timestamp
+        })
+    }
 
+    testTimeStamp(){
+        if(this.state.dates != null) {
+            this.setState({
+                dateExists : true
+            })
+        }
+/*         if (this.state.otherUser != null && this.state.timeStampRecovery != null) {
+        console.log("TESTING TIME STAMP", this.state.timeStampRecovery)
+        var timeString = this.state.timeStampRecovery.toString();
+        var docRef =  db.collection('users')
+                        .doc(this.state.userEmail)
+                        .collection('messages')
+                        .doc(this.state.otherUser)
+                        .collection('dates').doc();
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                } else {
+                                // doc.data() will be undefined in this case
+                                console.log("No such document!");
+                            }
+                        }).catch(function(error) {
+                            console.log("Error getting document:", error);
+                        });
+        } */
     }
 
     render() {
@@ -189,8 +278,8 @@ class Messenger extends React.Component {
                             <div className="date-button-wrapper">
                             <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>
 
-                            {this.state.newDateRequest != null ? (
-                            <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser}/>
+                            {this.state.newDateRequest != null || this.state.dateExists == true ? (
+                           <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser}/>
                             ) : null }
                             </div>
 

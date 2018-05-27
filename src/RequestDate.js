@@ -103,17 +103,23 @@ class RequestDate extends Component {
             ':' +
             time.getMilliseconds();
 
+      this.props.callBack(timeStamp);
+      console.log(timeStamp + "TIMESTAMP CHEcK");
       const sendDate = {
           id: time,
           startTime: this.state.startArr,
           location: this.state.location,
-          sent: true
+          sent: true,
+          response: false,
+          confirm: false
       };
       const receiveDate = {
         id: time,
         startTime: this.state.startArr,
         location: this.state.location,
-        sent: false
+        sent: false,
+        response: false,
+        confirm: false
     };
       db
           .collection('users')
@@ -132,7 +138,7 @@ class RequestDate extends Component {
           .collection('dates')
           .doc(timeStamp)
           .set(receiveDate);
-          
+
     this.props.action();
     }
    

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
 import { db } from './FirestoreConfig';
+import "./DatesSelection.css";
 
 class ReceiveRequest extends Component {
     constructor(props, context) {
@@ -13,9 +14,14 @@ class ReceiveRequest extends Component {
             otherUser: this.props.otherUser,
             otherUserName: this.props.otherUserName,
             ready : false,
-            userReceiving : false
+            userReceiving : false,
+            finalDateArray: []
         };
         this.test = this.test.bind(this);
+        this.confirmDate = this.confirmDate.bind(this);
+        this.otherUserConfirm = this.otherUserConfirm.bind(this);
+        this.respond = this.respond.bind(this);
+        this.otherUserRespond = this.otherUserRespond.bind(this);
 
     } 
 
@@ -113,39 +119,121 @@ class ReceiveRequest extends Component {
         console.log(this.state.user);
         }
         
+    confirmDate(){
+        console.log(this.props.timeStamp + "DOUBLE CHECKING")
+        this.otherUserConfirm();
+        var dateInfo = db
+        .collection('users')
+        .doc(this.props.userEmail)
+        .collection('messages')
+        .doc(this.props.otherUser)
+        .collection('dates').doc(this.props.timeStamp)
 
+        return dateInfo.update({
+            confirm: true
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    }
 
-    
-    // if user and dates sent equals false then display this component oe way
-    // if user and dates sent equals true then display it a different way
+    otherUserConfirm(){
+        var dateInfo = db
+        .collection('users')
+        .doc(this.props.otherUser)
+        .collection('messages')
+        .doc(this.props.userEmail)
+        .collection('dates').doc(this.props.timeStamp)
 
+        return dateInfo.update({
+            confirm: true
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    }
+
+    respond(){
+        console.log(this.props.timeStamp + "DOUBLE CHECKING")
+        this.otherUserConfirm();
+        var dateInfo = db
+        .collection('users')
+        .doc(this.props.userEmail)
+        .collection('messages')
+        .doc(this.props.otherUser)
+        .collection('dates').doc(this.props.timeStamp)
+
+        return dateInfo.update({
+            confirm: false,
+            response: true
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    }
+
+    otherUserRespond(){
+        var dateInfo = db
+        .collection('users')
+        .doc(this.props.otherUser)
+        .collection('messages')
+        .doc(this.props.userEmail)
+        .collection('dates').doc(this.props.timeStamp)
+
+        return dateInfo.update({
+            confirm: false,
+            response: true
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    }
 
     render(){
-
-    
         const data=this.state.dateDetails;
         const dateTimesNumeric = [];
         let dateTimes = [];
+        let dateOg = [];
         var day = '';
         var days = [];
 
             if (this.state.dateDetails.length != 0) {
-                dateTimes = this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].startTime;
-                console.log("I'm here")
+                dateOg = this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].startTime;
+                console.log("I'm here", dateOg)
+                 dateTimes = dateOg.filter(function(elem, index, self) {
+                    return index === self.indexOf(elem);
+                })
+                console.log("I'm here again", dateTimes);
+                dateTimes.sort();
                 var finalDateTimes = [];
                 var num = '';
                 // Monday Dates
                 for (var i = 0; i < dateTimes.length; i++) {
                     if(dateTimes[i] <= 660) {
                          day = "Monday"
-                         days.push(day)
                          num = dateTimes[i] / 60;
                          finalDateTimes.push([day,num]);     
                     }
                     // Tuesday Dates
-                    if(dateTimes[i] > 660 && dateTimes[i] <=2100){
+                   else if(dateTimes[i] > 660 && dateTimes[i] <=2100){
                         day = "Tuesday"
-                        days.push(day)
+
                         if(dateTimes[i] == 1620){
                             num = 3;
                             finalDateTimes.push([day,num]);
@@ -181,7 +269,7 @@ class ReceiveRequest extends Component {
                     }
 
                     // Wednesday Dates
-                    if(dateTimes[i] > 2100 && dateTimes[i] <= 3540 ){
+                    else if(dateTimes[i] > 2100 && dateTimes[i] <= 3540 ){
                         day = "Wednesday"
                         days.push(day)
 
@@ -220,7 +308,7 @@ class ReceiveRequest extends Component {
                     }
 
                     // This is so inefficient but Thursday Dates
-                    if(dateTimes[i] > 3540 && dateTimes[i] <= 4980 ){
+                    else if(dateTimes[i] > 3540 && dateTimes[i] <= 4980 ){
                         day = "Thursday"
                         days.push(day)
 
@@ -258,8 +346,8 @@ class ReceiveRequest extends Component {
                         }
                     }
 
-                    // Friday dates lol
-                    if(dateTimes[i]> 4980 && dateTimes[i] <= 6420 ){
+                  /*   // Friday dates lol
+                   else if(dateTimes[i]> 4980 && dateTimes[i] <= 6420 ){
                         day = "Friday"
                         days.push(day)
 
@@ -294,15 +382,12 @@ class ReceiveRequest extends Component {
                         if(dateTimes[i] == 6360){
                             num = 10;
                             finalDateTimes.push([day,num]);
-                        }
-                    }
-
+                        } */
+                   // }
+                    console.log("ARRAY CHECK", finalDateTimes);
                     }   
                 dateTimes = finalDateTimes;
-                dateTimes.sort();
-                dateTimesNumeric.Times = finalDateTimes;
-                dateTimes = dateTimes.filter((elem, index, self) => self.findIndex(
-                    (t) => {return (t.x === elem.x && t.y === elem.y)}) === index)
+                
                 console.log("finaldatetimes", dateTimes);
             } else {
                 dateTimes = null
@@ -311,25 +396,45 @@ class ReceiveRequest extends Component {
 
     return(
         <div>
-           {this.state.ready ?
-          <div> <p>
-              Hey, want to go to 
-               {" " + this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].location} this week? </p> 
-               <p>
-                   Let me know if any of these times work for you!
-               {days.map(day => <div> {day} </div>)}     
-               {dateTimes.map(time => 
-               <Button> {time + "PM"} </Button>)} 
-           </p> 
-  
-            <Button id = "confirm"> Confirm Date </Button>
-            <Button id = "diffTime"> Propose another time</Button>
-            </div>
-                
+           {this.state.ready  ?
+                <div id = "datebackground">
+                    {this.state.userReceiving == false && this.state.dateDetails != null ?        
+                    <div>  
+                        <h3 id = "halfwayText">
+                            Hey, want to go to 
+                            {" " + this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].location} this week? </h3> 
+                            <p>
+                            It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. <br/>
+                            <Button id ="locview">Here's where it is.</Button> <br/>
+                            
+                            Let me know if any of these times work for you! 
+                            {dateTimes.map(time => 
+                            <Button id = "times"> {time + "PM"} </Button>)} 
+                        </p> 
+
+                        <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
+                        <Button id = "confirm" onClick = {this.respond}> Another Time?</Button>
+                      </div>
+                            
+                            :
+                            <div>  <h3 id = "halfwayText">
+                            Hey, want to go to 
+                            {" " + this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].location} this week? </h3> 
+                            <p>
+                            It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. Let me know which of these times work best for you!
+                            {dateTimes.map(time => 
+                            <Button> {time + "PM"} </Button>)} 
+                        </p> 
+
+                        <Button id = "confirm" onClick = {this.confirmDate}> Waiting for {this.props.otherUserName} to respond </Button>
+                        </div>
+                            
+
+                        }
+                        </div>
                 :
                null
             }
->
         </div>
     );
 }

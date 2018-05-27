@@ -37,7 +37,7 @@ class Availability extends Component {
       render() {
         return (
           <div>
-              <h4 id = "timeFrame"> Pick a few times you'd like to go on the date. </h4>
+              <h4 id = "timeFrame"> Here's some time chunks that work for you both! </h4>
             <AvailableTimes
             weekStartsOn="monday"
             calendars={[
@@ -51,7 +51,6 @@ class Availability extends Component {
             ]}
             onChange={(selections) => {
                 selections.forEach(({ start, end }) => {
-                    this.reset();
                     this.setState({
                         start: this.state.start.concat(start),
                         end: this.state.end.concat(end)
@@ -67,9 +66,9 @@ class Availability extends Component {
             onEventsRequested={({ calendarId, start, end, callback }) => {
             }}
             initialSelections={[
-                { start: 3060, end: 3400 },
-                { start: 3360, end: 3240},
-                { start: 6240, end: 6300}
+                { start: 4860, end: 4920 },
+                { start: 1620, end: 1680},
+                { start: 1980, end: 2040}
                 
             ]}
             height={400}
