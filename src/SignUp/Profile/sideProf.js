@@ -1,6 +1,5 @@
 import React from 'react';
-import { db } from '../FirestoreConfig';
-import './Profile.css';
+import { db } from '../../FirestoreConfig';
 import placeholder from './placeholder.svg'
 import './sideProf.css'
 
@@ -61,9 +60,6 @@ class SideProf extends React.Component {
                     console.log('No such document!');
                 }
             });
-        // if (this.state.userDoc !== '') {
-
-        // }
     }
 
     render() {
@@ -83,17 +79,15 @@ class SideProf extends React.Component {
                 {this.state.images !== '' ? (
                     this.state.images.map((photo, i) => {
                         return (
-                            // <p key={i}>{photo.id}</p>
-                            <div>
-                                <img className="otherProfile-img" src={placeholder} alt="pic placeholder" />
+                            <div key={i}>
+                                <img
+                                    className="otherProfile-img" src={placeholder} alt="pic placeholder" />
                                 <p className="otherProfile-info" >some text or question</p>
                             </div>);
                     })
                 ) : (
                         <p>no images</p>
                     )}
-
-
             </div>
         )
     }

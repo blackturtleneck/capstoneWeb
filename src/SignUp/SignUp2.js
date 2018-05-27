@@ -8,7 +8,6 @@ import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 import Checkbox from 'muicss/lib/react/checkbox';
 
-
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
 
@@ -74,7 +73,6 @@ class SignUp2 extends React.Component {
             );
         };
 
-        console.log("avail", this.state.availability)
 
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
@@ -196,7 +194,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": this.state.availability.EVENING
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
                                         );
@@ -222,7 +219,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": this.state.availability.EVENING
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
 
@@ -247,7 +243,6 @@ class SignUp2 extends React.Component {
                                                         "EVENING": tempEve
                                                     }
                                                     this.setState({ availability: nextState })
-                                                    console.log(this.state)
                                                 }}
                                             />
                                         );

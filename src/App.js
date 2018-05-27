@@ -34,9 +34,6 @@ class App extends React.Component {
                         .collection('users')
                         .doc(this.state.user.email)
                         .onSnapshot(function (doc) {
-                            console.log('this.state', component.state);
-
-                            console.log('doc', doc.data());
                             if (!doc.data().onBoarding) {
                                 component.setState({
                                     onBoarding: false
@@ -74,8 +71,6 @@ class App extends React.Component {
                 content = PageContent.MESSENGER;
                 break;
         }
-        console.log('state', this.state);
-
         return (
             <div className="">
                 {this.state.authenticated ? (

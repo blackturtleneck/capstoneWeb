@@ -6,8 +6,6 @@ class Login extends Component {
         const result = await auth.signInWithPopup(provider);
         this.setState({ user: result.user });
         // Add a new document in collection "users"
-        // if(!db.collection("users").doc(result.user.email).get()) {
-        console.log('result.user', result.user);
         db
             .collection('users')
             .doc(result.user.email)
@@ -23,11 +21,11 @@ class Login extends Component {
                 photoURL: result.user.photoURL,
                 icons: { first: 'abc', sec: 'def' }
             })
-            .then(function() {
+            .then(function () {
                 // eslint-disable-line no-console
                 console.log('Document successfully written!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // eslint-disable-line no-console
                 console.error('Error writing document: ', error);
             });

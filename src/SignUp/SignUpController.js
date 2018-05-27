@@ -157,7 +157,6 @@ class SignUpInController extends Component {
                     };
 
                 } else {
-                    console.log('Document data:', doc.data());
                     let ref = doc.data();
                     fieldValues = {
                         name: ref.name,
@@ -296,7 +295,6 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-        console.log("values", fieldValues)
         return (!this.state.existingUser ? <span>Loading data...</span> : (
             <div className="signup-wrapper">
                 <div

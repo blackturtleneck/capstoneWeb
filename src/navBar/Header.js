@@ -63,8 +63,3 @@ class Header extends Component {
     }
 }
 export default Header;
-
-/**
- * TODO
- * - add link to edit profile through content in pagecontainer
- */

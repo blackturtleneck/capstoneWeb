@@ -6,8 +6,6 @@ import back from '../img/back.svg';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
-import Checkbox from 'muicss/lib/react/checkbox';
-
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;

@@ -185,9 +185,6 @@ input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checke
   color:black;
   font-weight: 700;
 }
-/* .signup4-header {
-  text-align: center;
-} */
 
 .date-row {
   display: block;

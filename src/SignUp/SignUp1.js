@@ -39,7 +39,6 @@ class SignUp1 extends React.Component {
         this.props.nextStep();
     }
     render() {
-        console.log("name", this.props.fieldValues)
         const header = this.props.existingUser ?
             (
                 <div>
@@ -88,7 +87,7 @@ class SignUp1 extends React.Component {
                         className="form-input custom-select"
                         required
                     >
-                        <option selected value="select">select</option>
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                     </select>
@@ -102,7 +101,7 @@ class SignUp1 extends React.Component {
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="january">JANUARY</option>
                             <option value="february">FEBRUARY</option>
                             <option value="march">MARCH</option>
@@ -122,7 +121,7 @@ class SignUp1 extends React.Component {
                             className="inline-form form-input custom-select"
                             required
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="1">01</option>
                             <option value="2">02</option>
                             <option value="3">03</option>
@@ -161,7 +160,7 @@ class SignUp1 extends React.Component {
                             className="inline-form custom-select form-input year"
                             defaultValue={this.props.fieldValues.birthday.year}
                         >
-                            <option selected value="select">select</option>
+                            <option value="select">select</option>
                             <option value="1963">1963</option>
                             <option value="1964">1964</option>
                             <option value="1965">1965</option>
