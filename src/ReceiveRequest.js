@@ -148,12 +148,8 @@ class ReceiveRequest extends Component {
 
     }
 
-    timeConfirm(event){
-        console.log("ID TEST", event.target.value)
-
-        this.setState({
-            timeConfirmed : event.target.value
-        })
+    timeConfirm(){
+        
     }
 
     test() {
@@ -172,8 +168,7 @@ class ReceiveRequest extends Component {
         .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
-            confirm: true,
-            timeConfirmed : this.state.timeConfirmed
+            confirm: true
         })
         .then(function() {
             console.log("Document successfully updated!");
@@ -196,8 +191,7 @@ class ReceiveRequest extends Component {
         .doc(this.props.userEmail)
         .collection('dates').doc(String(this.props.timeStamp))
         return dateInfo.update({
-            confirm: true,
-            timeConfirmed : this.state.timeConfirmed
+            confirm: true
         })
         .then(function() {
             console.log("Document successfully updated!");
@@ -585,7 +579,7 @@ class ReceiveRequest extends Component {
                             
                             Let me know if any of these times work for you! 
                             {finalDateButton.map(time => 
-                            <Button id = {time} value={time} onClick ={(event)=>this.timeConfirm(event)}>  {time} </Button>)} 
+                            <Button id = {time} onclick = {this.timeConfirm}> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
@@ -600,7 +594,7 @@ class ReceiveRequest extends Component {
                             <p>
                             It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. Let me know which of these times work best for you!
                             {finalDateButton.map(time => 
-                            <Button id = {time}>  </Button>)} 
+                            <Button id = {time}> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Waiting for {this.props.otherUserName} to respond </Button>
