@@ -17,6 +17,7 @@ class Availability2 extends Component {
         super(props);
         this.calculateTimes = this.calculateTimes.bind(this);
         this.getData = this.getData.bind(this);
+        this.populateAvailability = this.populateAvailability.bind(this);
         this.state = {
             cells: [
                 [false, false, false, false, false, false, false, false],
@@ -35,8 +36,8 @@ class Availability2 extends Component {
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
-                [false, false, false, false, false, false, false, false],
-                [false, false, false, false, false, false, false, false],
+                [true, false, false, false, false, false, false, false],
+                [true, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
@@ -51,13 +52,13 @@ class Availability2 extends Component {
     }
 
     componentWillMount(){
-      this.populateAvailability()
+      this.populateAvailability();
     }
 
     handleChange = cells => {
       this.setState({ cells })
-      this.calculateTimes()
-      this.props.availability(this.state.availability)
+      this.calculateTimes();
+    //  this.props.availability(this.state.availability)
     };
 
     handleClick = () => {
@@ -95,12 +96,12 @@ class Availability2 extends Component {
     };
 
     getData(arr){
-        this.props.sendData(arr);
+      this.props.sendData(arr);
 
-        db
-        .collection('users')
-        .doc(this.props.userEmail)
-        .collection('availability').doc("availability").set( { available: arr });
+       // db
+     //   .collection('users')
+      //  .doc(this.props.userEmail)
+       // .collection('availability').doc("availability").set( { available: arr });
     }
 
     calculateTimes(){ 
@@ -144,7 +145,8 @@ class Availability2 extends Component {
             }
           }
         
-        }  this.getData(a);
+        } 
+         this.getData(a);
       }
       this.setState({
         availability : a
@@ -153,25 +155,71 @@ class Availability2 extends Component {
 
     populateAvailability = () => {
       let cells = this.state.cells
-       if (this.props.currAvailability) {
-        if (this.props.currAvailability.days !== undefined) {//make sure they have an availability
-          this.props.currAvailability.days.forEach(day => {
-            let dayIndex = daysRef.indexOf(day.day)
-         day.times.forEach(time => {
-               let startIndex = times.indexOf(time.start)
-              let endIndex = times.indexOf(time.end)
-              if (startIndex > -1 && endIndex > -1) { //both times are within our timesRef
-             let index = startIndex
-                while (index < endIndex) {
-                 //first row and first value in each row are labels - do not modify
-                  cells[index + 1][dayIndex + 1] = true
-                  index++
-                 }
-               }
-            })
-          })
-        }
-       }
+      
+      if (this.props.currAvailability) {
+        this.props.currAvailability.map(function(a) {
+          let dayIndex = '';
+          if(a.day == 'sun') {
+            dayIndex = 0;
+          }
+          if(a.day == 'mon') {
+            dayIndex = 1;
+          }
+          if(a.day == 'tue') {
+            dayIndex = 2;
+          }
+          if(a.day == 'wed') {
+            dayIndex = 3;
+          }
+          if(a.day == 'thu') {
+            dayIndex = 4;
+          }
+          if(a.day == 'fri') {
+            dayIndex = 5;
+          }
+          if(a.day == 'sat') {
+            dayIndex = 6;
+          }
+          if(a.day == 'sun') {
+            dayIndex = 7;      
+          }
+          a.times.forEach(time => {
+            let startIndex = times.indexOf(time.start)
+           let endIndex = times.indexOf(time.end)
+           if (startIndex > -1 && endIndex > -1) { //both times are within our timesRef
+          let index = startIndex
+             while (index < endIndex) {
+              //first row and first value in each row are labels - do not modify
+               cells[index + 1][dayIndex + 1] = true
+               index++
+              }
+            }
+         })
+          console.log(cells);
+        });
+      }
+
+      //  if (this.props.currAvailability) {
+      //    console.log(this.props.currAvailability.index)
+      //   if (this.props.currAvailability !== undefined) {//make sure they have an availability
+      //     this.props.currAvailability.forEach(day => {
+      //       let dayIndex = daysRef.indexOf(day.day)
+      //    day.times.forEach(time => {
+      //          let startIndex = times.indexOf(time.start)
+      //         let endIndex = times.indexOf(time.end)
+      //         if (startIndex > -1 && endIndex > -1) { //both times are within our timesRef
+      //        let index = startIndex
+      //           while (index < endIndex) {
+      //            //first row and first value in each row are labels - do not modify
+      //             cells[index + 1][dayIndex + 1] = true
+      //             index++
+      //            }
+      //          }
+      //       })
+      //     })
+      //   }
+      //  }
+       console.log("CELLS", cells)
        this.setState({
          cells : cells
        })

@@ -53,7 +53,7 @@ class DateNames extends Component {
           location: "",
           nextButton: "next",
           nextButtonValue: "Next",
-          dateAvailability: [3060, 3360, 6240]
+          dateAvailability: this.props.availability
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -62,6 +62,15 @@ class DateNames extends Component {
         this.buttonTwoClick = this.buttonTwoClick.bind(this);
         this.buttonThreeClick = this.buttonThreeClick.bind(this);
         this.buttonFourClick = this.buttonFourClick.bind(this);
+      }
+
+      componentDidMount(){
+        console.log("CHECK PROPS", this.props.availability);
+      }
+    
+
+      componentWillReceiveProps(){
+        console.log("CHECK PROPS", this.props.availability);
       }
     
       _onButtonClick() {
@@ -84,15 +93,12 @@ class DateNames extends Component {
             location : oldState.location,
             nextButton: "nextClicked",
             nextButtonValue: "",
-            schedule : this.props.availability
           }));
       }
 
       getData(startArr){
         console.log("Start DateNames Array", startArr);
-
-        
-
+        this.props.sendData(startArr, this.state.location);
       }
 
       buttonOneClick(){
@@ -172,7 +178,7 @@ class DateNames extends Component {
 
             <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
             {this.state.availability ?
-               <Availability2 userEmail= {this.props.userEmail} sendData={this.getData} initialStart = {this.state.dateAvailability} currAvailability = {this.state.schedule}/> :
+               <Availability2 userEmail= {this.props.userEmail} sendData={this.getData} initialStart = {this.state.dateAvailability} currAvailability = {this.state.dateAvailability}/> :
                null
             }
             </div>

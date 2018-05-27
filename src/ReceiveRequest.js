@@ -15,14 +15,14 @@ class ReceiveRequest extends Component {
             otherUserName: this.props.otherUserName,
             ready : false,
             userReceiving : false,
-            finalDateArray: []
+            finalDateArray: [],
+            finalLocation: ''
         };
         this.test = this.test.bind(this);
         this.confirmDate = this.confirmDate.bind(this);
         this.otherUserConfirm = this.otherUserConfirm.bind(this);
         this.respond = this.respond.bind(this);
         this.otherUserRespond = this.otherUserRespond.bind(this);
-
     } 
 
    componentWillMount(){
@@ -206,8 +206,137 @@ class ReceiveRequest extends Component {
     }
 
     render(){
-        const data=this.state.dateDetails;
-        const dateTimesNumeric = [];
+        var startTimeArr = [];
+        var locationArr = '';
+        var finalDateButton = [];
+        console.log(this.state.dateDetails[this.state.dateDetails.length-1]);
+        const data=this.state.dateDetails[this.state.dateDetails.length-1];
+        console.log(typeof data)
+        for (var key in data) {
+           if (key == 'location'){
+            locationArr = data[key]
+            console.log(locationArr);
+           }
+           if (key == 'startTime'){
+           startTimeArr = data['startTime'];
+                startTimeArr.map(function(a) {
+                    let dayName = '';
+                    let time = '';
+                    if(a.day == 'sun') {
+                        dayName = "Sunday";
+                    }
+                    if(a.day == 'mon') {
+                        dayName = "Monday";
+                    }
+                    if(a.day == 'tues') {
+                        dayName = "Tuesday";
+                    }
+                    if(a.day == 'wed') {
+                        dayName = "Wednesday";
+                    }
+                    if(a.day == 'thurs') {
+                        dayName = "Thursday";
+                    }
+                    if(a.day == 'fri') {
+                        dayName = "Friday";
+                    }
+                    if(a.day == 'sat') {
+                        dayName = "Saturday";
+                    }
+                    if(a.day == 'sun') {
+                        dayName = "Sunday";      
+                    }
+
+                    a.times.forEach(time => {
+                        console.log(a.times)
+                        console.log(dayName)
+                        if (time.start == 1000){
+                            time = "10AM"
+                        }
+                        if (time.start == 1030){
+                            time = "10:30AM"
+                        }
+                        if (time.start == 1100){
+                            time = "11AM"
+                        }
+                        if (time.start == 1130){
+                            time = "11:30AM"
+                        }
+                        if (time.start == 1200){
+                            time = "12PM"
+                        }
+                        if (time.start == 1230){
+                            time = "12:30PM"
+                        }
+                        if (time.start == 1300){
+                            time = "1PM"
+                        }
+                        if (time.start == 1330){
+                            time = "1:30PM"
+                        }
+                        if (time.start == 1400){
+                            time = "2PM"
+                        }
+                        if (time.start == 1430){
+                            time = "2:30PM"
+                        }
+                        if (time.start == 1500){
+                            time = "3PM"
+                        }
+                        if (time.start == 1530){
+                            time = "3:30PM"
+                        }
+                        if (time.start == 1600){
+                            time = "4PM"
+                        }
+                        if (time.start == 1630){
+                            time = "4:30PM"
+                        }
+                        if (time.start == 1700){
+                            time = "5PM"
+                        }
+                        if (time.start == 1730){
+                            time = "5:30PM"
+                        }
+                        if (time.start == 1800){
+                            time = "6PM"
+                        }
+                        if (time.start == 1830){
+                            time = "6:30PM"
+                        }
+                        if (time.start == 1900){
+                            time = "7PM"
+                        }
+                        if (time.start == 1930){
+                            time = "7:30PM"
+                        }
+                        if (time.start == 2000){
+                            time = "8PM"
+                        }
+                        if (time.start == 2030){
+                            time = "8:30PM"
+                        }
+                        if (time.start == 2100){
+                            time = "9PM"
+                        }
+                        if (time.start == 2130){
+                            time = "9:30PM"
+                        }
+                        if (time.start == 2200){
+                            time = "10PM"
+                        }
+                        if (time.start == 2230){
+                            time = "10:30PM"
+                        }
+                        finalDateButton.push(dayName + ", " + time);
+                    });
+
+                 });
+                 console.log(finalDateButton);
+          }
+        }
+
+       /*  const dateTimesNumeric = [];
         let dateTimes = [];
         let dateOg = [];
         var day = '';
@@ -345,7 +474,7 @@ class ReceiveRequest extends Component {
                             finalDateTimes.push([day,num]);
                         }
                     }
-
+ */
                   /*   // Friday dates lol
                    else if(dateTimes[i]> 4980 && dateTimes[i] <= 6420 ){
                         day = "Friday"
@@ -384,7 +513,7 @@ class ReceiveRequest extends Component {
                             finalDateTimes.push([day,num]);
                         } */
                    // }
-                    console.log("ARRAY CHECK", finalDateTimes);
+     /*                console.log("ARRAY CHECK", finalDateTimes);
                     }   
                 dateTimes = finalDateTimes;
                 
@@ -392,7 +521,7 @@ class ReceiveRequest extends Component {
             } else {
                 dateTimes = null
             }
-   
+    */
 
     return(
         <div>
@@ -401,15 +530,15 @@ class ReceiveRequest extends Component {
                     {this.state.userReceiving == false && this.state.dateDetails != null ?        
                     <div>  
                         <h3 id = "halfwayText">
-                            Hey, want to go to 
-                            {" " + this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].location} this week? </h3> 
+                            Hey, want to go to {locationArr+ " "}
+                            this week? </h3> 
                             <p>
                             It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. <br/>
                             <Button id ="locview">Here's where it is.</Button> <br/>
                             
                             Let me know if any of these times work for you! 
-                            {dateTimes.map(time => 
-                            <Button id = "times"> {time + "PM"} </Button>)} 
+                            {finalDateButton.map(time => 
+                            <Button id = "times"> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
@@ -419,11 +548,11 @@ class ReceiveRequest extends Component {
                             :
                             <div>  <h3 id = "halfwayText">
                             Hey, want to go to 
-                            {" " + this.state.dateDetails[Object.keys(this.state.dateDetails)[data.length-1]].location} this week? </h3> 
+                            {this.state.finalLocation} this week? </h3> 
                             <p>
                             It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. Let me know which of these times work best for you!
-                            {dateTimes.map(time => 
-                            <Button> {time + "PM"} </Button>)} 
+                            {finalDateButton.map(time => 
+                            <Button id = "times"> {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Waiting for {this.props.otherUserName} to respond </Button>

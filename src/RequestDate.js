@@ -17,13 +17,53 @@ class RequestDate extends Component {
           buttonid: "request",
           startArr: [],
           location: "",
-          userEmail : this.props.userEmail
+          userEmail : this.props.userEmail,
+          userAvailability:[]
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._submit = this._submit.bind(this);
         this.submitDate = this.submitDate.bind(this);
         this.getData = this.getData.bind(this);
-        this.getAvailability = this.getAvailability.bind(this);
+      }
+
+      componentWillReceiveProps(){
+        let currentComponent = this;
+        var docRef = db.collection("users").doc(this.state.userEmail).collection("availability").doc("availability");
+        
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                let data = doc.data();
+                console.log("TEST ", data['available'])
+                currentComponent.setState({ userAvailability: data['available'] });
+            } else {
+                // doc.data() will be undefined in this case
+                this.setState({ userAvailability: null });
+                console.log("No such document!");
+            }
+            }).catch(function (error) {
+                this.setState({ data: null });
+                console.log("Error getting document:", error);
+            });
+      }
+    
+      componentDidMount(){
+        let currentComponent = this;
+        var docRef = db.collection("users").doc(this.state.userEmail).collection("availability").doc("availability");
+        
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                let data = doc.data();
+                console.log("TEST ", data['available'])
+                currentComponent.setState({ userAvailability: data['available'] });
+            } else {
+                // doc.data() will be undefined in this case
+                this.setState({ userAvailability: null });
+                console.log("No such document!");
+            }
+            }).catch(function (error) {
+                this.setState({ data: null });
+                console.log("Error getting document:", error);
+            });
       }
     
       _onButtonClick() {
@@ -43,7 +83,7 @@ class RequestDate extends Component {
           buttonid: "request"
         }));
 
-        console.log("USER PROPS", this.props.user)
+        console.log("USER PROPS", this.state.userEmail)
         console.log("OTHER USER PROPS", this.props.otherUser)
         console.log("START ARR", this.state.startArr)
         console.log("FINAL LOC", this.state.location)
@@ -125,7 +165,7 @@ class RequestDate extends Component {
     };
       db
           .collection('users')
-          .doc(this.props.user)
+          .doc(this.props.userEmail)
           .collection('messages')
           .doc(this.props.otherUser)
           .collection('dates')
@@ -136,7 +176,7 @@ class RequestDate extends Component {
           .collection('users')
           .doc(this.props.otherUser)
           .collection('messages')
-          .doc(this.props.user)
+          .doc(this.props.userEmail)
           .collection('dates')
           .doc(timeStamp)
           .set(receiveDate);
@@ -163,36 +203,15 @@ class RequestDate extends Component {
           });
       }
 
-      getAvailability(){
-        let currentComponent = this;
-        var currDates = [];
-        console.log(this.state.userEmail, " i gootta go")
-        db
-        .collection('users')
-        .doc(this.state.userEmail)
-        .collection('availability')
-        .doc("available").then(function(querySnapshot) {
-            querySnapshot.docs.map(function(doc) {
-                console.log(doc.id, " => ", doc.data());
-                console.log(doc.data());
-                currDates.push(doc.data()) 
-                currentComponent.setState(prevState =>({
-                    availability : currDates
-                })); 
-            }); 
-        })
-            .catch(function(error) {
-                console.log("Error getting documents: ", error);
-            });
-      }
+
 
       render() {
-          this.getAvailability();
+          console.log("AVAILABLE", this.state.userAvailability)
         return (
           <div>
             <Button id = {this.state.buttonid} onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
-               <DateNames userEmail= {this.props.user} submitDate={this.submitDate} sendData={this.getData} availability={this.state.availability} /> :
+               <DateNames userEmail= {this.props.user} submitDate={this.submitDate} sendData={this.getData} availability={this.state.userAvailability} /> :
                null
             }
             {this.state.showComponent ?

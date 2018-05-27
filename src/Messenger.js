@@ -223,9 +223,14 @@ class Messenger extends React.Component {
     }
 
     testTimeStamp(){
-        if(this.state.dates != null) {
+        console.log(this.state.dates)
+        if(this.state.dates.length != 0) {
             this.setState({
                 dateExists : true
+            })
+        } else {
+            this.setState({
+                dateExists : false
             })
         }
 /*         if (this.state.otherUser != null && this.state.timeStampRecovery != null) {
