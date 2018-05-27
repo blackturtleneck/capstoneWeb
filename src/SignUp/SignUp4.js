@@ -22,12 +22,12 @@ class SignUp4 extends React.Component {
             authenticated: true,
             user: this.props.user,
             content: this.props.content,
-            priceRange: [2, 3],
+            priceRange: [this.props.fieldValues.priceMin, this.props.fieldValues.priceMax],
             dietaryPref: this.props.fieldValues.dietaryPref,
             neighborhoods: this.props.fieldValues.neighborhoods,
-            foodTypeLIKE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
-            foodTypeHATE: { "AMERICAN": false, "FRENCH": false, "CHINESE": false, "DESSERT": false, "GREEK": false, "HALAL": false, "INDIAN": false, "ITALIAN": false, "JAPANESE": false, "KOREAN": false, "MEDITERRANEAN": false, "MEXICAN": false, "PIZZA": false, "THAI": false, "MIDDLE EASTERN": false },
-            music: { "POP": false, "COUNTRY": false, "EDM": false, "R&B": false, "LATIN": false, "HIP HOP": false, "ALTERNATIVE": false, "CLASSICAL": false, "INDIE": false, "FOLK": false, "JAZZ": false, "ROCK": false, "SOUL": false, "PUNK": false, "REGGAE": false }
+            foodTypeLIKE: this.props.fieldValues.foodTypeLIKE,
+            foodTypeHATE: this.props.fieldValues.foodTypeHATE,
+            music: this.props.fieldValues.music
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -40,7 +40,7 @@ class SignUp4 extends React.Component {
 
     onRangeChange(value) {
         this.setState({
-            ageRange: value
+            priceRange: value
         });
     }
 
@@ -53,7 +53,8 @@ class SignUp4 extends React.Component {
     nextStep(e) {
         e.preventDefault();
         var data = {
-            priceRange: this.state.priceRange,
+            priceMin: this.state.priceRange[0],
+            priceMax: this.state.priceRange[1],
             dietaryPref: this.state.dietaryPref,
             neighborhoods: this.state.neighborhoods,
             foodTypeLIKE: this.state.foodTypeLIKE,
@@ -81,6 +82,8 @@ class SignUp4 extends React.Component {
                 </Tooltip>
             );
         };
+
+        console.log(this.state)
         const foodPref = ["VEGETARIAN", "GLUTEN-FREE", "VEGAN", "DAIRY-FREE", "NO RED MEAT", "KOSHER", "PALEO", "RAW"];
         const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
         const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]

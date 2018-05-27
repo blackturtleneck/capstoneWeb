@@ -74,6 +74,8 @@ class SignUp2 extends React.Component {
             );
         };
 
+        console.log("avail", this.state.availability)
+
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
         return (
@@ -184,6 +186,7 @@ class SignUp2 extends React.Component {
                                                 time="morning"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.MORNING[index]}
                                                 onChange={() => {
                                                     let tempMorn = this.state.availability.MORNING;
                                                     tempMorn[index] = !tempMorn[index];
@@ -209,6 +212,7 @@ class SignUp2 extends React.Component {
                                                 time="afternoon"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.AFTERNOON[index]}
                                                 onChange={() => {
                                                     let tempAft = this.state.availability.AFTERNOON;
                                                     tempAft[index] = !tempAft[index];
@@ -233,6 +237,7 @@ class SignUp2 extends React.Component {
                                                 time="evening"
                                                 key={index}
                                                 label="e"
+                                                checked={this.state.availability.EVENING[index]}
                                                 onChange={() => {
                                                     let tempEve = this.state.availability.EVENING;
                                                     tempEve[index] = !tempEve[index];

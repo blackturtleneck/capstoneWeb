@@ -84,6 +84,8 @@ class SignUpInController extends Component {
                             "PALEO": false,
                             "RAW": false
                         },
+                        priceMin: 3,
+                        priceMax: 4,
                         neighborhoods: {
                             "BALLARD": false,
                             "BELLTOWN": false,
@@ -174,13 +176,14 @@ class SignUpInController extends Component {
                         matchAgeMin: ref.matchAgeMin,
                         matchAgeMax: ref.matchAgeMax,
                         matchDistance: ref.matchDistance,
-
                         availability: ref.availability,
 
                         dates: ref.dates,
                         topics: ref.topics,
 
                         dietaryPref: ref.dietaryPref,
+                        priceMin: ref.priceMin,
+                        priceMax: ref.priceMax,
                         neighborhoods: ref.neighborhoods,
                         foodTypeLIKE: ref.foodTypeLIKE,
                         foodTypeHATE: ref.foodTypeHATE,
@@ -234,8 +237,9 @@ class SignUpInController extends Component {
 
             dates: fieldValues.dates,
             topics: fieldValues.topics,
-
             dietaryPref: fieldValues.dietaryPref,
+            priceMin: fieldValues.priceMin,
+            priceMax: fieldValues.priceMax,
             neighborhoods: fieldValues.neighborhoods,
             foodTypeLIKE: fieldValues.foodTypeLIKE,
             foodTypeHATE: fieldValues.foodTypeHATE,
