@@ -16,12 +16,14 @@ class RequestDate extends Component {
           textValue: "Request a Date",
           buttonid: "request",
           startArr: [],
-          location: ""
+          location: "",
+          userEmail : this.props.userEmail
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._submit = this._submit.bind(this);
         this.submitDate = this.submitDate.bind(this);
         this.getData = this.getData.bind(this);
+        this.getAvailability = this.getAvailability.bind(this);
       }
     
       _onButtonClick() {
@@ -161,12 +163,36 @@ class RequestDate extends Component {
           });
       }
 
+      getAvailability(){
+        let currentComponent = this;
+        var currDates = [];
+        console.log(this.state.userEmail, " i gootta go")
+        db
+        .collection('users')
+        .doc(this.state.userEmail)
+        .collection('availability')
+        .doc("available").then(function(querySnapshot) {
+            querySnapshot.docs.map(function(doc) {
+                console.log(doc.id, " => ", doc.data());
+                console.log(doc.data());
+                currDates.push(doc.data()) 
+                currentComponent.setState(prevState =>({
+                    availability : currDates
+                })); 
+            }); 
+        })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+      }
+
       render() {
+          this.getAvailability();
         return (
           <div>
             <Button id = {this.state.buttonid} onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
-               <DateNames submitDate={this.submitDate} sendData={this.getData} /> :
+               <DateNames userEmail= {this.props.user} submitDate={this.submitDate} sendData={this.getData} availability={this.state.availability} /> :
                null
             }
             {this.state.showComponent ?

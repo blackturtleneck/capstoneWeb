@@ -3,6 +3,8 @@ import { OverlayTrigger, Button, Popover } from 'react-bootstrap';
 import "./DatesSelection.css"
 import ColorMap from "./ColorMap.js"
 import Availability from "./Availability.js"
+import Availability2 from './Availability2.js'
+import { db } from './FirestoreConfig';
 
 const popoverHoverFocus = (
     <Popover id="freBrew" title="Fremont Brewery">
@@ -81,14 +83,16 @@ class DateNames extends Component {
             mapButtonText: "",
             location : oldState.location,
             nextButton: "nextClicked",
-            nextButtonValue: ""
+            nextButtonValue: "",
+            schedule : this.props.availability
           }));
       }
 
-      getData(startArr, endArr){
+      getData(startArr){
         console.log("Start DateNames Array", startArr);
-        console.log("Start LocationDatenames", this.state.location);
-        this.props.sendData(startArr, this.state.location);
+
+        
+
       }
 
       buttonOneClick(){
@@ -168,7 +172,7 @@ class DateNames extends Component {
 
             <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
             {this.state.availability ?
-               <Availability sendData={this.getData} initialStart = {this.state.dateAvailability}/> :
+               <Availability2 userEmail= {this.props.userEmail} sendData={this.getData} initialStart = {this.state.dateAvailability} currAvailability = {this.state.schedule}/> :
                null
             }
             </div>

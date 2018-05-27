@@ -3,6 +3,7 @@ import { db } from './FirestoreConfig';
 import './Messaging.css';
 import RequestDate from './RequestDate';
 import ReceiveRequest from './ReceiveRequest';
+import Availability2 from './Availability2';
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -274,9 +275,9 @@ class Messenger extends React.Component {
                             <ol className="messages" id="message-list">
                                 {currentMessage}
                             </ol>
-
+    
                             <div className="date-button-wrapper">
-                            <RequestDate user={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>
+                            <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>
 
                             {this.state.newDateRequest != null || this.state.dateExists == true ? (
                            <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser}/>
