@@ -268,7 +268,6 @@ class SignUpInController extends Component {
                         previousStep={this.previousStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
-                        existingUser={this.state.existingUser}
                     />
                 );
             case 3:
@@ -278,7 +277,6 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
-                        existingUser={this.state.existingUser}
                     />
                 );
             case 4:
@@ -288,7 +286,6 @@ class SignUpInController extends Component {
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
                         submitRegistration={this.submitRegistration}
-                        existingUser={this.state.existingUser}
                     />
                 );
             case 5:

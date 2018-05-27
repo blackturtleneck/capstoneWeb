@@ -83,13 +83,7 @@ class SignUp4 extends React.Component {
             );
         };
 
-        console.log(this.state)
-        const foodPref = ["VEGETARIAN", "GLUTEN-FREE", "VEGAN", "DAIRY-FREE", "NO RED MEAT", "KOSHER", "PALEO", "RAW"];
-        const neighborhoods = ["BALLARD", "BELLTOWN", "CAPITOL HILL", "DOWNTOWN", "INTERNATIONAL DISTRICT", "FIRST HILL", "FREMONT", "GEORGETOWN", "PIONEER SQUARE", "QUEEN ANNE", "SODO", "SOUTH LAKE UNION", "WALLINGFORD", "WEST SEATTLE", "UDISTRICT"];
-        const foodTypes = ["AMERICAN", "FRENCH", "CHINESE", "DESSERT", "GREEK", "HALAL", "INDIAN", "ITALIAN", "JAPANESE", "KOREAN", "MEDITERRANEAN", "MEXICAN", "PIZZA", "THAI", "MIDDLE EASTERN"]
-        const music = ["POP", "COUNTRY", "EDM", "R&B", "LATIN", "HIP HOP", "ALTERNATIVE", "CLASSICAL", "INDIE", "FOLK", "JAZZ", "ROCK", "SOUL", "PUNK", "REGGAE"]
         return (
-
             <div className="signup-page">
                 <div className="tagline-2">TELL US MORE &amp; GET BETTER DATES</div>
                 <img
@@ -111,10 +105,14 @@ class SignUp4 extends React.Component {
                         </label>
                     </div>
                     <div id="foodAllergies">
-                        {foodPref.map((item, index) => {
+                        {Object.keys(this.props.fieldValues.dietaryPref).map((item, index) => {
                             return (
                                 <div className="boxes" key={index}>
-                                    <input type="checkbox" id={"box" + index} className="pref-checkbox"
+                                    <input
+                                        type="checkbox"
+                                        id={"box" + index}
+                                        className="pref-checkbox"
+                                        checked={this.state.dietaryPref[item]}
                                         onChange={() => {
                                             let foodTemp = this.state.dietaryPref;
                                             if (foodTemp[item]) {
@@ -130,7 +128,10 @@ class SignUp4 extends React.Component {
                             );
                         })}
                     </div>
-                    {/* TODO: make range is slider of prices ($$$), not numbers */}
+                    {/* TODO signup: 
+                    - make range is slider of prices ($$$), not numbers 
+                    - fix next arrows to be consistent
+                    - signup3 bottom section shouldnt need to scroll down*/}
                     <div id="priceRange">
                         <label className="signup-label" htmlFor="datePrice">
                             DATE PRICE PREFERENCE
@@ -163,7 +164,7 @@ class SignUp4 extends React.Component {
                             NEIGHBORHOODS I LIKE
                     </label>
                         <br />
-                        {neighborhoods.map((neighborhood, index) => {
+                        {Object.keys(this.props.fieldValues.neighborhoods).map((neighborhood, index) => {
                             return (
                                 <button
                                     className={
@@ -189,7 +190,7 @@ class SignUp4 extends React.Component {
                             CUISINES I LIKE
                     </label>
                         <br />
-                        {foodTypes.map((food, index) => {
+                        {Object.keys(this.props.fieldValues.foodTypeLIKE).map((food, index) => {
                             return (
                                 <button
                                     className={
@@ -215,7 +216,7 @@ class SignUp4 extends React.Component {
                             CUISINES I HATE
                     </label>
                         <br />
-                        {foodTypes.map((food, index) => {
+                        {Object.keys(this.props.fieldValues.foodTypeHATE).map((food, index) => {
                             return (
                                 <button
                                     className={
@@ -241,7 +242,7 @@ class SignUp4 extends React.Component {
                             MUSIC PREFERENCES
                     </label>
                         <br />
-                        {music.map((genre, index) => {
+                        {Object.keys(this.props.fieldValues.music).map((genre, index) => {
                             return (
                                 <button
                                     className={

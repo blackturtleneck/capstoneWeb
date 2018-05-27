@@ -38,15 +38,27 @@ class SignUp1 extends React.Component {
         this.props.saveValues(data);
         this.props.nextStep();
     }
-
     render() {
         console.log("name", this.props.fieldValues)
+        const header = this.props.existingUser ?
+            (
+                <div>
+                    <div className="signup-header-welcome"> EDIT YOUR </div>
+                    <div className="signup-header-amp">A M P R</div>
+                    <div className="signup-header-welcome-profile">PROFILE</div>
+                </div>
+            ) : (
+                <div>
+                    <div className="signup-header-welcome"> WELCOME TO </div>
+                    <div className="signup-header-amp">A M P R</div>
+                </div>
+            )
+
         return (
             <div className="signup-page">
                 <div className="signup-header">
-                    <div className="signup-header-welcome"> WELCOME TO </div>
-                    <div className="signup-header-amp">A M P R</div>
-                    <div className="tagline">TELL US ABOUT YOURSELF</div>
+                    {header}
+                    <div className="tagline-1">TELL US ABOUT YOURSELF</div>
                 </div>
                 <form className="form" onSubmit={this.nextStep}>
                     <div className="next-step next">
