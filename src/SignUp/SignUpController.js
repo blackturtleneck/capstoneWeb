@@ -8,148 +8,196 @@ import SignUp3 from './SignUp3';
 import SignUp4 from './SignUp4';
 import SignUpComplete from './SignUpComplete';
 
-let fieldValues = {
-    name: null,
-    gender: '',
-    education: null,
-    religion: null,
-    occupation: null,
-    location: null,
-    birthday: {
-        month: null,
-        day: null,
-        year: null
-    },
-
-    matchGender: null,
-    matchAgeMin: null,
-    matchAgeMax: null,
-    matchDistance: null,
-
-    availability: {
-        "MORNING": [false, false, false, false, false, false, false],
-        "AFTERNOON": [false, false, false, false, false, false, false],
-        "EVENING": [false, false, false, false, false, false, false]
-    },
-
-    dates: {
-        coffee: null,
-        dinner: null,
-        drinks: null,
-        museum: null,
-        show: null,
-        park: null
-    },
-    topics: {
-        travel: null,
-        food: null,
-        music: null,
-        sports: null,
-        movies: null,
-        gaming: null,
-        nature: null,
-        animals: null,
-        tech: null
-    },
-
-    dietaryPref: {
-        "VEGETARIAN": false,
-        "GLUTEN-FREE": false,
-        "VEGAN": false,
-        "DAIRY-FREE": false,
-        "NO RED MEAT": false,
-        "KOSHER": false,
-        "PALEO": false,
-        "RAW": false
-    },
-    neighborhoods: {
-        "BALLARD": false,
-        "BELLTOWN": false,
-        "CAPITOL HILL": false,
-        "DOWNTOWN": false,
-        "INTERNATIONAL DISTRICT": false,
-        "FIRST HILL": false,
-        "FREMONT": false,
-        "GEORGETOWN": false,
-        "PIONEER SQUARE": false,
-        "QUEEN ANNE": false,
-        "SODO": false,
-        "SOUTH LAKE UNION": false,
-        "WALLINGFORD": false,
-        "WEST SEATTLE": false,
-        "UDISTRICT": false
-    },
-    foodTypeLIKE: {
-        "AMERICAN": false,
-        "FRENCH": false,
-        "CHINESE": false,
-        "DESSERT": false,
-        "GREEK": false,
-        "HALAL": false,
-        "INDIAN": false,
-        "ITALIAN": false,
-        "JAPANESE": false,
-        "KOREAN": false,
-        "MEDITERRANEAN": false,
-        "MEXICAN": false,
-        "PIZZA": false,
-        "THAI": false,
-        "MIDDLE EASTERN": false
-    },
-    foodTypeHATE: {
-        "AMERICAN": false,
-        "FRENCH": false,
-        "CHINESE": false,
-        "DESSERT": false,
-        "GREEK": false,
-        "HALAL": false,
-        "INDIAN": false,
-        "ITALIAN": false,
-        "JAPANESE": false,
-        "KOREAN": false,
-        "MEDITERRANEAN": false,
-        "MEXICAN": false,
-        "PIZZA": false,
-        "THAI": false,
-        "MIDDLE EASTERN": false
-    },
-    music: {
-        "POP": false,
-        "COUNTRY": false,
-        "EDM": false,
-        "R&B": false,
-        "LATIN": false,
-        "HIP HOP": false,
-        "ALTERNATIVE": false,
-        "CLASSICAL": false,
-        "INDIE": false,
-        "FOLK": false,
-        "JAZZ": false,
-        "ROCK": false,
-        "SOUL": false,
-        "PUNK": false,
-        "REGGAE": false
-    }
-};
+let fieldValues = '';
 
 class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1
+            step: 1,
+            existingUser: false
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
         this.previousStep = this.previousStep.bind(this);
         this.submitRegistration = this.submitRegistration.bind(this);
     }
+
+    componentWillMount() {
+        db
+            .collection('users')
+            .doc(this.props.user.email)
+            .get()
+            .then(doc => {
+                if (!doc.exists) {
+                    fieldValues = {
+                        name: null,
+                        gender: '',
+                        education: null,
+                        religion: null,
+                        occupation: null,
+                        location: null,
+                        birthday: {
+                            month: null,
+                            day: null,
+                            year: null
+                        },
+
+                        matchGender: null,
+                        matchAgeMin: null,
+                        matchAgeMax: null,
+                        matchDistance: null,
+
+                        availability: {
+                            "MORNING": [false, false, false, false, false, false, false],
+                            "AFTERNOON": [false, false, false, false, false, false, false],
+                            "EVENING": [false, false, false, false, false, false, false]
+                        },
+
+                        dates: {
+                            coffee: null,
+                            dinner: null,
+                            drinks: null,
+                            museum: null,
+                            show: null,
+                            park: null
+                        },
+                        topics: {
+                            travel: null,
+                            food: null,
+                            music: null,
+                            sports: null,
+                            movies: null,
+                            gaming: null,
+                            nature: null,
+                            animals: null,
+                            tech: null
+                        },
+
+                        dietaryPref: {
+                            "VEGETARIAN": false,
+                            "GLUTEN-FREE": false,
+                            "VEGAN": false,
+                            "DAIRY-FREE": false,
+                            "NO RED MEAT": false,
+                            "KOSHER": false,
+                            "PALEO": false,
+                            "RAW": false
+                        },
+                        neighborhoods: {
+                            "BALLARD": false,
+                            "BELLTOWN": false,
+                            "CAPITOL HILL": false,
+                            "DOWNTOWN": false,
+                            "INTERNATIONAL DISTRICT": false,
+                            "FIRST HILL": false,
+                            "FREMONT": false,
+                            "GEORGETOWN": false,
+                            "PIONEER SQUARE": false,
+                            "QUEEN ANNE": false,
+                            "SODO": false,
+                            "SOUTH LAKE UNION": false,
+                            "WALLINGFORD": false,
+                            "WEST SEATTLE": false,
+                            "UDISTRICT": false
+                        },
+                        foodTypeLIKE: {
+                            "AMERICAN": false,
+                            "FRENCH": false,
+                            "CHINESE": false,
+                            "DESSERT": false,
+                            "GREEK": false,
+                            "HALAL": false,
+                            "INDIAN": false,
+                            "ITALIAN": false,
+                            "JAPANESE": false,
+                            "KOREAN": false,
+                            "MEDITERRANEAN": false,
+                            "MEXICAN": false,
+                            "PIZZA": false,
+                            "THAI": false,
+                            "MIDDLE EASTERN": false
+                        },
+                        foodTypeHATE: {
+                            "AMERICAN": false,
+                            "FRENCH": false,
+                            "CHINESE": false,
+                            "DESSERT": false,
+                            "GREEK": false,
+                            "HALAL": false,
+                            "INDIAN": false,
+                            "ITALIAN": false,
+                            "JAPANESE": false,
+                            "KOREAN": false,
+                            "MEDITERRANEAN": false,
+                            "MEXICAN": false,
+                            "PIZZA": false,
+                            "THAI": false,
+                            "MIDDLE EASTERN": false
+                        },
+                        music: {
+                            "POP": false,
+                            "COUNTRY": false,
+                            "EDM": false,
+                            "R&B": false,
+                            "LATIN": false,
+                            "HIP HOP": false,
+                            "ALTERNATIVE": false,
+                            "CLASSICAL": false,
+                            "INDIE": false,
+                            "FOLK": false,
+                            "JAZZ": false,
+                            "ROCK": false,
+                            "SOUL": false,
+                            "PUNK": false,
+                            "REGGAE": false
+                        }
+                    };
+
+                } else {
+                    console.log('Document data:', doc.data());
+                    let ref = doc.data();
+                    fieldValues = {
+                        name: ref.name,
+                        gender: ref.gender,
+                        education: ref.education,
+                        religion: ref.religion,
+                        occupation: ref.occupation,
+                        location: ref.location,
+                        birthday: {
+                            month: ref.birthday.month,
+                            day: ref.birthday.day,
+                            year: ref.birthday.year
+                        },
+
+                        matchGender: ref.matchGender,
+                        matchAgeMin: ref.matchAgeMin,
+                        matchAgeMax: ref.matchAgeMax,
+                        matchDistance: ref.matchDistance,
+
+                        availability: ref.availability,
+
+                        dates: ref.dates,
+                        topics: ref.topics,
+
+                        dietaryPref: ref.dietaryPref,
+                        neighborhoods: ref.neighborhoods,
+                        foodTypeLIKE: ref.foodTypeLIKE,
+                        foodTypeHATE: ref.foodTypeHATE,
+                        music: ref.music
+                    };
+                    this.setState({ existingUser: true })
+                }
+            })
+            .catch(err => {
+                console.log('Error getting document', err);
+            });
+    }
+
     saveValues(fields) {
         return (function () {
             fieldValues = Object.assign({}, fieldValues, fields);
-            console.log("fieldValues", fieldValues)
         })();
-
-
     }
 
     nextStep() {
@@ -165,7 +213,6 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
-        console.log('props', this.props.user);
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
             name: fieldValues.name,
@@ -207,6 +254,7 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
+                        existingUser={this.state.existingUser}
                     />
                 );
             case 2:
@@ -216,6 +264,7 @@ class SignUpInController extends Component {
                         previousStep={this.previousStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
+                        existingUser={this.state.existingUser}
                     />
                 );
             case 3:
@@ -225,6 +274,7 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
+                        existingUser={this.state.existingUser}
                     />
                 );
             case 4:
@@ -234,7 +284,7 @@ class SignUpInController extends Component {
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
                         submitRegistration={this.submitRegistration}
-
+                        existingUser={this.state.existingUser}
                     />
                 );
             case 5:
@@ -245,7 +295,8 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-        return (
+        console.log("values", fieldValues)
+        return (!this.state.existingUser ? <span>Loading data...</span> : (
             <div className="signup-wrapper">
                 <div
                     style={{ width: progress + 'vw' }}
@@ -255,7 +306,7 @@ class SignUpInController extends Component {
                 </div>
                 {this.showStep()}
             </div>
-        );
+        ));
     }
 }
 export default SignUpInController;

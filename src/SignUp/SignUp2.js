@@ -20,13 +20,9 @@ class SignUp2 extends React.Component {
             authenticated: true,
             user: this.props.user,
             content: this.props.content,
-            ageRange: [25, 30],
-            matchDistance: 10,
-            availability: {
-                "MORNING": [false, false, false, false, false, false, false],
-                "AFTERNOON": [false, false, false, false, false, false, false],
-                "EVENING": [false, false, false, false, false, false, false]
-            }
+            ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
+            matchDistance: this.props.fieldValues.matchDistance,
+            availability: this.props.fieldValues.availability
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);

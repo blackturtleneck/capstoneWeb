@@ -40,6 +40,7 @@ class SignUp1 extends React.Component {
     }
 
     render() {
+        console.log("name", this.props.fieldValues)
         return (
             <div className="signup-page">
                 <div className="signup-header">
