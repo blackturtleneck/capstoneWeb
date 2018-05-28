@@ -5,6 +5,7 @@ import RequestDate from '../RequestDate';
 import ReceiveRequest from '../ReceiveRequest';
 import SentRequest from '../SentRequest.js';
 import Availability2 from '../Availability2';
+import DateConfirmed from '../DateConfirmed';
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -60,7 +61,8 @@ class Messenger extends React.Component {
                     currentComponent.setState(prevState =>({
                         dates : currDates,
                         dateExists : false,
-                        userSent : currDates[currDates.length-1].sent
+                        userSent : currDates[currDates.length-1].sent,
+                        userConfirmed :currDates[currDates.length-1].confirm
                     }));
                 } else {
                     currentComponent.setState(prevState =>({
@@ -117,7 +119,8 @@ class Messenger extends React.Component {
                         currDates.push(doc.data());
                     });
                     if (currDates.length != 0) {
-                        currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent });
+                        currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent, 
+                            userConfirmed :currDates[currDates.length-1].confirm });
                     } else {
                         currentComponent2.setState({ dates: currDates });
                     }
@@ -367,18 +370,39 @@ class Messenger extends React.Component {
                                 {currentMessage}
                             </ol>
                                                 
-                            {this.state.dates.length != 0 ?
-                             <div>
+                    {this.state.dates.length != 0 ?
+                    <div>
                             {this.state.userSent == true ?
-                               <SentRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp}  /> :
+                            <div>
+                                    {this.state.userConfirmed == true ?
+                                    <div>
+                                     <DateConfirmed userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />   
 
-                               <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />
-                                }
-                            </div>                  
-                                                                   
-                             :
-                            null
+                                    </div>
+                                    :
+                                    <SentRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp}  />
+                                     }
+
+                               
+                            </div>
+                               :
+                            <div>
+                               {this.state.userConfirmed == true ?
+                                <div>
+                                 <DateConfirmed userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />   
+
+                                </div>
+                                :
+                                <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />
+                                 }
+
+                            </div>
                             }
+                    </div>                  
+                                                                   
+                    :
+                    null
+                    }
             
                 
 
