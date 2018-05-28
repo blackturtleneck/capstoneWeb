@@ -18,6 +18,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        // auth.signOut()
         let component = this;
         // check whether user is logged in
         auth
@@ -56,25 +57,12 @@ class App extends React.Component {
 
     async login() {
         const result = await auth.signInWithPopup(provider);
-        // FB.login(function (response) {
-        //     // handle the response
-        //     if (response.authResponse) {
-        //         console.log('Welcome!  Fetching your information.... ');
-        //         FB.api('/me', function (response) {
-        //             console.log('Good to see you, ' + response.name + '.');
-        //         });
-        //     } else {
-        //         console.log('User cancelled login or did not fully authorize.');
-        //     }
-        //     console.log("response with photos", response)
-
-        // }, { scope: 'user_photos' });
-
         var token = result.credential.accessToken;
         console.log("result", result)
         console.log("token", token)
         const getID = "https://graph.facebook.com/me?access_token=" + token;
         let uid = '';
+        let photoArray = [];
 
         fetch(getID)
             .then(function (response) {
@@ -88,6 +76,34 @@ class App extends React.Component {
                         if (response && !response.error) {
                             /* handle the result */
                             console.log("api response", response)
+                            photoArray = response.data;
+
+                            /* make the API call */
+                            // Add a new document in collection "users"
+                            db
+                                .collection('users')
+                                .doc(result.user.email)
+                                .set({
+                                    name: result.user.displayName,
+                                    uid: result.user.uid,
+                                    fName: result.additionalUserInfo.profile.first_name,
+                                    lName: result.additionalUserInfo.profile.last_name,
+                                    gender: result.additionalUserInfo.profile.gender,
+                                    age: result.additionalUserInfo.profile.age_range.min,
+                                    linkFB: result.additionalUserInfo.profile.link,
+                                    timeZone: result.additionalUserInfo.profile.timezone,
+                                    photoURL: result.user.photoURL,
+                                    photos: photoArray
+                                }, { merge: true })
+                                .then(function () {
+                                    /*eslint-disable-line no-console*/
+                                    console.log('Document successfully written!');
+                                })
+                                .catch(function (error) {
+                                    // eslint-disable-line no-console
+                                    console.error('Error writing document: ', error);
+                                });
+
                         }
                     }
                 );
@@ -101,30 +117,6 @@ class App extends React.Component {
             token: token
         });
 
-        /* make the API call */
-        // Add a new document in collection "users"
-        db
-            .collection('users')
-            .doc(result.user.email)
-            .set({
-                name: result.user.displayName,
-                uid: result.user.uid,
-                fName: result.additionalUserInfo.profile.first_name,
-                lName: result.additionalUserInfo.profile.last_name,
-                gender: result.additionalUserInfo.profile.gender,
-                age: result.additionalUserInfo.profile.age_range.min,
-                linkFB: result.additionalUserInfo.profile.link,
-                timeZone: result.additionalUserInfo.profile.timezone,
-                photoURL: result.user.photoURL
-            }, { merge: true })
-            .then(function () {
-                /*eslint-disable-line no-console*/
-                console.log('Document successfully written!');
-            })
-            .catch(function (error) {
-                // eslint-disable-line no-console
-                console.error('Error writing document: ', error);
-            });
     }
 
     render() {
