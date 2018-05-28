@@ -16,7 +16,7 @@ class Availability3 extends Component {
     constructor(props){
         super(props);
         this.calculateTimes = this.calculateTimes.bind(this);
-        this.getData = this.getData.bind(this);
+        this.userRespondedAvailablity = this.userRespondedAvailablity.bind(this);
         this.populateAvailability = this.populateAvailability.bind(this);
         this.state = {
             cells: [
@@ -95,7 +95,7 @@ class Availability3 extends Component {
 
     };
 
-    getData(arr){
+    userRespondedAvailablity(arr){
       console.log("CHECKING PROPS PT2", this.props.userEmail)
 
       var dateInfo = db
@@ -508,6 +508,7 @@ class Availability3 extends Component {
           <td />
         </tr>
       </TableDragSelect>
+      <Button onClick = {this.userRespondedAvailablity}> Send Availability </Button> 
       </div>
     </div>
         );

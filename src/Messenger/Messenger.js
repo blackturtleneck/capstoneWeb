@@ -462,7 +462,6 @@ class Messenger extends React.Component {
                                              <div id = "datebackground">
                                                 <p> WILL THIS SHOW ANYTING </p>
                                                 <Availability3 userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} /> 
-                                                <Button onClick = {this.userRespondedAvailablity}> Send Availability </Button> 
                                              </div>
                                              }
 
