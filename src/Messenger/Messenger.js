@@ -447,9 +447,17 @@ class Messenger extends React.Component {
                                         <div>
 
                                              {this.state.dates[0].availability ?
-                                               "We've sent your availabilities through!" 
-
-
+                                             <div>
+                                                    {this.state.closeItAll ?
+                                                        null
+                                                        :
+                                                        <div id = "datebackground">
+                                                        <h3 id="halfwayText"> Here's what you sent! </h3>
+                                                        <Availability4 currAvailability = {this.state.dates[0].availability} /> 
+                                                        <Button onClick = {this.closeEverything}> Close </Button> 
+                                                        </div>
+                                                        }
+                                            </div>
                                              :
                                              <div id = "datebackground">
                                                 <p> WILL THIS SHOW ANYTING </p>
