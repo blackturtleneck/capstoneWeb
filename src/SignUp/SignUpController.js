@@ -29,7 +29,9 @@ class SignUpInController extends Component {
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-                if (!doc.exists) {
+                console.log("check")
+                console.log(doc.data().hasOwnProperty('name'))
+                if (!doc.data().hasOwnProperty('name')) {
                     fieldValues = {
                         name: null,
                         gender: '',
@@ -155,7 +157,7 @@ class SignUpInController extends Component {
                             "REGGAE": false
                         }
                     };
-
+                    console.log(fieldValues)
                 } else {
                     let ref = doc.data();
                     fieldValues = {
@@ -188,8 +190,8 @@ class SignUpInController extends Component {
                         foodTypeHATE: ref.foodTypeHATE,
                         music: ref.music
                     };
-                    this.setState({ existingUser: true })
                 }
+                this.setState({ existingUser: true })
             })
             .catch(err => {
                 console.log('Error getting document', err);

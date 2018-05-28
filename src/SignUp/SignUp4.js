@@ -128,6 +128,7 @@ class SignUp4 extends React.Component {
                     </div>
                     {/* TODO signup: 
                     - make range is slider of prices ($$$), not numbers 
+                    - range slider on signup2 starts at 0
                     - fix next arrows to be consistent
                     - WHEN NEW USER - IMMEDIATLY DIRECT TO MAKE PROFILE
                     - signup3 bottom section shouldnt need to scroll down*/}

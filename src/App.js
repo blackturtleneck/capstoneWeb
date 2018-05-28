@@ -84,15 +84,6 @@ class App extends React.Component {
                                 .collection('users')
                                 .doc(result.user.email)
                                 .set({
-                                    name: result.user.displayName,
-                                    uid: result.user.uid,
-                                    fName: result.additionalUserInfo.profile.first_name,
-                                    lName: result.additionalUserInfo.profile.last_name,
-                                    gender: result.additionalUserInfo.profile.gender,
-                                    age: result.additionalUserInfo.profile.age_range.min,
-                                    linkFB: result.additionalUserInfo.profile.link,
-                                    timeZone: result.additionalUserInfo.profile.timezone,
-                                    photoURL: result.user.photoURL,
                                     photos: photoArray
                                 }, { merge: true })
                                 .then(function () {
