@@ -19,7 +19,6 @@ class App extends React.Component {
 
     componentDidMount() {
         let component = this;
-
         // check whether user is logged in
         auth
             .onAuthStateChanged(user => {
@@ -57,8 +56,23 @@ class App extends React.Component {
 
     async login() {
         const result = await auth.signInWithPopup(provider);
+        // FB.login(function (response) {
+        //     // handle the response
+        //     if (response.authResponse) {
+        //         console.log('Welcome!  Fetching your information.... ');
+        //         FB.api('/me', function (response) {
+        //             console.log('Good to see you, ' + response.name + '.');
+        //         });
+        //     } else {
+        //         console.log('User cancelled login or did not fully authorize.');
+        //     }
+        //     console.log("response with photos", response)
+
+        // }, { scope: 'user_photos' });
+
         var token = result.credential.accessToken;
         console.log("result", result)
+        console.log("token", token)
         const getID = "https://graph.facebook.com/me?access_token=" + token;
         let uid = '';
 
@@ -67,6 +81,7 @@ class App extends React.Component {
                 return response.json();
             }).then(function (body) {
                 uid = body.id;
+                console.log("uid", uid)
                 FB.api(
                     "/" + uid + "/photos?access_token=" + token,
                     function (response) {
