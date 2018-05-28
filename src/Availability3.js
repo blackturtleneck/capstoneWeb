@@ -103,7 +103,16 @@ class Availability3 extends Component {
     };
 
     userRespondedAvailablity(arr){
-      console.log("CHECKING PROPS PT2", this.props.userEmail)
+        var dateInfo2 = db
+        .collection('users')
+        .doc(this.props.otherUser)
+        .collection('messages')
+        .doc(this.props.userEmail)
+        .collection('dates').doc(String(this.props.timeStamp))
+
+        return dateInfo2.update({
+           availability: this.state.availabilityArray,     
+        });
 
       var dateInfo = db
         .collection('users')
@@ -114,18 +123,8 @@ class Availability3 extends Component {
 
         return dateInfo.update({
            availability: this.state.availabilityArray,     
-        })
-
-        var dateInfo2 = db
-        .collection('users')
-        .doc(this.props.otherUser)
-        .collection('messages')
-        .doc(this.props.userEmail)
-        .collection('dates').doc(String(this.props.timeStamp))
-
-        return dateInfo2.update({
-           availability: this.state.availabilityArray,     
-        })
+        });
+   
     }
 
     calculateTimes(){ 
