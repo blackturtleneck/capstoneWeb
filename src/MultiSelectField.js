@@ -26,13 +26,6 @@ const cuisines = [
 ];
 
 
-<<<<<<< HEAD
-=======
-    handleSelectChange(value) {
-        this.setState({ value });
-    }
->>>>>>> 0b82c18795dcf8b4afed44ae8de4c3af07c16ea5
-
 export default class MultiSelectField extends Component {
   constructor(props) {
     super(props);

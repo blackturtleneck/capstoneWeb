@@ -39,51 +39,6 @@ class DatesSelection extends React.Component {
         console.log(this.state.lon);    
         return (
             <div className="right-side">
-<<<<<<< HEAD
-         
-            <div>
-        <button className = "request" onClick={this.toggleHidden.bind(this)} >
-            Request a Date
-        </button>
-
-        {!this.state.isHidden && <AvailableTimes classname="scheduler"
-                    weekStartsOn="monday"
-                    calendars={[
-                        {
-                            id: 'me',
-                            title: 'My Schedule',
-                            foregroundColor: '#cd0ff',
-                            backgroundColor: '#f0f0f0',
-                            selected: true,
-                        },
-                        {
-                            id: 'date',
-                            title: 'My dates cal',
-                            foregroundColor: '#666',
-                            backgroundColor: '#f3f3f3',
-                        },
-                    ]}
-                    onChange={(selections) => {
-                        selections.forEach(({ start, end }) => {
-                            console.log('Start:', start, 'End:', end);
-                        })
-                    }}
-                    onEventsRequested={({ calendarId, start, end, callback }) => {
-
-                    }}
-                    height={600}
-                    recurring={false}
-                    availableDays={['monday', 'tuesday', 'wednesday', 'thursday', 'friday']}
-                    availableHourRange={{ start: 9, end: 19 }}
-                />}
-      </div>
-
-                <MultiSelectField />
-                {/* Pass in location into Dates */}
-            <div id="test">
-                <Dates ref="child" lat = {this.state.lat} lon = {this.state.lon}/>
-                </div>
-=======
                 {!this.props.otherUser ? (
                     <div>
                         <AvailableTimes
@@ -138,7 +93,6 @@ class DatesSelection extends React.Component {
                 ) : (
                         <SideProf otherUser={this.props.otherUser} />
                     )}
->>>>>>> 0b82c18795dcf8b4afed44ae8de4c3af07c16ea5
             </div>
         );
     }

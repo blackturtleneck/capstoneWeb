@@ -1,4 +1,4 @@
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+/* import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React from 'react';
 import Dates from './Dates';
 import "./DatesSelection.css";
@@ -13,11 +13,6 @@ export class MapContainer extends React.Component {
         };
     }
   }
-
-    handleChange(event) {
-        this.setState({ data: this.props.locations });
-    }
-
     var myComponent;
 
     const style = {
@@ -195,3 +190,4 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
 })(MapContainer)
 
+ */

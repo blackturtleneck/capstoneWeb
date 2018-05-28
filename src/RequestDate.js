@@ -4,7 +4,7 @@ import MultiSelectField from './MultiSelectField'
 import "./DatesSelection.css"
 import Availability from"./Availability"
 import DateNames from './DateNames'
-import './Messaging.css';
+import './Messenger/Messaging.css';
 import { db } from './FirestoreConfig';
 
 class RequestDate extends Component {

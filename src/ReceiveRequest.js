@@ -168,7 +168,8 @@ class ReceiveRequest extends Component {
         .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
-            confirm: true
+            confirm: true,
+            timeConfirmed : this.state.timeConfirmed
         })
         .then(function() {
             console.log("Document successfully updated!");
@@ -579,7 +580,7 @@ class ReceiveRequest extends Component {
                             
                             Let me know if any of these times work for you! 
                             {finalDateButton.map(time => 
-                            <Button id = {time} onclick = {this.timeConfirm}> {time} </Button>)} 
+                            <Button id = {time} value={time} onClick ={(event)=>this.timeConfirm(event)}>  {time} </Button>)} 
                         </p> 
 
                         <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>

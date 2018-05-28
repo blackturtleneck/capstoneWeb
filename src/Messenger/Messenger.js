@@ -1,9 +1,9 @@
 import React from 'react';
 import { db } from '../FirestoreConfig';
 import './Messaging.css';
-import RequestDate from './RequestDate';
-import ReceiveRequest from './ReceiveRequest';
-import Availability2 from './Availability2';
+import RequestDate from '../RequestDate';
+import ReceiveRequest from '../ReceiveRequest';
+import Availability2 from '../Availability2';
 
 class Messenger extends React.Component {
     constructor(props, context) {

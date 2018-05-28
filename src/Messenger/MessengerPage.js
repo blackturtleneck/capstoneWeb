@@ -3,14 +3,9 @@ import { db } from '../FirestoreConfig';
 import UserList from './UserList';
 import Messenger from './Messenger';
 import './Messaging.css';
-<<<<<<< HEAD:src/MessengerPage.js
-import DatesSelection from './DatesSelection';
-import RequestDate from './RequestDate';
-import ColorMap from './ColorMap';
-import Availability2 from './Availability2';
-=======
-import DatesSelection from '../DatesSelection';
->>>>>>> 0b82c18795dcf8b4afed44ae8de4c3af07c16ea5:src/Messenger/MessengerPage.js
+import RequestDate from '../RequestDate';
+import ColorMap from '../ColorMap';
+import Availability2 from '../Availability2';
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
@@ -63,10 +58,6 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-<<<<<<< HEAD:src/MessengerPage.js
-=======
-                <DatesSelection otherUser={this.state.otherUser} />
->>>>>>> 0b82c18795dcf8b4afed44ae8de4c3af07c16ea5:src/Messenger/MessengerPage.js
             </div>
         );
     }

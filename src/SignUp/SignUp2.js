@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { auth } from '../FirestoreConfig';
 import './SignUp.css';
 import next from '../img/next.svg';
@@ -261,4 +261,4 @@ class SignUp2 extends React.Component {
 
 export default SignUp2;
 
-// try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile
+// try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile */
