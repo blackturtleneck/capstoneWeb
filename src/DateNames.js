@@ -162,7 +162,7 @@ class DateNames extends Component {
                 <OverlayTrigger
                 trigger={['hover', 'focus']}
                 placement="bottom"
-                overlay={popoverHoverFocus}
+                overlay={popoverHoverFocus4}
                 >
                 <Button id = "datefour" onClick={this.buttonFourClick}>THE BARREL THIEF</Button>
                 </OverlayTrigger>

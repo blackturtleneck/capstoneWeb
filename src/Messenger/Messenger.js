@@ -19,7 +19,7 @@ class Messenger extends React.Component {
             newDateRequest: null,
             dateRequestTimeStamp : null,
             dateExists : false,
-            userSent : null
+            userSent : false
         };
 
         this.updateMessage = this.updateMessage.bind(this);

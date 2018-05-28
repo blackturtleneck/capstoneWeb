@@ -66,10 +66,10 @@ input.send-text {
 
 .date-button-wrapper {
   align-content: center;
-  width: 50vw;
+  width: 20vw;
   bottom: 0;
   position: absolute;
-  margin-bottom: 80px;
+  margin-bottom: 10vh;
   margin-left: 655px;
 }
 
@@ -114,7 +114,7 @@ button {
 .messenger-wrapper {
   margin-left: 20vw;
   height: 80vh;
-  width: 50vw;
+  width: 40vw;
   position: absolute;
   bottom: 0;
 }

@@ -1,5 +1,14 @@
 .right-side{
-  padding-left: 75%; 
+  /* padding-left: 65%;  */
+    width: 20vw;
+    display: inline-block;
+    font-family: "Lato", sans-serif;
+    vertical-align: top;
+    border-left: 1px lightgray solid;
+    height: 90vh;
+    bottom: 0;
+    position: absolute;
+  
 }
 
 .scheduler{
@@ -15,7 +24,7 @@ h4 {
  font-weight: bold;
 }
 
-#request {
+#buttons #request {
  background-color: #9ba2ff; /* Green */
  border: none;
  color: white;
@@ -25,21 +34,27 @@ h4 {
  font-family: "Lato", sans-serif, bold;
  text-transform: uppercase;
  width: 20vw;
- margin-left: 20%;
- position:relative;
- margin-bottom: 20px;
+ margin-left: 50%;
+ position:bottom;
+ margin-bottom: 10px;
  margin-top:100%;
 }
 
-#buttons{
+#buttons #submit {
+background-color: #9ba2ff;
+margin-left: 80%;
+position:relative;
+margin-bottom: 10px;
 }
+
+
 
 
 
 #halfwayText {
- font-size: 30px;
+ font-size: 20px;
  font-family: "Lato", sans-serif, bold;
- padding-top: 15px;
+ padding-top: 10px;
  padding-bottom:5px;
  margin-bottom: 0;
 }
@@ -53,8 +68,8 @@ h4 {
 }
 
 #map {
- height: 300px;
- width: 55vh;
+ height: 40vh;
+ width: 28vw;
 }
 
 .test{
@@ -76,15 +91,15 @@ h4 {
 }
 
 #mapview {
- font-size: 10px;
+ font-size: 15px;
  font-family: "Lato", sans-serif, bold;
  color: #9ba2ff;
  width: 5vw;
  height: 1.5vw;
  background-color: white;
- margin-left: 70%;
+ margin-left: 50%;
  padding:0;
- text-align: center;
+ text-align: ceter;
  display: inline-block;
  border: 0px;
  box-shadow: none;
@@ -119,7 +134,8 @@ h4 {
  font-family: "Lato", sans-serif, bold;
  text-transform: uppercase;
  text-align: center;
- Margin-top: 20px;
+ margin-top: 20px;
+ width: 10vw;
 }
 
 #nextClicked{
@@ -138,17 +154,18 @@ h4 {
 
 #datebackground{
  background-color: white;
- width: 60vh;
- height: 75vh;
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ width: 30vw;
+ height: 70vh;
+ /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
  text-align: center;
  margin-left: 65px;
- margin-bottom: 100px;
+ margin-bottom: 10vh;
+ margin-top: 20vh;
 }
 
 #dateone {
  height: 50px;
- width: 55vh;
+ width: 28vw;
  background-size: 100%; /* To fill the dimensions of container (button), or */
  background-image: url(https://static1.squarespace.com/static/5386bf34e4b0f6a71c87ce6a/t/54b40943e4b0531e1f8e58f5/1472149135599/IMG_8833_1.jpg?format=1500w);
  background-repeat: no-repeat;
@@ -156,9 +173,13 @@ h4 {
  font: "Josephin Sans Bold";
 }
 
+#dateone onClick {
+  background-color: #9ba2ff;
+}
+
 #datetwo {
  height: 50px;
- width: 55vh;
+ width: 28vw;
  background-size: 100%; /* To fill the dimensions of container (button), or */
  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvr3cSFbhG6bVDGWyRoPm9R-AL6lUvaZHBBaBxemf_dUoVFoZ4);
  background-repeat: no-repeat;
@@ -167,7 +188,7 @@ h4 {
 
 #datethree {
  height: 50px;
- width: 55vh;
+ width: 28vw;
  background-size: 100%; /* To fill the dimensions of container (button), or */
  background-image: url(http://fremocentrist.com/news/wp-content/uploads/2011/09/BackdoorRoxysMay11OpeningWholeRoomLeft800px1.jpg);
  background-repeat: no-repeat;
@@ -177,7 +198,7 @@ h4 {
 
 #datefour {
  height: 50px;
- width: 55vh;
+ width: 28vw;
  background-size: 100%; /* To fill the dimensions of container (button), or */
  background-image: url(http://res.cloudinary.com/sagacity/image/upload/c_crop,h_800,w_1200,x_0,y_0/c_scale,w_640/v1406744402/barrel-thief-lounge_lycbcm.jpg);
  background-repeat: no-repeat;

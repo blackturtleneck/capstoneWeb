@@ -27,8 +27,8 @@
 }
 
 .availabilityTableDragDown{
-    width: 55vh;
-    margin-top: 50px;
+    width: 28vw;
+    margin-top: 10vh;
 }
 
 .table-drag-select td.cell-being-selected {
@@ -43,7 +43,7 @@
 @media only screen and (max-width : 1043px)  {
 
     .availabilityTableDragDown{
-        width: 300px;
+        width: 28vw;
     }
     
 }

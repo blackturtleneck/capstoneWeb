@@ -176,9 +176,9 @@ class ColorMap extends Component {
         return(
            <div>
              <GoogleMapExample
-                   containerElement={ <div style={{ height: `250px`, width: '55vh' }} /> }
+                   containerElement={ <div style={{ height: `40vh`, width: '28vw' }} /> }
                mapElement={ <div style={{ height: `100%` }} /> }
-             />
+             /> 
            </div>
         );
         }

@@ -35,6 +35,7 @@ class ReceiveRequest extends Component {
 
    componentWillMount(){
         console.log(this.props.userSent, "userSENTTEST")
+        console.log(this.props.otherUser, "userSENTTEST")
         let currentComponent = this;
         var currDates = [];
         db
@@ -191,7 +192,7 @@ class ReceiveRequest extends Component {
         this.setState({
             dateConfirmed : true
         })
-        console.log(this.state.dateConfirmed, "UGH")
+        console.log(this.props.userEmail, "UGH")
 
         this.otherUserConfirm();
         var dateInfo = db
@@ -506,57 +507,10 @@ class ReceiveRequest extends Component {
                     }
 
             </div>
-
- 
-/*                     {this.state.sent == false && this.state.dateDetails != null ?           
-                    <div>    
-                          
-                          {this.state.dateConfirmed == false && this.state.sent == false?
-                           <div>
-                           <h3 id = "letsdate">
-                           Hey, <br/>want to go to {locationArr+ " "}
-                           this week? </h3> 
-                           <p>
-                           It's got inventive codadcktails and small plates in a warm, eco-friendly setting with regular tastings and classes. <br/></p>
-                           <Button id ="locview" onClick = {this.showMap} >Here's where it is.</Button> <br/>
-                             
-                             {this.state.mapShowing ?
-                                 <ColorMap /> :
-                                 null
-                                 }
-
-                            <p> Let me know if any of these times work for you! </p>
-                              
-                            {finalDateButton.map(time => 
-                            <Button id = {time} value={time} onClick ={(event)=>this.timeConfirm(event)}>  {time} </Button>)}          
-                      
-                            <Button id = "confirm" onClick = {this.confirmDate}> Confirm Date </Button>
-                            <Button id = "confirm" onClick = {this.respond}> Another Time?</Button>
-                        </div>       
-                              :
-                               
-                              <div> You have an upcoming date at {locationArr} at {this.state.timeConfirmed}
-
-                              {this.state.availabilityCalendar ?
-                                  <div>  <Availability2 /> <Button> Send Availability </Button> </div> :
-                                    null
-                                    }
-                              
-                                </div> 
-                            
-                            
-                            }                   
-                
-                      </div>
-                    
-              
-                            :
-                        null 
-                        }
-                        </div>
-                :
-               <div>   <div> You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> </div> </div>
-            }  </div> */}
+                                : 
+                                null
+                                }
+        </div>
     );
 }
 
