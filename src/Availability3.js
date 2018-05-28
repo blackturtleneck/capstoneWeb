@@ -163,7 +163,6 @@ class Availability3 extends Component {
           }
         
         } 
-         this.getData(a);
       }
       this.setState({
         availability : a
