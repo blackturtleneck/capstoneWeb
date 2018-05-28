@@ -17,6 +17,7 @@ class Availability3 extends Component {
         super(props);
         this.calculateTimes = this.calculateTimes.bind(this);
         this.userRespondedAvailablity = this.userRespondedAvailablity.bind(this);
+        this.getData = this.getData.bind(this);
         this.populateAvailability = this.populateAvailability.bind(this);
         this.state = {
             cells: [
@@ -53,6 +54,12 @@ class Availability3 extends Component {
 
     componentWillMount(){
       this.populateAvailability();
+    }
+    
+    getData(arr) {
+      this.setState({
+        availabilityArray : arr
+      });
     }
 
     handleChange = cells => {
@@ -106,18 +113,18 @@ class Availability3 extends Component {
         .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
-           availability: arr,     
+           availability: this.state.availabilityArray,     
         })
 
-        var dateInfo = db
+        var dateInfo2 = db
         .collection('users')
         .doc(this.props.otherUser)
         .collection('messages')
         .doc(this.props.userEmail)
         .collection('dates').doc(String(this.props.timeStamp))
 
-        return dateInfo.update({
-           availability: arr,     
+        return dateInfo2.update({
+           availability: this.state.availabilityArray,     
         })
     }
 
@@ -163,6 +170,7 @@ class Availability3 extends Component {
           }
         
         } 
+         this.getData(a);
       }
       this.setState({
         availability : a
