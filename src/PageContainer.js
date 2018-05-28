@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth, db } from './FirestoreConfig';
+import { auth } from './FirestoreConfig';
 import MessengerPage from './Messenger/MessengerPage';
 import './Login.css';
 import { PageContent } from './Enums';
@@ -22,36 +22,36 @@ class PageContainer extends React.Component {
         auth.signOut();
     }
 
-    componentDidMount() {
-        let component = this;
-        db
-            .collection('users')
-            .doc(this.state.user.email)
-            .get()
-            .then(function (doc) {
-                if (!doc.data().onBoarding) {
-                    component.setState({
-                        onBoarding: false
-                    });
-                } else {
-                    component.setState({
-                        onBoarding: true
-                    });
-                }
-            });
-    }
+    // componentDidMount() {
+    //     let component = this;
+    //     db
+    //         .collection('users')
+    //         .doc(this.state.user.email)
+    //         .get()
+    //         .then(function (doc) {
+    //             if (!doc.data().onBoarding) {
+    //                 component.setState({
+    //                     onBoarding: false
+    //                 });
+    //             } else {
+    //                 component.setState({
+    //                     onBoarding: true
+    //                 });
+    //             }
+    //         });
+    // }
 
     render() {
         return (
             <div>
-
-                {this.state.onBoarding && (
+                {/* {this.props.signup && } */}
+                {/* {this.state.onBoarding && ( */}
+                {!(this.state.content === PageContent.SIGN_UP) && (
                     <div>
                         <Header userEmail={this.state.user.email} />
                         {/* <Redirect to={'/messenger'} /> */}
                     </div>
                 )}
-
                 {this.state.content === PageContent.DATE_SELECTION && (
                     <DatesSelection />
                 )}

@@ -15,7 +15,8 @@ class SignUpInController extends Component {
         super(props);
         this.state = {
             step: 1,
-            existingUser: false
+            existingUser: false,
+            new: false
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -29,9 +30,8 @@ class SignUpInController extends Component {
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-                console.log("check")
-                console.log(doc.data().hasOwnProperty('name'))
-                if (!doc.data().hasOwnProperty('name')) {
+                console.log("check", doc.data().newUser)
+                if (doc.data().newUser) {
                     fieldValues = {
                         name: null,
                         gender: '',
@@ -157,6 +157,7 @@ class SignUpInController extends Component {
                             "REGGAE": false
                         }
                     };
+                    this.setState({ new: true })
                     console.log(fieldValues)
                 } else {
                     let ref = doc.data();
@@ -191,7 +192,7 @@ class SignUpInController extends Component {
                         music: ref.music
                     };
                 }
-                this.setState({ existingUser: true })
+                // this.setState({ existingUser: true })
             })
             .catch(err => {
                 console.log('Error getting document', err);
@@ -259,7 +260,7 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
-                        existingUser={this.state.existingUser}
+                        new={this.state.new}
                     />
                 );
             case 2:
@@ -297,17 +298,18 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-        return (!this.state.existingUser ? <span>Loading data...</span> : (
-            <div className="signup-wrapper">
-                <div
-                    style={{ width: progress + 'vw' }}
-                    className="progress-bar"
-                >
-                    {' '}
-                </div>
-                {this.showStep()}
+        // return (!this.state.existingUser ? <span>Loading data...</span> : (
+        return
+        <div className="signup-wrapper">
+            <div
+                style={{ width: progress + 'vw' }}
+                className="progress-bar"
+            >
+                {' '}
             </div>
-        ));
+            {this.showStep()}
+        </div>
+        // ));
     }
 }
 export default SignUpInController;

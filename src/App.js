@@ -4,7 +4,6 @@ import { auth, db, provider } from './FirestoreConfig';
 import { Routes, PageContent } from './Enums';
 import PageContainer from './PageContainer';
 import './Login.css';
-import Login from './Login';
 import FB from 'fb'
 
 class App extends React.Component {
@@ -13,13 +12,13 @@ class App extends React.Component {
 
         this.state = {
             authenticated: false,
-            user: null
+            user: null,
+            newUser: false,
+            token: ''
         };
     }
 
     componentDidMount() {
-        // auth.signOut()
-        let component = this;
         // check whether user is logged in
         auth
             .onAuthStateChanged(user => {
@@ -31,20 +30,6 @@ class App extends React.Component {
                             email: user.email
                         }
                     });
-                    db
-                        .collection('users')
-                        .doc(this.state.user.email)
-                        .onSnapshot(function (doc) {
-                            if (!doc.data().onBoarding) {
-                                component.setState({
-                                    onBoarding: false
-                                });
-                            } else {
-                                component.setState({
-                                    onBoarding: true
-                                });
-                            }
-                        });
                 } else {
                     this.setState({
                         authenticated: true,
@@ -55,106 +40,147 @@ class App extends React.Component {
             .bind(this);
     }
 
+    updateState() {
+        //causes no render
+        db
+            .collection('users')
+            .doc(this.state.user.email)
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    if (doc.data().newUser) {
+                        this.setState({ newUser: true })
+                    }
+                }
+                console.log("update state", this.state)
+            })
+    }
+
     async login() {
         const result = await auth.signInWithPopup(provider);
-        var token = result.credential.accessToken;
-        console.log("result", result)
-        console.log("token", token)
+        const token = result.credential.accessToken;
+        this.setState({ token: token });
         const getID = "https://graph.facebook.com/me?access_token=" + token;
         let uid = '';
         let photoArray = [];
+        let component = this;
 
         fetch(getID)
             .then(function (response) {
                 return response.json();
             }).then(function (body) {
                 uid = body.id;
-                console.log("uid", uid)
                 FB.api(
                     "/" + uid + "/photos?access_token=" + token,
                     function (response) {
                         if (response && !response.error) {
                             /* handle the result */
-                            console.log("api response", response)
                             photoArray = response.data;
-
-                            /* make the API call */
-                            // Add a new document in collection "users"
                             db
                                 .collection('users')
                                 .doc(result.user.email)
-                                .set({
-                                    photos: photoArray
-                                }, { merge: true })
-                                .then(function () {
-                                    /*eslint-disable-line no-console*/
-                                    console.log('Document successfully written!');
+                                .get()
+                                .then(doc => {
+                                    if (!doc.exists) {
+                                        db
+                                            .collection('users')
+                                            .doc(result.user.email)
+                                            .set({
+                                                newUser: true,
+                                                photos: photoArray
+                                            })
+                                        component.updateState();
+                                    }
                                 })
-                                .catch(function (error) {
-                                    // eslint-disable-line no-console
-                                    console.error('Error writing document: ', error);
-                                });
 
+                            /* make the API call */
+                            // Add a new document in collection "users"
+                            // db
+                            //     .collection('users')
+                            //     .doc(result.user.email)
+                            //     .set({
+                            //         photos: photoArray
+                            //     }, { merge: true })
+                            //     .then(function () {
+                            //         /*eslint-disable-line no-console*/
+                            //         console.log('Document successfully written!');
+                            //     })
+                            //     .catch(function (error) {
+                            //         // eslint-disable-line no-console
+                            //         console.error('Error writing document: ', error);
+                            //     });
                         }
                     }
                 );
-
             }).catch(function (error) {
                 console.log(error)
             })
 
-        this.setState({
-            // user: result.user,
-            token: token
-        });
-
     }
 
     render() {
-        let path = window.location.href.split('/')[3];
+        // auth.signOut();
         let content = '';
-        switch (path) {
-            case Routes.PROFILE:
-                content = PageContent.PROFILE;
-                break;
-            case Routes.DATE_SELECTION:
-                content = PageContent.DATE_SELECTION;
-                break;
-            case Routes.SIGN_UP:
-                content = PageContent.SIGN_UP;
-                break;
-            default:
-                content = PageContent.MESSENGER;
-                break;
-        }
-        return (
-            <div className="">
-                {this.state.authenticated ? (
-                    this.state.user ? (
-                        <div>
-                            <PageContainer
-                                user={this.state.user}
-                                content={content}
-                                token={this.state.token}
-                            />
-                            {/* {!this.state.onBoarding && (
-                                <Redirect to={'/signup'} />
-                            )} */}
-                            {!path ? <Redirect to={'/messenger'} /> : null}
-                        </div>
-                    ) : (
-                            <div className="login">
-                                <Login login={this.login} />
-                                <Redirect to={'/'} />
+        let path = window.location.href.split('/')[3];
+        console.log(this.state)
+        // if (path !== PageContent.SIGN_UP && this.state.newUser) {
+        if (this.state.newUser) {
+            //     return <Redirect to={'/signup'} />
+            //     // }
+
+            //     // if (this.state.newUser) {
+            //     //     content = PageContent.SIGN_UP;
+            //     //     return <Redirect to={'/signup'} />
+            // } else if (path === PageContent.SIGN_UP && this.state.newUser) {
+            content = PageContent.PROFILE;
+        } else {
+            switch (path) {
+                case Routes.PROFILE:
+                    content = PageContent.PROFILE;
+                    break;
+                case Routes.DATE_SELECTION:
+                    content = PageContent.DATE_SELECTION;
+                    break;
+                case Routes.SIGN_UP:
+                    content = PageContent.SIGN_UP;
+                    break;
+                default:
+                    content = PageContent.MESSENGER;
+                    break;
+            }
+
+            console.log(content)
+            return (
+                <div className="">
+                    {this.state.authenticated ? (
+                        this.state.user ? (
+                            <div>
+                                {/* {this.state.new && <Redirect to={'/signup'} />} */}
+
+                                <PageContainer
+                                    user={this.state.user}
+                                    content={content}
+                                    token={this.state.token}
+                                    signup={this.state.newUser}
+                                />
                             </div>
-                        )
-                ) : (
-                        // if login hasn't mounted
-                        <div />
-                    )}
-            </div>
-        );
+                        ) : (
+                                <div className="login">
+                                    <button className="facebook" onClick={this.login.bind(this)}>
+                                        Login with Facebook
+                                </button>
+                                    <Redirect to={'/'} />
+                                </div>
+                            )
+                    ) : (
+                            // if login hasn't mounted
+                            <div>Loading data... </div>
+                        )}
+                </div>
+            );
+        }
     }
 }
+
 
 export default App;

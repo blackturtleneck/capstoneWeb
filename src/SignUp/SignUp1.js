@@ -39,7 +39,7 @@ class SignUp1 extends React.Component {
         this.props.nextStep();
     }
     render() {
-        const header = this.props.existingUser ?
+        const header = !this.props.new ?
             (
                 <div>
                     <div className="signup-header-welcome"> EDIT YOUR </div>
