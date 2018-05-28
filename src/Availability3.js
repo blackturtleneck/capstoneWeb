@@ -111,9 +111,9 @@ class Availability3 extends Component {
 
         var dateInfo = db
         .collection('users')
-        .doc(this.props.userEmail)
-        .collection('messages')
         .doc(this.props.otherUser)
+        .collection('messages')
+        .doc(this.props.userEmail)
         .collection('dates').doc(String(this.props.timeStamp))
 
         return dateInfo.update({
