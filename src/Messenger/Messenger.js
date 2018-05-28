@@ -4,8 +4,11 @@ import './Messaging.css';
 import RequestDate from '../RequestDate';
 import ReceiveRequest from '../ReceiveRequest';
 import SentRequest from '../SentRequest.js';
-import Availability2 from '../Availability2';
+import Availability3 from '../Availability3';
+import Availability4 from '../Availability4';
 import DateConfirmed from '../DateConfirmed';
+import sendAvailabilityResponse from '../sendAvailabilityResponse.js';
+import {Button} from 'react-bootstrap';
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -21,7 +24,8 @@ class Messenger extends React.Component {
             newDateRequest: null,
             dateRequestTimeStamp : null,
             dateExists : false,
-            userSent : null
+            userSent : null,
+            userRespondedAvailability : true
         };
 
         this.updateMessage = this.updateMessage.bind(this);
@@ -29,6 +33,7 @@ class Messenger extends React.Component {
         this.submitMessageEnter = this.submitMessageEnter.bind(this);
         this.dateRequestHandler = this.dateRequestHandler.bind(this);
         this.update = this.update.bind(this);
+        this.userRespondedAvailablity = this.userRespondedAvailablity.bind(this);
     }
 
     componentWillMount() {
@@ -62,7 +67,8 @@ class Messenger extends React.Component {
                         dates : currDates,
                         dateExists : false,
                         userSent : currDates[currDates.length-1].sent,
-                        userConfirmed :currDates[currDates.length-1].confirm
+                        userConfirmed :currDates[currDates.length-1].confirm,
+                        userResponded : currDates[currDates.length-1].response
                     }));
 
                 } else {
@@ -121,7 +127,7 @@ class Messenger extends React.Component {
                     });
                     if (currDates.length != 0) {
                         currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent, 
-                            userConfirmed :currDates[currDates.length-1].confirm });
+                            userConfirmed :currDates[currDates.length-1].confirm,    userResponded : currDates[currDates.length-1].response });
                     } else {
                         currentComponent2.setState({ dates: currDates });
                     }
@@ -340,6 +346,11 @@ class Messenger extends React.Component {
         } */
     }
 
+    userRespondedAvailablity() {
+        console.log(this.state.dates[0])
+    }
+
+
     render() {
 
         const currentMessage = this.state.messages.map((message, i) => {
@@ -382,8 +393,22 @@ class Messenger extends React.Component {
 
                                     </div>
                                     :
-                                    <SentRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp}  />
-                                     }
+                                    <div>
+                                        {this.state.userResponded == true ?
+                                        <div>
+                                          <p> Here's when they're free - you can find a good time from here. </p>
+                                              <Availability4 /> 
+                                              <Button> Close</Button> 
+                                        </div>
+                                            :
+                                            <div>
+                                                <SentRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp}  />
+                                            </div>
+                                        }
+
+                                    
+                                    </div>
+                                }
 
                                
                             </div>
@@ -395,8 +420,33 @@ class Messenger extends React.Component {
 
                                 </div>
                                 :
-                                <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />
-                                 }
+
+                                <div>
+                                        {this.state.userResponded == true ?
+                                        <div>
+
+                                             {this.state.userRespondedAvailability == true ?
+                                            <div id = "datebackground">
+                                                   <p> WILL THIS SHOW ANYTING </p>
+                                                    <Availability3 userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} /> 
+                                                    <Button onClick = {this.userRespondedAvailablity}> Send Availability </Button> 
+                                            </div>
+                                             :
+                                             null
+                                             }
+
+                                        </div>
+                                            :
+                                            <div>
+                                                   <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />
+                                            </div>
+                                        }
+
+                                    
+                                    </div>
+                                
+                            
+                                }
 
                             </div>
                             }
