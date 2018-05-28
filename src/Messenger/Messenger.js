@@ -401,16 +401,16 @@ class Messenger extends React.Component {
                     </div>                  
                                                                    
                     :
-                    null
+                    <div className="date-button-wrapper">
+                    {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
+                  
+
+                    </div>
                     }
             
                 
 
-                            <div className="date-button-wrapper">
-                        {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
-                      
 
-                            </div>
 
                             <div className="button-input-wrapper">
                                 <input

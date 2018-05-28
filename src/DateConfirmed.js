@@ -429,7 +429,8 @@ class DateConfirmed extends Component {
           }
         }
     return(
-        <div>
+        <div id = "datebackground">
+
       
      
                                    <h3 id = "letsdate">   You have an upcoming date at {locationArr} at {this.state.timeConfirmed} </h3>

@@ -429,7 +429,8 @@ class ReceiveRequest extends Component {
           }
         }
 
-    return( <div> 
+    return(    <div id = "datebackground">
+
 
                                 <div>
                                       <h3 id = "letsdate">

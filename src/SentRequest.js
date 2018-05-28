@@ -429,7 +429,8 @@ class SentRequest extends Component {
           }
         }
     return(
-        <div>
+        <div id = "datebackground">
+
       
         <div>
                                       <h3 id = "letsdate">
