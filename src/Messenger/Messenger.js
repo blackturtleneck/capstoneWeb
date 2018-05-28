@@ -3,6 +3,7 @@ import { db } from '../FirestoreConfig';
 import './Messaging.css';
 import RequestDate from '../RequestDate';
 import ReceiveRequest from '../ReceiveRequest';
+import SentRequest from '../SentRequest.js';
 import Availability2 from '../Availability2';
 
 class Messenger extends React.Component {
@@ -55,11 +56,19 @@ class Messenger extends React.Component {
                     currDates.push(doc.data())
                 }); return currDates
             }).then(function(currDates) {
-                currentComponent.setState(prevState =>({
-                    dates : currDates,
-                    dateExists : false,
-                    userSent : currDates[currDates.length-1].sent
-                }));
+                if (currDates.length != 0) {
+                    currentComponent.setState(prevState =>({
+                        dates : currDates,
+                        dateExists : false,
+                        userSent : currDates[currDates.length-1].sent
+                    }));
+                } else {
+                    currentComponent.setState(prevState =>({
+                        dates : currDates,
+                        dateExists : false,
+                    }));
+                }
+
 
             })
             .catch(function(error) {
@@ -107,8 +116,12 @@ class Messenger extends React.Component {
                     querySnapshot.forEach(function(doc) {
                         currDates.push(doc.data());
                     });
-                    currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent
-                });
+                    if (currDates.length != 0) {
+                        currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent });
+                    } else {
+                        currentComponent2.setState({ dates: currDates });
+                    }
+               
                 });
         }
 
@@ -339,6 +352,11 @@ class Messenger extends React.Component {
             );
         });
 
+        //                             {this.state.dateResponse == false  ?
+     //   <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
+    //    null
+//}
+
         return (
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
@@ -348,19 +366,26 @@ class Messenger extends React.Component {
                             <ol className="messages" id="message-list">
                                 {currentMessage}
                             </ol>
-    
+                                                
+                            {this.state.dates.length != 0 ?
+                             <div>
+                            {this.state.userSent == true ?
+                               <SentRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp}  /> :
+
+                               <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} />
+                                }
+                            </div>                  
+                                                                   
+                             :
+                            null
+                            }
+            
+                
+
                             <div className="date-button-wrapper">
                         {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
+                      
 
-                         {  this.state.newDateRequest != null || this.state.dateExists == true ? (
-                            <div>
-                            {this.state.dateResponse == false  ?
-                               <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
-                                      null
-                            }
-           
-                           </div>
-                            ) : null }
                             </div>
 
                             <div className="button-input-wrapper">
