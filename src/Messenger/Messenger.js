@@ -18,7 +18,8 @@ class Messenger extends React.Component {
             otherUserName: this.props.otherUserName,
             newDateRequest: null,
             dateRequestTimeStamp : null,
-            dateExists : false
+            dateExists : false,
+            userSent : null
         };
 
         this.updateMessage = this.updateMessage.bind(this);
@@ -56,7 +57,8 @@ class Messenger extends React.Component {
             }).then(function(currDates) {
                 currentComponent.setState(prevState =>({
                     dates : currDates,
-                    dateExists : false
+                    dateExists : false,
+                    userSent : currDates[currDates.length-1].sent
                 }));
 
             })
@@ -68,9 +70,6 @@ class Messenger extends React.Component {
 
     }
 
-    componentWillMount() {
-        this.testTimeStamp();
-    }
 
     componentWillReceiveProps(newProps) {
         this.testTimeStamp();
@@ -108,7 +107,7 @@ class Messenger extends React.Component {
                     querySnapshot.forEach(function(doc) {
                         currDates.push(doc.data());
                     });
-                    currentComponent2.setState({ dates: currDates
+                    currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent
                 });
                 });
         }
@@ -355,10 +354,10 @@ class Messenger extends React.Component {
 
                          {  this.state.newDateRequest != null || this.state.dateExists == true ? (
                             <div>
-                                          {this.state.dateResponse == false ?
-                                             <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser}/> :
-                                            null
-                                            }
+                            {this.state.dateResponse == false  ?
+                               <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
+                                      null
+                            }
            
                            </div>
                             ) : null }

@@ -34,7 +34,7 @@ class ReceiveRequest extends Component {
     } 
 
    componentWillMount(){
-        console.log(this.props.otherUser)
+        console.log(this.props.userSent, "userSENTTEST")
         let currentComponent = this;
         var currDates = [];
         db
@@ -64,6 +64,12 @@ class ReceiveRequest extends Component {
                    this.setState({
                     timeStampFinal : data[key]
                    });             
+               }
+               if (key == 'sent') {
+                this.setState({
+                    sent : data[key]
+                   });    
+                console.log("SENT", this.state.sent) 
                }
             }
 
@@ -110,6 +116,12 @@ class ReceiveRequest extends Component {
                 timeStampFinal : data[key]
                });             
            }
+           if (key == 'sent') {
+            this.setState({
+                sent : data[key]
+               });    
+            console.log("SENT", this.state.sent, this.state.otherUser) 
+           }
         }
 
     }
@@ -151,6 +163,12 @@ class ReceiveRequest extends Component {
                    this.setState({
                     timeStampFinal : data[key]
                    });             
+               }
+               if (key == 'sent') {
+                this.setState({
+                    sent : data[key]
+                   });    
+                console.log("SENT", this.state.sent) 
                }
             }
 
@@ -416,11 +434,10 @@ class ReceiveRequest extends Component {
            {this.state.ready  ?
 
                 <div id = "datebackground">
-
-                    {this.state.userReceiving == false && this.state.dateDetails != null ?           
+                    {this.state.sent == false && this.state.dateDetails != null ?           
                     <div>    
                           
-                          {this.state.dateConfirmed == false ?
+                          {this.state.dateConfirmed == false && this.state.sent == false?
                            <div>
                            <h3 id = "letsdate">
                            Hey, <br/>want to go to {locationArr+ " "}
@@ -455,25 +472,12 @@ class ReceiveRequest extends Component {
                             
                             
                             }                   
-
-                          
+                
                       </div>
                     
               
                             :
-                            <div>  <h3 id = "letsDate">
-                            Hey, want to go to 
-                            {" " + locationArr+ " "} this week? </h3> 
-                            <p>
-                            It's got inventive cocktails and small plates in a warm, eco-friendly setting with regular tastings and classes. Let me know which of these times work best for you!
-                            {finalDateButton.map(time => 
-                            <Button id = {time}>  </Button>)} 
-                        </p> 
-
-                        <Button id = "confirm" onClick = {this.confirmDate}> Waiting for {this.props.otherUserName} to respond </Button>
-                        </div>
-                            
-
+                        null 
                         }
                         </div>
                 :
