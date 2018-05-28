@@ -65,12 +65,12 @@ class DateNames extends Component {
       }
 
       componentDidMount(){
-        console.log("CHECK PROPS", this.props.availability);
+        console.log("CHECK PROPS", this.props.userEmail);
       }
     
 
       componentWillReceiveProps(){
-        console.log("CHECK PROPS", this.props.availability);
+        console.log("CHECK PROPS", this.props.userEmail);
       }
     
       _onButtonClick() {
@@ -130,59 +130,58 @@ class DateNames extends Component {
   render () {
         return (
             <div id = "datebackground">
-            {this.state.datesShown && 
-             <div>
-             <h3 id = "halfwayText"> Let's meet halfway! </h3>
-                <div class="btn-group-vertical">
-                <OverlayTrigger
+                <div>
+                <h3 id = "halfwayText"> Let's meet halfway! </h3>
+                    <div class="btn-group-vertical">
+                    <OverlayTrigger
+                        trigger={['hover', 'focus']}
+                        placement="bottom"
+                          overlay={popoverHoverFocus}
+                    >
+                        <Button id = "dateone" onClick={this.buttonOneClick} >FREMONT BREWERY</Button>
+                    </OverlayTrigger>
+        
+                    <OverlayTrigger
                     trigger={['hover', 'focus']}
                     placement="bottom"
-                      overlay={popoverHoverFocus}
-                >
-                     <Button id = "dateone" onClick={this.buttonOneClick} >FREMONT BREWERY</Button>
-                </OverlayTrigger>
-    
-                <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="bottom"
-                overlay={popoverHoverFocus2}
-                >
-                <Button id ="datetwo" onClick={this.buttonTwoClick}>SCHILLING CIDERHOUSE</Button>
-                </OverlayTrigger>
-    
-    
-                <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="bottom"
-                overlay={popoverHoverFocus3}
-                >
-                <Button id = "datethree" onClick={this.buttonThreeClick}>THE BACKDOOR</Button>
-                </OverlayTrigger>
-    
-                <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="bottom"
-                overlay={popoverHoverFocus}
-                >
-                <Button id = "datefour" onClick={this.buttonFourClick}>THE BARREL THIEF</Button>
-                </OverlayTrigger>
+                    overlay={popoverHoverFocus2}
+                    >
+                    <Button id ="datetwo" onClick={this.buttonTwoClick}>SCHILLING CIDERHOUSE</Button>
+                    </OverlayTrigger>
+        
+        
+                    <OverlayTrigger
+                    trigger={['hover', 'focus']}
+                    placement="bottom"
+                    overlay={popoverHoverFocus3}
+                    >
+                    <Button id = "datethree" onClick={this.buttonThreeClick}>THE BACKDOOR</Button>
+                    </OverlayTrigger>
+        
+                    <OverlayTrigger
+                    trigger={['hover', 'focus']}
+                    placement="bottom"
+                    overlay={popoverHoverFocus}
+                    >
+                    <Button id = "datefour" onClick={this.buttonFourClick}>THE BARREL THIEF</Button>
+                    </OverlayTrigger>
+                    </div>
+              </div>}
+
+                <div class="btn-group-vertical">
+              <Button id ="mapview" onClick={this._onButtonClick}> {this.state.mapButtonText} </Button>
+                {this.state.showComponent ?
+                  <ColorMap /> :
+                  null
+                }
+
+                <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
+                {this.state.availability ?
+                  <Availability2 userEmail= {this.props.userEmail} sendData={this.getData} initialStart = {this.state.dateAvailability} currAvailability = {this.state.dateAvailability}/> :
+                  null
+                }
                 </div>
-          </div>}
-
-            <div class="btn-group-vertical">
-           <Button id ="mapview" onClick={this._onButtonClick}> {this.state.mapButtonText} </Button>
-            {this.state.showComponent ?
-               <ColorMap /> :
-               null
-            }
-
-            <Button id ={this.state.nextButton} onClick={this.handleClick} value="Next"> {this.state.nextButtonValue} </Button>
-            {this.state.availability ?
-               <Availability2 userEmail= {this.props.userEmail} sendData={this.getData} initialStart = {this.state.dateAvailability} currAvailability = {this.state.dateAvailability}/> :
-               null
-            }
-            </div>
-            </div>
+                </div>
         );
     }
 }

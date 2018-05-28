@@ -31,7 +31,7 @@ class Messenger extends React.Component {
         this.update = this.update.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         //doesnt werk..?
         if (document.getElementById('message-list') != null) {
             var list = document.getElementById('message-list');
@@ -64,6 +64,7 @@ class Messenger extends React.Component {
                         userSent : currDates[currDates.length-1].sent,
                         userConfirmed :currDates[currDates.length-1].confirm
                     }));
+
                 } else {
                     currentComponent.setState(prevState =>({
                         dates : currDates,
@@ -77,13 +78,13 @@ class Messenger extends React.Component {
                 console.log("Error getting documents: ", error);
             });
         }
-        this.testTimeStamp();
 
     }
 
 
     componentWillReceiveProps(newProps) {
         this.testTimeStamp();
+        console.log(this.state.dateRequestTimeStamp);
         this.setState({
             otherUser: newProps.otherUser,
             newDateRequest: null
@@ -232,7 +233,7 @@ class Messenger extends React.Component {
     }
 
     update(timestamp){
-        console.log("update", timestamp)
+        console.log("update", this.state.dateRequestTimeStamp)
         this.setState({
             dateRequestTimeStamp: timestamp
         })
@@ -340,6 +341,7 @@ class Messenger extends React.Component {
     }
 
     render() {
+
         const currentMessage = this.state.messages.map((message, i) => {
             return (
                 <li
@@ -402,7 +404,7 @@ class Messenger extends React.Component {
                                                                    
                     :
                     <div className="date-button-wrapper">
-                    {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
+                    {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/>  }
                   
 
                     </div>

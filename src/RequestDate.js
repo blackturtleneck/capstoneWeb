@@ -213,7 +213,7 @@ class RequestDate extends Component {
           <div id = "buttons">
             <Button id = {this.state.buttonid} onClick={this._onButtonClick}>{this.state.textValue}</Button>
             {this.state.componentTwo ?
-               <DateNames userEmail= {this.props.user} submitDate={this.submitDate} sendData={this.getData} availability={this.state.userAvailability} /> :
+               <DateNames userEmail= {this.props.userEmail} submitDate={this.submitDate} sendData={this.getData} availability={this.state.userAvailability} /> :
                null
             }
             {this.state.showComponent ?

@@ -96,12 +96,13 @@ class Availability2 extends Component {
     };
 
     getData(arr){
+      console.log("CHECKING PROPS PT2", this.props.userEmail)
       this.props.sendData(arr);
 
-       // db
-     //   .collection('users')
-      //  .doc(this.props.userEmail)
-       // .collection('availability').doc("availability").set( { available: arr });
+       db
+       .collection('users')
+       .doc(this.props.userEmail)
+       .collection('availability').doc("availability").set( { available: arr });
     }
 
     calculateTimes(){ 
