@@ -34,6 +34,7 @@ class Messenger extends React.Component {
         this.dateRequestHandler = this.dateRequestHandler.bind(this);
         this.update = this.update.bind(this);
         this.userRespondedAvailablity = this.userRespondedAvailablity.bind(this);
+        this.closeEverything = this.closeEverything.bind(this);
     }
 
     componentWillMount() {
@@ -347,7 +348,13 @@ class Messenger extends React.Component {
     }
 
     userRespondedAvailablity() {
-        console.log(this.state.dates[0])
+        console.log(this.state.dates[0].availability)
+    }
+
+    closeEverything(){
+        this.setState({
+            closeItAll : true
+        });
     }
 
 
@@ -396,9 +403,23 @@ class Messenger extends React.Component {
                                     <div>
                                         {this.state.userResponded == true ?
                                         <div>
-                                          <p> Here's when they're free - you can find a good time from here. </p>
-                                              <Availability4 /> 
-                                              <Button> Close</Button> 
+                                            {this.state.dates[0].availability ?
+                                            <div>
+                                                  {this.state.closeItAll ?
+                                                  null
+                                                  :
+                                                  <div id = "datebackground">
+                                                  <h3 id="halfwayText"> Wasn't free during the times you suggested - here's alternate schedule you can decide on a good time </h3>
+                                                   <Availability4 currAvailability = {this.state.dates[0].availability} /> 
+                                                   <Button onClick = {this.closeEverything}> Close </Button> 
+                                                    </div>
+                                                  }
+                                            </div>
+                                             :
+                                                null
+                                             }                                  
+
+
                                         </div>
                                             :
                                             <div>
@@ -425,14 +446,16 @@ class Messenger extends React.Component {
                                         {this.state.userResponded == true ?
                                         <div>
 
-                                             {this.state.userRespondedAvailability == true ?
-                                            <div id = "datebackground">
-                                                   <p> WILL THIS SHOW ANYTING </p>
-                                                    <Availability3 userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} /> 
-                                                    <Button onClick = {this.userRespondedAvailablity}> Send Availability </Button> 
-                                            </div>
+                                             {this.state.dates[0].availability ?
+                                               "We've sent your availabilities through!" 
+
+
                                              :
-                                             null
+                                             <div id = "datebackground">
+                                                <p> WILL THIS SHOW ANYTING </p>
+                                                <Availability3 userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} /> 
+                                                <Button onClick = {this.userRespondedAvailablity}> Send Availability </Button> 
+                                             </div>
                                              }
 
                                         </div>

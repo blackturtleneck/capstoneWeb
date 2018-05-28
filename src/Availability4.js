@@ -96,7 +96,7 @@ class Availability4 extends Component {
     };
 
     getData(arr){
-      console.log("CHECKING PROPS PT2", this.props.userEmail)
+    
     }
 
     calculateTimes(){ 
