@@ -49,9 +49,33 @@ class SignUpInController extends Component {
                         matchDistance: null,
 
                         availability: {
-                            "MORNING": [false, false, false, false, false, false, false],
-                            "AFTERNOON": [false, false, false, false, false, false, false],
-                            "EVENING": [false, false, false, false, false, false, false]
+                            MORNING: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            AFTERNOON: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            EVENING: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ]
                         },
 
                         dates: {
@@ -75,87 +99,86 @@ class SignUpInController extends Component {
                         },
 
                         dietaryPref: {
-                            "VEGETARIAN": false,
-                            "GLUTEN-FREE": false,
-                            "VEGAN": false,
-                            "DAIRY-FREE": false,
-                            "NO RED MEAT": false,
-                            "KOSHER": false,
-                            "PALEO": false,
-                            "RAW": false
+                            VEGETARIAN: false,
+                            'GLUTEN-FREE': false,
+                            VEGAN: false,
+                            'DAIRY-FREE': false,
+                            'NO RED MEAT': false,
+                            KOSHER: false,
+                            PALEO: false,
+                            RAW: false
                         },
                         priceMin: 3,
                         priceMax: 4,
                         neighborhoods: {
-                            "BALLARD": false,
-                            "BELLTOWN": false,
-                            "CAPITOL HILL": false,
-                            "DOWNTOWN": false,
-                            "INTERNATIONAL DISTRICT": false,
-                            "FIRST HILL": false,
-                            "FREMONT": false,
-                            "GEORGETOWN": false,
-                            "PIONEER SQUARE": false,
-                            "QUEEN ANNE": false,
-                            "SODO": false,
-                            "SOUTH LAKE UNION": false,
-                            "WALLINGFORD": false,
-                            "WEST SEATTLE": false,
-                            "UDISTRICT": false
+                            BALLARD: false,
+                            BELLTOWN: false,
+                            'CAPITOL HILL': false,
+                            DOWNTOWN: false,
+                            'INTERNATIONAL DISTRICT': false,
+                            'FIRST HILL': false,
+                            FREMONT: false,
+                            GEORGETOWN: false,
+                            'PIONEER SQUARE': false,
+                            'QUEEN ANNE': false,
+                            SODO: false,
+                            'SOUTH LAKE UNION': false,
+                            WALLINGFORD: false,
+                            'WEST SEATTLE': false,
+                            UDISTRICT: false
                         },
                         foodTypeLIKE: {
-                            "AMERICAN": false,
-                            "FRENCH": false,
-                            "CHINESE": false,
-                            "DESSERT": false,
-                            "GREEK": false,
-                            "HALAL": false,
-                            "INDIAN": false,
-                            "ITALIAN": false,
-                            "JAPANESE": false,
-                            "KOREAN": false,
-                            "MEDITERRANEAN": false,
-                            "MEXICAN": false,
-                            "PIZZA": false,
-                            "THAI": false,
-                            "MIDDLE EASTERN": false
+                            AMERICAN: false,
+                            FRENCH: false,
+                            CHINESE: false,
+                            DESSERT: false,
+                            GREEK: false,
+                            HALAL: false,
+                            INDIAN: false,
+                            ITALIAN: false,
+                            JAPANESE: false,
+                            KOREAN: false,
+                            MEDITERRANEAN: false,
+                            MEXICAN: false,
+                            PIZZA: false,
+                            THAI: false,
+                            'MIDDLE EASTERN': false
                         },
                         foodTypeHATE: {
-                            "AMERICAN": false,
-                            "FRENCH": false,
-                            "CHINESE": false,
-                            "DESSERT": false,
-                            "GREEK": false,
-                            "HALAL": false,
-                            "INDIAN": false,
-                            "ITALIAN": false,
-                            "JAPANESE": false,
-                            "KOREAN": false,
-                            "MEDITERRANEAN": false,
-                            "MEXICAN": false,
-                            "PIZZA": false,
-                            "THAI": false,
-                            "MIDDLE EASTERN": false
+                            AMERICAN: false,
+                            FRENCH: false,
+                            CHINESE: false,
+                            DESSERT: false,
+                            GREEK: false,
+                            HALAL: false,
+                            INDIAN: false,
+                            ITALIAN: false,
+                            JAPANESE: false,
+                            KOREAN: false,
+                            MEDITERRANEAN: false,
+                            MEXICAN: false,
+                            PIZZA: false,
+                            THAI: false,
+                            'MIDDLE EASTERN': false
                         },
                         music: {
-                            "POP": false,
-                            "COUNTRY": false,
-                            "EDM": false,
-                            "R&B": false,
-                            "LATIN": false,
-                            "HIP HOP": false,
-                            "ALTERNATIVE": false,
-                            "CLASSICAL": false,
-                            "INDIE": false,
-                            "FOLK": false,
-                            "JAZZ": false,
-                            "ROCK": false,
-                            "SOUL": false,
-                            "PUNK": false,
-                            "REGGAE": false
+                            POP: false,
+                            COUNTRY: false,
+                            EDM: false,
+                            'R&B': false,
+                            LATIN: false,
+                            'HIP HOP': false,
+                            ALTERNATIVE: false,
+                            CLASSICAL: false,
+                            INDIE: false,
+                            FOLK: false,
+                            JAZZ: false,
+                            ROCK: false,
+                            SOUL: false,
+                            PUNK: false,
+                            REGGAE: false
                         }
                     };
-
                 } else {
                     let ref = doc.data();
                     fieldValues = {
@@ -188,7 +211,7 @@ class SignUpInController extends Component {
                         foodTypeHATE: ref.foodTypeHATE,
                         music: ref.music
                     };
-                    this.setState({ existingUser: true })
+                    this.setState({ existingUser: true });
                 }
             })
             .catch(err => {
@@ -197,7 +220,7 @@ class SignUpInController extends Component {
     }
 
     saveValues(fields) {
-        return (function () {
+        return (function() {
             fieldValues = Object.assign({}, fieldValues, fields);
         })();
     }
@@ -251,51 +274,53 @@ class SignUpInController extends Component {
 
     showStep() {
         switch (this.state.step) {
-            default:
-                return (
-                    <SignUp1
-                        nextStep={this.nextStep}
-                        saveValues={this.saveValues}
-                        fieldValues={fieldValues}
-                        existingUser={this.state.existingUser}
-                    />
-                );
-            case 2:
-                return (
-                    <SignUp2
-                        nextStep={this.nextStep}
-                        previousStep={this.previousStep}
-                        saveValues={this.saveValues}
-                        fieldValues={fieldValues}
-                    />
-                );
-            case 3:
-                return (
-                    <SignUp3
-                        previousStep={this.previousStep}
-                        nextStep={this.nextStep}
-                        saveValues={this.saveValues}
-                        fieldValues={fieldValues}
-                    />
-                );
-            case 4:
-                return (
-                    <SignUp4
-                        previousStep={this.previousStep}
-                        saveValues={this.saveValues}
-                        fieldValues={fieldValues}
-                        submitRegistration={this.submitRegistration}
-                    />
-                );
-            case 5:
-                return <SignUpComplete nextStep={this.nextStep} />;
-            case 6:
-                return <Redirect to={'/messenger'} />;
+        default:
+            return (
+                <SignUp1
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    fieldValues={fieldValues}
+                    existingUser={this.state.existingUser}
+                />
+            );
+        case 2:
+            return (
+                <SignUp2
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
+                    saveValues={this.saveValues}
+                    fieldValues={fieldValues}
+                />
+            );
+        case 3:
+            return (
+                <SignUp3
+                    previousStep={this.previousStep}
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    fieldValues={fieldValues}
+                />
+            );
+        case 4:
+            return (
+                <SignUp4
+                    previousStep={this.previousStep}
+                    saveValues={this.saveValues}
+                    fieldValues={fieldValues}
+                    submitRegistration={this.submitRegistration}
+                />
+            );
+        case 5:
+            return <SignUpComplete nextStep={this.nextStep} />;
+        case 6:
+            return <Redirect to={'/messenger'} />;
         }
     }
     render() {
         let progress = this.state.step * 25;
-        return (!this.state.existingUser ? <span>Loading data...</span> : (
+        return !this.state.existingUser ? (
+            <span>Loading data...</span>
+        ) : (
             <div className="signup-wrapper">
                 <div
                     style={{ width: progress + 'vw' }}
@@ -305,7 +330,7 @@ class SignUpInController extends Component {
                 </div>
                 {this.showStep()}
             </div>
-        ));
+        );
     }
 }
 export default SignUpInController;

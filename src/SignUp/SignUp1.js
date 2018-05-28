@@ -39,19 +39,18 @@ class SignUp1 extends React.Component {
         this.props.nextStep();
     }
     render() {
-        const header = this.props.existingUser ?
-            (
-                <div>
-                    <div className="signup-header-welcome"> EDIT YOUR </div>
-                    <div className="signup-header-amp">A M P R</div>
-                    <div className="signup-header-welcome-profile">PROFILE</div>
-                </div>
-            ) : (
-                <div>
-                    <div className="signup-header-welcome"> WELCOME TO </div>
-                    <div className="signup-header-amp">A M P R</div>
-                </div>
-            )
+        const header = this.props.existingUser ? (
+            <div>
+                <div className="signup-header-welcome"> EDIT YOUR </div>
+                <div className="signup-header-amp">A M P R</div>
+                <div className="signup-header-welcome-profile">PROFILE</div>
+            </div>
+        ) : (
+            <div>
+                <div className="signup-header-welcome"> WELCOME TO </div>
+                <div className="signup-header-amp">A M P R</div>
+            </div>
+        );
 
         return (
             <div className="signup-page">
@@ -241,7 +240,6 @@ class SignUp1 extends React.Component {
             </div>
         );
     }
-
 }
 
 export default SignUp1;

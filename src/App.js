@@ -33,7 +33,7 @@ class App extends React.Component {
                     db
                         .collection('users')
                         .doc(this.state.user.email)
-                        .onSnapshot(function (doc) {
+                        .onSnapshot(function(doc) {
                             if (!doc.data().onBoarding) {
                                 component.setState({
                                     onBoarding: false
@@ -58,18 +58,18 @@ class App extends React.Component {
         let path = window.location.href.split('/')[3];
         let content = '';
         switch (path) {
-            case Routes.PROFILE:
-                content = PageContent.PROFILE;
-                break;
-            case Routes.DATE_SELECTION:
-                content = PageContent.DATE_SELECTION;
-                break;
-            case Routes.SIGN_UP:
-                content = PageContent.SIGN_UP;
-                break;
-            default:
-                content = PageContent.MESSENGER;
-                break;
+        case Routes.PROFILE:
+            content = PageContent.PROFILE;
+            break;
+        case Routes.DATE_SELECTION:
+            content = PageContent.DATE_SELECTION;
+            break;
+        case Routes.SIGN_UP:
+            content = PageContent.SIGN_UP;
+            break;
+        default:
+            content = PageContent.MESSENGER;
+            break;
         }
         return (
             <div className="">
@@ -86,15 +86,15 @@ class App extends React.Component {
                             {!path ? <Redirect to={'/messenger'} /> : null}
                         </div>
                     ) : (
-                            <div className="login">
-                                <Login />
-                                <Redirect to={'/'} />
-                            </div>
-                        )
+                        <div className="login">
+                            <Login />
+                            <Redirect to={'/'} />
+                        </div>
+                    )
                 ) : (
-                        // if login hasn't mounted
-                        <div />
-                    )}
+                    // if login hasn't mounted
+                    <div />
+                )}
             </div>
         );
     }
