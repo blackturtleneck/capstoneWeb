@@ -1,0 +1,49 @@
+.table-drag-select td  {
+    border: 0.1rem solid transparent;
+    font-size: 9px;
+    font: "Lato";
+    -o-text-overflow: clip;
+       text-overflow: clip; 
+}
+
+.table-drag-select tr td {
+    /* Remove empty space at top of table */
+    border-top: 0;
+    line-height: 2px;
+    padding: 5px;
+
+}
+
+.table-drag-select {
+    margin-left: 0px;
+}
+
+.timeLabel {
+    text-align: left;
+}
+
+.availabilityRow:nth-child(odd) {
+    border-bottom: 2px solid #ccced3
+}
+
+.availabilityTableDragDown{
+    width: 55vh;
+    margin-top: 50px;
+}
+
+.table-drag-select td.cell-being-selected {
+    /* This is the blue color you see when you select text with the cursor */
+    background-color: #9ba2ff;
+  }
+
+  .table-drag-select td.cell-selected {
+    background-color: #9ba2ff;
+  }
+
+@media only screen and (max-width : 1043px)  {
+
+    .availabilityTableDragDown{
+        width: 300px;
+    }
+    
+}

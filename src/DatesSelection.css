@@ -1,8 +1,209 @@
 .right-side{
-    float: right;
-    width: 30%;
+  padding-left: 75%; 
 }
 
 .scheduler{
-    padding-left: 65%;
+   padding-left: 65%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+ font-family: "Lato";
+ text-transform: uppercase;
+ font-weight: bold;
+}
+
+#request {
+ background-color: #9ba2ff; /* Green */
+ border: none;
+ color: white;
+ text-align: center;
+ text-decoration: none;
+ font-size: 12px;
+ font-family: "Lato", sans-serif, bold;
+ text-transform: uppercase;
+ width: 20vw;
+ margin-left: 20%;
+ position:relative;
+ margin-bottom: 20px;
+ margin-top:100%;
+}
+
+#buttons{
+}
+
+
+
+#halfwayText {
+ font-size: 30px;
+ font-family: "Lato", sans-serif, bold;
+ padding-top: 15px;
+ padding-bottom:5px;
+ margin-bottom: 0;
+}
+
+#letsdate {
+ font-size: 25px;
+ font-family: "Lato", sans-serif, bold;
+ padding-top: 15px;
+ padding-bottom:5px;
+ margin-bottom: 0;
+}
+
+#map {
+ height: 300px;
+ width: 55vh;
+}
+
+.test{
+ width:2px;
+}
+
+#dateRequested {
+ background-color: #9ba2ff; /* Green */
+ border: none;
+ color: white;
+ text-align: center;
+ text-decoration: none;
+ font-size: 12px;
+ font-family: "Lato", sans-serif, bold;
+ text-transform: uppercase;
+ width: 20vw;
+ margin-left: 20%;
+ margin-top: 800px;
+}
+
+#mapview {
+ font-size: 10px;
+ font-family: "Lato", sans-serif, bold;
+ color: #9ba2ff;
+ width: 5vw;
+ height: 1.5vw;
+ background-color: white;
+ margin-left: 70%;
+ padding:0;
+ text-align: center;
+ display: inline-block;
+ border: 0px;
+ box-shadow: none;
+}
+
+#locview {
+ font-size: 15px;
+ font-family: "Lato", sans-serif, bold;
+ color: #9ba2ff;
+ width: 5vw;
+ height: 1.5vw;
+ background-color: white;
+ padding:0;
+ border: 0px;
+ box-shadow: none;
+ text-align:left; 
+ padding-left:6px;
+ align-self: auto;
+}
+
+#timeFrame{
+ font-size:18px;
+ padding-bottom:20px;
+}
+
+#next{
+ background-color: #9ba2ff; /* Green */
+ border: none;
+ color: white;
+ display: inline-block;
+ font-size: 15px;
+ font-family: "Lato", sans-serif, bold;
+ text-transform: uppercase;
+ text-align: center;
+ Margin-top: 20px;
+}
+
+#nextClicked{
+ background-color: Transparent;
+ background-repeat:no-repeat;
+ border: none;
+ cursor:pointer;
+ overflow: hidden;
+ outline:none;
+ box-shadow:none;
+ visibility: hidden;
+ height:0px;
+ width:0px;
+}
+
+
+#datebackground{
+ background-color: white;
+ width: 60vh;
+ height: 75vh;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ text-align: center;
+ margin-left: 100%;
+ margin-bottom: 100px;
+}
+
+#dateone {
+ height: 50px;
+ width: 55vh;
+ background-size: 100%; /* To fill the dimensions of container (button), or */
+ background-image: url(https://static1.squarespace.com/static/5386bf34e4b0f6a71c87ce6a/t/54b40943e4b0531e1f8e58f5/1472149135599/IMG_8833_1.jpg?format=1500w);
+ background-repeat: no-repeat;
+ margin: 6px;
+ font: "Josephin Sans Bold";
+}
+
+#datetwo {
+ height: 50px;
+ width: 55vh;
+ background-size: 100%; /* To fill the dimensions of container (button), or */
+ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvr3cSFbhG6bVDGWyRoPm9R-AL6lUvaZHBBaBxemf_dUoVFoZ4);
+ background-repeat: no-repeat;
+ margin: 6px;
+}
+
+#datethree {
+ height: 50px;
+ width: 55vh;
+ background-size: 100%; /* To fill the dimensions of container (button), or */
+ background-image: url(http://fremocentrist.com/news/wp-content/uploads/2011/09/BackdoorRoxysMay11OpeningWholeRoomLeft800px1.jpg);
+ background-repeat: no-repeat;
+ margin: 6px;
+}
+
+
+#datefour {
+ height: 50px;
+ width: 55vh;
+ background-size: 100%; /* To fill the dimensions of container (button), or */
+ background-image: url(http://res.cloudinary.com/sagacity/image/upload/c_crop,h_800,w_1200,x_0,y_0/c_scale,w_640/v1406744402/barrel-thief-lounge_lycbcm.jpg);
+ background-repeat: no-repeat;
+ margin: 6px;
+}
+
+
+button {
+ display: block;
+}
+
+
+#times{
+ background-color: #9ba2ff; /* Green */
+ border: none;
+ color: white;
+ display: inline-block;
+ font-size: 15px;
+ font-family: "Lato", sans-serif, bold;
+ text-transform: uppercase;
+ text-align: center;
+}
+
+#confirm {
+ font-size: 15px;
+ font-family: "Lato", sans-serif, bold;
+ color: #9ba2ff;
+ background-color: lightgrey;
 }

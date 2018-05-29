@@ -241,7 +241,6 @@ class SignUp1 extends React.Component {
             </div>
         );
     }
-
 }
 
 export default SignUp1;

@@ -1,11 +1,42 @@
 import React from 'react';
-import MultiSelectField from './MultiSelectField';
-import './DatesSelection.css';
+import { Card, ListItem, Button } from 'react'
+import MapContainer from './MapContainer'
+import Slider from 'react-slick'
+import MultiSelectField from './MultiSelectField'
+import Dates from './Dates'
+import "./DatesSelection.css"
 import AvailableTimes from 'react-available-times';
 import SideProf from './SignUp/Profile/sideProf';
 
 class DatesSelection extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          lat: null,
+          lon: null,
+          isHidden: true
+        }
+      }
+      toggleHidden () {
+        this.setState({
+          isHidden: !this.state.isHidden
+        })
+      }
+
+      componentDidMount() {
+        navigator.geolocation.getCurrentPosition(function (location) {
+          this.setState({
+            lat: location.coords.latitude,
+            lon: location.coords.longitude 
+          })
+        }.bind(this));
+    }
+
     render() {
+
+
+        console.log(this.state.lat);
+        console.log(this.state.lon);    
         return (
             <div className="right-side">
                 {!this.props.otherUser ? (
