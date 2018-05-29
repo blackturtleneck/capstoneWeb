@@ -2,6 +2,7 @@ import React from 'react';
 import { db } from '../../FirestoreConfig';
 import placeholder from './placeholder.svg'
 import './sideProf.css'
+import FB from 'fb'
 
 class SideProf extends React.Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class SideProf extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
+        let component = this;
         db
             .collection('users')
             .doc(this.props.otherUser)
@@ -46,9 +48,22 @@ class SideProf extends React.Component {
             .then(doc => {
                 if (doc.exists) {
                     this.setState({ userDoc: doc.data() });
+
                     let images = [];
                     {
-                        this.state.userDoc.photos.data.forEach(function (photo) {
+                        this.state.userDoc.photos.forEach(function (photo) {
+                            FB.api(
+                                "/" + photo.id,
+                                function (response) {
+                                    if (response && !response.error) {
+                                        /* handle the result */
+                                        console.log("api response", response)
+
+
+                                    }
+                                }
+                            );
+
                             images.push(photo);
                         })
                     }
@@ -61,19 +76,22 @@ class SideProf extends React.Component {
     }
 
     render() {
+        // let age = (new Date()).getFullYear() - this.state.userDoc.birthday.year.parseInt();
+        let date = (new Date()).getFullYear();
+        // console.log(this.state.userDoc.birthday.day)
+        let age = typeof this.state.userDoc
         return (
             <div className="otherProfile-container">
                 <h4 className="other-header">{this.state.userDoc.name} </h4>
-                <p>{this.state.userDoc.age}</p>
-                <img className="otherProfile-img" src={placeholder} alt="pic placeholder" />
+                <p>{age}</p>
+                <img className="otherProfile-img" src={this.state.userDoc.photoURL} alt="user profile img" />
                 <p className="otherProfile-info-type" >Occupation</p>
-                <p className="otherProfile-info" >job title</p>
+                <p className="otherProfile-info" >{this.state.userDoc.occupation}</p>
                 <p className="otherProfile-info-type" >Education</p>
-                <p className="otherProfile-info" >school </p>
+                <p className="otherProfile-info" >{this.state.userDoc.education}</p>
                 <p className="otherProfile-info-type" >Religion</p>
-                <p className="otherProfile-info" >type of religion</p>
+                <p className="otherProfile-info" >{this.state.userDoc.religion}</p>
 
-                <p> {this.state.userDoc.photoURL}</p>
                 {this.state.images !== '' ? (
                     this.state.images.map((photo, i) => {
                         return (

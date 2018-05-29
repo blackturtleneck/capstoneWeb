@@ -52,7 +52,7 @@ class SignUp1 extends React.Component {
                     <div className="signup-header-amp">A M P R</div>
                 </div>
             )
-
+        console.log("fv", this.props.fieldValues)
         return (
             <div className="signup-page">
                 <div className="signup-header">

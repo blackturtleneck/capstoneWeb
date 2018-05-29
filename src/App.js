@@ -13,7 +13,9 @@ class App extends React.Component {
 
         this.state = {
             authenticated: false,
-            user: null
+            user: null,
+            newUser: false,
+            token: ''
         };
     }
 
@@ -31,20 +33,6 @@ class App extends React.Component {
                             email: user.email
                         }
                     });
-                    db
-                        .collection('users')
-                        .doc(this.state.user.email)
-                        .onSnapshot(function (doc) {
-                            if (!doc.data().onBoarding) {
-                                component.setState({
-                                    onBoarding: false
-                                });
-                            } else {
-                                component.setState({
-                                    onBoarding: true
-                                });
-                            }
-                        });
                 } else {
                     this.setState({
                         authenticated: true,
@@ -58,59 +46,105 @@ class App extends React.Component {
     async login() {
         const result = await auth.signInWithPopup(provider);
         var token = result.credential.accessToken;
-        console.log("result", result)
-        console.log("token", token)
+        // this.setState({ token: token });
         const getID = "https://graph.facebook.com/me?access_token=" + token;
         let uid = '';
         let photoArray = [];
 
-        fetch(getID)
-            .then(function (response) {
-                return response.json();
-            }).then(function (body) {
-                uid = body.id;
-                console.log("uid", uid)
-                FB.api(
-                    "/" + uid + "/photos?access_token=" + token,
-                    function (response) {
-                        if (response && !response.error) {
-                            /* handle the result */
-                            console.log("api response", response)
-                            photoArray = response.data;
+        db
+            .collection('users')
+            .doc(result.user.email)
+            .set({
+                uid: result.user.uid,
+                age: result.additionalUserInfo.profile.age_range.min,
+                linkFB: result.additionalUserInfo.profile.link,
+                photoURL: result.user.photoURL
+            }, { merge: true })
+            .then(function () {
+                // eslint-disable-line no-console
+                console.log('Document with first FB successfully written!');
 
-                            /* make the API call */
-                            // Add a new document in collection "users"
-                            db
-                                .collection('users')
-                                .doc(result.user.email)
-                                .set({
-                                    photos: photoArray
-                                }, { merge: true })
-                                .then(function () {
-                                    /*eslint-disable-line no-console*/
-                                    console.log('Document successfully written!');
-                                })
-                                .catch(function (error) {
-                                    // eslint-disable-line no-console
-                                    console.error('Error writing document: ', error);
-                                });
+                fetch(getID)
+                    .then(function (response) {
+                        return response.json();
+                    }).then(function (body) {
+                        uid = body.id;
+                        FB.api(
+                            "/" + uid + "/photos?access_token=" + token,
+                            function (response) {
+                                if (response && !response.error) {
+                                    /* handle the result */
+                                    // console.log("api response", response)
+                                    photoArray = response.data;
 
-                        }
-                    }
-                );
-
-            }).catch(function (error) {
-                console.log(error)
+                                    /* make the API call */
+                                    // Add a new document in collection "users"
+                                    db
+                                        .collection('users')
+                                        .doc(result.user.email)
+                                        .set({
+                                            photos: photoArray
+                                        }, { merge: true })
+                                        .then(function () {
+                                            /*eslint-disable-line no-console*/
+                                            console.log('Document successfully written!');
+                                            console.log(token)
+                                            photoArray.forEach(function (photo) {
+                                                FB.api(
+                                                    "/" + photo.id + "?access_token=" + token,
+                                                    function (response) {
+                                                        if (response && !response.error) {
+                                                            /* handle the result */
+                                                            console.log("api response", response)
+                                                            // photoArray = response.data;
+                                                        } else {
+                                                            console.log("error", response.error)
+                                                        }
+                                                        // );
+                                                    })
+                                            })
+                                        })
+                                        .catch(function (error) {
+                                            // eslint-disable-line no-console
+                                            console.error('Error writing document: ', error);
+                                        });
+                                }
+                            }
+                        );
+                        //     return photoArray;
+                        // }).then(function () {
+                        //     photoArray.forEach(function (photo) {
+                        //         FB.api(
+                        //             "/" + photo.id + "?access_token=" + token,
+                        //             function (response) {
+                        //                 if (response && !response.error) {
+                        //                     /* handle the result */
+                        //                     console.log("api response", response)
+                        //                     // photoArray = response.data;
+                        //                 }
+                        //                 // );
+                        //             })
+                        //     })
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
             })
+            .catch(function (error) {
+                // eslint-disable-line no-console
+                console.error('Error writing document: ', error);
+            });
 
-        this.setState({
-            // user: result.user,
-            token: token
-        });
+
+
+        // this.setState({
+        //     // user: result.user,
+        //     token: token
+        // });
 
     }
 
     render() {
+        // auth.signOut();
         let path = window.location.href.split('/')[3];
         let content = '';
         switch (path) {

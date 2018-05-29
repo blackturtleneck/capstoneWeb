@@ -29,9 +29,9 @@ class SignUpInController extends Component {
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-                console.log("check")
+                console.log("check", doc.data())
                 console.log(doc.data().hasOwnProperty('name'))
-                if (!doc.data().hasOwnProperty('name')) {
+                if (!doc.data().hasOwnProperty('matchGender')) {
                     fieldValues = {
                         name: null,
                         gender: '',
@@ -157,7 +157,7 @@ class SignUpInController extends Component {
                             "REGGAE": false
                         }
                     };
-                    console.log(fieldValues)
+                    console.log("FV in SUC", fieldValues)
                 } else {
                     let ref = doc.data();
                     fieldValues = {
@@ -252,6 +252,7 @@ class SignUpInController extends Component {
     }
 
     showStep() {
+        console.log("fv s1", fieldValues)
         switch (this.state.step) {
             default:
                 return (
@@ -297,7 +298,8 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-        return (!this.state.existingUser ? <span>Loading data...</span> : (
+        // return (!this.state.existingUser ? <span>Loading data...</span> : (
+        return (
             <div className="signup-wrapper">
                 <div
                     style={{ width: progress + 'vw' }}
@@ -307,7 +309,7 @@ class SignUpInController extends Component {
                 </div>
                 {this.showStep()}
             </div>
-        ));
+        );
     }
 }
 export default SignUpInController;
