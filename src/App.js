@@ -30,20 +30,20 @@ class App extends React.Component {
                             email: user.email
                         }
                     });
-                    db
-                        .collection('users')
-                        .doc(this.state.user.email)
-                        .onSnapshot(function (doc) {
-                            if (!doc.data().onBoarding) {
-                                component.setState({
-                                    onBoarding: false
-                                });
-                            } else {
-                                component.setState({
-                                    onBoarding: true
-                                });
-                            }
-                        });
+                    // db
+                    //     .collection('users')
+                    //     .doc(this.state.user.email)
+                    //     .onSnapshot(function (doc) {
+                    //         if (!doc.data().onBoarding) {
+                    //             component.setState({
+                    //                 onBoarding: false
+                    //             });
+                    //         } else {
+                    //             component.setState({
+                    //                 onBoarding: true
+                    //             });
+                    //         }
+                    //     });
                 } else {
                     this.setState({
                         authenticated: true,

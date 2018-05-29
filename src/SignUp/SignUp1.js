@@ -96,7 +96,7 @@ class SignUp1 extends React.Component {
                     </label>
                     <div className="birthday-wrapper" name="birthday">
                         <select
-                            defaultValue={this.props.fieldValues.birthday.month}
+                            // defaultValue={this.props.fieldValues.birthday.month}
                             name="month"
                             className="inline-form form-input custom-select"
                             required
@@ -116,7 +116,7 @@ class SignUp1 extends React.Component {
                             <option value="december">DECEMBER</option>
                         </select>
                         <select
-                            defaultValue={this.props.fieldValues.birthday.day}
+                            // defaultValue={this.props.fieldValues.birthday.day}
                             name="day"
                             className="inline-form form-input custom-select"
                             required
@@ -158,7 +158,7 @@ class SignUp1 extends React.Component {
                             required
                             name="year"
                             className="inline-form custom-select form-input year"
-                            defaultValue={this.props.fieldValues.birthday.year}
+                        // defaultValue={this.props.fieldValues.birthday.year}
                         >
                             <option value="select">select</option>
                             <option value="1963">1963</option>

@@ -9,25 +9,80 @@ class Login extends Component {
         db
             .collection('users')
             .doc(result.user.email)
-            .set({
-                name: result.user.displayName,
-                uid: result.user.uid,
-                fName: result.additionalUserInfo.profile.first_name,
-                lName: result.additionalUserInfo.profile.last_name,
-                gender: result.additionalUserInfo.profile.gender,
-                age: result.additionalUserInfo.profile.age_range.min,
-                linkFB: result.additionalUserInfo.profile.link,
-                timeZone: result.additionalUserInfo.profile.timezone,
-                photoURL: result.user.photoURL,
-                icons: { first: 'abc', sec: 'def' }
-            })
-            .then(function () {
-                // eslint-disable-line no-console
-                console.log('Document successfully written!');
-            })
-            .catch(function (error) {
-                // eslint-disable-line no-console
-                console.error('Error writing document: ', error);
+            .get()
+            .then(doc => {
+                if (!doc.exists) {
+                    db
+                        .collection('users')
+                        .doc(result.user.email)
+                        .set({
+                            newUser: true
+                        }, { merge: true })
+                        .then(function () {
+                            // eslint-disable-line no-console
+                            console.log('Document successfully written!');
+                            db
+                                .collection('users')
+                                .doc(result.user.email)
+                                .set({
+                                    uid: result.user.uid,
+                                    age: result.additionalUserInfo.profile.age_range.min,
+                                    linkFB: result.additionalUserInfo.profile.link,
+                                    photoURL: result.user.photoURL
+                                }, { merge: true })
+                                .then(function () {
+                                    // eslint-disable-line no-console
+                                    console.log('Document successfully written!');
+                                })
+                                .catch(function (error) {
+                                    // eslint-disable-line no-console
+                                    console.error('Error writing document: ', error);
+                                });
+
+                        })
+                        .catch(function (error) {
+                            // eslint-disable-line no-console
+                            console.error('Error writing document: ', error);
+                            //                     db
+                            // .collection('users')
+                            // .doc(result.user.email)
+                            // .set({
+                            //     uid: result.user.uid,
+                            //     age: result.additionalUserInfo.profile.age_range.min,
+                            //     linkFB: result.additionalUserInfo.profile.link,
+                            //     photoURL: result.user.photoURL
+                            // }, { merge: true })
+                            // .then(function () {
+                            //     // eslint-disable-line no-console
+                            //     console.log('Document successfully written!');
+                            // })
+                            // .catch(function (error) {
+                            //     // eslint-disable-line no-console
+                            //     console.error('Error writing document: ', error);
+                            // });
+
+                        });
+
+                } else {
+                    db
+                        .collection('users')
+                        .doc(result.user.email)
+                        .set({
+                            uid: result.user.uid,
+                            age: result.additionalUserInfo.profile.age_range.min,
+                            linkFB: result.additionalUserInfo.profile.link,
+                            photoURL: result.user.photoURL
+                        }, { merge: true })
+                        .then(function () {
+                            // eslint-disable-line no-console
+                            console.log('Document successfully written!');
+                        })
+                        .catch(function (error) {
+                            // eslint-disable-line no-console
+                            console.error('Error writing document: ', error);
+                        });
+
+                }
             });
     }
 

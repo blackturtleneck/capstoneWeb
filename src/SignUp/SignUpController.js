@@ -9,13 +9,13 @@ import SignUp4 from './SignUp4';
 import SignUpComplete from './SignUpComplete';
 
 let fieldValues = '';
+let existingUser = false;
 
 class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1,
-            existingUser: false
+            step: 1
         };
         this.saveValues = this.saveValues.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -29,7 +29,47 @@ class SignUpInController extends Component {
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-                if (!doc.exists) {
+                console.log("doc", doc.data())
+                // if (doc.exists) {
+                if (!doc.data().newUser) {
+                    // existingUser = true;
+
+                    console.log("in if cwm", doc.data())
+                    let ref = doc.data();
+                    fieldValues = {
+                        name: ref.name,
+                        gender: ref.gender,
+                        education: ref.education,
+                        religion: ref.religion,
+                        occupation: ref.occupation,
+                        location: ref.location,
+                        birthday: {
+                            month: ref.birthday.month,
+                            day: ref.birthday.day,
+                            year: ref.birthday.year
+                        },
+
+                        matchGender: ref.matchGender,
+                        matchAgeMin: ref.matchAgeMin,
+                        matchAgeMax: ref.matchAgeMax,
+                        matchDistance: ref.matchDistance,
+                        availability: ref.availability,
+
+                        dates: ref.dates,
+                        topics: ref.topics,
+
+                        dietaryPref: ref.dietaryPref,
+                        priceMin: ref.priceMin,
+                        priceMax: ref.priceMax,
+                        neighborhoods: ref.neighborhoods,
+                        foodTypeLIKE: ref.foodTypeLIKE,
+                        foodTypeHATE: ref.foodTypeHATE,
+                        music: ref.music
+                    };
+                    // this.setState({ existingUser: true })
+                    // }
+                } else {
+                    console.log("in else cwm", fieldValues)
                     fieldValues = {
                         name: null,
                         gender: '',
@@ -155,40 +195,6 @@ class SignUpInController extends Component {
                             "REGGAE": false
                         }
                     };
-
-                } else {
-                    let ref = doc.data();
-                    fieldValues = {
-                        name: ref.name,
-                        gender: ref.gender,
-                        education: ref.education,
-                        religion: ref.religion,
-                        occupation: ref.occupation,
-                        location: ref.location,
-                        birthday: {
-                            month: ref.birthday.month,
-                            day: ref.birthday.day,
-                            year: ref.birthday.year
-                        },
-
-                        matchGender: ref.matchGender,
-                        matchAgeMin: ref.matchAgeMin,
-                        matchAgeMax: ref.matchAgeMax,
-                        matchDistance: ref.matchDistance,
-                        availability: ref.availability,
-
-                        dates: ref.dates,
-                        topics: ref.topics,
-
-                        dietaryPref: ref.dietaryPref,
-                        priceMin: ref.priceMin,
-                        priceMax: ref.priceMax,
-                        neighborhoods: ref.neighborhoods,
-                        foodTypeLIKE: ref.foodTypeLIKE,
-                        foodTypeHATE: ref.foodTypeHATE,
-                        music: ref.music
-                    };
-                    this.setState({ existingUser: true })
                 }
             })
             .catch(err => {
@@ -216,40 +222,43 @@ class SignUpInController extends Component {
 
     submitRegistration() {
         let userRef = db.collection('users');
-        userRef.doc(this.props.user.email).set({
-            name: fieldValues.name,
-            gender: fieldValues.gender,
-            education: fieldValues.education,
-            religion: fieldValues.religion,
-            occupation: fieldValues.occupation,
-            location: fieldValues.location,
-            birthday: {
-                month: fieldValues.birthday.month,
-                day: fieldValues.birthday.day,
-                year: fieldValues.birthday.year
-            },
-            matchGender: fieldValues.matchGender,
-            matchAgeMin: fieldValues.matchAgeMin,
-            matchAgeMax: fieldValues.matchAgeMax,
-            matchDistance: fieldValues.matchDistance,
-            availability: fieldValues.availability,
+        userRef
+            .doc(this.props.user.email).
+            set({
+                name: fieldValues.name,
+                gender: fieldValues.gender,
+                education: fieldValues.education,
+                religion: fieldValues.religion,
+                occupation: fieldValues.occupation,
+                location: fieldValues.location,
+                birthday: {
+                    month: fieldValues.birthday.month,
+                    day: fieldValues.birthday.day,
+                    year: fieldValues.birthday.year
+                },
+                matchGender: fieldValues.matchGender,
+                matchAgeMin: fieldValues.matchAgeMin,
+                matchAgeMax: fieldValues.matchAgeMax,
+                matchDistance: fieldValues.matchDistance,
+                availability: fieldValues.availability,
 
-            dates: fieldValues.dates,
-            topics: fieldValues.topics,
-            dietaryPref: fieldValues.dietaryPref,
-            priceMin: fieldValues.priceMin,
-            priceMax: fieldValues.priceMax,
-            neighborhoods: fieldValues.neighborhoods,
-            foodTypeLIKE: fieldValues.foodTypeLIKE,
-            foodTypeHATE: fieldValues.foodTypeHATE,
-            music: fieldValues.music,
+                dates: fieldValues.dates,
+                topics: fieldValues.topics,
+                dietaryPref: fieldValues.dietaryPref,
+                priceMin: fieldValues.priceMin,
+                priceMax: fieldValues.priceMax,
+                neighborhoods: fieldValues.neighborhoods,
+                foodTypeLIKE: fieldValues.foodTypeLIKE,
+                foodTypeHATE: fieldValues.foodTypeHATE,
+                music: fieldValues.music,
 
-            onBoarding: true
-        });
+                onBoarding: true
+            }, { merge: true });
         this.nextStep();
     }
 
     showStep() {
+        console.log("FV in showstep", fieldValues)
         switch (this.state.step) {
             default:
                 return (
@@ -257,7 +266,7 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
-                        existingUser={this.state.existingUser}
+                        existingUser={existingUser}
                     />
                 );
             case 2:
@@ -295,7 +304,7 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-        return (!this.state.existingUser ? <span>Loading data...</span> : (
+        return (
             <div className="signup-wrapper">
                 <div
                     style={{ width: progress + 'vw' }}
@@ -305,7 +314,7 @@ class SignUpInController extends Component {
                 </div>
                 {this.showStep()}
             </div>
-        ));
+        )
     }
 }
 export default SignUpInController;

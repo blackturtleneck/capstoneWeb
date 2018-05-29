@@ -72,7 +72,7 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
-
+        console.log("state s2", this.state)
 
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
