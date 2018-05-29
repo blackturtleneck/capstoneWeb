@@ -95,29 +95,41 @@ margin-bottom: 10px;
  font-family: "Lato", sans-serif, bold;
  color: #9ba2ff;
  width: 5vw;
- height: 1.5vw;
+ height: 1.5vh;
  background-color: white;
  margin-left: 50%;
  padding:0;
- text-align: ceter;
+ text-align: center;
  display: inline-block;
  border: 0px;
  box-shadow: none;
 }
 
 #locview {
- font-size: 15px;
+  font-size: 15px;
+  font-family: "Lato", sans-serif, bold;
+  color: #9ba2ff;
+  width: 5vw;
+  height: 1.5vh;
+  background-color: white;
+  margin-left: 50%;
+  padding:0;
+  text-align: center;
+  display: inline-block;
+  border: 0px;
+  box-shadow: none;
+ /* font-size: 15px;
  font-family: "Lato", sans-serif, bold;
  color: #9ba2ff;
  width: 5vw;
- height: 1.5vw;
+ height: 1.5vh;
  background-color: white;
  padding:0;
  border: 0px;
  box-shadow: none;
  text-align:left; 
- padding-left:6px;
- align-self: auto;
+ padding-left:50%;
+ align-self: auto; */
 }
 
 #timeFrame{
