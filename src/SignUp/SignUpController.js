@@ -66,6 +66,7 @@ class SignUpInController extends Component {
                         foodTypeHATE: ref.foodTypeHATE,
                         music: ref.music
                     };
+                    console.log("fv in cwm", fieldValues)
                     // this.setState({ existingUser: true })
                     // }
                 } else {
@@ -252,7 +253,7 @@ class SignUpInController extends Component {
                 foodTypeHATE: fieldValues.foodTypeHATE,
                 music: fieldValues.music,
 
-                onBoarding: true
+                newUser: false
             }, { merge: true });
         this.nextStep();
     }
@@ -266,7 +267,7 @@ class SignUpInController extends Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         fieldValues={fieldValues}
-                        existingUser={existingUser}
+                        newUser={this.props.newUser}
                     />
                 );
             case 2:

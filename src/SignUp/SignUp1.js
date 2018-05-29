@@ -39,7 +39,7 @@ class SignUp1 extends React.Component {
         this.props.nextStep();
     }
     render() {
-        const header = this.props.existingUser ?
+        const header = this.props.newUser ?
             (
                 <div>
                     <div className="signup-header-welcome"> EDIT YOUR </div>
@@ -52,7 +52,7 @@ class SignUp1 extends React.Component {
                     <div className="signup-header-amp">A M P R</div>
                 </div>
             )
-
+        console.log("s1", this.props.fieldValues)
         return (
             <div className="signup-page">
                 <div className="signup-header">
