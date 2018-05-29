@@ -2,6 +2,7 @@ import React from 'react';
 import { db } from '../../FirestoreConfig';
 import placeholder from './placeholder.svg'
 import './sideProf.css'
+import { Joycie, Jess, Zhan, Sarah } from '../../Enums'
 
 class SideProf extends React.Component {
     constructor(props) {
@@ -24,12 +25,12 @@ class SideProf extends React.Component {
                     if (doc.exists) {
                         this.setState({ userDoc: doc.data() });
                         let images = [];
-                        {
-                            this.state.userDoc.photos.data.forEach(function (photo) {
-                                images.push(photo);
-                            })
-                        }
-                        this.setState({ images: images });
+                        // {
+                        //     this.state.userDoc.photos.data.forEach(function (photo) {
+                        //         images.push(photo);
+                        //     })
+                        // }
+                        // this.setState({ images: images });
                     } else {
                         // doc.data() will be undefined in this case
                         console.log('No such document!');
@@ -49,11 +50,11 @@ class SideProf extends React.Component {
                 if (doc.exists) {
                     this.setState({ userDoc: doc.data() });
                     let images = [];
-                    {
-                        this.state.userDoc.photos.data.forEach(function (photo) {
-                            images.push(photo);
-                        })
-                    }
+                    // {
+                    //     this.state.userDoc.photos.data.forEach(function (photo) {
+                    //         images.push(photo);
+                    //     })
+                    // }
                     this.setState({ images: images });
                 } else {
                     // doc.data() will be undefined in this case
@@ -63,6 +64,7 @@ class SideProf extends React.Component {
     }
 
     render() {
+        console.log(Joycie)
         return (
             <div className="otherProfile-container">
                 <h4 className="other-header">{this.state.userDoc.name} </h4>
@@ -75,8 +77,14 @@ class SideProf extends React.Component {
                 <p className="otherProfile-info-type" >Religion</p>
                 <p className="otherProfile-info" >type of religion</p>
 
-                <p> {this.state.userDoc.photoURL}</p>
-                {this.state.images !== '' ? (
+                <img
+                    className="otherProfile-img" src={"https://www.googledrive.com/host/1CllNqteJL2uMvkkjZtb4bzPGI9nRF48S"} alt="pic placeholder" />
+                {/* {Joycie.forEach((photo) => {
+                    return <img
+                        className="otherProfile-img" src={"https://drive.google.com/a/uw.edu/file/d/1CllNqteJL2uMvkkjZtb4bzPGI9nRF48S/view?usp=sharing"} alt="pic placeholder" />
+                })} */}
+                {/* <p> {this.state.userDoc.photoURL}</p> */}
+                {/* {this.state.images !== '' ? (
                     this.state.images.map((photo, i) => {
                         return (
                             <div key={i}>
@@ -87,7 +95,7 @@ class SideProf extends React.Component {
                     })
                 ) : (
                         <p>no images</p>
-                    )}
+                    )} */}
             </div>
         )
     }
