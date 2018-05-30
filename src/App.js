@@ -1,7 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { auth, db, provider } from './FirestoreConfig';
-import { Routes, PageContent } from './Enums';
+import {Redirect} from 'react-router-dom';
+import {auth, db, provider} from './FirestoreConfig';
+import {Routes, PageContent} from './Enums';
 import PageContainer from './PageContainer';
 import './Login.css';
 import Login from './Login';
@@ -14,7 +14,7 @@ class App extends React.Component {
 
         this.state = {
             authenticated: false,
-            user: null
+            user: null,
         };
     }
 
@@ -23,14 +23,14 @@ class App extends React.Component {
 
         // check whether user is logged in
         auth
-            .onAuthStateChanged(user => {
+            .onAuthStateChanged((user) => {
                 if (user) {
                     this.setState({
                         authenticated: true,
                         user: {
                             displayName: user.displayName,
-                            email: user.email
-                        }
+                            email: user.email,
+                        },
                     });
                     db
                         .collection('users')
@@ -38,18 +38,18 @@ class App extends React.Component {
                         .onSnapshot(function(doc) {
                             if (!doc.data().onBoarding) {
                                 component.setState({
-                                    onBoarding: false
+                                    onBoarding: false,
                                 });
                             } else {
                                 component.setState({
-                                    onBoarding: true
+                                    onBoarding: true,
                                 });
                             }
                         });
                 } else {
                     this.setState({
                         authenticated: true,
-                        user: null
+                        user: null,
                     });
                 }
             })
@@ -58,22 +58,22 @@ class App extends React.Component {
 
     async login() {
         const result = await auth.signInWithPopup(provider);
-        this.setState({ user: result.user });
+        this.setState({user: result.user});
         // Add a new document in collection "users"
         db
             .collection('users')
             .doc(result.user.email)
             .get()
-            .then(doc => {
+            .then((doc) => {
                 if (!doc.exists) {
                     db
                         .collection('users')
                         .doc(result.user.email)
                         .set(
                             {
-                                newUser: true
+                                newUser: true,
                             },
-                            { merge: true }
+                            {merge: true}
                         )
                         .then(function() {
                             newUser = true;
@@ -91,9 +91,9 @@ class App extends React.Component {
                                         linkFB:
                                             result.additionalUserInfo.profile
                                                 .link,
-                                        photoURL: result.user.photoURL
+                                        photoURL: result.user.photoURL,
                                     },
-                                    { merge: true }
+                                    {merge: true}
                                 )
                                 .then(function() {
                                     // eslint-disable-line no-console
@@ -124,9 +124,9 @@ class App extends React.Component {
                                     result.additionalUserInfo.profile.age_range
                                         .min,
                                 linkFB: result.additionalUserInfo.profile.link,
-                                photoURL: result.user.photoURL
+                                photoURL: result.user.photoURL,
                             },
-                            { merge: true }
+                            {merge: true}
                         )
                         .then(function() {
                             // eslint-disable-line no-console
@@ -148,18 +148,18 @@ class App extends React.Component {
         // }
 
         switch (path) {
-        case Routes.PROFILE:
-            content = PageContent.PROFILE;
-            break;
-        case Routes.DATE_SELECTION:
-            content = PageContent.DATE_SELECTION;
-            break;
-        case Routes.SIGN_UP:
-            content = PageContent.SIGN_UP;
-            break;
-        default:
-            content = PageContent.MESSENGER;
-            break;
+            case Routes.PROFILE:
+                content = PageContent.PROFILE;
+                break;
+            case Routes.DATE_SELECTION:
+                content = PageContent.DATE_SELECTION;
+                break;
+            case Routes.SIGN_UP:
+                content = PageContent.SIGN_UP;
+                break;
+            default:
+                content = PageContent.MESSENGER;
+                break;
         }
         return (
             <div className="">

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 import MultiSelectField from './MultiSelectField';
 import './DatesSelection.css';
 import AvailableTimes from 'react-available-times';
@@ -10,7 +10,7 @@ class Availability extends Component {
         this.state = {
             showComponent: false,
             start: this.props.initialStart,
-            end: []
+            end: [],
         };
         this.baseState;
         this._onButtonClick = this._onButtonClick.bind(this);
@@ -20,7 +20,7 @@ class Availability extends Component {
 
     _onButtonClick() {
         this.setState({
-            showComponent: true
+            showComponent: true,
         });
     }
 
@@ -31,7 +31,7 @@ class Availability extends Component {
     reset() {
         this.setState({
             start: [],
-            end: []
+            end: [],
         });
     }
     render() {
@@ -49,14 +49,14 @@ class Availability extends Component {
                             title: 'Work',
                             foregroundColor: '#ff00ff',
                             backgroundColor: '#f0f0f0',
-                            selected: true
-                        }
+                            selected: true,
+                        },
                     ]}
-                    onChange={selections => {
-                        selections.forEach(({ start, end }) => {
+                    onChange={(selections) => {
+                        selections.forEach(({start, end}) => {
                             this.setState({
                                 start: this.state.start.concat(start),
-                                end: this.state.end.concat(end)
+                                end: this.state.end.concat(end),
                             });
                             console.log('Start:', start, 'End:', end);
                             console.log(
@@ -71,12 +71,12 @@ class Availability extends Component {
                         calendarId,
                         start,
                         end,
-                        callback
+                        callback,
                     }) => {}}
                     initialSelections={[
-                        { start: 4860, end: 4920 },
-                        { start: 1620, end: 1680 },
-                        { start: 1980, end: 2040 }
+                        {start: 4860, end: 4920},
+                        {start: 1620, end: 1680},
+                        {start: 1980, end: 2040},
                     ]}
                     height={400}
                     recurring={true}
@@ -85,9 +85,9 @@ class Availability extends Component {
                         'tuesday',
                         'wednesday',
                         'thursday',
-                        'friday'
+                        'friday',
                     ]}
-                    availableHourRange={{ start: 3, end: 11 }}
+                    availableHourRange={{start: 3, end: 11}}
                 />
             </div>
         );
