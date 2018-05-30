@@ -41,8 +41,8 @@ class SentRequest extends Component {
             .doc(this.props.otherUser)
             .collection('dates')
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, ' => ', doc.data());
                     console.log(doc.data());
@@ -50,7 +50,7 @@ class SentRequest extends Component {
                     !currDates[0].confirm;
                 });
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log('Error getting documents: ', error);
             });
 
@@ -84,8 +84,8 @@ class SentRequest extends Component {
                 .doc(this.props.otherUser)
                 .collection('dates')
                 .get()
-                .then(function(querySnapshot) {
-                    querySnapshot.docs.map(function(doc) {
+                .then(function (querySnapshot) {
+                    querySnapshot.docs.map(function (doc) {
                         console.log(doc.id, ' => ', doc.data());
                         console.log(doc.data());
                         currDates.push(doc.data());
@@ -93,14 +93,14 @@ class SentRequest extends Component {
                     });
                     return currDates;
                 })
-                .then(function(currDates) {
+                .then(function (currDates) {
                     currentComponent.setState(prevState => ({
                         dateDetails: currDates,
                         ready: !currDates[0].confirm,
                         timeConfirmed: currDates[0].timeConfirmed
                     }));
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log('Error getting documents: ', error);
                 });
         }
@@ -134,8 +134,8 @@ class SentRequest extends Component {
             .doc(this.props.otherUser)
             .collection('dates')
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     console.log(doc.id, ' => ', doc.data());
                     console.log(doc.data());
                     currDates.push(doc.data());
@@ -143,14 +143,14 @@ class SentRequest extends Component {
                 });
                 return currDates;
             })
-            .then(function(currDates) {
+            .then(function (currDates) {
                 currentComponent.setState(prevState => ({
                     dateDetails: currDates,
                     ready: !currDates[0].confirm,
                     timeConfirmed: currDates[0].timeConfirmed
                 }));
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log('Error getting documents: ', error);
             });
 
@@ -207,10 +207,10 @@ class SentRequest extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -237,10 +237,10 @@ class SentRequest extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -273,10 +273,10 @@ class SentRequest extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -296,10 +296,10 @@ class SentRequest extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -319,7 +319,7 @@ class SentRequest extends Component {
             }
             if (key === 'startTime') {
                 startTimeArr = data['startTime'];
-                startTimeArr.map(function(a) {
+                startTimeArr.map(function (a) {
                     let dayName = '';
                     let time = '';
                     if (a.day === 'sun') {
@@ -437,12 +437,12 @@ class SentRequest extends Component {
         return (
             <div id="datebackground">
                 <div>
-                    <h3 id="letsdate">
+                    {/* <h3 id="letsdate">
                         You've sent a date request to go to {locationArr + ' '}
                         this week!{' '}
                     </h3>
 
-                    <p> We will let you know as soon as you have a response!</p>
+                    <p> We will let you know as soon as you have a response!</p> */}
                 </div>
             </div>
         );
