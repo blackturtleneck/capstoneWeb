@@ -58,6 +58,7 @@ class SignUp2 extends React.Component {
     }
 
     render() {
+        console.log(this.state.availability)
         const handle = props => {
             const { value, dragging, index, ...restProps } = props;
             return (
@@ -175,9 +176,9 @@ class SignUp2 extends React.Component {
                                         <span className="weekday-label" key={index}>{day}</span>
                                     );
                                 })}
-                                <div className="morning">
+                                {/* <div className="morning">
 
-                                    {this.state.availability.MORNING.map((day, index) => {
+                                    {this.state.availability["MORNING"].map((day, index) => {
                                         return (
                                             <Checkbox
                                                 className="avail-checkbox"
@@ -246,8 +247,8 @@ class SignUp2 extends React.Component {
                                                 }}
                                             />
                                         );
-                                    })}
-                                </div>
+                                    })} */}
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

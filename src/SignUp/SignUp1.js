@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth } from '../FirestoreConfig';
+import { auth, db } from '../FirestoreConfig';
 import './SignUp.css';
 import next from '../img/next.svg';
 
@@ -38,11 +38,97 @@ class SignUp1 extends React.Component {
         this.props.saveValues(data);
         this.props.nextStep();
     }
+
+    up() {
+
+        let userRef = db.collection('users');
+        userRef.doc('greenrocksjl@hotmail.com').set({
+            dietaryPref: {
+                "VEGETARIAN": false,
+                "GLUTEN-FREE": false,
+                "VEGAN": false,
+                "DAIRY-FREE": false,
+                "NO RED MEAT": false,
+                "KOSHER": false,
+                "PALEO": false,
+                "RAW": false
+            }, neighborhoods: {
+                "BALLARD": false,
+                "BELLTOWN": false,
+                "CAPITOL HILL": false,
+                "DOWNTOWN": false,
+                "INTERNATIONAL DISTRICT": false,
+                "FIRST HILL": false,
+                "FREMONT": false,
+                "GEORGETOWN": false,
+                "PIONEER SQUARE": false,
+                "QUEEN ANNE": false,
+                "SODO": false,
+                "SOUTH LAKE UNION": false,
+                "WALLINGFORD": false,
+                "WEST SEATTLE": false,
+                "UDISTRICT": false
+            },
+            foodTypeLIKE: {
+                "AMERICAN": false,
+                "FRENCH": false,
+                "CHINESE": false,
+                "DESSERT": false,
+                "GREEK": false,
+                "HALAL": false,
+                "INDIAN": false,
+                "ITALIAN": false,
+                "JAPANESE": false,
+                "KOREAN": false,
+                "MEDITERRANEAN": false,
+                "MEXICAN": false,
+                "PIZZA": false,
+                "THAI": false,
+                "MIDDLE EASTERN": false
+            },
+            foodTypeHATE: {
+                "AMERICAN": false,
+                "FRENCH": false,
+                "CHINESE": false,
+                "DESSERT": false,
+                "GREEK": false,
+                "HALAL": false,
+                "INDIAN": false,
+                "ITALIAN": false,
+                "JAPANESE": false,
+                "KOREAN": false,
+                "MEDITERRANEAN": false,
+                "MEXICAN": false,
+                "PIZZA": false,
+                "THAI": false,
+                "MIDDLE EASTERN": false
+            },
+            music: {
+                "POP": false,
+                "COUNTRY": false,
+                "EDM": false,
+                "R&B": false,
+                "LATIN": false,
+                "HIP HOP": false,
+                "ALTERNATIVE": false,
+                "CLASSICAL": false,
+                "INDIE": false,
+                "FOLK": false,
+                "JAZZ": false,
+                "ROCK": false,
+                "SOUL": false,
+                "PUNK": false,
+                "REGGAE": false
+            }
+        }, { merge: true })
+    }
+
     render() {
+        this.up();
         const header = this.props.existingUser ?
             (
                 <div>
-                    <div className="signup-header-welcome"> EDIT YOUR </div>
+                    <div className="signup-header-welcome" onClick={this.up} > EDIT YOUR </div>
                     <div className="signup-header-amp">A M P R</div>
                     <div className="signup-header-welcome-profile">PROFILE</div>
                 </div>
@@ -55,6 +141,7 @@ class SignUp1 extends React.Component {
 
         return (
             <div className="signup-page">
+                <button >click</button>
                 <div className="signup-header">
                     {header}
                     <div className="tagline-1">TELL US ABOUT YOURSELF</div>
