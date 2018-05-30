@@ -6,7 +6,7 @@ import MultiSelectField from './MultiSelectField';
 import Dates from './Dates';
 import './DatesSelection.css';
 import AvailableTimes from 'react-available-times';
-import SideProf from './SignUp/Profile/SideProf';
+import SideProf from './SignUp/Profile/sideProf';
 
 class DatesSelection extends React.Component {
     constructor(props) {

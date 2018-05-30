@@ -21,7 +21,7 @@ class SideProf extends React.Component {
                     component.setState({ otherDoc: doc.data() })
                 }
             })
-            console.log("willmount",this.state)
+        console.log("willmount", this.state)
     }
 
     componentWillReceiveProps(newProps) {
@@ -32,21 +32,21 @@ class SideProf extends React.Component {
             let component = this;
             db
                 .collection("users")
-                .doc(this.state.otherUser)
+                .doc(newProps.otherUser)
                 .get()
                 .then(doc => {
                     if (doc.exists) {
                         component.setState({ otherDoc: doc.data() })
                     }
-                    console.log("in call",this.state)
+                    console.log("in call", this.state)
                     component.forceUpdate();
                 })
         }
-        console.log("receive befere force",this.state)
-        
+        console.log("receive befere force", this.state)
+
         // this.forceUpdate();
-        console.log("receive after force",this.state)
-        
+        console.log("receive after force", this.state)
+
     }
 
     calcAge(birthday) {
@@ -63,7 +63,7 @@ class SideProf extends React.Component {
             OCTOBER: "10",
             NOVEMBER: "11",
             DECEMBER: "12"
-          };
+        };
 
         console.log("birthday", birthday);
         let birthYear = birthday.year;
@@ -72,60 +72,60 @@ class SideProf extends React.Component {
 
         let month = new Date().getMonth();
         if (month < 10) {
-        month = 0 + "" + month;
+            month = 0 + "" + month;
         }
         let birthMonth = months[birthday.month];
 
         let day = new Date().getDate();
         if (day < 10) {
-        day = 0 + "" + day;
+            day = 0 + "" + day;
         }
         let birthDay = birthday.day;
 
         if (birthMonth > month) {
-        years--;
-        } else if (birthMonth === month) {
-        if (birthDay > day) {
             years--;
+        } else if (birthMonth === month) {
+            if (birthDay > day) {
+                years--;
+            }
         }
-        }
-        this.setState({age:years});
+        this.setState({ age: years });
     }
 
     render() {
-        console.log("render",this)
+        console.log("render", this)
         // let age = '';
         // if(this.state.otherDoc.birthday) {
         // age = this.calcAge(this.state.otherDoc.birthday).bind(this)
         // }
         return (
             <div className="otherProfile-container" >
-            {this.state.otherDoc &&
-                <div>
-                    <h4 className="other-header" > {this.state.otherDoc.name} </h4 >
-                    <p className="otherProfile-info">{this.state.age}</p> 
-                    <p className="otherProfile-info">{this.state.otherDoc.location}</p>
-                    <img className="sideProf-img" src={this.state.otherDoc.imgProfile[0]} alt={this.state.otherDoc.name} />
-                    <p className="otherProfile-info-type">OCCUPATION</p>
-                    <p className="otherProfile-info">{this.state.otherDoc.occupation}</p>
-                    <p className="otherProfile-info-type">EDUCATION</p>
-                    <p className="otherProfile-info">{this.state.otherDoc.education}</p>
-                    <p className="otherProfile-info-type">RELIGION</p>
-                    <p className="otherProfile-info">{this.state.otherDoc.religion}</p>
-                    <img className="sideProf-img" src={this.state.otherDoc.imgProfile[1]} alt={this.state.otherDoc.name} />
-                    <p className="otherProfile-info-type">MY FAVORITE FIRST DATES</p>
-                    <div>firstdateicons</div>
-                    <img className="sideProf-img" src={this.state.otherDoc.imgProfile[2]} alt={this.state.otherDoc.name} />
-                    <p className="otherProfile-info-type">MY INTERESTS</p>
-                    <div>interesticons</div>
-                    <img className="sideProf-img" src={this.state.otherDoc.imgProfile[3]} alt={this.state.otherDoc.name} />
-                    <p className="otherProfile-info-type">BIO</p>
-                    <p className="otherProfile-info">{this.state.otherDoc.bio}</p>
-                    <div>block</div>
-                    <div>unmatch</div>
-                </div>
-            }
-                
+                {this.state.otherDoc &&
+                    <div>
+                        <h4 className="other-header" > {this.state.otherDoc.name} </h4 >
+                        <p className="otherProfile-info">{this.state.age}</p>
+                        <p className="otherProfile-info">{this.state.otherDoc.location}</p>
+                        <img className="sideProf-img" src={this.state.otherDoc.imgProfile[0]} alt={this.state.otherDoc.name} />
+                        <p className="otherProfile-info-type">OCCUPATION</p>
+                        <p className="otherProfile-info">{this.state.otherDoc.occupation}</p>
+                        <p className="otherProfile-info-type">EDUCATION</p>
+                        <p className="otherProfile-info">{this.state.otherDoc.education}</p>
+                        <p className="otherProfile-info-type">RELIGION</p>
+                        <p className="otherProfile-info">{this.state.otherDoc.religion}</p>
+                        <img className="sideProf-img" src={this.state.otherDoc.imgProfile[1]} alt={this.state.otherDoc.name} />
+                        <p className="otherProfile-info-type">MY FAVORITE FIRST DATES</p>
+                        <div>firstdateicons</div>
+                        <img className="sideProf-img" src={this.state.otherDoc.imgProfile[2]} alt={this.state.otherDoc.name} />
+                        <p className="otherProfile-info-type">MY INTERESTS</p>
+                        <div>interesticons</div>
+                        <img className="sideProf-img" src={this.state.otherDoc.imgProfile[3]} alt={this.state.otherDoc.name} />
+                        <p className="otherProfile-info-type">BIO</p>
+                        <p className="otherProfile-info">{this.state.otherDoc.bio}</p>
+                        <div>block</div>
+                        <div>unmatch</div>
+                    </div>
+                }
+
             </div>
 
         );

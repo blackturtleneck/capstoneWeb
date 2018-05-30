@@ -6,7 +6,7 @@ import './Messaging.css';
 import RequestDate from '../RequestDate';
 import ColorMap from '../ColorMap';
 import Availability2 from '../Availability2';
-import SideProf from '../SignUp/Profile/SideProf'
+import SideProf from '../SignUp/Profile/sideProf'
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
