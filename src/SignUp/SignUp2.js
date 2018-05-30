@@ -17,8 +17,6 @@ class SignUp2 extends React.Component {
 
         this.state = {
             authenticated: true,
-            user: this.props.user,
-            content: this.props.content,
             ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
             matchDistance: this.props.fieldValues.matchDistance,
             availability: this.props.fieldValues.availability
@@ -58,6 +56,7 @@ class SignUp2 extends React.Component {
     }
 
     render() {
+        console.log(this.state.availability)
         const handle = props => {
             const { value, dragging, index, ...restProps } = props;
             return (
@@ -72,12 +71,16 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
-        console.log("state s2", this.state)
-
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
+        const dataDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        // console.log("this", this.state.availability.mon.morning)
+
+        // let tempAvailability = this.state.availability;
+
         return (
             <div className="signup-page">
+
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
                 <img
                     src={back}
@@ -116,7 +119,7 @@ class SignUp2 extends React.Component {
                         <Range
                             min={18}
                             max={55}
-                            defaultValue={this.state.ageRange}
+                            defaultValue={[this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax]}
                             handle={handle}
                             trackStyle={[
                                 { backgroundColor: '#828282' },
@@ -157,27 +160,337 @@ class SignUp2 extends React.Component {
                             onChange={this.onSliderChange}
                         />
                     </div>
-                    <div id="availability-wrapper">
-                        <div className="tagline-2">I'M GENERALLY AVAILABLE...</div>
-                        <br />
-                        <div className="gen-availability">
-                            <div className="avail-left">
-                                <br />
-                                {weekdayRows.map((time, index) => {
-                                    return (
-                                        <span className="weekday-time" key={index}>{time}</span>
-                                    );
-                                })}
-                            </div>
-                            <div className="avail-right">
-                                {weekdays.map((day, index) => {
-                                    return (
-                                        <span className="weekday-label" key={index}>{day}</span>
-                                    );
-                                })}
-                                <div className="morning">
 
-                                    {this.state.availability.MORNING.map((day, index) => {
+
+
+                    {/* <div id="availability-wrapper"> */}
+                    <div className="tagline-2">I'M GENERALLY AVAILABLE...</div>
+                    <br />
+                    {/* <div className="gen-availability">
+                            <div className="avail-left"> */}
+                    <div className="weekday-wrapper">
+                        {weekdays.map((day, index) => {
+                            return (
+                                <span className="weekday-label" key={index}>{day}</span>
+                            );
+                        })}
+                    </div>
+                    <br />
+                    {/* {weekdayRows.map((time, index) => {
+                        return (
+                            <span className="weekday-time" key={index}>{time}</span>
+                        );
+                    })} */}
+                    {/* </div> */}
+                    <div className="weekday-time-morning">MORNING</div>
+                    <div className="avail-row">
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.mon.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.mon.morning = !days.mon.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.tue.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.tue.morning = !days.tue.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.wed.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.wed.morning = !days.wed.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.thu.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.thu.morning = !days.thu.morning
+                                this.setState({ availability: days })
+                            }}
+
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.fri.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.fri.morning = !days.fri.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sat.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sat.morning = !days.sat.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sun.morning}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sun.morning = !days.sun.morning
+                                this.setState({ availability: days })
+                            }}
+                        />
+                    </div>
+                    <br />
+                    <div className="weekday-time-afternoon">AFTERNOON</div>
+                    <div className="avail-row">
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.mon.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.mon.afternoon = !days.mon.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.tue.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.tue.afternoon = !days.tue.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.wed.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.wed.afternoon = !days.wed.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.thu.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.thu.afternoon = !days.thu.afternoon
+                                this.setState({ availability: days })
+                            }}
+
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.fri.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.fri.afternoon = !days.fri.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sat.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sat.afternoon = !days.sat.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sun.afternoon}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sun.afternoon = !days.sun.afternoon
+                                this.setState({ availability: days })
+                            }}
+                        />
+                    </div>
+                    <br />
+                    <div className="weekday-time-evening">EVENING</div>
+                    <div className="avail-row">
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.mon.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.mon.evening = !days.mon.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.tue.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.tue.evening = !days.tue.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.wed.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.wed.evening = !days.wed.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.thu.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.thu.evening = !days.thu.evening
+                                this.setState({ availability: days })
+                            }}
+
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.fri.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.fri.evening = !days.fri.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sat.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sat.evening = !days.sat.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+
+                        <Checkbox
+                            className="avail-checkbox"
+                            label="e"
+                            checked={this.state.availability.sun.evening}
+                            onChange={() => {
+                                let days = this.state.availability;
+                                days.sun.evening = !days.sun.evening
+                                this.setState({ availability: days })
+                            }}
+                        />
+                    </div>
+                    {/* <Checkbox
+                                className="avail-checkbox"
+                                label="e"
+                                checked={this.state.availability.mon.morning}
+                                onChange={() => {
+                                    let days = this.state.availability;
+                                    days.mon.morning = !days.mon.morning
+                                    if (days.mon.morning) {
+                                        days.mon.morning = false;
+                                    } else {
+                                        days.mon.morning = true;
+                                    }
+                                    this.setState({ availability: days })
+                                }}
+                            /> */}
+
+                    {/*}  //             < div className = "boxes" >
+                                    //                 <input
+                                    //                     type="checkbox"
+                                    //                     id={"monMorn"}
+                                    //                     className="pref-checkbox"
+                                    //                     checked={this.state.availability.mon.morning}
+                                    //                     onClick={(e) => {
+                                    //                         console.log(e)
+                                    // let days = this.state.availability;
+                                    // days.mon.morning = !days.mon.morning
+                                    // if (days.mon.morning) {
+                                    //     days.mon.morning = false;
+                                    // } else {
+                                    //     days.mon.morning = true;
+                                    // }
+                                    //                         this.setState({ availability: days })
+
+                                    //                     }} />
+                                    //                 <label htmlFor={"box"}>{' '}</label>
+                                    // </div>
+                                    {/* <div className="boxes">
+                                <input
+                                    type="checkbox"
+                                    id={"tueMorn"}
+                                    className="pref-checkbox"
+                                    checked={true}
+                                    onChange={() => {
+                                        console.log(this)
+                                        // let days = this.state.availability;
+                                        // days[day][time] = !days[day][time];
+                                        // this.setState({ availability: days })
+
+                                    }} />
+                                <label htmlFor={"box"}>{' '}</label>
+                            </div> */}
+
+                    <div className="avail-right">
+                        {/* {weekdayRows.map(function (time) {
+                                    dataDays.map((day, dayIndex) => {
+                                        return (
+                                            <div className="boxes" key={dayIndex}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={"box" + dayIndex}
+                                                    className="pref-checkbox"
+                                                    checked={tempAvailability[day][time]}
+                                                    onChange={() => {
+                                                        console.log("HI")
+                                                        // let days = tempAvailability;
+                                                        // days[day][time] = !days[day][time];
+                                                        // this.setState({ availability: days })
+                                                    }} />
+                                                <label htmlFor={"box" + dayIndex}>{' '}</label>
+                                            </div>
+                                        )
+                                    })
+
+                                })} */}
+
+
+                        {/* <div className="morning">
+
+                                    {this.state.availability["MORNING"].map((day, index) => {
                                         return (
                                             <Checkbox
                                                 className="avail-checkbox"
@@ -246,11 +559,11 @@ class SignUp2 extends React.Component {
                                                 }}
                                             />
                                         );
-                                    })}
-                                </div>
-                            </div>
-                        </div>
+                                    })} */}
+                        {/* </div> */}
                     </div>
+                    {/* </div> */}
+                    {/* </div> */}
                 </form>
             </div>
         );

@@ -10,8 +10,6 @@ class SignUp3 extends React.Component {
 
         this.state = {
             authenticated: true,
-            user: this.props.user,
-            content: this.props.content,
 
             coffee: this.props.fieldValues.dates.coffee,
             dinner: this.props.fieldValues.dates.dinner,

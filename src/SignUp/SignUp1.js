@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth } from '../FirestoreConfig';
+import { auth, db } from '../FirestoreConfig';
 import './SignUp.css';
 import next from '../img/next.svg';
 
@@ -8,9 +8,7 @@ class SignUp1 extends React.Component {
         super(props);
 
         this.state = {
-            authenticated: true,
-            user: this.props.user,
-            content: this.props.content
+            authenticated: true
         };
         this.nextStep = this.nextStep.bind(this);
     }
@@ -38,6 +36,7 @@ class SignUp1 extends React.Component {
         this.props.saveValues(data);
         this.props.nextStep();
     }
+
     render() {
         const header = this.props.newUser ?
             (
@@ -55,6 +54,7 @@ class SignUp1 extends React.Component {
         console.log("s1", this.props.fieldValues)
         return (
             <div className="signup-page">
+                <button >click</button>
                 <div className="signup-header">
                     {header}
                     <div className="tagline-1">TELL US ABOUT YOURSELF</div>
