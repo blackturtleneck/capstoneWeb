@@ -9,7 +9,7 @@ install:
   - npm install
 script:
 - npm run lint
-- npm run build
+- CI=false npm run build
 - npm run lint-functions
 
 notifications:
