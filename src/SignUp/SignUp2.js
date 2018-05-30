@@ -83,22 +83,22 @@ class SignUp2 extends React.Component {
                         src={next}
                         alt="next"
                     />
-                    <label className="signup-label" for="matchGender">
+                    <label className="signup-label" htmlFor="matchGender">
                         I'M LOOKING FOR...
                     </label>
                     <select
                         required
                         className="custom-select margin"
                         name="matchGender"
-                        value={this.props.fieldValues.matchGender}
+                        defaultValue={this.props.fieldValues.matchGender}
                     >
-                        <option selected />
+                        <option value="select">select</option>
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                         <option value="both">BOTH</option>
                     </select>
 
-                    <label className="signup-label" for="match-age">
+                    <label className="signup-label" htmlFor="match-age">
                         AGE
                     </label>
                     <div id="ageRange">
@@ -126,15 +126,15 @@ class SignUp2 extends React.Component {
                     </div>
                     <label
                         className="signup-label distance-wrapper"
-                        for="distance"
+                        htmlFor="distance"
                     >
-                        DISTANCE
+                        DISTANCE (miles)
                     </label>
                     <div id="distance">
                         <Slider
                             min={0}
                             max={50}
-                            defaultValue={this.state.distance}
+                            defaultValue={this.state.matchDistance}
                             handle={handle}
                             trackStyle={[{ backgroundColor: '#828282' }]}
                             handleStyle={[
@@ -561,7 +561,7 @@ class SignUp2 extends React.Component {
             matchGender: e.target.matchGender.value,
             matchAgeMin: this.state.ageRange[0],
             matchAgeMax: this.state.ageRange[1],
-            matchDistance: this.state.distance
+            matchDistance: this.state.matchDistance
         };
         console.log('data', data);
         this.props.saveValues(data);
