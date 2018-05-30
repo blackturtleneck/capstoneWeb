@@ -51,7 +51,7 @@ class DateConfirmed extends Component {
                 });
             })
             .catch(function(error) {
-                Console.log("Error getting documents: ", error);
+                console.log("Error getting documents: ", error);
             });
 
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];

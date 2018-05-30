@@ -1,9 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React from "react"; // eslint-disable-line no-use-before-define
+import ReactDOM from "react-dom"; // eslint-disable-line no-use-before-define
+import App from "./App"; // eslint-disable-line no-use-before-define
 
 it("renders without crashing", () => {
-    // eslint-disable-next-line no-use-before-define
     const div = document.createElement("div");
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
