@@ -225,7 +225,7 @@ class SignUpInController extends Component {
     }
 
     saveValues(fields) {
-        return (function() {
+        return (function () {
             fieldValues = Object.assign({}, fieldValues, fields);
         })();
     }

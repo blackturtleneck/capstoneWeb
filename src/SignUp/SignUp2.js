@@ -128,13 +128,13 @@ class SignUp2 extends React.Component {
                         className="signup-label distance-wrapper"
                         for="distance"
                     >
-                        DISTANCE
+                        DISTANCE (miles)
                     </label>
                     <div id="distance">
                         <Slider
                             min={0}
                             max={50}
-                            defaultValue={this.state.distance}
+                            defaultValue={this.state.matchDistance}
                             handle={handle}
                             trackStyle={[{ backgroundColor: '#828282' }]}
                             handleStyle={[
@@ -561,7 +561,7 @@ class SignUp2 extends React.Component {
             matchGender: e.target.matchGender.value,
             matchAgeMin: this.state.ageRange[0],
             matchAgeMax: this.state.ageRange[1],
-            matchDistance: this.state.distance
+            matchDistance: this.state.matchDistance
         };
         console.log('data', data);
         this.props.saveValues(data);
