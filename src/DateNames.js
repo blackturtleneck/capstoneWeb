@@ -130,7 +130,7 @@ class DateNames extends Component {
 
     render() {
         return (
-            <div id="datebackground">
+            <div id="datebackground" className="request-date-location">
                 <div>
                     <h3 id="halfwayText"> Let's meet halfway! </h3>
                     <div class="btn-group-vertical">
@@ -207,6 +207,7 @@ class DateNames extends Component {
                 </div>
             </div>
         );
+        
     }
 }
 

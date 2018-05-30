@@ -385,19 +385,39 @@ class Messenger extends React.Component {
         //   <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
         //    null
         //}
+        let content = '';
+        if(this.state.dates.length !== 0) {
+            if(this.state.userSent) {
+                if(this.state.userConfirmed) {
+                    content = "dateconfirmed"
+                } else if (this.state.userResponded) {
+                    content = "Availability4"
+                    content = "Button" //close everything
+                }
+                content = "Sent Request"
+            } if (this.state.userConfirmed === true) {
+                content = "DateConfirmed"
+            } else if (this.state.userResponded === true ) {
+                content = "Availability4"
+                content = "Availability3" // probs doesnt show
+            }
+            content ="ReceiveRequest"
+        } else {
+            content = "RequestDate"
+        }
+        
 
         return (
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
                 this.state.otherUser !== null ? (
                     <div className="messenger">
+                    
                         <h2>{this.state.otherUserName}</h2>
-                        <ol className="messages" id="message-list">
-                            {currentMessage}
-                        </ol>
+
 
                         {this.state.dates.length !== 0 ? (
-                            <div>
+                            <div id = "bigmood">
                                 {this.state.userSent === true ? (
                                     <div>
                                         {this.state.userConfirmed === true ? (
@@ -609,17 +629,19 @@ class Messenger extends React.Component {
                             </div>
                         ) : (
                             <div className="date-button-wrapper">
-                                {
+                            
                                     <RequestDate
                                         userEmail={this.state.userEmail}
                                         otherUser={this.state.otherUser}
                                         action={this.dateRequestHandler}
                                         callBack={this.update}
                                     />
-                                }
                             </div>
                         )}
 
+                        <ol className="messages" id="message-list">
+                            {currentMessage}
+                        </ol>
                         <div className="button-input-wrapper">
                             <input
                                 id="message-box"
@@ -637,7 +659,9 @@ class Messenger extends React.Component {
                             </button>
                         </div>
                         <br />
+                        
                     </div>
+                    
                 ) : (
                     <div className="messenger">
                         <p className="select">

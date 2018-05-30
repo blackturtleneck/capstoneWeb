@@ -435,7 +435,7 @@ class SentRequest extends Component {
             }
         }
         return (
-            <div id="datebackground">
+            <div id="datebackground" className="confirm-date">
                 <div>
                     <h3 id="letsdate">
                         You've sent a date request to go to {locationArr + ' '}

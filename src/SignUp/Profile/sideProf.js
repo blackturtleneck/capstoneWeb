@@ -1,12 +1,21 @@
 import React from 'react';
 import { db } from '../../FirestoreConfig';
 import './sideProf.css'
+import RequestDate from '../../RequestDate'
+import ReceiveRequest from '../../ReceiveRequest.js'
+import DateConfirmed from '../../DateConfirmed.js'
+import SentRequest from '../../SentRequest.js'
+import Availability3 from '../../Availability3.js'
+
+import '../../DatesSelection.css'
+import { Button } from "react-bootstrap";
 
 class SideProf extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            otherUser: this.props.otherUser
+            otherUser: this.props.otherUser,
+            userEmail: this.props.userEmail
         };
     }
 
@@ -100,9 +109,14 @@ class SideProf extends React.Component {
         // }
         return (
             <div className="otherProfile-container" >
+
                 {this.state.otherDoc &&
+         
                     <div>
-                        <h4 className="other-header" > {this.state.otherDoc.name} </h4 >
+                        <h4 className="other-header" > {this.state.otherDoc.name} 
+                      
+                      </h4 >
+             
                         <p className="otherProfile-info">{this.state.age}</p>
                         <p className="otherProfile-info">{this.state.otherDoc.location}</p>
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[0]} alt={this.state.otherDoc.name} />
