@@ -28,3 +28,7 @@
 .otherProfile-info {
     font-size: 18px;
 }
+
+.icon-container > i {
+    margin: 10px;
+}
