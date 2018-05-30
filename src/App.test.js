@@ -1,6 +1,3 @@
-/* global it:true*/
-/* eslint no-undef: "error"*/
-
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
