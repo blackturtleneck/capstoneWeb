@@ -62,7 +62,6 @@ class SignUp4 extends React.Component {
 
         this.props.saveValues(data);
         this.props.submitRegistration();
-
     }
     bioChange(e) {
         this.setState({ bio: e.target.value })
@@ -87,7 +86,9 @@ class SignUp4 extends React.Component {
 
         return (
             <div className="signup-page">
-                <div className="tagline-2">TELL US MORE &amp; GET BETTER DATES</div>
+                <div className="tagline-2">
+                    TELL US MORE &amp; GET BETTER DATES
+                </div>
                 <img
                     src={back}
                     className="back back-2"
@@ -112,7 +113,10 @@ class SignUp4 extends React.Component {
                     </div>
 
                     <div className="foodPref-label">
-                        <label className="signup-label signup4-header" htmlFor="foodPreferencesAllergies">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="foodPreferencesAllergies"
+                        >
                             FOOD PREFERENCES / ALLERGIES
                         </label>
                     </div>
@@ -166,10 +170,13 @@ class SignUp4 extends React.Component {
                     </div>
 
                     <br />
-                    <div id="foodLike" >
-                        <label className="signup-label signup4-header" htmlFor="CuisinesYes">
+                    <div id="foodLike">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="CuisinesYes"
+                        >
                             CUISINES I LIKE
-                    </label>
+                        </label>
                         <br />
                         {Object.keys(this.props.fieldValues.cuisinePreferences).map((food, index) => {
                             return (
@@ -191,11 +198,14 @@ class SignUp4 extends React.Component {
                                 >{food}</button>);
                         })}
                     </div>
-                    <div id="foodHate" >
+                    <div id="foodHate">
                         <br />
-                        <label className="signup-label signup4-header" htmlFor="CuisinesNo">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="CuisinesNo"
+                        >
                             CUISINES I HATE
-                    </label>
+                        </label>
                         <br />
                         {Object.keys(this.props.fieldValues.cuisineDislikes).map((food, index) => {
                             return (
@@ -219,9 +229,12 @@ class SignUp4 extends React.Component {
                     </div>
                     <div id="musicLike">
                         <br />
-                        <label className="signup-label signup4-header" htmlFor="Music">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="Music"
+                        >
                             MUSIC PREFERENCES
-                    </label>
+                        </label>
                         <br />
                         {Object.keys(this.props.fieldValues.musicPreferences).map((genre, index) => {
                             return (
@@ -248,8 +261,6 @@ class SignUp4 extends React.Component {
         );
     }
 }
-
-
 
 export default SignUp4;
 

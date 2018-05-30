@@ -8,6 +8,7 @@ import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 import Checkbox from 'muicss/lib/react/checkbox';
 
+
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
 
@@ -38,21 +39,8 @@ class SignUp2 extends React.Component {
 
     onSliderChange(value) {
         this.setState({
-            matchDistance: value
+            distance: value
         });
-    }
-
-    nextStep(e) {
-        e.preventDefault();
-        var data = {
-            matchGender: e.target.matchGender.value,
-            matchAgeMin: this.state.ageRange[0],
-            matchAgeMax: this.state.ageRange[1],
-            matchDistance: this.state.matchDistance,
-            availability: this.state.availability
-        };
-        this.props.saveValues(data);
-        this.props.nextStep();
     }
 
     render() {
@@ -89,30 +77,28 @@ class SignUp2 extends React.Component {
                     alt="back"
                 />
                 <form className="form" onSubmit={this.nextStep}>
-                    <div className="next-step next">
-                        <input
-                            type="image"
-                            className="next next-2"
-                            src={next}
-                            alt="next"
-                        />
-                    </div>
-                    <label className="signup-label" htmlFor="matchGender">
+                    <input
+                        type="image"
+                        className="next next-2"
+                        src={next}
+                        alt="next"
+                    />
+                    <label className="signup-label" for="matchGender">
                         I'M LOOKING FOR...
                     </label>
                     <select
                         required
                         className="custom-select margin"
                         name="matchGender"
-                        defaultValue={this.props.fieldValues.matchGender}
+                        value={this.props.fieldValues.matchGender}
                     >
-                        <option value="select">select</option>
+                        <option selected />
                         <option value="male">MALE</option>
                         <option value="female">FEMALE</option>
                         <option value="both">BOTH</option>
                     </select>
 
-                    <label className="signup-label" htmlFor="match-age">
+                    <label className="signup-label" for="match-age">
                         AGE
                     </label>
                     <div id="ageRange">
@@ -140,7 +126,7 @@ class SignUp2 extends React.Component {
                     </div>
                     <label
                         className="signup-label distance-wrapper"
-                        htmlFor="distance"
+                        for="distance"
                     >
                         DISTANCE
                     </label>
@@ -148,7 +134,7 @@ class SignUp2 extends React.Component {
                         <Slider
                             min={0}
                             max={50}
-                            defaultValue={this.state.matchDistance}
+                            defaultValue={this.state.distance}
                             handle={handle}
                             trackStyle={[{ backgroundColor: '#828282' }]}
                             handleStyle={[
@@ -568,10 +554,19 @@ class SignUp2 extends React.Component {
             </div>
         );
     }
+
+    nextStep(e) {
+        e.preventDefault();
+        var data = {
+            matchGender: e.target.matchGender.value,
+            matchAgeMin: this.state.ageRange[0],
+            matchAgeMax: this.state.ageRange[1],
+            matchDistance: this.state.distance
+        };
+        console.log('data', data);
+        this.props.saveValues(data);
+        this.props.nextStep();
+    }
 }
 
-
-
 export default SignUp2;
-
-// try to pass " " in as prop to this, if "", new profile, otherwisse, take from db to edit profile

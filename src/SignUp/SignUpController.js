@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { db } from '../FirestoreConfig';
-import { Redirect } from 'react-router-dom';
-import './SignUp.css';
-import SignUp1 from './SignUp1';
-import SignUp2 from './SignUp2';
-import SignUp3 from './SignUp3';
-import SignUp4 from './SignUp4';
-import SignUpComplete from './SignUpComplete';
+import React, { Component } from "react"; // eslint-disable-line no-use-before-define
+import { db } from "../FirestoreConfig";
+import { Redirect } from "react-router-dom"; // eslint-disable-line no-use-before-define
+import "./SignUp.css";
+import SignUp1 from "./SignUp1"; // eslint-disable-line no-use-before-define
+import SignUp2 from "./SignUp2"; // eslint-disable-line no-use-before-define
+import SignUp3 from "./SignUp3"; // eslint-disable-line no-use-before-define
+import SignUp4 from "./SignUp4"; // eslint-disable-line no-use-before-define
+import SignUpComplete from "./SignUpComplete"; // eslint-disable-line no-use-before-define
 
 let fieldValues = '';
 
@@ -25,7 +25,7 @@ class SignUpInController extends Component {
 
     componentWillMount() {
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.user.email)
             .get()
             .then(doc => {
@@ -220,12 +220,12 @@ class SignUpInController extends Component {
                 }
             })
             .catch(err => {
-                console.log('Error getting document', err);
+                console.log("Error getting document", err);
             });
     }
 
     saveValues(fields) {
-        return (function () {
+        return (function() {
             fieldValues = Object.assign({}, fieldValues, fields);
         })();
     }
@@ -313,7 +313,7 @@ class SignUpInController extends Component {
             case 5:
                 return <SignUpComplete nextStep={this.nextStep} />;
             case 6:
-                return <Redirect to={'/messenger'} />;
+                return <Redirect to={"/messenger"} />;
         }
     }
     render() {
@@ -321,10 +321,10 @@ class SignUpInController extends Component {
         return (!this.state.existingUser ? <span>Loading data...</span> : (
             <div className="signup-wrapper">
                 <div
-                    style={{ width: progress + 'vw' }}
+                    style={{ width: progress + "vw" }}
                     className="progress-bar"
                 >
-                    {' '}
+                    {" "}
                 </div>
                 {this.showStep()}
             </div>
