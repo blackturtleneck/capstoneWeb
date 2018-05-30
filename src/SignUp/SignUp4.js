@@ -23,7 +23,8 @@ class SignUp4 extends React.Component {
             // neighborhoodPreferences: this.props.fieldValues.neighborhoodPreferences,
             cuisinePreferences: this.props.fieldValues.cuisinePreferences,
             cuisineDislikes: this.props.fieldValues.cuisineDislikes,
-            musicPreferences: this.props.fieldValues.musicPreferences
+            musicPreferences: this.props.fieldValues.musicPreferences,
+            bio: this.props.fieldValues.bio
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -53,13 +54,17 @@ class SignUp4 extends React.Component {
             foodPreferences: this.state.foodPreferences,
             cuisinePreferences: this.state.cuisinePreferences,
             cuisineDislikes: this.state.cuisineDislikes,
-            musicPreferences: this.state.musicPreferences
+            musicPreferences: this.state.musicPreferences,
+            bio: this.state.bio
             // neighborhoodPreferences: this.state.neighborhoodPreferences
         };
         console.log("4", data)
 
         this.props.saveValues(data);
         this.props.submitRegistration();
+    }
+    bioChange(e) {
+        this.setState({ bio: e.target.value })
     }
 
     render() {
@@ -96,7 +101,17 @@ class SignUp4 extends React.Component {
                     alt="next"
                     onClick={this.nextStep}
                 />
-                <div id="signup4">
+                <div id="signup4" >
+
+                    <div className="bio-label">
+                        <label className="signup-label signup4-header" htmlFor="bio">
+                            ABOUT ME
+                        </label>
+                    </div>
+                    <div className="bio">
+                        <textarea value={this.state.bio} onChange={this.bioChange.bind(this)} />
+                    </div>
+
                     <div className="foodPref-label">
                         <label
                             className="signup-label signup4-header"
