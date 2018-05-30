@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import { db } from "./FirestoreConfig";
-import "./DatesSelection.css";
-import ColorMap from "./ColorMap.js";
-import Availability2 from "./Availability2.js";
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { db } from './FirestoreConfig';
+import './DatesSelection.css';
+import ColorMap from './ColorMap.js';
+import Availability2 from './Availability2.js';
 
 class DateConfirmed extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message: "",
+            message: '',
             dateDetails: [],
             user: this.props.user,
             userEmail: this.props.userEmail,
@@ -17,7 +17,7 @@ class DateConfirmed extends Component {
             otherUserName: this.props.otherUserName,
             ready: false,
             finalDateArray: [],
-            finalLocation: "",
+            finalLocation: '',
             dateConfirmed: false,
             timeStampFinal: null,
             mapShowing: false
@@ -35,11 +35,11 @@ class DateConfirmed extends Component {
         let currentComponent = this;
         var currDates = [];
         db
-            .collection("users")
+            .collection('users')
             .doc(this.props.userEmail)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.otherUser)
-            .collection("dates")
+            .collection('dates')
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.docs.map(function(doc) {
@@ -57,12 +57,12 @@ class DateConfirmed extends Component {
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
         // console.log(typeof data);
         for (var key in data) {
-            if (key === "id") {
+            if (key === 'id') {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === "sent") {
+            if (key === 'sent') {
                 this.setState({
                     sent: data[key]
                 });
@@ -78,11 +78,11 @@ class DateConfirmed extends Component {
             let currentComponent = this;
             var currDates = [];
             db
-                .collection("users")
+                .collection('users')
                 .doc(this.props.userEmail)
-                .collection("messages")
+                .collection('messages')
                 .doc(this.props.otherUser)
-                .collection("dates")
+                .collection('dates')
                 .get()
                 .then(function(querySnapshot) {
                     querySnapshot.docs.map(function(doc) {
@@ -109,12 +109,12 @@ class DateConfirmed extends Component {
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
         // console.log(typeof data);
         for (var key in data) {
-            if (key === "id") {
+            if (key === 'id') {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === "sent") {
+            if (key === 'sent') {
                 this.setState({
                     sent: data[key]
                 });
@@ -128,11 +128,11 @@ class DateConfirmed extends Component {
         let currentComponent = this;
         var currDates = [];
         db
-            .collection("users")
+            .collection('users')
             .doc(this.props.userEmail)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.otherUser)
-            .collection("dates")
+            .collection('dates')
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.docs.map(function(doc) {
@@ -157,12 +157,12 @@ class DateConfirmed extends Component {
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
         // console.log(typeof data);
         for (var key in data) {
-            if (key === "id") {
+            if (key === 'id') {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === "sent") {
+            if (key === 'sent') {
                 this.setState({
                     sent: data[key]
                 });
@@ -195,11 +195,11 @@ class DateConfirmed extends Component {
 
         this.otherUserConfirm();
         var dateInfo = db
-            .collection("users")
+            .collection('users')
             .doc(this.props.userEmail)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.otherUser)
-            .collection("dates")
+            .collection('dates')
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -208,11 +208,11 @@ class DateConfirmed extends Component {
                 timeConfirmed: this.state.timeConfirmed
             })
             .then(function() {
-                console.log("Document successfully updated!");
+                console.log('Document successfully updated!');
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
+                console.error('Error updating document: ', error);
             });
     }
 
@@ -226,11 +226,11 @@ class DateConfirmed extends Component {
     otherUserConfirm() {
         // console.log(this.state.timeStampFinal);
         var dateInfo = db
-            .collection("users")
+            .collection('users')
             .doc(this.props.otherUser)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.userEmail)
-            .collection("dates")
+            .collection('dates')
             .doc(String(this.props.timeStamp));
         return dateInfo
             .update({
@@ -238,11 +238,11 @@ class DateConfirmed extends Component {
                 timeConfirmed: this.state.timeConfirmed
             })
             .then(function() {
-                console.log("Document successfully updated!");
+                console.log('Document successfully updated!');
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
+                console.error('Error updating document: ', error);
             });
 
         // this.setState({
@@ -258,14 +258,14 @@ class DateConfirmed extends Component {
         this.setState({
             dateConfirmed: true
         });
-        console.log(this.props.timeStamp + "DOUBLE CHECKING");
+        console.log(this.props.timeStamp + 'DOUBLE CHECKING');
         this.otherUserRespond();
         var dateInfo = db
-            .collection("users")
+            .collection('users')
             .doc(this.props.userEmail)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.otherUser)
-            .collection("dates")
+            .collection('dates')
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -274,21 +274,21 @@ class DateConfirmed extends Component {
                 response: true
             })
             .then(function() {
-                console.log("Document successfully updated!");
+                console.log('Document successfully updated!');
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
+                console.error('Error updating document: ', error);
             });
     }
 
     otherUserRespond() {
         var dateInfo = db
-            .collection("users")
+            .collection('users')
             .doc(this.props.otherUser)
-            .collection("messages")
+            .collection('messages')
             .doc(this.props.userEmail)
-            .collection("dates")
+            .collection('dates')
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -297,138 +297,138 @@ class DateConfirmed extends Component {
                 response: true
             })
             .then(function() {
-                console.log("Document successfully updated!");
+                console.log('Document successfully updated!');
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
+                console.error('Error updating document: ', error);
             });
     }
 
     render() {
         var startTimeArr = [];
-        var locationArr = "";
+        var locationArr = '';
         var finalDateButton = [];
         console.log(this.state.dateDetails[this.state.dateDetails.length - 1]);
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
         console.log(typeof data);
         for (var key in data) {
-            if (key === "location") {
+            if (key === 'location') {
                 locationArr = data[key];
                 console.log(locationArr);
             }
-            if (key === "startTime") {
-                startTimeArr = data["startTime"];
+            if (key === 'startTime') {
+                startTimeArr = data['startTime'];
                 startTimeArr.map(function(a) {
-                    let dayName = "";
-                    let time = "";
-                    if (a.day === "sun") {
-                        dayName = "Sunday";
+                    let dayName = '';
+                    let time = '';
+                    if (a.day === 'sun') {
+                        dayName = 'Sunday';
                     }
-                    if (a.day === "mon") {
-                        dayName = "Monday";
+                    if (a.day === 'mon') {
+                        dayName = 'Monday';
                     }
-                    if (a.day === "tues") {
-                        dayName = "Tuesday";
+                    if (a.day === 'tues') {
+                        dayName = 'Tuesday';
                     }
-                    if (a.day === "wed") {
-                        dayName = "Wednesday";
+                    if (a.day === 'wed') {
+                        dayName = 'Wednesday';
                     }
-                    if (a.day === "thurs") {
-                        dayName = "Thursday";
+                    if (a.day === 'thurs') {
+                        dayName = 'Thursday';
                     }
-                    if (a.day === "fri") {
-                        dayName = "Friday";
+                    if (a.day === 'fri') {
+                        dayName = 'Friday';
                     }
-                    if (a.day === "sat") {
-                        dayName = "Saturday";
+                    if (a.day === 'sat') {
+                        dayName = 'Saturday';
                     }
-                    if (a.day === "sun") {
-                        dayName = "Sunday";
+                    if (a.day === 'sun') {
+                        dayName = 'Sunday';
                     }
 
                     a.times.forEach(time => {
                         console.log(a.times);
                         console.log(dayName);
                         if (time.start === 1000) {
-                            time = "10AM";
+                            time = '10AM';
                         }
                         if (time.start === 1030) {
-                            time = "10:30AM";
+                            time = '10:30AM';
                         }
                         if (time.start === 1100) {
-                            time = "11AM";
+                            time = '11AM';
                         }
                         if (time.start === 1130) {
-                            time = "11:30AM";
+                            time = '11:30AM';
                         }
                         if (time.start === 1200) {
-                            time = "12PM";
+                            time = '12PM';
                         }
                         if (time.start === 1230) {
-                            time = "12:30PM";
+                            time = '12:30PM';
                         }
                         if (time.start === 1300) {
-                            time = "1PM";
+                            time = '1PM';
                         }
                         if (time.start === 1330) {
-                            time = "1:30PM";
+                            time = '1:30PM';
                         }
                         if (time.start === 1400) {
-                            time = "2PM";
+                            time = '2PM';
                         }
                         if (time.start === 1430) {
-                            time = "2:30PM";
+                            time = '2:30PM';
                         }
                         if (time.start === 1500) {
-                            time = "3PM";
+                            time = '3PM';
                         }
                         if (time.start === 1530) {
-                            time = "3:30PM";
+                            time = '3:30PM';
                         }
                         if (time.start === 1600) {
-                            time = "4PM";
+                            time = '4PM';
                         }
                         if (time.start === 1630) {
-                            time = "4:30PM";
+                            time = '4:30PM';
                         }
                         if (time.start === 1700) {
-                            time = "5PM";
+                            time = '5PM';
                         }
                         if (time.start === 1730) {
-                            time = "5:30PM";
+                            time = '5:30PM';
                         }
                         if (time.start === 1800) {
-                            time = "6PM";
+                            time = '6PM';
                         }
                         if (time.start === 1830) {
-                            time = "6:30PM";
+                            time = '6:30PM';
                         }
                         if (time.start === 1900) {
-                            time = "7PM";
+                            time = '7PM';
                         }
                         if (time.start === 1930) {
-                            time = "7:30PM";
+                            time = '7:30PM';
                         }
                         if (time.start === 2000) {
-                            time = "8PM";
+                            time = '8PM';
                         }
                         if (time.start === 2030) {
-                            time = "8:30PM";
+                            time = '8:30PM';
                         }
                         if (time.start === 2100) {
-                            time = "9PM";
+                            time = '9PM';
                         }
                         if (time.start === 2130) {
-                            time = "9:30PM";
+                            time = '9:30PM';
                         }
                         if (time.start === 2200) {
-                            time = "10PM";
+                            time = '10PM';
                         }
                         if (time.start === 2230) {
-                            time = "10:30PM";
+                            time = '10:30PM';
                         }
-                        finalDateButton.push(dayName + ", " + time);
+                        finalDateButton.push(dayName + ', ' + time);
                     });
                 });
                 console.log(finalDateButton);
@@ -437,9 +437,9 @@ class DateConfirmed extends Component {
         return (
             <div id="datebackground">
                 <h3 id="letsdate">
-                    {" "}
-                    You have an upcoming date at {locationArr} at{" "}
-                    {this.state.timeConfirmed}{" "}
+                    {' '}
+                    You have an upcoming date at {locationArr} at{' '}
+                    {this.state.timeConfirmed}{' '}
                 </h3>
             </div>
         );
