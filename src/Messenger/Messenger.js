@@ -1,20 +1,20 @@
-import React from 'react';
-import { db } from '../FirestoreConfig';
-import './Messaging.css';
-import RequestDate from '../RequestDate';
-import ReceiveRequest from '../ReceiveRequest';
-import SentRequest from '../SentRequest.js';
-import Availability3 from '../Availability3';
-import Availability4 from '../Availability4';
-import DateConfirmed from '../DateConfirmed';
-import sendAvailabilityResponse from '../sendAvailabilityResponse.js';
-import { Button } from 'react-bootstrap';
+import React from "react";
+import { db } from "../FirestoreConfig";
+import "./Messaging.css";
+import RequestDate from "../RequestDate"; // eslint-disable-line no-use-before-define
+import ReceiveRequest from "../ReceiveRequest"; // eslint-disable-line no-use-before-define
+import SentRequest from "../SentRequest.js"; // eslint-disable-line no-use-before-define
+import Availability3 from "../Availability3"; // eslint-disable-line no-use-before-define
+import Availability4 from "../Availability4"; // eslint-disable-line no-use-before-define
+import DateConfirmed from "../DateConfirmed"; // eslint-disable-line no-use-before-define
+import sendAvailabilityResponse from "../sendAvailabilityResponse.js"; // eslint-disable-line no-use-before-define
+import { Button } from "react-bootstrap"; // eslint-disable-line no-use-before-define
 
 class Messenger extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message: '',
+            message: "",
             messages: [],
             dates: [],
             user: this.props.user,
@@ -41,8 +41,8 @@ class Messenger extends React.Component {
 
     componentWillMount() {
         //doesnt werk..?
-        if (document.getElementById('message-list') != null) {
-            var list = document.getElementById('message-list');
+        if (document.getElementById("message-list") != null) {
+            var list = document.getElementById("message-list");
             list.scrollTop = list.scrollHeight;
             list.animate({ scrollTop: list.scrollHeight });
         }
@@ -51,15 +51,15 @@ class Messenger extends React.Component {
             let currentComponent = this;
             var currDates = [];
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(this.props.otherUser)
-                .collection('dates')
+                .collection("dates")
                 .get()
                 .then(function(querySnapshot) {
                     querySnapshot.docs.map(function(doc) {
-                        console.log(doc.id, ' => ', doc.data());
+                        console.log(doc.id, " => ", doc.data());
                         console.log(doc.data());
                         currDates.push(doc.data());
                     });
@@ -99,11 +99,11 @@ class Messenger extends React.Component {
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(newProps.otherUser)
-                .collection('messages')
+                .collection("messages")
                 .onSnapshot(function(querySnapshot) {
                     var curMessages = [];
                     querySnapshot.forEach(function(doc) {
@@ -116,11 +116,11 @@ class Messenger extends React.Component {
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent2 = this;
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(newProps.otherUser)
-                .collection('dates')
+                .collection("dates")
                 .onSnapshot(function(querySnapshot) {
                     var currDates = [];
                     querySnapshot.forEach(function(doc) {
@@ -149,7 +149,7 @@ class Messenger extends React.Component {
     }
 
     submitMessageEnter(event) {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             this.submitMessage();
         }
     }
@@ -158,58 +158,58 @@ class Messenger extends React.Component {
         const time = new Date();
 
         let month = time.getMonth();
-        let formattedMonth = '';
+        let formattedMonth = "";
         if (month < 10) {
-            formattedMonth = '0' + (month + 1);
+            formattedMonth = "0" + (month + 1);
         } else {
-            formattedMonth = month + 1 + '';
+            formattedMonth = month + 1 + "";
         }
 
         let day = time.getDate();
-        let formattedDay = '';
+        let formattedDay = "";
         if (day < 10) {
-            formattedDay = '0' + day;
+            formattedDay = "0" + day;
         } else {
-            formattedDay = day + '';
+            formattedDay = day + "";
         }
 
         let hours = time.getHours();
-        let formattedHours = '';
+        let formattedHours = "";
         if (hours < 10) {
-            formattedHours = '0' + hours;
+            formattedHours = "0" + hours;
         } else {
-            formattedHours = hours + '';
+            formattedHours = hours + "";
         }
 
         let minutes = time.getMinutes();
-        let formattedMinutes = '';
+        let formattedMinutes = "";
         if (minutes < 10) {
-            formattedMinutes = '0' + minutes;
+            formattedMinutes = "0" + minutes;
         } else {
-            formattedMinutes = minutes + '';
+            formattedMinutes = minutes + "";
         }
 
         let seconds = time.getSeconds();
-        let formattedSeconds = '';
+        let formattedSeconds = "";
         if (seconds < 10) {
-            formattedSeconds = '0' + seconds;
+            formattedSeconds = "0" + seconds;
         } else {
-            formattedSeconds = seconds + '';
+            formattedSeconds = seconds + "";
         }
 
         const timeStamp =
             time.getFullYear() +
-            ':' +
+            ":" +
             formattedMonth +
-            ':' +
+            ":" +
             formattedDay +
-            ':' +
+            ":" +
             formattedHours +
-            ':' +
+            ":" +
             formattedMinutes +
-            ':' +
+            ":" +
             formattedSeconds +
-            ':' +
+            ":" +
             time.getMilliseconds();
         const nextMessage = {
             id: time,
@@ -217,23 +217,23 @@ class Messenger extends React.Component {
             from: this.state.user
         };
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.state.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(timeStamp)
             .set(nextMessage);
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(this.state.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(timeStamp)
             .set(nextMessage);
 
-        document.getElementById('message-box').value = '';
+        document.getElementById("message-box").value = "";
     }
 
     dateRequestHandler() {
@@ -243,7 +243,7 @@ class Messenger extends React.Component {
     }
 
     update(timestamp) {
-        console.log('update', this.state.dateRequestTimeStamp);
+        console.log("update", this.state.dateRequestTimeStamp);
         this.setState({
             dateRequestTimeStamp: timestamp
         });
@@ -253,62 +253,62 @@ class Messenger extends React.Component {
         console.log(this.state.dates[this.state.dates.length - 1]);
         const data = this.state.dates[this.state.dates.length - 1];
         for (var key in data) {
-            if (key === 'id') {
+            if (key === "id") {
                 var fullTimeStamp = data[key];
 
                 let month = fullTimeStamp.getMonth();
-                let formattedMonth = '';
+                let formattedMonth = "";
                 if (month < 10) {
-                    formattedMonth = '0' + (month + 1);
+                    formattedMonth = "0" + (month + 1);
                 } else {
-                    formattedMonth = month + 1 + '';
+                    formattedMonth = month + 1 + "";
                 }
 
                 let day = fullTimeStamp.getDate();
-                let formattedDay = '';
+                let formattedDay = "";
                 if (day < 10) {
-                    formattedDay = '0' + day;
+                    formattedDay = "0" + day;
                 } else {
-                    formattedDay = day + '';
+                    formattedDay = day + "";
                 }
 
                 let hours = fullTimeStamp.getHours();
-                let formattedHours = '';
+                let formattedHours = "";
                 if (hours < 10) {
-                    formattedHours = '0' + hours;
+                    formattedHours = "0" + hours;
                 } else {
-                    formattedHours = hours + '';
+                    formattedHours = hours + "";
                 }
 
                 let minutes = fullTimeStamp.getMinutes();
-                let formattedMinutes = '';
+                let formattedMinutes = "";
                 if (minutes < 10) {
-                    formattedMinutes = '0' + minutes;
+                    formattedMinutes = "0" + minutes;
                 } else {
-                    formattedMinutes = minutes + '';
+                    formattedMinutes = minutes + "";
                 }
 
                 let seconds = fullTimeStamp.getSeconds();
-                let formattedSeconds = '';
+                let formattedSeconds = "";
                 if (seconds < 10) {
-                    formattedSeconds = '0' + seconds;
+                    formattedSeconds = "0" + seconds;
                 } else {
-                    formattedSeconds = seconds + '';
+                    formattedSeconds = seconds + "";
                 }
 
                 const timeStampDate =
                     fullTimeStamp.getFullYear() +
-                    ':' +
+                    ":" +
                     formattedMonth +
-                    ':' +
+                    ":" +
                     formattedDay +
-                    ':' +
+                    ":" +
                     formattedHours +
-                    ':' +
+                    ":" +
                     formattedMinutes +
-                    ':' +
+                    ":" +
                     formattedSeconds +
-                    ':' +
+                    ":" +
                     fullTimeStamp.getMilliseconds();
 
                 this.setState({
@@ -368,8 +368,8 @@ class Messenger extends React.Component {
                 <li
                     className={
                         this.state.user === message.from
-                            ? 'me message-bubble'
-                            : 'them message-bubble'
+                            ? "me message-bubble"
+                            : "them message-bubble"
                     }
                     key={message.id}
                 >
@@ -387,45 +387,45 @@ class Messenger extends React.Component {
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
                 this.state.otherUser !== null ? (
-                        <div className="messenger">
-                            <h2>{this.state.otherUserName}</h2>
-                            <ol className="messages" id="message-list">
-                                {currentMessage}
-                            </ol>
+                    <div className="messenger">
+                        <h2>{this.state.otherUserName}</h2>
+                        <ol className="messages" id="message-list">
+                            {currentMessage}
+                        </ol>
 
-                            {this.state.dates.length !== 0 ? (
-                                <div>
-                                    {this.state.userSent === true ? (
-                                        <div>
-                                            {this.state.userConfirmed === true ? (
-                                                <div>
-                                                    <DateConfirmed
-                                                        userEmail={
-                                                            this.state.userEmail
-                                                        }
-                                                        user={this.state.user}
-                                                        otherUser={
-                                                            this.state.otherUser
-                                                        }
-                                                        timeStamp={
-                                                            this.state
-                                                                .dateRequestTimeStamp
-                                                        }
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    {this.state.userResponded ===
+                        {this.state.dates.length !== 0 ? (
+                            <div>
+                                {this.state.userSent === true ? (
+                                    <div>
+                                        {this.state.userConfirmed === true ? (
+                                            <div>
+                                                <DateConfirmed
+                                                    userEmail={
+                                                        this.state.userEmail
+                                                    }
+                                                    user={this.state.user}
+                                                    otherUser={
+                                                        this.state.otherUser
+                                                    }
+                                                    timeStamp={
+                                                        this.state
+                                                            .dateRequestTimeStamp
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {this.state.userResponded ===
                                                 true ? (
+                                                    <div>
+                                                        {this.state.dates[0]
+                                                            .availability ? (
                                                             <div>
-                                                                {this.state.dates[0]
-                                                                    .availability ? (
-                                                                        <div>
-                                                                            {this.state
-                                                                                .closeItAll ? null : (
-                                                                                    <div id="datebackground">
-                                                                                        <h3 id="halfwayText">
-                                                                                            {' '}
+                                                                {this.state
+                                                                    .closeItAll ? null : (
+                                                                    <div id="datebackground">
+                                                                        <h3 id="halfwayText">
+                                                                            {" "}
                                                                             Wasn't
                                                                             free
                                                                             during
@@ -442,206 +442,206 @@ class Messenger extends React.Component {
                                                                             decide
                                                                             on a
                                                                             good
-                                                                            time{' '}
-                                                                                        </h3>
-                                                                                        <Availability4
-                                                                                            currAvailability={
-                                                                                                this
-                                                                                                    .state
-                                                                                                    .dates[0]
-                                                                                                    .availability
-                                                                                            }
-                                                                                        />
-                                                                                        <Button
-                                                                                            onClick={
-                                                                                                this
-                                                                                                    .closeEverything
-                                                                                            }
-                                                                                        >
-                                                                                            {' '}
-                                                                            Close{' '}
-                                                                                        </Button>
-                                                                                    </div>
-                                                                                )}
-                                                                        </div>
-                                                                    ) : null}
+                                                                            time{" "}
+                                                                        </h3>
+                                                                        <Availability4
+                                                                            currAvailability={
+                                                                                this
+                                                                                    .state
+                                                                                    .dates[0]
+                                                                                    .availability
+                                                                            }
+                                                                        />
+                                                                        <Button
+                                                                            onClick={
+                                                                                this
+                                                                                    .closeEverything
+                                                                            }
+                                                                        >
+                                                                            {" "}
+                                                                            Close{" "}
+                                                                        </Button>
+                                                                    </div>
+                                                                )}
                                                             </div>
-                                                        ) : (
-                                                            <div>
-                                                                <SentRequest
-                                                                    userEmail={
-                                                                        this.state
-                                                                            .userEmail
-                                                                    }
-                                                                    user={
-                                                                        this.state.user
-                                                                    }
-                                                                    otherUser={
-                                                                        this.state
-                                                                            .otherUser
-                                                                    }
-                                                                    timeStamp={
-                                                                        this.state
-                                                                            .dateRequestTimeStamp
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            {this.state.userConfirmed === true ? (
-                                                <div>
-                                                    <DateConfirmed
-                                                        userEmail={
-                                                            this.state.userEmail
-                                                        }
-                                                        user={this.state.user}
-                                                        otherUser={
-                                                            this.state.otherUser
-                                                        }
-                                                        timeStamp={
-                                                            this.state
-                                                                .dateRequestTimeStamp
-                                                        }
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    {this.state.userResponded ===
+                                                        ) : null}
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <SentRequest
+                                                            userEmail={
+                                                                this.state
+                                                                    .userEmail
+                                                            }
+                                                            user={
+                                                                this.state.user
+                                                            }
+                                                            otherUser={
+                                                                this.state
+                                                                    .otherUser
+                                                            }
+                                                            timeStamp={
+                                                                this.state
+                                                                    .dateRequestTimeStamp
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {this.state.userConfirmed === true ? (
+                                            <div>
+                                                <DateConfirmed
+                                                    userEmail={
+                                                        this.state.userEmail
+                                                    }
+                                                    user={this.state.user}
+                                                    otherUser={
+                                                        this.state.otherUser
+                                                    }
+                                                    timeStamp={
+                                                        this.state
+                                                            .dateRequestTimeStamp
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {this.state.userResponded ===
                                                 true ? (
+                                                    <div>
+                                                        {this.state.dates[0]
+                                                            .availability ? (
                                                             <div>
-                                                                {this.state.dates[0]
-                                                                    .availability ? (
-                                                                        <div>
-                                                                            {this.state
-                                                                                .closeItAll ? null : (
-                                                                                    <div id="datebackground">
-                                                                                        <h3 id="halfwayText">
-                                                                                            {' '}
+                                                                {this.state
+                                                                    .closeItAll ? null : (
+                                                                    <div id="datebackground">
+                                                                        <h3 id="halfwayText">
+                                                                            {" "}
                                                                             Here's
                                                                             what
                                                                             you
-                                                                            sent!{' '}
-                                                                                        </h3>
-                                                                                        <Availability4
-                                                                                            currAvailability={
-                                                                                                this
-                                                                                                    .state
-                                                                                                    .dates[0]
-                                                                                                    .availability
-                                                                                            }
-                                                                                        />
-                                                                                        <Button
-                                                                                            onClick={
-                                                                                                this
-                                                                                                    .closeEverything
-                                                                                            }
-                                                                                        >
-                                                                                            {' '}
-                                                                            Close{' '}
-                                                                                        </Button>
-                                                                                    </div>
-                                                                                )}
-                                                                        </div>
-                                                                    ) : (
-                                                                        <div id="datebackground">
-                                                                            <p>
-                                                                                {' '}
-                                                                    WILL THIS
-                                                                    SHOW ANYTING{' '}
-                                                                            </p>
-                                                                            <Availability3
-                                                                                userEmail={
-                                                                                    this
-                                                                                        .state
-                                                                                        .userEmail
-                                                                                }
-                                                                                user={
-                                                                                    this
-                                                                                        .state
-                                                                                        .user
-                                                                                }
-                                                                                otherUser={
-                                                                                    this
-                                                                                        .state
-                                                                                        .otherUser
-                                                                                }
-                                                                                timeStamp={
-                                                                                    this
-                                                                                        .state
-                                                                                        .dateRequestTimeStamp
-                                                                                }
-                                                                            />
-                                                                        </div>
-                                                                    )}
+                                                                            sent!{" "}
+                                                                        </h3>
+                                                                        <Availability4
+                                                                            currAvailability={
+                                                                                this
+                                                                                    .state
+                                                                                    .dates[0]
+                                                                                    .availability
+                                                                            }
+                                                                        />
+                                                                        <Button
+                                                                            onClick={
+                                                                                this
+                                                                                    .closeEverything
+                                                                            }
+                                                                        >
+                                                                            {" "}
+                                                                            Close{" "}
+                                                                        </Button>
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         ) : (
-                                                            <div>
-                                                                <ReceiveRequest
+                                                            <div id="datebackground">
+                                                                <p>
+                                                                    {" "}
+                                                                    WILL THIS
+                                                                    SHOW ANYTING{" "}
+                                                                </p>
+                                                                <Availability3
                                                                     userEmail={
-                                                                        this.state
+                                                                        this
+                                                                            .state
                                                                             .userEmail
                                                                     }
                                                                     user={
-                                                                        this.state.user
+                                                                        this
+                                                                            .state
+                                                                            .user
                                                                     }
                                                                     otherUser={
-                                                                        this.state
+                                                                        this
+                                                                            .state
                                                                             .otherUser
                                                                     }
                                                                     timeStamp={
-                                                                        this.state
+                                                                        this
+                                                                            .state
                                                                             .dateRequestTimeStamp
                                                                     }
                                                                 />
                                                             </div>
                                                         )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="date-button-wrapper">
-                                    {
-                                        <RequestDate
-                                            userEmail={this.state.userEmail}
-                                            otherUser={this.state.otherUser}
-                                            action={this.dateRequestHandler}
-                                            callBack={this.update}
-                                        />
-                                    }
-                                </div>
-                            )}
-
-                            <div className="button-input-wrapper">
-                                <input
-                                    id="message-box"
-                                    className="send-text"
-                                    onChange={this.updateMessage}
-                                    type="text"
-                                    placeholder="message"
-                                    onKeyPress={this.submitMessageEnter}
-                                />
-                                <button
-                                    className="submit-button"
-                                    onClick={this.submitMessage}
-                                >
-                                Send
-                                </button>
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <ReceiveRequest
+                                                            userEmail={
+                                                                this.state
+                                                                    .userEmail
+                                                            }
+                                                            user={
+                                                                this.state.user
+                                                            }
+                                                            otherUser={
+                                                                this.state
+                                                                    .otherUser
+                                                            }
+                                                            timeStamp={
+                                                                this.state
+                                                                    .dateRequestTimeStamp
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
-                            <br />
+                        ) : (
+                            <div className="date-button-wrapper">
+                                {
+                                    <RequestDate
+                                        userEmail={this.state.userEmail}
+                                        otherUser={this.state.otherUser}
+                                        action={this.dateRequestHandler}
+                                        callBack={this.update}
+                                    />
+                                }
+                            </div>
+                        )}
+
+                        <div className="button-input-wrapper">
+                            <input
+                                id="message-box"
+                                className="send-text"
+                                onChange={this.updateMessage}
+                                type="text"
+                                placeholder="message"
+                                onKeyPress={this.submitMessageEnter}
+                            />
+                            <button
+                                className="submit-button"
+                                onClick={this.submitMessage}
+                            >
+                                Send
+                            </button>
                         </div>
-                    ) : (
-                        <div className="messenger">
-                            <p className="select">
+                        <br />
+                    </div>
+                ) : (
+                    <div className="messenger">
+                        <p className="select">
                             Select a match to start messaging!
-                            </p>
-                        </div>
-                    )}
+                        </p>
+                    </div>
+                )}
             </div>
         );
     }
