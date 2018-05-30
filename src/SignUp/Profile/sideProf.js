@@ -2,8 +2,8 @@ import React from 'react';
 import { db } from '../../FirestoreConfig';
 import './sideProf.css'
 // import FirstDates from '../../Enums'
-let dateArray = []; //firstDates
-let topicArray = []; //interests
+let usersDates = []; //allDates
+let usersTopics = []; //allTopics
 class SideProf extends React.Component {
     constructor(props) {
         super(props);
@@ -21,40 +21,37 @@ class SideProf extends React.Component {
             .then(doc => {
                 if (doc.exists) {
                     component.setState({ otherDoc: doc.data() })
-                    console.log("dates", doc.data().dates)
-
-                    dateArray = [];
-                    topicArray = [];
+                    usersDates = [];
+                    usersTopics = [];
 
                     Object.keys(doc.data().dates).forEach((date) => {
                         if (doc.data().dates[date]) {
-                            Object.keys(firstDates).forEach((cName) => {
+                            Object.keys(allDates).forEach((cName) => {
                                 if (date == cName) {
-                                    dateArray.push(firstDates[cName])
+                                    usersDates.push(allDates[cName])
                                 }
                             })
                         }
                     })
-                    component.setState({ dateArray: dateArray })
-
-                    console.log(dateArray)
+                    component.setState({ usersDates: usersDates })
 
                     Object.keys(doc.data().topics).forEach((topic) => {
                         if (doc.data().topics[topic]) {
-                            console.log(topic)
+                            console.log("all topic", topic)
 
-                            Object.keys(interests).forEach((cName) => {
+                            Object.keys(allTopics).forEach((cName) => {
                                 if (topic == cName) {
-                                    topicArray.push(interests[cName])
+                                    console.log("user topics", topic)
+                                    usersTopics.push(allTopics[cName])
                                 }
                             })
                         }
                     })
-                    component.setState({ topicArray: topicArray })
-
+                    console.log("all users topics", usersTopics)
+                    this.setState({ usersTopics: usersTopics })
                 }
             })
-        console.log("willmount", this.state)
+        console.log("topics outside function", usersTopics)
     }
 
     componentWillReceiveProps(newProps) {
@@ -70,47 +67,42 @@ class SideProf extends React.Component {
                 .then(doc => {
                     if (doc.exists) {
                         component.setState({ otherDoc: doc.data() })
-                        console.log("dates", doc.data().dates)
-                        dateArray = [];
-                        topicArray = [];
+                        // console.log("dates", doc.data().dates)
+                        usersDates = [];
+                        usersTopics = [];
 
                         Object.keys(doc.data().dates).forEach((date) => {
                             if (doc.data().dates[date]) {
-                                Object.keys(firstDates).forEach((cName) => {
+                                Object.keys(allDates).forEach((cName) => {
                                     if (date == cName) {
-                                        dateArray.push(firstDates[cName])
+                                        usersDates.push(allDates[cName])
                                     }
                                 })
                             }
                         })
-                        component.setState({ dateArray: dateArray })
+                        component.setState({ usersDates: usersDates })
                         Object.keys(doc.data().topics).forEach((topic) => {
                             if (doc.data().topics[topic]) {
-                                console.log(topic)
+                                console.log("all topic", topic)
 
-                                Object.keys(interests).forEach((cName) => {
+                                Object.keys(allTopics).forEach((cName) => {
                                     if (topic == cName) {
-                                        topicArray.push(interests[cName])
+                                        console.log("user topics", topic)
+
+                                        usersTopics.push(allTopics[cName])
                                     }
                                 })
                             }
                         })
-                        component.setState({ topicArray: topicArray })
-
-                        this.setState({ dateArray: dateArray })
-                        console.log("DATEDATE", this.state)
+                        component.setState({ usersTopics: usersTopics })
+                        this.setState({ usersDates: usersDates, usersTopics: usersTopics })
                     }
 
-                    // console.log("in call", this.state)
                     component.forceUpdate();
                 })
 
+
         }
-        // console.log("receive befere force", this.state)
-
-        // this.forceUpdate();
-        // console.log("receive after force", this.state)
-
     }
 
     calcAge(birthday) {
@@ -172,9 +164,11 @@ class SideProf extends React.Component {
                 {this.state.otherDoc &&
                     <div>
                         <h4 className="other-header" > {this.state.otherDoc.name} </h4 >
-                        <p className="otherProfile-info">{this.state.age}</p>
+                        {/* <p className="otherProfile-info">{this.state.age}</p> */}
                         <p className="otherProfile-info">{this.state.otherDoc.location}</p>
+
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[0]} alt={this.state.otherDoc.name} />
+
                         <p className="otherProfile-info-type">OCCUPATION</p>
                         <p className="otherProfile-info">{this.state.otherDoc.occupation}</p>
                         <p className="otherProfile-info-type">EDUCATION</p>
@@ -182,19 +176,23 @@ class SideProf extends React.Component {
                         <p className="otherProfile-info-type">RELIGION</p>
                         <p className="otherProfile-info">{this.state.otherDoc.religion}</p>
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[1]} alt={this.state.otherDoc.name} />
+
                         <p className="otherProfile-info-type">MY FAVORITE FIRST DATES</p>
                         <div className="icon-container">
-                            {dateArray.map((date, index) => {
+                            {usersDates.map((date, index) => {
                                 return (<i key={index} className={date}>{''}</i>)
                             })}
                         </div>
+
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[2]} alt={this.state.otherDoc.name} />
-                        <p className="otherProfile-info-type">MY INTERESTS</p>
+
+                        <p className="otherProfile-info-type">MY TOPICS</p>
                         <div className="icon-container">
-                            {topicArray.map((topic, index) => {
+                            {usersTopics.map((topic, index) => {
                                 return (<i key={index} className={topic}>{''}</i>)
                             })}
                         </div>
+
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[3]} alt={this.state.otherDoc.name} />
                         <p className="otherProfile-info-type">BIO</p>
                         <p className="otherProfile-info">{this.state.otherDoc.bio}</p>
@@ -202,31 +200,29 @@ class SideProf extends React.Component {
                         <div>unmatch</div>
                     </div>
                 }
-
             </div>
-
         );
     }
 }
-const interests = {
-    ANIMALS: "fas fa-paw fa-3x",
-    TRAVEL: "fas fa-plane fa-3x",
-    FOOD: "fas fa-utensils fa-3x",
-    MUSIC: "fas fa-music fa-3x",
-    SPORTS: "fas fa-futbol fa-3x",
-    MOVIES: "fas fa-film fa-3x",
-    TECH: "fas fa-mobile fa-3x",
-    GAMING: "fas fa-gamepad fa-3x",
-    NATURE: "fas fa-tree fa-3x",
-    COFFEE: "fas fa-coffee fa-3x",
-    DRINKS: "fas fa-glass-martini fa-3x",
-    DINNER: "fas fa-utensils fa-3x",
-    MUSEUM: "fas fa-institution fa-3x",
-    SHOW: "fas fa-ticket fa-3x",
-    PARK: "fas fa-tree fa-3x"
+const allTopics = {
+    animals: "fas fa-paw fa-3x",
+    travel: "fas fa-plane fa-3x",
+    food: "fas fa-utensils fa-3x",
+    music: "fas fa-music fa-3x",
+    sports: "fas fa-futbol fa-3x",
+    movies: "fas fa-film fa-3x",
+    tech: "fas fa-mobile fa-3x",
+    gaming: "fas fa-gamepad fa-3x",
+    nature: "fas fa-tree fa-3x",
+    coffee: "fas fa-coffee fa-3x",
+    drinks: "fas fa-glass-martini fa-3x",
+    dinner: "fas fa-utensils fa-3x",
+    museum: "fas fa-institution fa-3x",
+    show: "fas fa-ticket fa-3x",
+    park: "fas fa-tree fa-3x"
 };
 
-const firstDates = {
+const allDates = {
     coffee: "fas fa-coffee fa-3x",
     drinks: "fas fa-glass-martini fa-3x",
     dinner: "fas fa-utensils fa-3x",
