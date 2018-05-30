@@ -71,7 +71,6 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
-
         const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
         const dataDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
