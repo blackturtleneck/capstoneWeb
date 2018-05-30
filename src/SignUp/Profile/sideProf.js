@@ -63,6 +63,7 @@ class SideProf extends React.Component {
     }
 
     render() {
+        console.log("sideProf")
         return (
             <div className="otherProfile-container">
                 <h4 className="other-header">{this.state.userDoc.name} </h4>

@@ -6,6 +6,7 @@ import './Messaging.css';
 import RequestDate from '../RequestDate';
 import ColorMap from '../ColorMap';
 import Availability2 from '../Availability2';
+import SideProf from '../SignUp/Profile/SideProf'
 
 class MessengerPage extends React.Component {
     constructor(props, context) {
@@ -58,6 +59,9 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
+                <div style={{marginLeft:"70vw"}}>
+                <SideProf user={this.state.useotherUser}/>
+                </div>
             </div>
         );
     }
