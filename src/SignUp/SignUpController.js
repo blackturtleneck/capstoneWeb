@@ -14,7 +14,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 2,
+            step: 1,
             existingUser: false
         };
         this.saveValues = this.saveValues.bind(this);
@@ -180,7 +180,8 @@ class SignUpInController extends Component {
                             reggae: null,
                             soul: null,
                             punk: null
-                        }
+                        },
+                        bio: 'Tell us about yourself...'
                     };
 
                 } else {
@@ -212,7 +213,8 @@ class SignUpInController extends Component {
                         // neighborhoodPreferences: ref.neighborhoodPreferences,
                         cuisinePreferences: ref.cuisinePreferences,
                         cuisineDislikes: ref.cuisineDislikes,
-                        musicPreferences: ref.musicPreferences
+                        musicPreferences: ref.musicPreferences,
+                        bio: ref.bio
                     };
                     this.setState({ existingUser: true })
                 }
@@ -264,8 +266,9 @@ class SignUpInController extends Component {
             musicPreferences: fieldValues.musicPreferences,
             dates: fieldValues.dates,
             topics: fieldValues.topics,
+            bio: fieldValues.bio,
             onBoarding: true
-        });
+        }, { merge: true });
         this.nextStep();
     }
 
