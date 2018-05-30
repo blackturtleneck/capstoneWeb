@@ -112,24 +112,24 @@ class SignUpInController extends Component {
                             paleo: null,
                             raw: null
                         },
-                        datePrice: null,
-                        neighborhoodPreferences: {
-                            ballard: null,
-                            belltown: null,
-                            capitolHill: null,
-                            downtown: null,
-                            eastside: null,
-                            firstHill: null,
-                            fremont: null,
-                            georgetown: null,
-                            pioneerSquare: null,
-                            queenAnne: null,
-                            sodo: null,
-                            slu: null,
-                            uDistrict: null,
-                            wallingford: null,
-                            westSeattle: null
-                        },
+                        datePrice: 1,
+                        // neighborhoodPreferences: {
+                        //     ballard: null,
+                        //     belltown: null,
+                        //     capitolHill: null,
+                        //     downtown: null,
+                        //     eastside: null,
+                        //     firstHill: null,
+                        //     fremont: null,
+                        //     georgetown: null,
+                        //     pioneerSquare: null,
+                        //     queenAnne: null,
+                        //     sodo: null,
+                        //     slu: null,
+                        //     uDistrict: null,
+                        //     wallingford: null,
+                        //     westSeattle: null
+                        // },
                         cuisinePreferences: {
                             american: null,
                             french: null,
@@ -207,9 +207,9 @@ class SignUpInController extends Component {
                         dates: ref.dates,
                         topics: ref.topics,
 
-                        foodPreferences: ref.dietaryPref,
+                        foodPreferences: ref.foodPreferences,
                         datePrice: ref.datePrice,
-                        neighborhoodPreferences: ref.neighborhoodPreferences,
+                        // neighborhoodPreferences: ref.neighborhoodPreferences,
                         cuisinePreferences: ref.cuisinePreferences,
                         cuisineDislikes: ref.cuisineDislikes,
                         musicPreferences: ref.musicPreferences
@@ -241,28 +241,29 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
+        console.log("Fv in submit", fieldValues)
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
-            name: this.state.fieldValues.name,
-            gender: this.state.fieldValues.gender,
-            education: this.state.fieldValues.education,
-            religion: this.state.fieldValues.religion,
-            occupation: this.state.fieldValues.occupation,
-            location: this.state.fieldValues.location,
-            birthday: this.state.fieldValues.birthday,
-            matchGender: this.state.fieldValues.matchGender,
-            matchAgeMin: this.state.fieldValues.matchAgeMin,
-            matchAgeMax: this.state.fieldValues.matchAgeMax,
-            matchDistance: this.state.fieldValues.matchDistance,
+            name: fieldValues.name,
+            gender: fieldValues.gender,
+            education: fieldValues.education,
+            religion: fieldValues.religion,
+            occupation: fieldValues.occupation,
+            location: fieldValues.location,
+            birthday: fieldValues.birthday,
+            matchGender: fieldValues.matchGender,
+            matchAgeMin: fieldValues.matchAgeMin,
+            matchAgeMax: fieldValues.matchAgeMax,
+            matchDistance: fieldValues.matchDistance,
 
-            availability: this.state.fieldValues.availability,
-            foodPreferences: this.state.fieldValues.foodPreferences,
-            cuisineDislikes: this.state.fieldValues.cuisineDislikes,
-            cuisinePreferences: this.state.fieldValues.cuisinePreferences,
-            datePrice: this.state.fieldValues.datePrice,
-            musicPreferences: this.state.fieldValues.musicPreferences,
-            dates: this.state.fieldValues.dates,
-            topics: this.state.fieldValues.topics,
+            availability: fieldValues.availability,
+            foodPreferences: fieldValues.foodPreferences,
+            cuisineDislikes: fieldValues.cuisineDislikes,
+            cuisinePreferences: fieldValues.cuisinePreferences,
+            datePrice: fieldValues.datePrice,
+            musicPreferences: fieldValues.musicPreferences,
+            dates: fieldValues.dates,
+            topics: fieldValues.topics,
             onBoarding: true
         });
         this.nextStep();

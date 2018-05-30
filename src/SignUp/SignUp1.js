@@ -8,9 +8,7 @@ class SignUp1 extends React.Component {
         super(props);
 
         this.state = {
-            authenticated: true,
-            user: this.props.user,
-            content: this.props.content
+            authenticated: true
         };
         this.nextStep = this.nextStep.bind(this);
     }
@@ -39,106 +37,7 @@ class SignUp1 extends React.Component {
         this.props.nextStep();
     }
 
-    up() {
-
-        let userRef = db.collection('users');
-        userRef.doc('greenrocksjl@hotmail.com').set({
-            availability: {
-                fri: { morning: false, evening: false, afternoon: false },
-                sat: { morning: false, evening: false, afternoon: false },
-                sun: { morning: false, evening: false, afternoon: false },
-                mon: { morning: false, evening: false, afternoon: false },
-                tue: { morning: false, evening: false, afternoon: false },
-                wed: { morning: false, evening: false, afternoon: false },
-                thu: { morning: false, evening: false, afternoon: false },
-            },
-            cuisineDislikes: {
-                american: null,
-                french: null,
-                chinese: null,
-                dessert: null,
-                greek: null,
-                halal: null,
-                indian: null,
-                italian: null,
-                japanese: null,
-                korean: null,
-                mediterranean: null,
-                mexican: null,
-                pizza: null,
-                thai: null,
-                middleEastern: null
-            },
-            cuisinePreferences: {
-                american: null,
-                french: null,
-                chinese: null,
-                dessert: null,
-                greek: null,
-                halal: null,
-                indian: null,
-                italian: null,
-                japanese: null,
-                korean: null,
-                mediterranean: null,
-                mexican: null,
-                pizza: null,
-                thai: null,
-                middleEastern: null
-            },
-            datePrice: null,
-            dates: {
-                coffee: null,
-                dinner: null,
-                drinks: null,
-                museum: null,
-                show: null,
-                park: null
-            },
-            education: "uw",
-            foodPreferences: {
-                vegetarian: null,
-                glutenFree: null,
-                vegan: null,
-                dairyFree: null,
-                noRedMeat: null,
-                kosher: null,
-                paleo: null,
-                raw: null
-            },
-            musicPreferences: {
-                pop: null,
-                country: null,
-                edm: null,
-                rb: null,
-                latin: null,
-                hiphop: null,
-                alternative: null,
-                classical: null,
-                indie: null,
-                folk: null,
-                jazz: null,
-                rock: null,
-                soul: null,
-                punk: null,
-                reggae: null
-            },
-            topics: {
-                travel: null,
-                food: null,
-                music: null,
-                sports: null,
-                movies: null,
-                gaming: null,
-                nature: null,
-                animals: null,
-                tech: null
-            },
-        }, { merge: true })
-    }
-
     render() {
-        // this.up();
         const header = this.props.existingUser ?
             (
                 <div>

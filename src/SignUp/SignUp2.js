@@ -17,8 +17,6 @@ class SignUp2 extends React.Component {
 
         this.state = {
             authenticated: true,
-            user: this.props.user,
-            content: this.props.content,
             ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
             matchDistance: this.props.fieldValues.matchDistance,
             availability: this.props.fieldValues.availability
@@ -117,7 +115,7 @@ class SignUp2 extends React.Component {
                         <Range
                             min={18}
                             max={55}
-                            defaultValue={this.state.ageRange}
+                            defaultValue={[this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax]}
                             handle={handle}
                             trackStyle={[
                                 { backgroundColor: '#828282' },
