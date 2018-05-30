@@ -6,7 +6,7 @@ import MultiSelectField from './MultiSelectField';
 import Dates from './Dates';
 import './DatesSelection.css';
 import AvailableTimes from 'react-available-times';
-import SideProf from './SignUp/Profile/SideProf';
+import SideProf from './SignUp/Profile/sideProf';
 
 class DatesSelection extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class DatesSelection extends React.Component {
 
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(
-            function(location) {
+            function (location) {
                 this.setState({
                     lat: location.coords.latitude,
                     lon: location.coords.longitude
@@ -69,7 +69,7 @@ class DatesSelection extends React.Component {
                                 start,
                                 end,
                                 callback
-                            }) => {}}
+                            }) => { }}
                             height={600}
                             recurring={false}
                             availableDays={[
@@ -91,8 +91,8 @@ class DatesSelection extends React.Component {
                         </form>
                     </div>
                 ) : (
-                    <SideProf otherUser={this.props.otherUser} />
-                )}
+                        <SideProf otherUser={this.props.otherUser} />
+                    )}
             </div>
         );
     }

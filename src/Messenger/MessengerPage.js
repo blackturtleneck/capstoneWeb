@@ -8,7 +8,6 @@ import ColorMap from '../ColorMap';
 import Availability2 from '../Availability2';
 import SideProf from '../SignUp/Profile/sideProf'
 
-
 class MessengerPage extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -60,9 +59,9 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                {/* <div style={{ marginLeft: "70vw" }}>
+                <div style={{ marginLeft: "70vw" }}>
                     <SideProf otherUser={this.state.otherUser} />
-                </div> */}
+                </div>
             </div>
         );
     }
