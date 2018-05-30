@@ -360,4 +360,7 @@ background-color: white;
 
 .boxes input[type="checkbox"] { display: none; }
 
-/* #foodAllergies > div:nth-child(2) */
+.sideProf-img {
+  width: 90%;
+  margin-bottom:10px;
+}

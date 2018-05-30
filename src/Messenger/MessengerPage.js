@@ -13,7 +13,8 @@ class MessengerPage extends React.Component {
         super(props, context);
         this.state = {
             user: this.props.user,
-            userEmail: this.props.userEmail
+            userEmail: this.props.userEmail,
+            otherUser: null
         };
     }
 
@@ -43,6 +44,7 @@ class MessengerPage extends React.Component {
     }
 
     render() {
+        console.log("messengerpage", this.state)
         return (
             <div className="messenger-page">
                 {this.state.userList ? (
@@ -59,9 +61,13 @@ class MessengerPage extends React.Component {
                     userEmail={this.state.userEmail}
                     otherUser={this.state.otherUser}
                 />
-                <div style={{ marginLeft: "70vw" }}>
-                    <SideProf otherUser={this.state.otherUser} />
-                </div>
+                {this.state.otherUser &&
+                    <div style={{ marginLeft: "70vw" }}>
+                        <SideProf user={this.state.user}
+                            userEmail={this.state.userEmail}
+                            otherUser={this.state.otherUser} />
+                    </div>}
+
             </div>
         );
     }
