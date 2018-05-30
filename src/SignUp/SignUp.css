@@ -161,12 +161,35 @@ input[type="checkbox"],[type="checkbox"]:not(:checked), [type="checkbox"]:checke
 }
 
 .weekday-time {
-  display: block;
+  display: inline-block;
   line-height: 1.6;
+  /* float:left; */
+}
+
+.weekday-time-morning {
+  display: inline-block;
+  line-height: 1.6;
+  margin-left: 30px;
+}
+.weekday-time-afternoon {
+  display: inline-block;
+  line-height: 1.6;
+  margin-left: 13px;
+}
+.weekday-time-evening {
+  display: inline-block;
+  line-height: 1.6;
+  margin-left: 38px;
+}
+.weekday-wrapper{
+  margin-left: 100px;
 }
 
 .avail-left, .avail-right {
-  display: inline-block
+  display: inline-block;
+}
+.avail-row {
+  display: inline-block;
 }
 
 .avail-left {

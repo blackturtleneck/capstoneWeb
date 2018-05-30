@@ -14,7 +14,7 @@ class SignUpInController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 1,
+            step: 2,
             existingUser: false
         };
         this.saveValues = this.saveValues.bind(this);
