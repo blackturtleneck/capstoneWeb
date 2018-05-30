@@ -31,17 +31,13 @@ class SignUpInController extends Component {
             .then(doc => {
                 if (!doc.exists) {
                     fieldValues = {
-                        name: null,
-                        gender: '',
+                        name: this.props.user.displayName,
+                        gender: null, //this.props.user.gender,
                         education: null,
                         religion: null,
                         occupation: null,
-                        location: null,
-                        birthday: {
-                            month: null,
-                            day: null,
-                            year: null
-                        },
+                        location: null, //this.props.user.location,
+                        birthday: null, //this.props.user.birthday,
 
                         matchGender: null,
                         matchAgeMin: null,
@@ -49,9 +45,41 @@ class SignUpInController extends Component {
                         matchDistance: null,
 
                         availability: {
-                            "MORNING": [false, false, false, false, false, false, false],
-                            "AFTERNOON": [false, false, false, false, false, false, false],
-                            "EVENING": [false, false, false, false, false, false, false]
+                            sun: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            mon: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            tue: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            wed: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            thu: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            fri: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            },
+                            sat: {
+                                morning: null,
+                                afternoon: null,
+                                evening: null
+                            }
                         },
 
                         dates: {
@@ -74,85 +102,84 @@ class SignUpInController extends Component {
                             tech: null
                         },
 
-                        dietaryPref: {
-                            "VEGETARIAN": false,
-                            "GLUTEN-FREE": false,
-                            "VEGAN": false,
-                            "DAIRY-FREE": false,
-                            "NO RED MEAT": false,
-                            "KOSHER": false,
-                            "PALEO": false,
-                            "RAW": false
+                        foodPreferences: {
+                            vegetarian: null,
+                            glutenFree: null,
+                            vegan: null,
+                            dairyFree: null,
+                            noRedMeat: null,
+                            kosher: null,
+                            paleo: null,
+                            raw: null
                         },
-                        priceMin: 3,
-                        priceMax: 4,
-                        neighborhoods: {
-                            "BALLARD": false,
-                            "BELLTOWN": false,
-                            "CAPITOL HILL": false,
-                            "DOWNTOWN": false,
-                            "INTERNATIONAL DISTRICT": false,
-                            "FIRST HILL": false,
-                            "FREMONT": false,
-                            "GEORGETOWN": false,
-                            "PIONEER SQUARE": false,
-                            "QUEEN ANNE": false,
-                            "SODO": false,
-                            "SOUTH LAKE UNION": false,
-                            "WALLINGFORD": false,
-                            "WEST SEATTLE": false,
-                            "UDISTRICT": false
+                        datePrice: null,
+                        neighborhoodPreferences: {
+                            ballard: null,
+                            belltown: null,
+                            capitolHill: null,
+                            downtown: null,
+                            eastside: null,
+                            firstHill: null,
+                            fremont: null,
+                            georgetown: null,
+                            pioneerSquare: null,
+                            queenAnne: null,
+                            sodo: null,
+                            slu: null,
+                            uDistrict: null,
+                            wallingford: null,
+                            westSeattle: null
                         },
-                        foodTypeLIKE: {
-                            "AMERICAN": false,
-                            "FRENCH": false,
-                            "CHINESE": false,
-                            "DESSERT": false,
-                            "GREEK": false,
-                            "HALAL": false,
-                            "INDIAN": false,
-                            "ITALIAN": false,
-                            "JAPANESE": false,
-                            "KOREAN": false,
-                            "MEDITERRANEAN": false,
-                            "MEXICAN": false,
-                            "PIZZA": false,
-                            "THAI": false,
-                            "MIDDLE EASTERN": false
+                        cuisinePreferences: {
+                            american: null,
+                            french: null,
+                            chinese: null,
+                            dessert: null,
+                            greek: null,
+                            halal: null,
+                            indian: null,
+                            italian: null,
+                            japanese: null,
+                            korean: null,
+                            mediterranean: null,
+                            mexican: null,
+                            middleEastern: null,
+                            pizza: null,
+                            thai: null
                         },
-                        foodTypeHATE: {
-                            "AMERICAN": false,
-                            "FRENCH": false,
-                            "CHINESE": false,
-                            "DESSERT": false,
-                            "GREEK": false,
-                            "HALAL": false,
-                            "INDIAN": false,
-                            "ITALIAN": false,
-                            "JAPANESE": false,
-                            "KOREAN": false,
-                            "MEDITERRANEAN": false,
-                            "MEXICAN": false,
-                            "PIZZA": false,
-                            "THAI": false,
-                            "MIDDLE EASTERN": false
+                        cuisineDislikes: {
+                            american: null,
+                            french: null,
+                            chinese: null,
+                            dessert: null,
+                            greek: null,
+                            halal: null,
+                            indian: null,
+                            italian: null,
+                            japanese: null,
+                            korean: null,
+                            mediterranean: null,
+                            mexican: null,
+                            middleEastern: null,
+                            pizza: null,
+                            thai: null
                         },
-                        music: {
-                            "POP": false,
-                            "COUNTRY": false,
-                            "EDM": false,
-                            "R&B": false,
-                            "LATIN": false,
-                            "HIP HOP": false,
-                            "ALTERNATIVE": false,
-                            "CLASSICAL": false,
-                            "INDIE": false,
-                            "FOLK": false,
-                            "JAZZ": false,
-                            "ROCK": false,
-                            "SOUL": false,
-                            "PUNK": false,
-                            "REGGAE": false
+                        musicPreferences: {
+                            hiphop: null,
+                            pop: null,
+                            country: null,
+                            latin: null,
+                            edm: null,
+                            rb: null,
+                            rock: null,
+                            alternative: null,
+                            classical: null,
+                            jazz: null,
+                            indie: null,
+                            folk: null,
+                            reggae: null,
+                            soul: null,
+                            punk: null
                         }
                     };
 
@@ -180,13 +207,12 @@ class SignUpInController extends Component {
                         dates: ref.dates,
                         topics: ref.topics,
 
-                        dietaryPref: ref.dietaryPref,
-                        priceMin: ref.priceMin,
-                        priceMax: ref.priceMax,
-                        neighborhoods: ref.neighborhoods,
-                        foodTypeLIKE: ref.foodTypeLIKE,
-                        foodTypeHATE: ref.foodTypeHATE,
-                        music: ref.music
+                        foodPreferences: ref.dietaryPref,
+                        datePrice: ref.datePrice,
+                        neighborhoodPreferences: ref.neighborhoodPreferences,
+                        cuisinePreferences: ref.cuisinePreferences,
+                        cuisineDislikes: ref.cuisineDislikes,
+                        musicPreferences: ref.musicPreferences
                     };
                     this.setState({ existingUser: true })
                 }
@@ -217,33 +243,26 @@ class SignUpInController extends Component {
     submitRegistration() {
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
-            name: fieldValues.name,
-            gender: fieldValues.gender,
-            education: fieldValues.education,
-            religion: fieldValues.religion,
-            occupation: fieldValues.occupation,
-            location: fieldValues.location,
-            birthday: {
-                month: fieldValues.birthday.month,
-                day: fieldValues.birthday.day,
-                year: fieldValues.birthday.year
-            },
-            matchGender: fieldValues.matchGender,
-            matchAgeMin: fieldValues.matchAgeMin,
-            matchAgeMax: fieldValues.matchAgeMax,
-            matchDistance: fieldValues.matchDistance,
-            availability: fieldValues.availability,
+            name: this.state.fieldValues.name,
+            gender: this.state.fieldValues.gender,
+            education: this.state.fieldValues.education,
+            religion: this.state.fieldValues.religion,
+            occupation: this.state.fieldValues.occupation,
+            location: this.state.fieldValues.location,
+            birthday: this.state.fieldValues.birthday,
+            matchGender: this.state.fieldValues.matchGender,
+            matchAgeMin: this.state.fieldValues.matchAgeMin,
+            matchAgeMax: this.state.fieldValues.matchAgeMax,
+            matchDistance: this.state.fieldValues.matchDistance,
 
-            dates: fieldValues.dates,
-            topics: fieldValues.topics,
-            dietaryPref: fieldValues.dietaryPref,
-            priceMin: fieldValues.priceMin,
-            priceMax: fieldValues.priceMax,
-            neighborhoods: fieldValues.neighborhoods,
-            foodTypeLIKE: fieldValues.foodTypeLIKE,
-            foodTypeHATE: fieldValues.foodTypeHATE,
-            music: fieldValues.music,
-
+            availability: this.state.fieldValues.availability,
+            foodPreferences: this.state.fieldValues.foodPreferences,
+            cuisineDislikes: this.state.fieldValues.cuisineDislikes,
+            cuisinePreferences: this.state.fieldValues.cuisinePreferences,
+            datePrice: this.state.fieldValues.datePrice,
+            musicPreferences: this.state.fieldValues.musicPreferences,
+            dates: this.state.fieldValues.dates,
+            topics: this.state.fieldValues.topics,
             onBoarding: true
         });
         this.nextStep();

@@ -43,92 +43,106 @@ class SignUp1 extends React.Component {
 
         let userRef = db.collection('users');
         userRef.doc('greenrocksjl@hotmail.com').set({
-            dietaryPref: {
-                "VEGETARIAN": false,
-                "GLUTEN-FREE": false,
-                "VEGAN": false,
-                "DAIRY-FREE": false,
-                "NO RED MEAT": false,
-                "KOSHER": false,
-                "PALEO": false,
-                "RAW": false
-            }, neighborhoods: {
-                "BALLARD": false,
-                "BELLTOWN": false,
-                "CAPITOL HILL": false,
-                "DOWNTOWN": false,
-                "INTERNATIONAL DISTRICT": false,
-                "FIRST HILL": false,
-                "FREMONT": false,
-                "GEORGETOWN": false,
-                "PIONEER SQUARE": false,
-                "QUEEN ANNE": false,
-                "SODO": false,
-                "SOUTH LAKE UNION": false,
-                "WALLINGFORD": false,
-                "WEST SEATTLE": false,
-                "UDISTRICT": false
+            availability: {
+                fri: { morning: false, evening: false, afternoon: false },
+                sat: { morning: false, evening: false, afternoon: false },
+                sun: { morning: false, evening: false, afternoon: false },
+                mon: { morning: false, evening: false, afternoon: false },
+                tue: { morning: false, evening: false, afternoon: false },
+                wed: { morning: false, evening: false, afternoon: false },
+                thu: { morning: false, evening: false, afternoon: false },
             },
-            foodTypeLIKE: {
-                "AMERICAN": false,
-                "FRENCH": false,
-                "CHINESE": false,
-                "DESSERT": false,
-                "GREEK": false,
-                "HALAL": false,
-                "INDIAN": false,
-                "ITALIAN": false,
-                "JAPANESE": false,
-                "KOREAN": false,
-                "MEDITERRANEAN": false,
-                "MEXICAN": false,
-                "PIZZA": false,
-                "THAI": false,
-                "MIDDLE EASTERN": false
+            cuisineDislikes: {
+                american: null,
+                french: null,
+                chinese: null,
+                dessert: null,
+                greek: null,
+                halal: null,
+                indian: null,
+                italian: null,
+                japanese: null,
+                korean: null,
+                mediterranean: null,
+                mexican: null,
+                pizza: null,
+                thai: null,
+                middleEastern: null
             },
-            foodTypeHATE: {
-                "AMERICAN": false,
-                "FRENCH": false,
-                "CHINESE": false,
-                "DESSERT": false,
-                "GREEK": false,
-                "HALAL": false,
-                "INDIAN": false,
-                "ITALIAN": false,
-                "JAPANESE": false,
-                "KOREAN": false,
-                "MEDITERRANEAN": false,
-                "MEXICAN": false,
-                "PIZZA": false,
-                "THAI": false,
-                "MIDDLE EASTERN": false
+            cuisinePreferences: {
+                american: null,
+                french: null,
+                chinese: null,
+                dessert: null,
+                greek: null,
+                halal: null,
+                indian: null,
+                italian: null,
+                japanese: null,
+                korean: null,
+                mediterranean: null,
+                mexican: null,
+                pizza: null,
+                thai: null,
+                middleEastern: null
             },
-            music: {
-                "POP": false,
-                "COUNTRY": false,
-                "EDM": false,
-                "R&B": false,
-                "LATIN": false,
-                "HIP HOP": false,
-                "ALTERNATIVE": false,
-                "CLASSICAL": false,
-                "INDIE": false,
-                "FOLK": false,
-                "JAZZ": false,
-                "ROCK": false,
-                "SOUL": false,
-                "PUNK": false,
-                "REGGAE": false
-            }
+            datePrice: null,
+            dates: {
+                coffee: null,
+                dinner: null,
+                drinks: null,
+                museum: null,
+                show: null,
+                park: null
+            },
+            education: "uw",
+            foodPreferences: {
+                vegetarian: null,
+                glutenFree: null,
+                vegan: null,
+                dairyFree: null,
+                noRedMeat: null,
+                kosher: null,
+                paleo: null,
+                raw: null
+            },
+            musicPreferences: {
+                pop: null,
+                country: null,
+                edm: null,
+                rb: null,
+                latin: null,
+                hiphop: null,
+                alternative: null,
+                classical: null,
+                indie: null,
+                folk: null,
+                jazz: null,
+                rock: null,
+                soul: null,
+                punk: null,
+                reggae: null
+            },
+            topics: {
+                travel: null,
+                food: null,
+                music: null,
+                sports: null,
+                movies: null,
+                gaming: null,
+                nature: null,
+                animals: null,
+                tech: null
+            },
         }, { merge: true })
     }
 
     render() {
-        this.up();
+        // this.up();
         const header = this.props.existingUser ?
             (
                 <div>
-                    <div className="signup-header-welcome" onClick={this.up} > EDIT YOUR </div>
+                    <div className="signup-header-welcome"> EDIT YOUR </div>
                     <div className="signup-header-amp">A M P R</div>
                     <div className="signup-header-welcome-profile">PROFILE</div>
                 </div>
