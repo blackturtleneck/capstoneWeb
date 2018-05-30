@@ -1,34 +1,33 @@
 // Disable undeclared variable check on 'exports'
-/*global google:true*/
-/*eslint no-undef: "error"*/
+/* global google:true */
 
-import React from 'react';
-import Map from './Map';
-import { Marker, GoogleApiWrapper } from 'google-maps-react';
+import React from "react";
+import Map from "./Map";
+import { Marker, GoogleApiWrapper } from "google-maps-react";
 
 export class Container extends React.Component {
     render() {
         if (!this.props.loaded) {
             return <div>Loading...</div>;
         }
-        const { compose, withProps, withStateHandlers } = require('recompose');
+        const { compose, withProps, withStateHandlers } = require("recompose"); // eslint-disable-line no-use-before-define
         const {
             withScriptjs,
             withGoogleMap,
             GoogleMap
-        } = require('react-google-maps');
+        } = require("react-google-maps"); // eslint-disable-line no-use-before-define
         const {
             InfoBox
-        } = require('react-google-maps/lib/components/addons/InfoBox');
-        const demoFancyMapStyles = require('./demoFancyMapStyles.json');
+        } = require("react-google-maps/lib/components/addons/InfoBox"); // eslint-disable-line no-use-before-define
+        const demoFancyMapStyles = require("./demoFancyMapStyles.json"); // eslint-disable-line no-use-before-define
 
         const StyledMapWithAnInfoBox = compose(
             withProps({
                 googleMapURL:
-                    'https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places',
-                loadingElement: <div style={{ height: '100%' }} />,
-                containerElement: <div style={{ height: '400px' }} />,
-                mapElement: <div style={{ height: '100%' }} />,
+                    "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+                loadingElement: <div style={{ height: "100%" }} />,
+                containerElement: <div style={{ height: "400px" }} />,
+                mapElement: <div style={{ height: "100%" }} />,
                 center: { lat: 25.03, lng: 121.6 }
             }),
             withStateHandlers(
@@ -56,16 +55,16 @@ export class Container extends React.Component {
                             props.center.lng
                         )
                     }
-                    options={{ closeBoxURL: '', enableEventPropagation: true }}
+                    options={{ closeBoxURL: "", enableEventPropagation: true }}
                 >
                     <div
                         style={{
-                            backgroundColor: 'yellow',
+                            backgroundColor: "yellow",
                             opacity: 0.75,
-                            padding: '12px'
+                            padding: "12px"
                         }}
                     >
-                        <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
+                        <div style={{ fontSize: "16px", fontColor: "#08233B" }}>
                             Hello, Taipei!
                         </div>
                     </div>
@@ -78,21 +77,21 @@ export class Container extends React.Component {
                         <InfoBox
                             onCloseClick={props.onToggleOpen}
                             options={{
-                                closeBoxURL: '',
+                                closeBoxURL: "",
                                 enableEventPropagation: true
                             }}
                         >
                             <div
                                 style={{
-                                    backgroundColor: 'yellow',
+                                    backgroundColor: "yellow",
                                     opacity: 0.75,
-                                    padding: '12px'
+                                    padding: "12px"
                                 }}
                             >
                                 <div
                                     style={{
-                                        fontSize: '16px',
-                                        fontColor: '#08233B'
+                                        fontSize: "16px",
+                                        fontColor: "#08233B"
                                     }}
                                 >
                                     Hello, Kaohsiung!
@@ -112,5 +111,5 @@ export class Container extends React.Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+    apiKey: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
 })(Container);
