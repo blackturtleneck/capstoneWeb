@@ -41,8 +41,8 @@ class DateConfirmed extends Component {
             .doc(this.props.otherUser)
             .collection("dates")
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     // doc.data() is never undefined for query doc snapshots
                     // console.log(doc.id, " => ", doc.data());
                     // console.log(doc.data());
@@ -50,7 +50,7 @@ class DateConfirmed extends Component {
                     // ready: !currDates[0].confirm;
                 });
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log("Error getting documents: ", error);
             });
 
@@ -84,8 +84,8 @@ class DateConfirmed extends Component {
                 .doc(this.props.otherUser)
                 .collection("dates")
                 .get()
-                .then(function(querySnapshot) {
-                    querySnapshot.docs.map(function(doc) {
+                .then(function (querySnapshot) {
+                    querySnapshot.docs.map(function (doc) {
                         // console.log(doc.id, " => ", doc.data());
                         // console.log(doc.data());
                         currDates.push(doc.data());
@@ -93,14 +93,14 @@ class DateConfirmed extends Component {
                     });
                     return currDates;
                 })
-                .then(function(currDates) {
+                .then(function (currDates) {
                     currentComponent.setState(prevState => ({
                         dateDetails: currDates,
                         ready: !currDates[0].confirm,
                         timeConfirmed: currDates[0].timeConfirmed
                     }));
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // console.log("Error getting documents: ", error);
                 });
         }
@@ -134,8 +134,8 @@ class DateConfirmed extends Component {
             .doc(this.props.otherUser)
             .collection("dates")
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     // console.log(doc.id, " => ", doc.data());
                     // console.log(doc.data());
                     currDates.push(doc.data());
@@ -143,14 +143,14 @@ class DateConfirmed extends Component {
                 });
                 return currDates;
             })
-            .then(function(currDates) {
+            .then(function (currDates) {
                 currentComponent.setState(prevState => ({
                     dateDetails: currDates,
                     ready: !currDates[0].confirm,
                     timeConfirmed: currDates[0].timeConfirmed
                 }));
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // console.log("Error getting documents: ", error);
             });
 
@@ -207,10 +207,10 @@ class DateConfirmed extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log("Document successfully updated!");
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
@@ -237,10 +237,10 @@ class DateConfirmed extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log("Document successfully updated!");
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
@@ -273,10 +273,10 @@ class DateConfirmed extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log("Document successfully updated!");
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
@@ -296,10 +296,10 @@ class DateConfirmed extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log("Document successfully updated!");
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
@@ -319,7 +319,7 @@ class DateConfirmed extends Component {
             }
             if (key === "startTime") {
                 startTimeArr = data["startTime"];
-                startTimeArr.map(function(a) {
+                startTimeArr.map(function (a) {
                     let dayName = ""; // eslint-disable-line no-use-before-define
                     let time = ""; // eslint-disable-line no-use-before-define
                     if (a.day === "sun") {
@@ -438,8 +438,8 @@ class DateConfirmed extends Component {
             <div id="datebackground">
                 <h3 id="letsdate">
                     {" "}
-                    You have an upcoming date at {locationArr} at{" "}
-                    {this.state.timeConfirmed}{" "}
+                    {/* You have an upcoming date at {locationArr} at{" "}
+                    {this.state.timeConfirmed}{" "} */}
                 </h3>
             </div>
         );

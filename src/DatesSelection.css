@@ -24,8 +24,8 @@ h4 {
  font-weight: bold;
 }
 
- #request {
- background-color: #9ba2ff; /* Green */
+  /* #request{
+ background-color: #9ba2ff; 
  border: none;
  color: white;
  text-align: center;
@@ -38,9 +38,9 @@ h4 {
  margin-left: 20%;
  position:bottom;
  margin-bottom: 10px;
- /* float:right; */
+
  position: fixed;
-}
+} */
 
 #buttons #submit {
 background-color: #9ba2ff;
@@ -170,9 +170,9 @@ margin-bottom: 10px;
  background-color: white;
  width: 30vw;
  height: 70vh;
- /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
  text-align: center;
- margin-left: 65px;
+ margin-left: auto;
+ margin-right: auto;
  margin-bottom: 10vh;
  margin-top: 20vh;
 }

@@ -49,7 +49,7 @@ class RequestDate extends Component {
                     console.log('No such document!');
                 }
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 this.setState({ data: null });
                 console.log('Error getting document:', error);
             });
@@ -78,7 +78,7 @@ class RequestDate extends Component {
                     console.log('No such document!');
                 }
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 this.setState({ data: null });
                 console.log('Error getting document:', error);
             });
@@ -166,7 +166,7 @@ class RequestDate extends Component {
         console.log(timeStamp + 'TIMESTAMP CHEcK');
         const sendDate = {
             id: time,
-            timestampid : timeStamp,
+            timestampid: timeStamp,
             startTime: this.state.startArr,
             location: this.state.location,
             sent: true,
@@ -176,7 +176,7 @@ class RequestDate extends Component {
         };
         const receiveDate = {
             id: time,
-            timestampid : timeStamp,
+            timestampid: timeStamp,
             startTime: this.state.startArr,
             location: this.state.location,
             sent: false,
@@ -215,8 +215,6 @@ class RequestDate extends Component {
     }
 
     getData(start, location) {
-        console.log('Start FINAL Array', start);
-        console.log('LOCATION NAME', location);
         this.setState({
             startArr: start,
             location: location
@@ -224,9 +222,8 @@ class RequestDate extends Component {
     }
 
     render() {
-        console.log('AVAILABLE', this.state.userAvailability);
         return (
-            <div id="buttons">
+            <div className="buttons">
                 <Button id={this.state.buttonid} onClick={this._onButtonClick}>
                     {this.state.textValue}
                 </Button>

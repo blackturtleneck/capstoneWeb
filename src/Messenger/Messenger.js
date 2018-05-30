@@ -9,6 +9,7 @@ import Availability4 from "../Availability4"; // eslint-disable-line no-use-befo
 import DateConfirmed from "../DateConfirmed"; // eslint-disable-line no-use-before-define
 import sendAvailabilityResponse from "../sendAvailabilityResponse.js"; // eslint-disable-line no-use-before-define
 import { Button } from "react-bootstrap"; // eslint-disable-line no-use-before-define
+import Dialog from 'react-dialog'
 
 class Messenger extends React.Component {
     constructor(props, context) {
@@ -57,15 +58,15 @@ class Messenger extends React.Component {
                 .doc(this.props.otherUser)
                 .collection("dates")
                 .get()
-                .then(function(querySnapshot) {
-                    querySnapshot.docs.map(function(doc) {
+                .then(function (querySnapshot) {
+                    querySnapshot.docs.map(function (doc) {
                         console.log(doc.id, " => ", doc.data());
                         console.log(doc.data());
                         currDates.push(doc.data());
                     });
                     return currDates;
                 })
-                .then(function(currDates) {
+                .then(function (currDates) {
                     if (currDates.length !== 0) {
                         currentComponent.setState(prevState => ({
                             // eslint-disable-line no-use-before-define
@@ -85,7 +86,7 @@ class Messenger extends React.Component {
                         }));
                     }
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // console.log("Error getting documents: ", error);
                 });
         }
@@ -106,9 +107,9 @@ class Messenger extends React.Component {
                 .collection("messages")
                 .doc(newProps.otherUser)
                 .collection("messages")
-                .onSnapshot(function(querySnapshot) {
+                .onSnapshot(function (querySnapshot) {
                     var curMessages = [];
-                    querySnapshot.forEach(function(doc) {
+                    querySnapshot.forEach(function (doc) {
                         curMessages.push(doc.data());
                     });
                     currentComponent.setState({ messages: curMessages });
@@ -123,9 +124,9 @@ class Messenger extends React.Component {
                 .collection("messages")
                 .doc(newProps.otherUser)
                 .collection("dates")
-                .onSnapshot(function(querySnapshot) {
+                .onSnapshot(function (querySnapshot) {
                     var currDates = [];
-                    querySnapshot.forEach(function(doc) {
+                    querySnapshot.forEach(function (doc) {
                         currDates.push(doc.data());
                     });
                     if (currDates.length !== 0) {
@@ -385,103 +386,126 @@ class Messenger extends React.Component {
         //   <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
         //    null
         //}
+        let requestDate = false;
 
         return (
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
-                this.state.otherUser !== null ? (
-                    <div className="messenger">
-                        <h2>{this.state.otherUserName}</h2>
-                        <ol className="messages" id="message-list">
-                            {currentMessage}
-                        </ol>
+                    this.state.otherUser !== null ? (
+                        <div className="messenger">
+                            <h2>{this.state.otherUserName}</h2>
+                            <ol className="messages" id="message-list">
+                                {currentMessage}
+                            </ol>
 
-                        {this.state.dates.length !== 0 ? (
-                            <div>
-                                {this.state.userSent === true ? (
-                                    <div>
-                                        {this.state.userConfirmed === true ? (
-                                            <div>
-                                                <DateConfirmed
-                                                    userEmail={
-                                                        this.state.userEmail
-                                                    }
-                                                    user={this.state.user}
-                                                    otherUser={
-                                                        this.state.otherUser
-                                                    }
-                                                    timeStamp={
-                                                        this.state
-                                                            .dateRequestTimeStamp
-                                                    }
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                {this.state.userResponded ===
-                                                true ? (
+                            {this.state.dates.length !== 0 ? (
+                                <div>
+                                    {this.state.userSent === true ? (
+                                        <div>
+                                            {this.state.userConfirmed === true ? (
+                                                <div>
+                                                    <DateConfirmed
+                                                        userEmail={
+                                                            this.state.userEmail
+                                                        }
+                                                        user={this.state.user}
+                                                        otherUser={
+                                                            this.state.otherUser
+                                                        }
+                                                        timeStamp={
+                                                            this.state
+                                                                .dateRequestTimeStamp
+                                                        }
+                                                    />
+                                                </div>
+                                            ) : (
                                                     <div>
-                                                        {this.state.dates[0]
-                                                            .availability ? (
-                                                            <div>
-                                                                {this.state
-                                                                    .closeItAll ? null : (
-                                                                    <div id="datebackground">
-                                                                        <h3 id="halfwayText">
-                                                                            {" "}
-                                                                            Wasn't
-                                                                            free
-                                                                            during
-                                                                            the
-                                                                            times
-                                                                            you
-                                                                            suggested
-                                                                            -
-                                                                            here's
-                                                                            alternate
-                                                                            schedule
-                                                                            you
-                                                                            can
-                                                                            decide
-                                                                            on a
-                                                                            good
+                                                        {this.state.userResponded ===
+                                                            true ? (
+                                                                <div>
+                                                                    {this.state.dates[0]
+                                                                        .availability ? (
+                                                                            <div>
+                                                                                {this.state
+                                                                                    .closeItAll ? null : (
+                                                                                        <div id="datebackground">
+                                                                                            <h3 id="halfwayText">
+                                                                                                {" "}
+                                                                                                Wasn't
+                                                                                                free
+                                                                                                during
+                                                                                                the
+                                                                                                times
+                                                                                                you
+                                                                                                suggested
+                                                                                                -
+                                                                                                here's
+                                                                                                alternate
+                                                                                                schedule
+                                                                                                you
+                                                                                                can
+                                                                                                decide
+                                                                                                on a
+                                                                                                good
                                                                             time{" "}
-                                                                        </h3>
-                                                                        <Availability4
-                                                                            currAvailability={
-                                                                                this
-                                                                                    .state
-                                                                                    .dates[0]
-                                                                                    .availability
-                                                                            }
-                                                                        />
-                                                                        <Button
-                                                                            onClick={
-                                                                                this
-                                                                                    .closeEverything
-                                                                            }
-                                                                        >
-                                                                            {" "}
-                                                                            Close{" "}
-                                                                        </Button>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        ) : null}
+                                                                                            </h3>
+                                                                                            <Availability4
+                                                                                                currAvailability={
+                                                                                                    this
+                                                                                                        .state
+                                                                                                        .dates[0]
+                                                                                                        .availability
+                                                                                                }
+                                                                                            />
+                                                                                            <Button
+                                                                                                onClick={
+                                                                                                    this
+                                                                                                        .closeEverything
+                                                                                                }
+                                                                                            >
+                                                                                                {" "}
+                                                                                                Close{" "}
+                                                                                            </Button>
+                                                                                        </div>
+                                                                                    )}
+                                                                            </div>
+                                                                        ) : null}
+                                                                </div>
+                                                            ) : (
+                                                                <div>
+                                                                    <SentRequest
+                                                                        userEmail={
+                                                                            this.state
+                                                                                .userEmail
+                                                                        }
+                                                                        user={
+                                                                            this.state.user
+                                                                        }
+                                                                        otherUser={
+                                                                            this.state
+                                                                                .otherUser
+                                                                        }
+                                                                        timeStamp={
+                                                                            this.state
+                                                                                .dateRequestTimeStamp
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            )}
                                                     </div>
-                                                ) : (
+                                                )}
+                                        </div>
+                                    ) : (
+                                            <div>
+                                                {this.state.userConfirmed === true ? (
                                                     <div>
-                                                        <SentRequest
+                                                        <DateConfirmed
                                                             userEmail={
-                                                                this.state
-                                                                    .userEmail
+                                                                this.state.userEmail
                                                             }
-                                                            user={
-                                                                this.state.user
-                                                            }
+                                                            user={this.state.user}
                                                             otherUser={
-                                                                this.state
-                                                                    .otherUser
+                                                                this.state.otherUser
                                                             }
                                                             timeStamp={
                                                                 this.state
@@ -489,162 +513,158 @@ class Messenger extends React.Component {
                                                             }
                                                         />
                                                     </div>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <div>
-                                        {this.state.userConfirmed === true ? (
-                                            <div>
-                                                <DateConfirmed
-                                                    userEmail={
-                                                        this.state.userEmail
-                                                    }
-                                                    user={this.state.user}
-                                                    otherUser={
-                                                        this.state.otherUser
-                                                    }
-                                                    timeStamp={
-                                                        this.state
-                                                            .dateRequestTimeStamp
-                                                    }
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                {this.state.userResponded ===
-                                                true ? (
-                                                    <div>
-                                                        {this.state.dates[0]
-                                                            .availability ? (
-                                                            <div>
-                                                                {this.state
-                                                                    .closeItAll ? null : (
-                                                                    <div id="datebackground">
-                                                                        <h3 id="halfwayText">
-                                                                            {" "}
-                                                                            Here's
-                                                                            what
-                                                                            you
+                                                ) : (
+                                                        <div>
+                                                            {this.state.userResponded ===
+                                                                true ? (
+                                                                    <div>
+                                                                        {this.state.dates[0]
+                                                                            .availability ? (
+                                                                                <div>
+                                                                                    {this.state
+                                                                                        .closeItAll ? null : (
+                                                                                            <div id="datebackground">
+                                                                                                <h3 id="halfwayText">
+                                                                                                    {" "}
+                                                                                                    Here's
+                                                                                                    what
+                                                                                                    you
                                                                             sent!{" "}
-                                                                        </h3>
-                                                                        <Availability4
-                                                                            currAvailability={
-                                                                                this
-                                                                                    .state
-                                                                                    .dates[0]
-                                                                                    .availability
-                                                                            }
-                                                                        />
-                                                                        <Button
-                                                                            onClick={
-                                                                                this
-                                                                                    .closeEverything
-                                                                            }
+                                                                                                </h3>
+                                                                                                <Availability4
+                                                                                                    currAvailability={
+                                                                                                        this
+                                                                                                            .state
+                                                                                                            .dates[0]
+                                                                                                            .availability
+                                                                                                    }
+                                                                                                />
+                                                                                                <Button
+                                                                                                    onClick={
+                                                                                                        this
+                                                                                                            .closeEverything
+                                                                                                    }
+                                                                                                >
+                                                                                                    {" "}
+                                                                                                    Close{" "}
+                                                                                                </Button>
+                                                                                            </div>
+                                                                                        )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <div id="datebackground">
+                                                                                    <p>
+                                                                                        {" "}
+                                                                                        WILL THIS
+                                                                    SHOW ANYTING{" "}
+                                                                                    </p>
+                                                                                    <Availability3
+                                                                                        userEmail={
+                                                                                            this
+                                                                                                .state
+                                                                                                .userEmail
+                                                                                        }
+                                                                                        user={
+                                                                                            this
+                                                                                                .state
+                                                                                                .user
+                                                                                        }
+                                                                                        otherUser={
+                                                                                            this
+                                                                                                .state
+                                                                                                .otherUser
+                                                                                        }
+                                                                                        timeStamp={
+                                                                                            this
+                                                                                                .state
+                                                                                                .dateRequestTimeStamp
+                                                                                        }
+                                                                                    />
+                                                                                </div>
+                                                                            )}
+                                                                    </div>
+                                                                ) : (
+                                                                    <div>
+                                                                        <Dialog
+                                                                            title="New date request!"
+                                                                            modal={true}
+                                                                            onClose={this.handleClose}
                                                                         >
-                                                                            {" "}
-                                                                            Close{" "}
-                                                                        </Button>
+                                                                            {/* <h1>Dialog Content</h1> */}
+                                                                            <ReceiveRequest
+                                                                                userEmail={
+                                                                                    this.state
+                                                                                        .userEmail
+                                                                                }
+                                                                                user={
+                                                                                    this.state.user
+                                                                                }
+                                                                                otherUser={
+                                                                                    this.state
+                                                                                        .otherUser
+                                                                                }
+                                                                                timeStamp={
+                                                                                    this.state
+                                                                                        .dateRequestTimeStamp
+                                                                                }
+                                                                            />
+                                                                        </Dialog>
+
                                                                     </div>
                                                                 )}
-                                                            </div>
-                                                        ) : (
-                                                            <div id="datebackground">
-                                                                <p>
-                                                                    {" "}
-                                                                    WILL THIS
-                                                                    SHOW ANYTING{" "}
-                                                                </p>
-                                                                <Availability3
-                                                                    userEmail={
-                                                                        this
-                                                                            .state
-                                                                            .userEmail
-                                                                    }
-                                                                    user={
-                                                                        this
-                                                                            .state
-                                                                            .user
-                                                                    }
-                                                                    otherUser={
-                                                                        this
-                                                                            .state
-                                                                            .otherUser
-                                                                    }
-                                                                    timeStamp={
-                                                                        this
-                                                                            .state
-                                                                            .dateRequestTimeStamp
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ) : (
-                                                    <div>
-                                                        <ReceiveRequest
-                                                            userEmail={
-                                                                this.state
-                                                                    .userEmail
-                                                            }
-                                                            user={
-                                                                this.state.user
-                                                            }
-                                                            otherUser={
-                                                                this.state
-                                                                    .otherUser
-                                                            }
-                                                            timeStamp={
-                                                                this.state
-                                                                    .dateRequestTimeStamp
-                                                            }
-                                                        />
-                                                    </div>
-                                                )}
+                                                        </div>
+                                                    )}
                                             </div>
                                         )}
-                                    </div>
+                                </div>
+                            ) : (
+                                    requestDate = true
+
+                                    // <RequestDate
+                                    //     className={"request-date-button-messenger"}
+                                    //     userEmail={this.state.userEmail}
+                                    //     otherUser={this.state.otherUser}
+                                    //     action={this.dateRequestHandler}
+                                    //     callBack={this.update}
+                                    // />
+
                                 )}
-                            </div>
-                        ) : (
-                            <div className="date-button-wrapper">
-                                {
+
+                            <div className="button-input-wrapper">
+                                <input
+                                    id="message-box"
+                                    className="send-text"
+                                    onChange={this.updateMessage}
+                                    type="text"
+                                    placeholder="message"
+                                    onKeyPress={this.submitMessageEnter}
+                                />
+                                <button
+                                    className="submit-button"
+                                    onClick={this.submitMessage}
+                                >
+                                    Send
+                            </button>
+                                {requestDate && (
                                     <RequestDate
+                                        className={"request-date-button-messenger"}
                                         userEmail={this.state.userEmail}
                                         otherUser={this.state.otherUser}
                                         action={this.dateRequestHandler}
                                         callBack={this.update}
                                     />
-                                }
-                            </div>
-                        )}
+                                )}
 
-                        <div className="button-input-wrapper">
-                            <input
-                                id="message-box"
-                                className="send-text"
-                                onChange={this.updateMessage}
-                                type="text"
-                                placeholder="message"
-                                onKeyPress={this.submitMessageEnter}
-                            />
-                            <button
-                                className="submit-button"
-                                onClick={this.submitMessage}
-                            >
-                                Send
-                            </button>
+                            </div>
+                            <br />
                         </div>
-                        <br />
-                    </div>
-                ) : (
-                    <div className="messenger">
-                        <p className="select">
-                            Select a match to start messaging!
+                    ) : (
+                        <div className="messenger">
+                            <p className="select">
+                                Select a match to start messaging!
                         </p>
-                    </div>
-                )}
+                        </div>
+                    )}
             </div>
         );
     }

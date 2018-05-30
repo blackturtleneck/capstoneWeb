@@ -43,8 +43,8 @@ class ReceiveRequest extends Component {
             .doc(this.props.otherUser)
             .collection('dates')
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, ' => ', doc.data());
                     console.log(doc.data());
@@ -52,7 +52,7 @@ class ReceiveRequest extends Component {
                     !currDates[0].confirm;
                 });
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log('Error getting documents: ', error);
             });
 
@@ -86,8 +86,8 @@ class ReceiveRequest extends Component {
                 .doc(this.props.otherUser)
                 .collection('dates')
                 .get()
-                .then(function(querySnapshot) {
-                    querySnapshot.docs.map(function(doc) {
+                .then(function (querySnapshot) {
+                    querySnapshot.docs.map(function (doc) {
                         console.log(doc.id, ' => ', doc.data());
                         console.log(doc.data());
                         currDates.push(doc.data());
@@ -95,14 +95,14 @@ class ReceiveRequest extends Component {
                     });
                     return currDates;
                 })
-                .then(function(currDates) {
+                .then(function (currDates) {
                     currentComponent.setState(prevState => ({
                         dateDetails: currDates,
                         ready: !currDates[0].confirm,
                         timeConfirmed: currDates[0].timeConfirmed
                     }));
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log('Error getting documents: ', error);
                 });
         }
@@ -136,8 +136,8 @@ class ReceiveRequest extends Component {
             .doc(this.props.otherUser)
             .collection('dates')
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.docs.map(function (doc) {
                     console.log(doc.id, ' => ', doc.data());
                     console.log(doc.data());
                     currDates.push(doc.data());
@@ -145,14 +145,14 @@ class ReceiveRequest extends Component {
                 });
                 return currDates;
             })
-            .then(function(currDates) {
+            .then(function (currDates) {
                 currentComponent.setState(prevState => ({
                     dateDetails: currDates,
                     ready: !currDates[0].confirm,
                     timeConfirmed: currDates[0].timeConfirmed
                 }));
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log('Error getting documents: ', error);
             });
 
@@ -209,10 +209,10 @@ class ReceiveRequest extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -239,10 +239,10 @@ class ReceiveRequest extends Component {
                 confirm: true,
                 timeConfirmed: this.state.timeConfirmed
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -275,10 +275,10 @@ class ReceiveRequest extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -298,10 +298,10 @@ class ReceiveRequest extends Component {
                 confirm: false,
                 response: true
             })
-            .then(function() {
+            .then(function () {
                 console.log('Document successfully updated!');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // The document probably doesn't exist.
                 console.error('Error updating document: ', error);
             });
@@ -321,7 +321,7 @@ class ReceiveRequest extends Component {
             }
             if (key === 'startTime') {
                 startTimeArr = data['startTime'];
-                startTimeArr.map(function(a) {
+                startTimeArr.map(function (a) {
                     let dayName = '';
                     let time = '';
                     if (a.day === 'sun') {
@@ -439,41 +439,37 @@ class ReceiveRequest extends Component {
 
         return (
             <div id="datebackground">
-                <div>
-                    <h3 id="letsdate">
-                        Hey, <br />want to go to {locationArr + ' '}
-                        this week?{' '}
-                    </h3>
-                    <p>
-                        It's got inventive codadcktails and small plates in a
-                        warm, eco-friendly setting with regular tastings and
-                        classes. <br />
-                    </p>
-                    <Button id="locview" onClick={this.showMap}>
-                        Here's where it is.
+                {/* <div> */}
+                <h3 id="letsdate">
+                    Hey, <br />want to go to {locationArr + ' '}
+                    this week?{' '}
+                </h3>
+
+                <Button id="locview" onClick={this.showMap}>
+                    Here's where it is.
                     </Button>{' '}
-                    <br />
-                    {this.state.mapShowing ? <ColorMap /> : null}
-                    <p> Let me know if any of these times work for you! </p>
-                    {finalDateButton.map(time => (
-                        <Button
-                            id={time}
-                            value={time}
-                            onClick={event => this.timeConfirm(event)}
-                        >
-                            {' '}
-                            {time}{' '}
-                        </Button>
-                    ))}
-                    <Button id="confirm" onClick={this.confirmDate}>
+                <br />
+                {this.state.mapShowing ? <ColorMap /> : null}
+                <p> Let me know if any of these times work for you! </p>
+                {finalDateButton.map(time => (
+                    <Button
+                        id={time}
+                        value={time}
+                        onClick={event => this.timeConfirm(event)}
+                    >
                         {' '}
-                        Confirm Date{' '}
+                        {time}{' '}
                     </Button>
-                    <Button id="confirm" onClick={this.respond}>
-                        {' '}
-                        Another Time?
+                ))}
+                <Button id="confirm" onClick={this.confirmDate}>
+                    {' '}
+                    Confirm Date{' '}
+                </Button>
+                <Button id="confirm" onClick={this.respond}>
+                    {' '}
+                    Another Time?
                     </Button>
-                </div>
+                {/* </div> */}
             </div>
         );
     }
