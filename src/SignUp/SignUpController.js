@@ -34,58 +34,10 @@ class SignUpInController extends Component {
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-<<<<<<< HEAD
-                console.log("doc", doc.data());
-                // if (doc.exists) {
-                if (!doc.data().newUser) {
-                    // existingUser = true;
-
-                    console.log("in if cwm", doc.data());
-                    let ref = doc.data();
-                    fieldValues = {
-                        name: ref.name,
-                        gender: ref.gender,
-                        education: ref.education,
-                        religion: ref.religion,
-                        occupation: ref.occupation,
-                        location: ref.location,
-                        birthday: {
-                            month: ref.birthday.month,
-                            day: ref.birthday.day,
-                            year: ref.birthday.year
-                        },
-
-                        matchGender: ref.matchGender,
-                        matchAgeMin: ref.matchAgeMin,
-                        matchAgeMax: ref.matchAgeMax,
-                        matchDistance: ref.matchDistance,
-                        availability: ref.availability,
-
-                        dates: ref.dates,
-                        topics: ref.topics,
-
-                        dietaryPref: ref.dietaryPref,
-                        priceMin: ref.priceMin,
-                        priceMax: ref.priceMax,
-                        neighborhoods: ref.neighborhoods,
-                        foodTypeLIKE: ref.foodTypeLIKE,
-                        foodTypeHATE: ref.foodTypeHATE,
-                        music: ref.music
-                    };
-                    console.log("fv in cwm", fieldValues);
-                    // this.setState({ existingUser: true })
-                    // }
-                } else {
-                    console.log("in else cwm", fieldValues);
-                    fieldValues = {
-                        name: null,
-                        gender: "",
-=======
                 if (!doc.exists) {
                     fieldValues = {
                         name: this.props.user.displayName,
                         gender: null, //this.props.user.gender,
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
                         education: null,
                         religion: null,
                         occupation: null,
@@ -98,35 +50,6 @@ class SignUpInController extends Component {
                         matchDistance: null,
 
                         availability: {
-<<<<<<< HEAD
-                            MORNING: [
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false
-                            ],
-                            AFTERNOON: [
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false
-                            ],
-                            EVENING: [
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false
-                            ]
-=======
                             sun: {
                                 morning: null,
                                 afternoon: null,
@@ -162,7 +85,6 @@ class SignUpInController extends Component {
                                 afternoon: null,
                                 evening: null
                             }
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
                         },
 
                         dates: {
@@ -185,87 +107,6 @@ class SignUpInController extends Component {
                             tech: null
                         },
 
-<<<<<<< HEAD
-                        dietaryPref: {
-                            VEGETARIAN: false,
-                            "GLUTEN-FREE": false,
-                            VEGAN: false,
-                            "DAIRY-FREE": false,
-                            "NO RED MEAT": false,
-                            KOSHER: false,
-                            PALEO: false,
-                            RAW: false
-                        },
-                        priceMin: 3,
-                        priceMax: 4,
-                        neighborhoods: {
-                            BALLARD: false,
-                            BELLTOWN: false,
-                            "CAPITOL HILL": false,
-                            DOWNTOWN: false,
-                            "INTERNATIONAL DISTRICT": false,
-                            "FIRST HILL": false,
-                            FREMONT: false,
-                            GEORGETOWN: false,
-                            "PIONEER SQUARE": false,
-                            "QUEEN ANNE": false,
-                            SODO: false,
-                            "SOUTH LAKE UNION": false,
-                            WALLINGFORD: false,
-                            "WEST SEATTLE": false,
-                            UDISTRICT: false
-                        },
-                        foodTypeLIKE: {
-                            AMERICAN: false,
-                            FRENCH: false,
-                            CHINESE: false,
-                            DESSERT: false,
-                            GREEK: false,
-                            HALAL: false,
-                            INDIAN: false,
-                            ITALIAN: false,
-                            JAPANESE: false,
-                            KOREAN: false,
-                            MEDITERRANEAN: false,
-                            MEXICAN: false,
-                            PIZZA: false,
-                            THAI: false,
-                            "MIDDLE EASTERN": false
-                        },
-                        foodTypeHATE: {
-                            AMERICAN: false,
-                            FRENCH: false,
-                            CHINESE: false,
-                            DESSERT: false,
-                            GREEK: false,
-                            HALAL: false,
-                            INDIAN: false,
-                            ITALIAN: false,
-                            JAPANESE: false,
-                            KOREAN: false,
-                            MEDITERRANEAN: false,
-                            MEXICAN: false,
-                            PIZZA: false,
-                            THAI: false,
-                            "MIDDLE EASTERN": false
-                        },
-                        music: {
-                            POP: false,
-                            COUNTRY: false,
-                            EDM: false,
-                            "R&B": false,
-                            LATIN: false,
-                            "HIP HOP": false,
-                            ALTERNATIVE: false,
-                            CLASSICAL: false,
-                            INDIE: false,
-                            FOLK: false,
-                            JAZZ: false,
-                            ROCK: false,
-                            SOUL: false,
-                            PUNK: false,
-                            REGGAE: false
-=======
                         foodPreferences: {
                             vegetarian: null,
                             glutenFree: null,
@@ -344,7 +185,6 @@ class SignUpInController extends Component {
                             reggae: null,
                             soul: null,
                             punk: null
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
                         }
                     };
 
@@ -406,42 +246,6 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
-<<<<<<< HEAD
-        let userRef = db.collection("users");
-        userRef.doc(this.props.user.email).set(
-            {
-                name: fieldValues.name,
-                gender: fieldValues.gender,
-                education: fieldValues.education,
-                religion: fieldValues.religion,
-                occupation: fieldValues.occupation,
-                location: fieldValues.location,
-                birthday: {
-                    month: fieldValues.birthday.month,
-                    day: fieldValues.birthday.day,
-                    year: fieldValues.birthday.year
-                },
-                matchGender: fieldValues.matchGender,
-                matchAgeMin: fieldValues.matchAgeMin,
-                matchAgeMax: fieldValues.matchAgeMax,
-                matchDistance: fieldValues.matchDistance,
-                availability: fieldValues.availability,
-
-                dates: fieldValues.dates,
-                topics: fieldValues.topics,
-                dietaryPref: fieldValues.dietaryPref,
-                priceMin: fieldValues.priceMin,
-                priceMax: fieldValues.priceMax,
-                neighborhoods: fieldValues.neighborhoods,
-                foodTypeLIKE: fieldValues.foodTypeLIKE,
-                foodTypeHATE: fieldValues.foodTypeHATE,
-                music: fieldValues.music,
-
-                newUser: false
-            },
-            { merge: true }
-        );
-=======
         console.log("Fv in submit", fieldValues)
         let userRef = db.collection('users');
         userRef.doc(this.props.user.email).set({
@@ -467,7 +271,6 @@ class SignUpInController extends Component {
             topics: fieldValues.topics,
             onBoarding: true
         });
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
         this.nextStep();
     }
 
@@ -521,14 +324,7 @@ class SignUpInController extends Component {
     }
     render() {
         let progress = this.state.step * 25;
-<<<<<<< HEAD
-        return (
-            // return !this.state.existingUser ? (
-            //     <span>Loading data...</span>
-            // ) : (
-=======
         return (!this.state.existingUser ? <span>Loading data...</span> : (
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
             <div className="signup-wrapper">
                 <div
                     style={{ width: progress + "vw" }}
@@ -538,12 +334,7 @@ class SignUpInController extends Component {
                 </div>
                 {this.showStep()}
             </div>
-<<<<<<< HEAD
-            // )
-        );
-=======
         ));
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
     }
 }
 export default SignUpInController;

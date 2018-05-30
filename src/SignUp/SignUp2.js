@@ -1,11 +1,11 @@
-import React from 'react';
-import { auth } from '../FirestoreConfig';
-import './SignUp.css';
-import next from '../img/next.svg';
-import back from '../img/back.svg';
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import Tooltip from 'rc-tooltip';
+import React from "react";
+import { auth } from "../FirestoreConfig";
+import "./SignUp.css";
+import next from "../img/next.svg";
+import back from "../img/back.svg";
+import Slider, { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import Tooltip from "rc-tooltip";
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
@@ -16,16 +16,12 @@ class SignUp2 extends React.Component {
 
         this.state = {
             authenticated: true,
-<<<<<<< HEAD
-            user: this.props.user,
-            content: this.props.content,
-            ageRange: [25, 30],
-            distance: 10
-=======
-            ageRange: [this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax],
+            ageRange: [
+                this.props.fieldValues.matchAgeMin,
+                this.props.fieldValues.matchAgeMax
+            ],
             matchDistance: this.props.fieldValues.matchDistance,
             availability: this.props.fieldValues.availability
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
         };
         this.onRangeChange = this.onRangeChange.bind(this);
         this.onSliderChange = this.onSliderChange.bind(this);
@@ -49,7 +45,7 @@ class SignUp2 extends React.Component {
     }
 
     render() {
-        console.log(this.state.availability)
+        console.log(this.state.availability);
         const handle = props => {
             const { value, dragging, index, ...restProps } = props;
             return (
@@ -64,23 +60,15 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
-<<<<<<< HEAD
-        console.log('state s2', this.state);
-
-        const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-        const weekdayRows = ['MORNING', 'AFTERNOON', 'EVENING'];
-=======
-        const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
-        const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"]
-        const dataDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+        const weekdayRows = ["MORNING", "AFTERNOON", "EVENING"];
+        const dataDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
         // console.log("this", this.state.availability.mon.morning)
 
         // let tempAvailability = this.state.availability;
 
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
         return (
             <div className="signup-page">
-
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
                 <img
                     src={back}
@@ -117,20 +105,23 @@ class SignUp2 extends React.Component {
                         <Range
                             min={18}
                             max={55}
-                            defaultValue={[this.props.fieldValues.matchAgeMin, this.props.fieldValues.matchAgeMax]}
+                            defaultValue={[
+                                this.props.fieldValues.matchAgeMin,
+                                this.props.fieldValues.matchAgeMax
+                            ]}
                             handle={handle}
                             trackStyle={[
-                                { backgroundColor: '#828282' },
-                                { backgroundColor: '#828282' }
+                                { backgroundColor: "#828282" },
+                                { backgroundColor: "#828282" }
                             ]}
                             handleStyle={[
                                 {
-                                    backgroundColor: '#9BA2FF',
-                                    borderColor: '#9BA2FF'
+                                    backgroundColor: "#9BA2FF",
+                                    borderColor: "#9BA2FF"
                                 },
                                 {
-                                    backgroundColor: '#9BA2FF',
-                                    borderColor: '#9BA2FF'
+                                    backgroundColor: "#9BA2FF",
+                                    borderColor: "#9BA2FF"
                                 }
                             ]}
                             onChange={this.onRangeChange}
@@ -148,20 +139,16 @@ class SignUp2 extends React.Component {
                             max={50}
                             defaultValue={this.state.distance}
                             handle={handle}
-                            trackStyle={[{ backgroundColor: '#828282' }]}
+                            trackStyle={[{ backgroundColor: "#828282" }]}
                             handleStyle={[
                                 {
-                                    backgroundColor: '#9BA2FF',
-                                    borderColor: '#9BA2FF'
+                                    backgroundColor: "#9BA2FF",
+                                    borderColor: "#9BA2FF"
                                 }
                             ]}
                             onChange={this.onSliderChange}
                         />
                     </div>
-<<<<<<< HEAD
-=======
-
-
 
                     {/* <div id="availability-wrapper"> */}
                     <div className="tagline-2">I'M GENERALLY AVAILABLE...</div>
@@ -171,7 +158,9 @@ class SignUp2 extends React.Component {
                     <div className="weekday-wrapper">
                         {weekdays.map((day, index) => {
                             return (
-                                <span className="weekday-label" key={index}>{day}</span>
+                                <span className="weekday-label" key={index}>
+                                    {day}
+                                </span>
                             );
                         })}
                     </div>
@@ -190,8 +179,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.mon.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.mon.morning = !days.mon.morning
-                                this.setState({ availability: days })
+                                days.mon.morning = !days.mon.morning;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -200,8 +189,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.tue.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.tue.morning = !days.tue.morning
-                                this.setState({ availability: days })
+                                days.tue.morning = !days.tue.morning;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -210,8 +199,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.wed.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.wed.morning = !days.wed.morning
-                                this.setState({ availability: days })
+                                days.wed.morning = !days.wed.morning;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -220,10 +209,9 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.thu.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.thu.morning = !days.thu.morning
-                                this.setState({ availability: days })
+                                days.thu.morning = !days.thu.morning;
+                                this.setState({ availability: days });
                             }}
-
                         />
 
                         <Checkbox
@@ -232,8 +220,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.fri.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.fri.morning = !days.fri.morning
-                                this.setState({ availability: days })
+                                days.fri.morning = !days.fri.morning;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -242,8 +230,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sat.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sat.morning = !days.sat.morning
-                                this.setState({ availability: days })
+                                days.sat.morning = !days.sat.morning;
+                                this.setState({ availability: days });
                             }}
                         />
 
@@ -253,8 +241,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sun.morning}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sun.morning = !days.sun.morning
-                                this.setState({ availability: days })
+                                days.sun.morning = !days.sun.morning;
+                                this.setState({ availability: days });
                             }}
                         />
                     </div>
@@ -267,8 +255,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.mon.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.mon.afternoon = !days.mon.afternoon
-                                this.setState({ availability: days })
+                                days.mon.afternoon = !days.mon.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -277,8 +265,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.tue.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.tue.afternoon = !days.tue.afternoon
-                                this.setState({ availability: days })
+                                days.tue.afternoon = !days.tue.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -287,8 +275,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.wed.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.wed.afternoon = !days.wed.afternoon
-                                this.setState({ availability: days })
+                                days.wed.afternoon = !days.wed.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -297,10 +285,9 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.thu.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.thu.afternoon = !days.thu.afternoon
-                                this.setState({ availability: days })
+                                days.thu.afternoon = !days.thu.afternoon;
+                                this.setState({ availability: days });
                             }}
-
                         />
 
                         <Checkbox
@@ -309,8 +296,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.fri.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.fri.afternoon = !days.fri.afternoon
-                                this.setState({ availability: days })
+                                days.fri.afternoon = !days.fri.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -319,8 +306,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sat.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sat.afternoon = !days.sat.afternoon
-                                this.setState({ availability: days })
+                                days.sat.afternoon = !days.sat.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
 
@@ -330,8 +317,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sun.afternoon}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sun.afternoon = !days.sun.afternoon
-                                this.setState({ availability: days })
+                                days.sun.afternoon = !days.sun.afternoon;
+                                this.setState({ availability: days });
                             }}
                         />
                     </div>
@@ -344,8 +331,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.mon.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.mon.evening = !days.mon.evening
-                                this.setState({ availability: days })
+                                days.mon.evening = !days.mon.evening;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -354,8 +341,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.tue.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.tue.evening = !days.tue.evening
-                                this.setState({ availability: days })
+                                days.tue.evening = !days.tue.evening;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -364,8 +351,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.wed.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.wed.evening = !days.wed.evening
-                                this.setState({ availability: days })
+                                days.wed.evening = !days.wed.evening;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -374,10 +361,9 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.thu.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.thu.evening = !days.thu.evening
-                                this.setState({ availability: days })
+                                days.thu.evening = !days.thu.evening;
+                                this.setState({ availability: days });
                             }}
-
                         />
 
                         <Checkbox
@@ -386,8 +372,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.fri.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.fri.evening = !days.fri.evening
-                                this.setState({ availability: days })
+                                days.fri.evening = !days.fri.evening;
+                                this.setState({ availability: days });
                             }}
                         />
                         <Checkbox
@@ -396,8 +382,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sat.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sat.evening = !days.sat.evening
-                                this.setState({ availability: days })
+                                days.sat.evening = !days.sat.evening;
+                                this.setState({ availability: days });
                             }}
                         />
 
@@ -407,8 +393,8 @@ class SignUp2 extends React.Component {
                             checked={this.state.availability.sun.evening}
                             onChange={() => {
                                 let days = this.state.availability;
-                                days.sun.evening = !days.sun.evening
-                                this.setState({ availability: days })
+                                days.sun.evening = !days.sun.evening;
+                                this.setState({ availability: days });
                             }}
                         />
                     </div>
@@ -487,7 +473,6 @@ class SignUp2 extends React.Component {
 
                                 })} */}
 
-
                         {/* <div className="morning">
 
                                     {this.state.availability["MORNING"].map((day, index) => {
@@ -564,7 +549,6 @@ class SignUp2 extends React.Component {
                     </div>
                     {/* </div> */}
                     {/* </div> */}
->>>>>>> 4cf581a2e3e9c36fde6b3745879c648a2b39cf0d
                 </form>
             </div>
         );
@@ -578,7 +562,7 @@ class SignUp2 extends React.Component {
             matchAgeMax: this.state.ageRange[1],
             matchDistance: this.state.distance
         };
-        console.log('data', data);
+        console.log("data", data);
         this.props.saveValues(data);
         this.props.nextStep();
     }
