@@ -22,8 +22,8 @@ class MessengerPage extends React.Component {
         db
             .collection('users')
             .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
                     if (doc.get('name') !== currentComponent.state.user) {
                         curUserList.push({
@@ -37,7 +37,7 @@ class MessengerPage extends React.Component {
     }
 
     chooseUser(e) {
-        this.setState({ otherUser: e }, function () { });
+        this.setState({ otherUser: e }, function() {});
         this.forceUpdate();
     }
 
@@ -51,8 +51,8 @@ class MessengerPage extends React.Component {
                         curUserList={this.state.userList}
                     />
                 ) : (
-                        <div>loading</div>
-                    )}
+                    <div>loading</div>
+                )}
                 <Messenger
                     user={this.state.user}
                     userEmail={this.state.userEmail}

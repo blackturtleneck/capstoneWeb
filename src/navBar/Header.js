@@ -32,9 +32,7 @@ class Header extends Component {
                                 aria-expanded="false"
                             >
                                 {/* <li className="right"> */}
-                                <i className="medium material-icons">
-                                    person
-                                    </i>
+                                <i className="medium material-icons">person</i>
                                 {/* </li> */}
                             </a>
 

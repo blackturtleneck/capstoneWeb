@@ -5,7 +5,7 @@ import './DatesSelection.css';
 import ColorMap from './ColorMap.js';
 import Availability2 from './Availability2.js';
 
-class ReceiveRequest extends Component {
+class SentRequest extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -16,7 +16,6 @@ class ReceiveRequest extends Component {
             otherUser: this.props.otherUser,
             otherUserName: this.props.otherUserName,
             ready: false,
-            userSent: this.props.userSent,
             finalDateArray: [],
             finalLocation: '',
             dateConfirmed: false,
@@ -33,7 +32,6 @@ class ReceiveRequest extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.userSent, 'userSENTTEST');
         let currentComponent = this;
         var currDates = [];
         db
@@ -436,111 +434,19 @@ class ReceiveRequest extends Component {
                 console.log(finalDateButton);
             }
         }
-
         return (
             <div id="datebackground">
                 <div>
                     <h3 id="letsdate">
-                        Hey, <br />want to go to {locationArr + ' '}
-                        this week?{' '}
+                        You've sent a date request to go to {locationArr + ' '}
+                        this week!{' '}
                     </h3>
-                    <p>
-                        It's got inventive codadcktails and small plates in a
-                        warm, eco-friendly setting with regular tastings and
-                        classes. <br />
-                    </p>
-                    <Button id="locview" onClick={this.showMap}>
-                        Here's where it is.
-                    </Button>{' '}
-                    <br />
-                    {this.state.mapShowing ? <ColorMap /> : null}
-                    <p> Let me know if any of these times work for you! </p>
-                    {finalDateButton.map(time => (
-                        <Button
-                            id={time}
-                            value={time}
-                            onClick={event => this.timeConfirm(event)}
-                        >
-                            {' '}
-                            {time}{' '}
-                        </Button>
-                    ))}
-                    <Button id="confirm" onClick={this.confirmDate}>
-                        {' '}
-                        Confirm Date{' '}
-                    </Button>
-                    <Button id="confirm" onClick={this.respond}>
-                        {' '}
-                        Another Time?
-                    </Button>
+
+                    <p> We will let you know as soon as you have a response!</p>
                 </div>
             </div>
         );
     }
 }
-/*         <div>
-           {this.state.ready  ?
 
-                <div id = "datebackground">
-
-                    {this.state.dateDetails != null ?             
-                    <div> 
-
-                        {this.state.userSent == false ?
-                        <div> 
-                             {this.state.dateConfirmed == false ?
-                                
-
-                                :
-
-                                <div>
-                               <p> User sent is false and date is confirmed </p>
-
-                                 You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> 
-                                </div>
-                             }
-
-
-                        </div>
-                        :
-                        <div>
-                             Here the userSent is True
-                             {this.state.dateConfirmed == false ?
-                                <div>
-                                    <p> User sent is true and Date is not confirmed yet </p>
-
-
-                                    <p> You've sent a date request - we will let you know what they say! </p>
-                                </div>
-
-                                :
-
-                                <div>
-                                User sent is true and date is confirmed
-
-                                   You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> 
-                                </div>
-                             }
-
-                        </div>
-                    }
-
-                 </div>
-                    :
-                    null
-                    
-                    }
-
-            </div>
-                                : 
-                                null
-                                }
-        </div>
-    );
-}
-
-
-}
-
-
-export default ReceiveRequest;
+export default SentRequest;

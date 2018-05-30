@@ -1,12 +1,9 @@
-/*global it:true*/
-/*eslint no-undef: "error"*/
+import React from "react"; // eslint-disable-line no-use-before-define
+import ReactDOM from "react-dom"; // eslint-disable-line no-use-before-define
+import App from "./App"; // eslint-disable-line no-use-before-define
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-
-it('renders without crashing', () => {
-    const div = document.createElement('div');
+it("renders without crashing", () => {
+    const div = document.createElement("div");
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
 });

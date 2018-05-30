@@ -22,35 +22,35 @@ class PageContainer extends React.Component {
         auth.signOut();
     }
 
-    componentDidMount() {
-        let component = this;
-        db
-            .collection('users')
-            .doc(this.state.user.email)
-            .get()
-            .then(function (doc) {
-                if (!doc.data().onBoarding) {
-                    component.setState({
-                        onBoarding: false
-                    });
-                } else {
-                    component.setState({
-                        onBoarding: true
-                    });
-                }
-            });
-    }
+    // componentDidMount() {
+    //     let component = this;
+    //     db
+    //         .collection('users')
+    //         .doc(this.state.user.email)
+    //         .get()
+    //         .then(function (doc) {
+    //             if (!doc.data().onBoarding) {
+    //                 component.setState({
+    //                     onBoarding: false
+    //                 });
+    //             } else {
+    //                 component.setState({
+    //                     onBoarding: true
+    //                 });
+    //             }
+    //         });
+    // }
 
     render() {
         return (
             <div>
 
-                {this.state.onBoarding && (
-                    <div>
-                        <Header userEmail={this.state.user.email} />
-                        {/* <Redirect to={'/messenger'} /> */}
-                    </div>
-                )}
+                {/* {this.state.onBoarding && ( */}
+                <div>
+                    <Header userEmail={this.state.user.email} />
+                    {/* <Redirect to={'/messenger'} /> */}
+                </div>
+                {/* )} */}
 
                 {this.state.content === PageContent.DATE_SELECTION && (
                     <DatesSelection />

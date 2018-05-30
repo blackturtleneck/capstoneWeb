@@ -1,25 +1,31 @@
-import React from 'react';
-import { db } from '../FirestoreConfig';
-import './Messaging.css';
-import RequestDate from '../RequestDate';
-import ReceiveRequest from '../ReceiveRequest';
-import Availability2 from '../Availability2';
+import React from "react";
+import { db } from "../FirestoreConfig";
+import "./Messaging.css";
+import RequestDate from "../RequestDate"; // eslint-disable-line no-use-before-define
+import ReceiveRequest from "../ReceiveRequest"; // eslint-disable-line no-use-before-define
+import SentRequest from "../SentRequest.js"; // eslint-disable-line no-use-before-define
+import Availability3 from "../Availability3"; // eslint-disable-line no-use-before-define
+import Availability4 from "../Availability4"; // eslint-disable-line no-use-before-define
+import DateConfirmed from "../DateConfirmed"; // eslint-disable-line no-use-before-define
+import sendAvailabilityResponse from "../sendAvailabilityResponse.js"; // eslint-disable-line no-use-before-define
+import { Button } from "react-bootstrap"; // eslint-disable-line no-use-before-define
 
 class Messenger extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message: '',
+            message: "",
             messages: [],
-            dates:[],
+            dates: [],
             user: this.props.user,
             userEmail: this.props.userEmail,
             otherUser: this.props.otherUser,
             otherUserName: this.props.otherUserName,
             newDateRequest: null,
-            dateRequestTimeStamp : null,
-            dateExists : false,
-            userSent : false
+            dateRequestTimeStamp: null,
+            dateExists: false,
+            userSent: null,
+            userRespondedAvailability: true
         };
 
         this.updateMessage = this.updateMessage.bind(this);
@@ -27,52 +33,67 @@ class Messenger extends React.Component {
         this.submitMessageEnter = this.submitMessageEnter.bind(this);
         this.dateRequestHandler = this.dateRequestHandler.bind(this);
         this.update = this.update.bind(this);
+        this.userRespondedAvailablity = this.userRespondedAvailablity.bind(
+            this
+        );
+        this.closeEverything = this.closeEverything.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         //doesnt werk..?
-        if (document.getElementById('message-list') != null) {
-            var list = document.getElementById('message-list');
+        if (document.getElementById("message-list") != null) {
+            var list = document.getElementById("message-list");
             list.scrollTop = list.scrollHeight;
             list.animate({ scrollTop: list.scrollHeight });
         }
 
-
         if (this.props.otherUser != null) {
-        let currentComponent = this;
-        var currDates = [];
-        db
-            .collection('users')
-            .doc(this.props.userEmail)
-            .collection('messages')
-            .doc(this.props.otherUser)
-            .collection('dates')
-            .get()
-            .then(function(querySnapshot) {
-                querySnapshot.docs.map(function(doc) {
-                    console.log(doc.id, " => ", doc.data());
-                    console.log(doc.data());
-                    currDates.push(doc.data())
-                }); return currDates
-            }).then(function(currDates) {
-                currentComponent.setState(prevState =>({
-                    dates : currDates,
-                    dateExists : false,
-                    userSent : currDates[currDates.length-1].sent
-                }));
-
-            })
-            .catch(function(error) {
-                console.log("Error getting documents: ", error);
-            });
+            let currentComponent = this;
+            var currDates = [];
+            db
+                .collection("users")
+                .doc(this.props.userEmail)
+                .collection("messages")
+                .doc(this.props.otherUser)
+                .collection("dates")
+                .get()
+                .then(function(querySnapshot) {
+                    querySnapshot.docs.map(function(doc) {
+                        console.log(doc.id, " => ", doc.data());
+                        console.log(doc.data());
+                        currDates.push(doc.data());
+                    });
+                    return currDates;
+                })
+                .then(function(currDates) {
+                    if (currDates.length !== 0) {
+                        currentComponent.setState(prevState => ({
+                            // eslint-disable-line no-use-before-define
+                            dates: currDates,
+                            dateExists: false,
+                            userSent: currDates[currDates.length - 1].sent,
+                            userConfirmed:
+                                currDates[currDates.length - 1].confirm,
+                            userResponded:
+                                currDates[currDates.length - 1].response
+                        }));
+                    } else {
+                        currentComponent.setState(prevState => ({
+                            // eslint-disable-line no-use-before-define
+                            dates: currDates,
+                            dateExists: false
+                        }));
+                    }
+                })
+                .catch(function(error) {
+                    // console.log("Error getting documents: ", error);
+                });
         }
-        this.testTimeStamp();
-
     }
-
 
     componentWillReceiveProps(newProps) {
         this.testTimeStamp();
+        // console.log(this.state.dateRequestTimeStamp);
         this.setState({
             otherUser: newProps.otherUser,
             newDateRequest: null
@@ -80,11 +101,11 @@ class Messenger extends React.Component {
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent = this;
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(newProps.otherUser)
-                .collection('messages')
+                .collection("messages")
                 .onSnapshot(function(querySnapshot) {
                     var curMessages = [];
                     querySnapshot.forEach(function(doc) {
@@ -97,22 +118,30 @@ class Messenger extends React.Component {
         if (newProps.otherUser !== this.props.otherUser) {
             let currentComponent2 = this;
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(newProps.otherUser)
-                .collection('dates')
+                .collection("dates")
                 .onSnapshot(function(querySnapshot) {
                     var currDates = [];
                     querySnapshot.forEach(function(doc) {
                         currDates.push(doc.data());
                     });
-                    currentComponent2.setState({ dates: currDates, userSent : currDates[currDates.length-1].sent
-                });
+                    if (currDates.length !== 0) {
+                        currentComponent2.setState({
+                            dates: currDates,
+                            userSent: currDates[currDates.length - 1].sent,
+                            userConfirmed:
+                                currDates[currDates.length - 1].confirm,
+                            userResponded:
+                                currDates[currDates.length - 1].response
+                        });
+                    } else {
+                        currentComponent2.setState({ dates: currDates });
+                    }
                 });
         }
-
-
     }
 
     updateMessage(event) {
@@ -122,7 +151,7 @@ class Messenger extends React.Component {
     }
 
     submitMessageEnter(event) {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             this.submitMessage();
         }
     }
@@ -131,58 +160,58 @@ class Messenger extends React.Component {
         const time = new Date();
 
         let month = time.getMonth();
-        let formattedMonth = '';
+        let formattedMonth = "";
         if (month < 10) {
-            formattedMonth = '0' + (month + 1);
+            formattedMonth = "0" + (month + 1);
         } else {
-            formattedMonth = month + 1 + '';
+            formattedMonth = month + 1 + "";
         }
 
         let day = time.getDate();
-        let formattedDay = '';
+        let formattedDay = "";
         if (day < 10) {
-            formattedDay = '0' + day;
+            formattedDay = "0" + day;
         } else {
-            formattedDay = day + '';
+            formattedDay = day + "";
         }
 
         let hours = time.getHours();
-        let formattedHours = '';
+        let formattedHours = "";
         if (hours < 10) {
-            formattedHours = '0' + hours;
+            formattedHours = "0" + hours;
         } else {
-            formattedHours = hours + '';
+            formattedHours = hours + "";
         }
 
         let minutes = time.getMinutes();
-        let formattedMinutes = '';
+        let formattedMinutes = "";
         if (minutes < 10) {
-            formattedMinutes = '0' + minutes;
+            formattedMinutes = "0" + minutes;
         } else {
-            formattedMinutes = minutes + '';
+            formattedMinutes = minutes + "";
         }
 
         let seconds = time.getSeconds();
-        let formattedSeconds = '';
+        let formattedSeconds = "";
         if (seconds < 10) {
-            formattedSeconds = '0' + seconds;
+            formattedSeconds = "0" + seconds;
         } else {
-            formattedSeconds = seconds + '';
+            formattedSeconds = seconds + "";
         }
 
         const timeStamp =
             time.getFullYear() +
-            ':' +
+            ":" +
             formattedMonth +
-            ':' +
+            ":" +
             formattedDay +
-            ':' +
+            ":" +
             formattedHours +
-            ':' +
+            ":" +
             formattedMinutes +
-            ':' +
+            ":" +
             formattedSeconds +
-            ':' +
+            ":" +
             time.getMilliseconds();
         const nextMessage = {
             id: time,
@@ -190,23 +219,23 @@ class Messenger extends React.Component {
             from: this.state.user
         };
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.state.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(timeStamp)
             .set(nextMessage);
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(this.state.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(timeStamp)
             .set(nextMessage);
 
-        document.getElementById('message-box').value = '';
+        document.getElementById("message-box").value = "";
     }
 
     dateRequestHandler() {
@@ -215,94 +244,96 @@ class Messenger extends React.Component {
         });
     }
 
-    update(timestamp){
-        console.log("update", timestamp)
+    update(timestamp) {
+        console.log("update", this.state.dateRequestTimeStamp);
         this.setState({
             dateRequestTimeStamp: timestamp
-        })
+        });
     }
 
-    testTimeStamp(){
-        console.log(this.state.dates[this.state.dates.length-1])
-        const data = this.state.dates[this.state.dates.length-1];
+    testTimeStamp() {
+        console.log(this.state.dates[this.state.dates.length - 1]);
+        const data = this.state.dates[this.state.dates.length - 1];
         for (var key in data) {
-            if (key == 'id'){
-                var fullTimeStamp = data[key]
+            if (key === "id") {
+                var fullTimeStamp = data[key];
 
-                    let month = fullTimeStamp.getMonth();
-                    let formattedMonth = '';
-                    if (month < 10) {
-                        formattedMonth = '0' + (month + 1);
-                    } else {
-                        formattedMonth = month + 1 + '';
-                    }
+                let month = fullTimeStamp.getMonth();
+                let formattedMonth = "";
+                if (month < 10) {
+                    formattedMonth = "0" + (month + 1);
+                } else {
+                    formattedMonth = month + 1 + "";
+                }
 
-                    let day = fullTimeStamp.getDate();
-                    let formattedDay = '';
-                    if (day < 10) {
-                        formattedDay = '0' + day;
-                    } else {
-                        formattedDay = day + '';
-                    }
+                let day = fullTimeStamp.getDate();
+                let formattedDay = "";
+                if (day < 10) {
+                    formattedDay = "0" + day;
+                } else {
+                    formattedDay = day + "";
+                }
 
-                    let hours = fullTimeStamp.getHours();
-                    let formattedHours = '';
-                    if (hours < 10) {
-                        formattedHours = '0' + hours;
-                    } else {
-                        formattedHours = hours + '';
-                    }
+                let hours = fullTimeStamp.getHours();
+                let formattedHours = "";
+                if (hours < 10) {
+                    formattedHours = "0" + hours;
+                } else {
+                    formattedHours = hours + "";
+                }
 
-                    let minutes = fullTimeStamp.getMinutes();
-                    let formattedMinutes = '';
-                    if (minutes < 10) {
-                        formattedMinutes = '0' + minutes;
-                    } else {
-                        formattedMinutes = minutes + '';
-                    }
+                let minutes = fullTimeStamp.getMinutes();
+                let formattedMinutes = "";
+                if (minutes < 10) {
+                    formattedMinutes = "0" + minutes;
+                } else {
+                    formattedMinutes = minutes + "";
+                }
 
-                    let seconds = fullTimeStamp.getSeconds();
-                    let formattedSeconds = '';
-                    if (seconds < 10) {
-                        formattedSeconds = '0' + seconds;
-                    } else {
-                        formattedSeconds = seconds + '';
-                    }
+                let seconds = fullTimeStamp.getSeconds();
+                let formattedSeconds = "";
+                if (seconds < 10) {
+                    formattedSeconds = "0" + seconds;
+                } else {
+                    formattedSeconds = seconds + "";
+                }
 
-
-                    const timeStampDate =
+                const timeStampDate =
                     fullTimeStamp.getFullYear() +
-                    ':' +
+                    ":" +
                     formattedMonth +
-                    ':' +
+                    ":" +
                     formattedDay +
-                    ':' +
+                    ":" +
                     formattedHours +
-                    ':' +
+                    ":" +
                     formattedMinutes +
-                    ':' +
+                    ":" +
                     formattedSeconds +
-                    ':' +
+                    ":" +
                     fullTimeStamp.getMilliseconds();
 
-             this.setState({
-                dateRequestTimeStamp : timeStampDate
-             })
-             console.log(data[key]);
+                this.setState({
+                    dateRequestTimeStamp: timeStampDate
+                });
+                console.log(data[key]);
             }
         }
-        if(this.state.dates.length != 0) {
-            console.log(this.state.dates[0].response, " HERE I CHECK IF I WANT TO RENDER A DATE OR NO")
+        if (this.state.dates.length !== 0) {
+            // console.log(
+            //     this.state.dates[0].response,
+            //     " HERE I CHECK IF I WANT TO RENDER A DATE OR NO"
+            // );
             this.setState({
-                dateExists : true,
-                dateResponse : this.state.dates[0].response
-            })
+                dateExists: true,
+                dateResponse: this.state.dates[0].response
+            });
         } else {
             this.setState({
-                dateExists : false
-            })
+                dateExists: false
+            });
         }
-/*         if (this.state.otherUser != null && this.state.timeStampRecovery != null) {
+        /*         if (this.state.otherUser != null && this.state.timeStampRecovery != null) {
         console.log("TESTING TIME STAMP", this.state.timeStampRecovery)
         var timeString = this.state.timeStampRecovery.toString();
         var docRef =  db.collection('users')
@@ -323,14 +354,25 @@ class Messenger extends React.Component {
         } */
     }
 
+    userRespondedAvailablity() {
+        // console.log(this.state.dates[0].availability);
+    }
+
+    closeEverything() {
+        this.setState({
+            closeItAll: true
+        });
+    }
+
     render() {
         const currentMessage = this.state.messages.map((message, i) => {
+            // eslint-disable-line no-use-before-define
             return (
                 <li
                     className={
                         this.state.user === message.from
-                            ? 'me message-bubble'
-                            : 'them message-bubble'
+                            ? "me message-bubble"
+                            : "them message-bubble"
                     }
                     key={message.id}
                 >
@@ -339,59 +381,270 @@ class Messenger extends React.Component {
             );
         });
 
+        //                             {this.state.dateResponse == false  ?
+        //   <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
+        //    null
+        //}
+
         return (
             <div className="messenger-wrapper">
                 {this.state.otherUser !== undefined &&
                 this.state.otherUser !== null ? (
-                        <div className="messenger">
-                            <h2>{this.state.otherUserName}</h2>
-                            <ol className="messages" id="message-list">
-                                {currentMessage}
-                            </ol>
-    
-                            <div className="date-button-wrapper">
-                        {    <RequestDate userEmail={this.state.userEmail} otherUser={this.state.otherUser} action={this.dateRequestHandler} callBack={this.update}/> }
+                    <div className="messenger">
+                        <h2>{this.state.otherUserName}</h2>
+                        <ol className="messages" id="message-list">
+                            {currentMessage}
+                        </ol>
 
-                         {  this.state.newDateRequest != null || this.state.dateExists == true ? (
+                        {this.state.dates.length !== 0 ? (
                             <div>
-                            {this.state.dateResponse == false  ?
-                               <ReceiveRequest userEmail={this.state.userEmail} user={this.state.user} otherUser={this.state.otherUser} timeStamp = {this.state.dateRequestTimeStamp} otherUserName = {this.props.otherUser} userSent = {this.state.userSent}/> :
-                                      null
-                            }
-           
-                           </div>
-                            ) : null }
+                                {this.state.userSent === true ? (
+                                    <div>
+                                        {this.state.userConfirmed === true ? (
+                                            <div>
+                                                <DateConfirmed
+                                                    userEmail={
+                                                        this.state.userEmail
+                                                    }
+                                                    user={this.state.user}
+                                                    otherUser={
+                                                        this.state.otherUser
+                                                    }
+                                                    timeStamp={
+                                                        this.state
+                                                            .dateRequestTimeStamp
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {this.state.userResponded ===
+                                                true ? (
+                                                    <div>
+                                                        {this.state.dates[0]
+                                                            .availability ? (
+                                                            <div>
+                                                                {this.state
+                                                                    .closeItAll ? null : (
+                                                                    <div id="datebackground">
+                                                                        <h3 id="halfwayText">
+                                                                            {" "}
+                                                                            Wasn't
+                                                                            free
+                                                                            during
+                                                                            the
+                                                                            times
+                                                                            you
+                                                                            suggested
+                                                                            -
+                                                                            here's
+                                                                            alternate
+                                                                            schedule
+                                                                            you
+                                                                            can
+                                                                            decide
+                                                                            on a
+                                                                            good
+                                                                            time{" "}
+                                                                        </h3>
+                                                                        <Availability4
+                                                                            currAvailability={
+                                                                                this
+                                                                                    .state
+                                                                                    .dates[0]
+                                                                                    .availability
+                                                                            }
+                                                                        />
+                                                                        <Button
+                                                                            onClick={
+                                                                                this
+                                                                                    .closeEverything
+                                                                            }
+                                                                        >
+                                                                            {" "}
+                                                                            Close{" "}
+                                                                        </Button>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        ) : null}
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <SentRequest
+                                                            userEmail={
+                                                                this.state
+                                                                    .userEmail
+                                                            }
+                                                            user={
+                                                                this.state.user
+                                                            }
+                                                            otherUser={
+                                                                this.state
+                                                                    .otherUser
+                                                            }
+                                                            timeStamp={
+                                                                this.state
+                                                                    .dateRequestTimeStamp
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        {this.state.userConfirmed === true ? (
+                                            <div>
+                                                <DateConfirmed
+                                                    userEmail={
+                                                        this.state.userEmail
+                                                    }
+                                                    user={this.state.user}
+                                                    otherUser={
+                                                        this.state.otherUser
+                                                    }
+                                                    timeStamp={
+                                                        this.state
+                                                            .dateRequestTimeStamp
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {this.state.userResponded ===
+                                                true ? (
+                                                    <div>
+                                                        {this.state.dates[0]
+                                                            .availability ? (
+                                                            <div>
+                                                                {this.state
+                                                                    .closeItAll ? null : (
+                                                                    <div id="datebackground">
+                                                                        <h3 id="halfwayText">
+                                                                            {" "}
+                                                                            Here's
+                                                                            what
+                                                                            you
+                                                                            sent!{" "}
+                                                                        </h3>
+                                                                        <Availability4
+                                                                            currAvailability={
+                                                                                this
+                                                                                    .state
+                                                                                    .dates[0]
+                                                                                    .availability
+                                                                            }
+                                                                        />
+                                                                        <Button
+                                                                            onClick={
+                                                                                this
+                                                                                    .closeEverything
+                                                                            }
+                                                                        >
+                                                                            {" "}
+                                                                            Close{" "}
+                                                                        </Button>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div id="datebackground">
+                                                                <p>
+                                                                    {" "}
+                                                                    WILL THIS
+                                                                    SHOW ANYTING{" "}
+                                                                </p>
+                                                                <Availability3
+                                                                    userEmail={
+                                                                        this
+                                                                            .state
+                                                                            .userEmail
+                                                                    }
+                                                                    user={
+                                                                        this
+                                                                            .state
+                                                                            .user
+                                                                    }
+                                                                    otherUser={
+                                                                        this
+                                                                            .state
+                                                                            .otherUser
+                                                                    }
+                                                                    timeStamp={
+                                                                        this
+                                                                            .state
+                                                                            .dateRequestTimeStamp
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <ReceiveRequest
+                                                            userEmail={
+                                                                this.state
+                                                                    .userEmail
+                                                            }
+                                                            user={
+                                                                this.state.user
+                                                            }
+                                                            otherUser={
+                                                                this.state
+                                                                    .otherUser
+                                                            }
+                                                            timeStamp={
+                                                                this.state
+                                                                    .dateRequestTimeStamp
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
+                        ) : (
+                            <div className="date-button-wrapper">
+                                {
+                                    <RequestDate
+                                        userEmail={this.state.userEmail}
+                                        otherUser={this.state.otherUser}
+                                        action={this.dateRequestHandler}
+                                        callBack={this.update}
+                                    />
+                                }
+                            </div>
+                        )}
 
-                            <div className="button-input-wrapper">
-                                <input
-
-                                    id="message-box"
-                                    className="send-text"
-                                    onChange={this.updateMessage}
-                                    type="text"
-                                    placeholder="message"
-                                    onKeyPress={this.submitMessageEnter}
-                                />
-                                <button
-                                    className="submit-button"
-                                    onClick={this.submitMessage}
-                                >
+                        <div className="button-input-wrapper">
+                            <input
+                                id="message-box"
+                                className="send-text"
+                                onChange={this.updateMessage}
+                                type="text"
+                                placeholder="message"
+                                onKeyPress={this.submitMessageEnter}
+                            />
+                            <button
+                                className="submit-button"
+                                onClick={this.submitMessage}
+                            >
                                 Send
-                                </button>
-
-                            </div>
-                            <br />
+                            </button>
                         </div>
-                    ) : (
-                        <div className="messenger">
-                            <p className="select">
+                        <br />
+                    </div>
+                ) : (
+                    <div className="messenger">
+                        <p className="select">
                             Select a match to start messaging!
-                            </p>
-                        </div>
-                    )
-                    }
-                                    
+                        </p>
+                    </div>
+                )}
             </div>
         );
     }

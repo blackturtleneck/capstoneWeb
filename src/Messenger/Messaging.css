@@ -1,67 +1,67 @@
 .me {
-  background-color: #9ba2ff;
-  margin-left: auto;
-  text-align: right;
-  color: white;
-  margin-bottom: 5px;
+    background-color: #9ba2ff;
+    margin-left: auto;
+    text-align: right;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .them {
-  margin-right: 40%;
-  background-color: lightgray;
-  margin-bottom: 5px;
+    margin-right: 40%;
+    background-color: lightgray;
+    margin-bottom: 5px;
 }
 
 .message-bubble {
-  width: 45%;
-  border-radius: 5px;
-  padding: 5px;
-  padding-right: 10px;
+    width: 45%;
+    border-radius: 5px;
+    padding: 5px;
+    padding-right: 10px;
 }
 
 .messenger-page {
-  margin: 0 auto;
-  height: 100vh;
-  overflow: hidden;
+    margin: 0 auto;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .messenger {
-  display: inline-block;
-  vertical-align: top;
-  width: 50vw;
-  height: 89.7vh;
-  bottom: 0;
-  position: absolute;
-  border-right: 1px solid lightgray;
+    display: inline-block;
+    vertical-align: top;
+    width: 50vw;
+    height: 89.7vh;
+    bottom: 0;
+    position: absolute;
+    border-right: 1px solid lightgray;
 }
 
 .button-input-wrapper {
-  align-content: center;
-  width: 50vw;
-  bottom: 0;
-  position: absolute;
+    align-content: center;
+    width: 50vw;
+    bottom: 0;
+    position: absolute;
 }
 
 input.send-text {
-  width: 40vw !important;
-  margin-left: 10px !important;
-  padding-left: 10px !important;
+    width: 40vw !important;
+    margin-left: 10px !important;
+    padding-left: 10px !important;
 }
 
 .submit-button {
-  background-color: #9ba2ff; /* Green */
-  border: none;
-  color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 12px;
-  font-size: 12px;
-  font-family: "Lato", sans-serif, bold;
-  text-transform: uppercase;
-  width: 7vw;
+    background-color: #9ba2ff; /* Green */
+    border: none;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    font-size: 12px;
+    font-family: "Lato", sans-serif, bold;
+    text-transform: uppercase;
+    width: 7vw;
 }
 
 .date-button-wrapper {
@@ -90,25 +90,25 @@ input.send-text {
 }
 
 h2 {
-  font-size: 2vw;
-  padding-left: 40px;
+    font-size: 2vw;
+    padding-left: 40px;
 }
 
 h1 {
-  font-size: 4vw;
+    font-size: 4vw;
 }
 
 button {
-  background: transparent;
-  border: none;
+    background: transparent;
+    border: none;
 }
 
 .messages {
-  bottom: 15vh;
-  position: absolute;
-  width: 50vw;
-  height: 73vh;
-  overflow-y: scroll;
+    bottom: 15vh;
+    position: absolute;
+    width: 50vw;
+    height: 73vh;
+    overflow-y: scroll;
 }
 
 .messenger-wrapper {
@@ -120,15 +120,15 @@ button {
 }
 
 .select {
-  margin-top: 40vh;
-  width: 50vw;
-  text-align: center;
+    margin-top: 40vh;
+    width: 50vw;
+    text-align: center;
 }
 
 #message-list {
-  padding-right: 40px;
-  /* height: 100%; */
-  /* overflow: auto; */
+    padding-right: 40px;
+    /* height: 100%; */
+    /* overflow: auto; */
 }
 
 /* TODO wrap text by size with 45% width max */

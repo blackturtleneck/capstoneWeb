@@ -5,28 +5,14 @@ node_js:
 cache:
   directories:
   - node_modules
-<<<<<<< HEAD
-<<<<<<< HEAD
 install:
   - npm install
-=======
->>>>>>> 9e1e7fabba8369987c6a0e30f1071ff038a1c198
-=======
-install:
-  - npm install
->>>>>>> bf3e80513c2a51ba970e5630c2e28ac70f364e48
 script:
 - npm run lint
 - npm test
 - npm run build
 - npm run lint-functions
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 notifications:
   slack: blackturtleneck:EVLbkltY4ixRldvU557yRFpb
-=======
->>>>>>> 9e1e7fabba8369987c6a0e30f1071ff038a1c198
-=======
-notifications:
-  slack: blackturtleneck:EVLbkltY4ixRldvU557yRFpb
->>>>>>> bf3e80513c2a51ba970e5630c2e28ac70f364e48
+

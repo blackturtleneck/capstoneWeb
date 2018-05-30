@@ -1,52 +1,52 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-// styling
-import TableDragSelect from 'react-table-drag-select';
-import 'react-table-drag-select/style.css';
-import './Availability.css';
-import {db} from './FirestoreConfig';
+//styling
+import TableDragSelect from "react-table-drag-select";
+import "react-table-drag-select/style.css";
+import "./Availability.css";
+import { db } from "./FirestoreConfig";
 const times = [
-    '1000',
-    '1030',
-    '1100',
-    '1130',
-    '1200',
-    '1230',
-    '1300',
-    '1330',
-    '1400',
-    '1430',
-    '1500',
-    '1530',
-    '1600',
-    '1630',
-    '1700',
-    '1730',
-    '1800',
-    '1830',
-    '1900',
-    '1930',
-    '2000',
-    '2030',
-    '2100',
-    '2130',
-    '2200',
-    '2230',
+    "1000",
+    "1030",
+    "1100",
+    "1130",
+    "1200",
+    "1230",
+    "1300",
+    "1330",
+    "1400",
+    "1430",
+    "1500",
+    "1530",
+    "1600",
+    "1630",
+    "1700",
+    "1730",
+    "1800",
+    "1830",
+    "1900",
+    "1930",
+    "2000",
+    "2030",
+    "2100",
+    "2130",
+    "2200",
+    "2230"
 ];
 
-const days = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat'];
+const days = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];
 
 const daysRef = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
 ];
 
-class Availability2 extends Component {
+class Availability4 extends Component {
     constructor(props) {
         super(props);
         this.calculateTimes = this.calculateTimes.bind(this);
@@ -79,9 +79,9 @@ class Availability2 extends Component {
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
                 [false, false, false, false, false, false, false, false],
-                [false, false, false, false, false, false, false, false],
+                [false, false, false, false, false, false, false, false]
             ],
-            availability: [],
+            availability: []
         };
     }
 
@@ -89,8 +89,8 @@ class Availability2 extends Component {
         this.populateAvailability();
     }
 
-    handleChange = (cells) => {
-        this.setState({cells});
+    handleChange = cells => {
+        this.setState({ cells });
         this.calculateTimes();
         //  this.props.availability(this.state.availability)
     };
@@ -122,37 +122,27 @@ class Availability2 extends Component {
             [false, false, false, false, false, false, false, false],
             [false, false, false, false, false, false, false, false],
             [false, false, false, false, false, false, false, false],
-            [false, false, false, false, false, false, false, false],
+            [false, false, false, false, false, false, false, false]
         ];
 
-        this.setState({cells});
+        this.setState({ cells });
     };
 
-    getData(arr) {
-        console.log('CHECKING PROPS PT2', this.props.userEmail);
-        this.props.sendData(arr);
-
-        db
-            .collection('users')
-            .doc(this.props.userEmail)
-            .collection('availability')
-            .doc('availability')
-            .set({available: arr});
-    }
+    getData(arr) {}
 
     calculateTimes() {
-        // we can skip 0 because the first row is always going to be false
+        //we can skip 0 because the first row is always going to be false
         let a = [];
         for (let i = 1; i <= times.length; i++) {
             for (let j = 1; j <= days.length; j++) {
                 let dayVal = days[j - 1];
                 let timeVal = times[i - 1];
                 let endTime = (parseInt(timeVal, 10) + 30).toString();
-                if (endTime[2] === '6') {
+                if (endTime[2] === "6") {
                     let end = (
                         parseInt(endTime.substring(0, 2), 10) + 1
                     ).toString();
-                    endTime = end + '00';
+                    endTime = end + "00";
                 }
                 if (this.state.cells[i]) {
                     if (this.state.cells[i][j]) {
@@ -176,13 +166,13 @@ class Availability2 extends Component {
                             } else {
                                 a[dayLocation].times.push({
                                     start: timeVal,
-                                    end: endTime,
+                                    end: endTime
                                 });
                             }
                         } else {
                             a.push({
                                 day: dayVal,
-                                times: [{start: timeVal, end: endTime}],
+                                times: [{ start: timeVal, end: endTime }]
                             });
                         }
                     }
@@ -191,7 +181,7 @@ class Availability2 extends Component {
             this.getData(a);
         }
         this.setState({
-            availability: a,
+            availability: a
         });
     }
 
@@ -200,39 +190,39 @@ class Availability2 extends Component {
 
         if (this.props.currAvailability) {
             this.props.currAvailability.map(function(a) {
-                let dayIndex = '';
-                if (a.day === 'sun') {
+                let dayIndex = "";
+                if (a.day === "sun") {
                     dayIndex = 0;
                 }
-                if (a.day === 'mon') {
+                if (a.day === "mon") {
                     dayIndex = 1;
                 }
-                if (a.day === 'tue') {
+                if (a.day === "tue") {
                     dayIndex = 2;
                 }
-                if (a.day === 'wed') {
+                if (a.day === "wed") {
                     dayIndex = 3;
                 }
-                if (a.day === 'thu') {
+                if (a.day === "thu") {
                     dayIndex = 4;
                 }
-                if (a.day === 'fri') {
+                if (a.day === "fri") {
                     dayIndex = 5;
                 }
-                if (a.day === 'sat') {
+                if (a.day === "sat") {
                     dayIndex = 6;
                 }
-                if (a.day === 'sun') {
+                if (a.day === "sun") {
                     dayIndex = 7;
                 }
-                a.times.forEach((time) => {
+                a.times.forEach(time => {
                     let startIndex = times.indexOf(time.start);
                     let endIndex = times.indexOf(time.end);
                     if (startIndex > -1 && endIndex > -1) {
-                        // both times are within our timesRef
+                        //both times are within our timesRef
                         let index = startIndex;
                         while (index < endIndex) {
-                            // first row and first value in each row are labels - do not modify
+                            //first row and first value in each row are labels - do not modify
                             cells[index + 1][dayIndex + 1] = true;
                             index++;
                         }
@@ -262,9 +252,9 @@ class Availability2 extends Component {
         //     })
         //   }
         //  }
-        console.log('CELLS', cells);
+        console.log("CELLS", cells);
         this.setState({
-            cells: cells,
+            cells: cells
         });
     };
 
@@ -290,7 +280,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 10:00AM
                             </td>
@@ -316,7 +306,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 11:00AM
                             </td>
@@ -342,7 +332,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 12:00PM
                             </td>
@@ -368,7 +358,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 1:00PM
                             </td>
@@ -394,7 +384,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 2:00PM
                             </td>
@@ -420,7 +410,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 3:00PM
                             </td>
@@ -446,7 +436,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 4:00PM
                             </td>
@@ -472,7 +462,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 5:00PM
                             </td>
@@ -498,7 +488,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 6:00PM
                             </td>
@@ -524,7 +514,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 7:00PM
                             </td>
@@ -550,9 +540,9 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
-                                8:00PM{' '}
+                                8:00PM{" "}
                             </td>
                             <td />
                             <td />
@@ -576,7 +566,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 9:00PM
                             </td>
@@ -602,7 +592,7 @@ class Availability2 extends Component {
                             <td
                                 disabled
                                 className="timeLabel"
-                                style={{textAlign: 'right'}}
+                                style={{ textAlign: "right" }}
                             >
                                 10:00PM
                             </td>
@@ -621,4 +611,4 @@ class Availability2 extends Component {
     }
 }
 
-export default Availability2;
+export default Availability4;

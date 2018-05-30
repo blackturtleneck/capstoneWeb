@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { db } from './FirestoreConfig';
-import './DatesSelection.css';
-import ColorMap from './ColorMap.js';
-import Availability2 from './Availability2.js';
+import React, { Component } from "react"; // eslint-disable-line no-use-before-define
+import { Button } from "react-bootstrap"; // eslint-disable-line no-use-before-define
+import { db } from "./FirestoreConfig";
+import "./DatesSelection.css";
+import ColorMap from "./ColorMap.js"; // eslint-disable-line no-use-before-define
+import Availability2 from "./Availability2.js"; // eslint-disable-line no-use-before-define
 
-class ReceiveRequest extends Component {
+class DateConfirmed extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message: '',
+            message: "",
             dateDetails: [],
             user: this.props.user,
             userEmail: this.props.userEmail,
             otherUser: this.props.otherUser,
             otherUserName: this.props.otherUserName,
             ready: false,
-            userSent: this.props.userSent,
             finalDateArray: [],
-            finalLocation: '',
+            finalLocation: "",
             dateConfirmed: false,
             timeStampFinal: null,
             mapShowing: false
@@ -33,42 +32,41 @@ class ReceiveRequest extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.userSent, 'userSENTTEST');
-        let currentComponent = this;
+        let currentComponent = this; // eslint-disable-line no-use-before-define
         var currDates = [];
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.otherUser)
-            .collection('dates')
+            .collection("dates")
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.docs.map(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, ' => ', doc.data());
-                    console.log(doc.data());
+                    // console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.data());
                     currDates.push(doc.data());
-                    !currDates[0].confirm;
+                    // ready: !currDates[0].confirm;
                 });
             })
             .catch(function(error) {
-                console.log('Error getting documents: ', error);
+                console.log("Error getting documents: ", error);
             });
 
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
-        console.log(typeof data);
+        // console.log(typeof data);
         for (var key in data) {
-            if (key === 'id') {
+            if (key === "id") {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === 'sent') {
+            if (key === "sent") {
                 this.setState({
                     sent: data[key]
                 });
-                console.log('SENT', this.state.sent);
+                // console.log("SENT", this.state.sent);
             }
         }
     }
@@ -76,22 +74,22 @@ class ReceiveRequest extends Component {
     componentWillReceiveProps(newProps) {
         this.setState({ newProps: newProps });
         if (newProps.otherUser !== this.props.otherUser) {
-            console.log(this.props.otherUser);
+            // console.log(this.props.otherUser);
             let currentComponent = this;
             var currDates = [];
             db
-                .collection('users')
+                .collection("users")
                 .doc(this.props.userEmail)
-                .collection('messages')
+                .collection("messages")
                 .doc(this.props.otherUser)
-                .collection('dates')
+                .collection("dates")
                 .get()
                 .then(function(querySnapshot) {
                     querySnapshot.docs.map(function(doc) {
-                        console.log(doc.id, ' => ', doc.data());
-                        console.log(doc.data());
+                        // console.log(doc.id, " => ", doc.data());
+                        // console.log(doc.data());
                         currDates.push(doc.data());
-                        console.log('IMPORTANT CURR DATES', currDates);
+                        // console.log("IMPORTANT CURR DATES", currDates);
                     });
                     return currDates;
                 })
@@ -103,45 +101,45 @@ class ReceiveRequest extends Component {
                     }));
                 })
                 .catch(function(error) {
-                    console.log('Error getting documents: ', error);
+                    // console.log("Error getting documents: ", error);
                 });
         }
         this.componentDidMount();
 
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
-        console.log(typeof data);
+        // console.log(typeof data);
         for (var key in data) {
-            if (key === 'id') {
+            if (key === "id") {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === 'sent') {
+            if (key === "sent") {
                 this.setState({
                     sent: data[key]
                 });
-                console.log('SENT', this.state.sent, this.state.otherUser);
+                // console.log("SENT", this.state.sent, this.state.otherUser);
             }
         }
     }
 
     componentDidMount() {
-        console.log(this.props.timeStamp, 'time props');
+        // console.log(this.props.timeStamp, "time props");
         let currentComponent = this;
         var currDates = [];
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.otherUser)
-            .collection('dates')
+            .collection("dates")
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.docs.map(function(doc) {
-                    console.log(doc.id, ' => ', doc.data());
-                    console.log(doc.data());
+                    // console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.data());
                     currDates.push(doc.data());
-                    console.log('IMPORTANT CURR DATES', currDates[0].confirm);
+                    // console.log("IMPORTANT CURR DATES", currDates[0].confirm);
                 });
                 return currDates;
             })
@@ -153,28 +151,28 @@ class ReceiveRequest extends Component {
                 }));
             })
             .catch(function(error) {
-                console.log('Error getting documents: ', error);
+                // console.log("Error getting documents: ", error);
             });
 
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
-        console.log(typeof data);
+        // console.log(typeof data);
         for (var key in data) {
-            if (key === 'id') {
+            if (key === "id") {
                 this.setState({
                     timeStampFinal: data[key]
                 });
             }
-            if (key === 'sent') {
+            if (key === "sent") {
                 this.setState({
                     sent: data[key]
                 });
-                console.log('SENT', this.state.sent);
+                // console.log("SENT", this.state.sent);
             }
         }
     }
 
     timeConfirm(event) {
-        console.log('ID TEST', event.target.value);
+        // console.log("ID TEST", event.target.value);
 
         this.setState({
             timeConfirmed: event.target.value
@@ -182,26 +180,26 @@ class ReceiveRequest extends Component {
     }
 
     test() {
-        console.log(
-            this.state.dateDetails[Object.keys(this.state.dateDetails)[1]]
-                .location
-        );
-        console.log(this.state.user);
+        // console.log(
+        //     this.state.dateDetails[Object.keys(this.state.dateDetails)[1]]
+        //         .location
+        // );
+        // console.log(this.state.user);
     }
 
     confirmDate() {
         this.setState({
             dateConfirmed: true
         });
-        console.log(this.state.dateConfirmed, 'UGH');
+        // console.log(this.state.dateConfirmed, "UGH");
 
         this.otherUserConfirm();
         var dateInfo = db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.otherUser)
-            .collection('dates')
+            .collection("dates")
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -210,29 +208,29 @@ class ReceiveRequest extends Component {
                 timeConfirmed: this.state.timeConfirmed
             })
             .then(function() {
-                console.log('Document successfully updated!');
+                console.log("Document successfully updated!");
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error('Error updating document: ', error);
+                console.error("Error updating document: ", error);
             });
     }
 
     showMap() {
-        console.log(this.state.mapShowing);
+        // console.log(this.state.mapShowing);
         this.setState(prevState => ({
             mapShowing: !prevState.mapShowing
         }));
     }
 
     otherUserConfirm() {
-        console.log(this.state.timeStampFinal);
+        // console.log(this.state.timeStampFinal);
         var dateInfo = db
-            .collection('users')
+            .collection("users")
             .doc(this.props.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.userEmail)
-            .collection('dates')
+            .collection("dates")
             .doc(String(this.props.timeStamp));
         return dateInfo
             .update({
@@ -240,17 +238,17 @@ class ReceiveRequest extends Component {
                 timeConfirmed: this.state.timeConfirmed
             })
             .then(function() {
-                console.log('Document successfully updated!');
+                console.log("Document successfully updated!");
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error('Error updating document: ', error);
+                console.error("Error updating document: ", error);
             });
 
         // this.setState({
         //     dateConfirmed: true
         // });
-        // console.log('DOES THIS WORK', this.state.dateConfirmed);
+        // console.log("DOES THIS WORK", this.state.dateConfirmed);
     }
 
     respond() {
@@ -260,14 +258,14 @@ class ReceiveRequest extends Component {
         this.setState({
             dateConfirmed: true
         });
-        console.log(this.props.timeStamp + 'DOUBLE CHECKING');
+        console.log(this.props.timeStamp + "DOUBLE CHECKING");
         this.otherUserRespond();
         var dateInfo = db
-            .collection('users')
+            .collection("users")
             .doc(this.props.userEmail)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.otherUser)
-            .collection('dates')
+            .collection("dates")
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -276,21 +274,21 @@ class ReceiveRequest extends Component {
                 response: true
             })
             .then(function() {
-                console.log('Document successfully updated!');
+                console.log("Document successfully updated!");
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error('Error updating document: ', error);
+                console.error("Error updating document: ", error);
             });
     }
 
     otherUserRespond() {
         var dateInfo = db
-            .collection('users')
+            .collection("users")
             .doc(this.props.otherUser)
-            .collection('messages')
+            .collection("messages")
             .doc(this.props.userEmail)
-            .collection('dates')
+            .collection("dates")
             .doc(String(this.props.timeStamp));
 
         return dateInfo
@@ -299,248 +297,153 @@ class ReceiveRequest extends Component {
                 response: true
             })
             .then(function() {
-                console.log('Document successfully updated!');
+                console.log("Document successfully updated!");
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
-                console.error('Error updating document: ', error);
+                console.error("Error updating document: ", error);
             });
     }
 
     render() {
         var startTimeArr = [];
-        var locationArr = '';
+        var locationArr = "";
         var finalDateButton = [];
         console.log(this.state.dateDetails[this.state.dateDetails.length - 1]);
         const data = this.state.dateDetails[this.state.dateDetails.length - 1];
         console.log(typeof data);
         for (var key in data) {
-            if (key === 'location') {
+            if (key === "location") {
                 locationArr = data[key];
                 console.log(locationArr);
             }
-            if (key === 'startTime') {
-                startTimeArr = data['startTime'];
+            if (key === "startTime") {
+                startTimeArr = data["startTime"];
                 startTimeArr.map(function(a) {
-                    let dayName = '';
-                    let time = '';
-                    if (a.day === 'sun') {
-                        dayName = 'Sunday';
+                    let dayName = ""; // eslint-disable-line no-use-before-define
+                    let time = ""; // eslint-disable-line no-use-before-define
+                    if (a.day === "sun") {
+                        dayName = "Sunday";
                     }
-                    if (a.day === 'mon') {
-                        dayName = 'Monday';
+                    if (a.day === "mon") {
+                        dayName = "Monday";
                     }
-                    if (a.day === 'tues') {
-                        dayName = 'Tuesday';
+                    if (a.day === "tues") {
+                        dayName = "Tuesday";
                     }
-                    if (a.day === 'wed') {
-                        dayName = 'Wednesday';
+                    if (a.day === "wed") {
+                        dayName = "Wednesday";
                     }
-                    if (a.day === 'thurs') {
-                        dayName = 'Thursday';
+                    if (a.day === "thurs") {
+                        dayName = "Thursday";
                     }
-                    if (a.day === 'fri') {
-                        dayName = 'Friday';
+                    if (a.day === "fri") {
+                        dayName = "Friday";
                     }
-                    if (a.day === 'sat') {
-                        dayName = 'Saturday';
+                    if (a.day === "sat") {
+                        dayName = "Saturday";
                     }
-                    if (a.day === 'sun') {
-                        dayName = 'Sunday';
+                    if (a.day === "sun") {
+                        dayName = "Sunday";
                     }
 
                     a.times.forEach(time => {
                         console.log(a.times);
                         console.log(dayName);
                         if (time.start === 1000) {
-                            time = '10AM';
+                            time = "10AM";
                         }
                         if (time.start === 1030) {
-                            time = '10:30AM';
+                            time = "10:30AM";
                         }
                         if (time.start === 1100) {
-                            time = '11AM';
+                            time = "11AM";
                         }
                         if (time.start === 1130) {
-                            time = '11:30AM';
+                            time = "11:30AM";
                         }
                         if (time.start === 1200) {
-                            time = '12PM';
+                            time = "12PM";
                         }
                         if (time.start === 1230) {
-                            time = '12:30PM';
+                            time = "12:30PM";
                         }
                         if (time.start === 1300) {
-                            time = '1PM';
+                            time = "1PM";
                         }
                         if (time.start === 1330) {
-                            time = '1:30PM';
+                            time = "1:30PM";
                         }
                         if (time.start === 1400) {
-                            time = '2PM';
+                            time = "2PM";
                         }
                         if (time.start === 1430) {
-                            time = '2:30PM';
+                            time = "2:30PM";
                         }
                         if (time.start === 1500) {
-                            time = '3PM';
+                            time = "3PM";
                         }
                         if (time.start === 1530) {
-                            time = '3:30PM';
+                            time = "3:30PM";
                         }
                         if (time.start === 1600) {
-                            time = '4PM';
+                            time = "4PM";
                         }
                         if (time.start === 1630) {
-                            time = '4:30PM';
+                            time = "4:30PM";
                         }
                         if (time.start === 1700) {
-                            time = '5PM';
+                            time = "5PM";
                         }
                         if (time.start === 1730) {
-                            time = '5:30PM';
+                            time = "5:30PM";
                         }
                         if (time.start === 1800) {
-                            time = '6PM';
+                            time = "6PM";
                         }
                         if (time.start === 1830) {
-                            time = '6:30PM';
+                            time = "6:30PM";
                         }
                         if (time.start === 1900) {
-                            time = '7PM';
+                            time = "7PM";
                         }
                         if (time.start === 1930) {
-                            time = '7:30PM';
+                            time = "7:30PM";
                         }
                         if (time.start === 2000) {
-                            time = '8PM';
+                            time = "8PM";
                         }
                         if (time.start === 2030) {
-                            time = '8:30PM';
+                            time = "8:30PM";
                         }
                         if (time.start === 2100) {
-                            time = '9PM';
+                            time = "9PM";
                         }
                         if (time.start === 2130) {
-                            time = '9:30PM';
+                            time = "9:30PM";
                         }
                         if (time.start === 2200) {
-                            time = '10PM';
+                            time = "10PM";
                         }
                         if (time.start === 2230) {
-                            time = '10:30PM';
+                            time = "10:30PM";
                         }
-                        finalDateButton.push(dayName + ', ' + time);
+                        finalDateButton.push(dayName + ", " + time);
                     });
                 });
                 console.log(finalDateButton);
             }
         }
-
         return (
             <div id="datebackground">
-                <div>
-                    <h3 id="letsdate">
-                        Hey, <br />want to go to {locationArr + ' '}
-                        this week?{' '}
-                    </h3>
-                    <p>
-                        It's got inventive codadcktails and small plates in a
-                        warm, eco-friendly setting with regular tastings and
-                        classes. <br />
-                    </p>
-                    <Button id="locview" onClick={this.showMap}>
-                        Here's where it is.
-                    </Button>{' '}
-                    <br />
-                    {this.state.mapShowing ? <ColorMap /> : null}
-                    <p> Let me know if any of these times work for you! </p>
-                    {finalDateButton.map(time => (
-                        <Button
-                            id={time}
-                            value={time}
-                            onClick={event => this.timeConfirm(event)}
-                        >
-                            {' '}
-                            {time}{' '}
-                        </Button>
-                    ))}
-                    <Button id="confirm" onClick={this.confirmDate}>
-                        {' '}
-                        Confirm Date{' '}
-                    </Button>
-                    <Button id="confirm" onClick={this.respond}>
-                        {' '}
-                        Another Time?
-                    </Button>
-                </div>
+                <h3 id="letsdate">
+                    {" "}
+                    You have an upcoming date at {locationArr} at{" "}
+                    {this.state.timeConfirmed}{" "}
+                </h3>
             </div>
         );
     }
 }
-/*         <div>
-           {this.state.ready  ?
 
-                <div id = "datebackground">
-
-                    {this.state.dateDetails != null ?             
-                    <div> 
-
-                        {this.state.userSent == false ?
-                        <div> 
-                             {this.state.dateConfirmed == false ?
-                                
-
-                                :
-
-                                <div>
-                               <p> User sent is false and date is confirmed </p>
-
-                                 You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> 
-                                </div>
-                             }
-
-
-                        </div>
-                        :
-                        <div>
-                             Here the userSent is True
-                             {this.state.dateConfirmed == false ?
-                                <div>
-                                    <p> User sent is true and Date is not confirmed yet </p>
-
-
-                                    <p> You've sent a date request - we will let you know what they say! </p>
-                                </div>
-
-                                :
-
-                                <div>
-                                User sent is true and date is confirmed
-
-                                   You have an upcoming date at {locationArr} at {this.state.timeConfirmed}   <ColorMap /> 
-                                </div>
-                             }
-
-                        </div>
-                    }
-
-                 </div>
-                    :
-                    null
-                    
-                    }
-
-            </div>
-                                : 
-                                null
-                                }
-        </div>
-    );
-}
-
-
-}
-
-
-export default ReceiveRequest;
+export default DateConfirmed;

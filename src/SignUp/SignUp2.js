@@ -57,7 +57,10 @@ class SignUp2 extends React.Component {
                 </Tooltip>
             );
         };
+        console.log('state s2', this.state);
 
+        const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+        const weekdayRows = ['MORNING', 'AFTERNOON', 'EVENING'];
         return (
             <div className="signup-page">
                 <div className="tagline-2">TELL US WHO YOU'RE LOOKING FOR</div>
