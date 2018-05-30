@@ -166,6 +166,7 @@ class RequestDate extends Component {
         console.log(timeStamp + 'TIMESTAMP CHEcK');
         const sendDate = {
             id: time,
+            timestampid : timeStamp,
             startTime: this.state.startArr,
             location: this.state.location,
             sent: true,
@@ -175,6 +176,7 @@ class RequestDate extends Component {
         };
         const receiveDate = {
             id: time,
+            timestampid : timeStamp,
             startTime: this.state.startArr,
             location: this.state.location,
             sent: false,

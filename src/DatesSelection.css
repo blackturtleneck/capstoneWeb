@@ -24,7 +24,7 @@ h4 {
  font-weight: bold;
 }
 
-#buttons #request {
+ #request {
  background-color: #9ba2ff; /* Green */
  border: none;
  color: white;
@@ -34,10 +34,12 @@ h4 {
  font-family: "Lato", sans-serif, bold;
  text-transform: uppercase;
  width: 20vw;
- margin-left: 50%;
+ max-width: 300px;
+ margin-left: 20%;
  position:bottom;
  margin-bottom: 10px;
- margin-top:100%;
+ /* float:right; */
+ position: fixed;
 }
 
 #buttons #submit {

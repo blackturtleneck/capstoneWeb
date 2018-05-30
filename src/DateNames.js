@@ -180,7 +180,7 @@ class DateNames extends Component {
                             </Button>
                         </OverlayTrigger>
                     </div>
-                </div>}
+                </div>
                 <div class="btn-group-vertical">
                     <Button id="mapview" onClick={this._onButtonClick}>
                         {' '}

@@ -179,7 +179,6 @@ class ColorMap extends Component {
                 </Marker>
             </GoogleMap>
         ));
-<<<<<<< HEAD
         return(
            <div>
              <GoogleMapExample
@@ -187,17 +186,6 @@ class ColorMap extends Component {
                mapElement={ <div style={{ height: `100%` }} /> }
              /> 
            </div>
-=======
-        return (
-            <div>
-                <GoogleMapExample
-                    containerElement={
-                        <div style={{ height: '250px', width: '55vh' }} />
-                    }
-                    mapElement={<div style={{ height: '100%' }} />}
-                />
-            </div>
->>>>>>> beaca4c4028ec6a56a9f530757f63bac66bffdcd
         );
     }
 }
