@@ -60,7 +60,7 @@ class MessengerPage extends React.Component {
                     otherUser={this.state.otherUser}
                 />
                 <div style={{marginLeft:"70vw"}}>
-                <SideProf user={this.state.useotherUser}/>
+                <SideProf otherUser={this.state.otherUser}/>
                 </div>
             </div>
         );
