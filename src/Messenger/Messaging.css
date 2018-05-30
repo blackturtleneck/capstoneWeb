@@ -39,11 +39,11 @@
     align-content: center;
     width: 50vw;
     bottom: 0;
-    position: absolute;
+    position: fixed;
 }
 
 input.send-text {
-    width: 40vw !important;
+    width: 30vw !important;
     margin-left: 10px !important;
     padding-left: 10px !important;
 }
@@ -74,19 +74,22 @@ input.send-text {
 }
 
 #request{
-  background-color: #9ba2ff; /* Green */
-  border: none;
-  color: white;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 12px;
-  font-size: 12px;
-  font-family: "Lato", sans-serif, bold;
-  text-transform: uppercase;
-  width: 10vw;
+    background-color: #9ba2ff;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: "Lato", sans-serif, bold;
+    text-transform: uppercase;
+    width: 10vw;
+    max-width: 300px;
+    margin-left: 39%;
+    position: bottom;
+    margin-bottom: 10px;
+    position: fixed;
+    border-radius: 12px;
+    margin-top: -61px;
 }
 
 h2 {
@@ -132,3 +135,13 @@ button {
 }
 
 /* TODO wrap text by size with 45% width max */
+
+.request-date-button-messenger {
+    z-index: 100;
+}
+
+#root > div > div > div > div > div:nth-child(2) > div > div.messenger-wrapper > div > div:nth-child(3) > div > div > div > div > div.ui-dialog {
+    transform: translate(150px, -150px) !important;
+    /* border: 1px solid black */
+}
+
