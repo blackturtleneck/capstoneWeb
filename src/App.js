@@ -1,12 +1,12 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { auth, db, provider } from './FirestoreConfig';
-import { Routes, PageContent } from './Enums';
-import PageContainer from './PageContainer';
-import './Login.css';
-import Login from './Login';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { auth, db, provider } from "./FirestoreConfig";
+import { Routes, PageContent } from "./Enums";
+import PageContainer from "./PageContainer";
+import "./Login.css";
+import Login from "./Login";
 
-let path = '';
+let path = "";
 let newUser = false;
 class App extends React.Component {
     constructor(props) {
@@ -32,6 +32,20 @@ class App extends React.Component {
                             email: user.email
                         }
                     });
+                    db
+                        .collection("users")
+                        .doc(this.state.user.email)
+                        .onSnapshot(function(doc) {
+                            if (!doc.data().onBoarding) {
+                                component.setState({
+                                    onBoarding: false
+                                });
+                            } else {
+                                component.setState({
+                                    onBoarding: true
+                                });
+                            }
+                        });
                 } else {
                     this.setState({
                         authenticated: true,
@@ -47,70 +61,88 @@ class App extends React.Component {
         this.setState({ user: result.user });
         // Add a new document in collection "users"
         db
-            .collection('users')
+            .collection("users")
             .doc(result.user.email)
             .get()
             .then(doc => {
                 if (!doc.exists) {
                     db
-                        .collection('users')
+                        .collection("users")
                         .doc(result.user.email)
-                        .set({
-                            newUser: true
-                        }, { merge: true })
-                        .then(function () {
+                        .set(
+                            {
+                                newUser: true
+                            },
+                            { merge: true }
+                        )
+                        .then(function() {
                             newUser = true;
                             // eslint-disable-line no-console
-                            console.log('Document successfully written!');
+                            console.log("Document successfully written!");
                             db
-                                .collection('users')
+                                .collection("users")
                                 .doc(result.user.email)
-                                .set({
-                                    uid: result.user.uid,
-                                    age: result.additionalUserInfo.profile.age_range.min,
-                                    linkFB: result.additionalUserInfo.profile.link,
-                                    photoURL: result.user.photoURL
-                                }, { merge: true })
-                                .then(function () {
+                                .set(
+                                    {
+                                        uid: result.user.uid,
+                                        age:
+                                            result.additionalUserInfo.profile
+                                                .age_range.min,
+                                        linkFB:
+                                            result.additionalUserInfo.profile
+                                                .link,
+                                        photoURL: result.user.photoURL
+                                    },
+                                    { merge: true }
+                                )
+                                .then(function() {
                                     // eslint-disable-line no-console
-                                    console.log('Document successfully written!');
+                                    console.log(
+                                        "Document successfully written!"
+                                    );
                                 })
-                                .catch(function (error) {
+                                .catch(function(error) {
                                     // eslint-disable-line no-console
-                                    console.error('Error writing document: ', error);
+                                    console.error(
+                                        "Error writing document: ",
+                                        error
+                                    );
                                 });
                         })
-                        .catch(function (error) {
+                        .catch(function(error) {
                             // eslint-disable-line no-console
-                            console.error('Error writing document: ', error);
+                            console.error("Error writing document: ", error);
                         });
                 } else {
                     db
-                        .collection('users')
+                        .collection("users")
                         .doc(result.user.email)
-                        .set({
-                            uid: result.user.uid,
-                            age: result.additionalUserInfo.profile.age_range.min,
-                            linkFB: result.additionalUserInfo.profile.link,
-                            photoURL: result.user.photoURL
-                        }, { merge: true })
-                        .then(function () {
+                        .set(
+                            {
+                                uid: result.user.uid,
+                                age:
+                                    result.additionalUserInfo.profile.age_range
+                                        .min,
+                                linkFB: result.additionalUserInfo.profile.link,
+                                photoURL: result.user.photoURL
+                            },
+                            { merge: true }
+                        )
+                        .then(function() {
                             // eslint-disable-line no-console
-                            console.log('Document successfully written!');
+                            console.log("Document successfully written!");
                         })
-                        .catch(function (error) {
+                        .catch(function(error) {
                             // eslint-disable-line no-console
-                            console.error('Error writing document: ', error);
+                            console.error("Error writing document: ", error);
                         });
-
                 }
             });
     }
 
-
     render() {
-        let path = window.location.href.split('/')[3];
-        let content = '';
+        let path = window.location.href.split("/")[3];
+        let content = "";
         // if (newUser) {
         //     path = Routes.SIGN_UP;
         // }
@@ -139,22 +171,24 @@ class App extends React.Component {
                                 content={content}
                                 newUser={newUser}
                             />
-                            {!path ? <Redirect to={'/messenger'} /> : null}
+                            {!path ? <Redirect to={"/messenger"} /> : null}
                         </div>
                     ) : (
-                            <div className="login">
-                                <button className="facebook" onClick={this.login.bind(this)}>
-                                    Login with Facebook
-                                </button>
-                                );
-
-                                <Redirect to={'/'} />
-                            </div>
-                        )
+                        <div className="login">
+                            <button
+                                className="facebook"
+                                onClick={this.login.bind(this)}
+                            >
+                                Login with Facebook
+                            </button>
+                            );
+                            <Redirect to={"/"} />
+                        </div>
+                    )
                 ) : (
-                        // if login hasn't mounted
-                        <div />
-                    )}
+                    // if login hasn't mounted
+                    <div />
+                )}
             </div>
         );
     }

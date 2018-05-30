@@ -1,11 +1,11 @@
-import React from 'react';
-import { auth } from '../FirestoreConfig';
-import './SignUp.css';
-import next from '../img/next.svg';
-import back from '../img/back.svg';
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import Tooltip from 'rc-tooltip';
+import React from "react";
+import { auth } from "../FirestoreConfig";
+import "./SignUp.css";
+import next from "../img/next.svg";
+import back from "../img/back.svg";
+import Slider, { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import Tooltip from "rc-tooltip";
 
 // found here http://react-component.github.io/slider/examples/handle.html
 const Handle = Slider.Handle;
@@ -56,11 +56,10 @@ class SignUp4 extends React.Component {
             musicPreferences: this.state.musicPreferences
             // neighborhoodPreferences: this.state.neighborhoodPreferences
         };
-        console.log("4", data)
+        console.log("4", data);
 
         this.props.saveValues(data);
         this.props.submitRegistration();
-
     }
 
     render() {
@@ -78,11 +77,13 @@ class SignUp4 extends React.Component {
                 </Tooltip>
             );
         };
-        console.log("4 render", this.state)
+        console.log("4 render", this.state);
 
         return (
             <div className="signup-page">
-                <div className="tagline-2">TELL US MORE &amp; GET BETTER DATES</div>
+                <div className="tagline-2">
+                    TELL US MORE &amp; GET BETTER DATES
+                </div>
                 <img
                     src={back}
                     className="back back-2"
@@ -95,32 +96,44 @@ class SignUp4 extends React.Component {
                     alt="next"
                     onClick={this.nextStep}
                 />
-                <div id="signup4" >
+                <div id="signup4">
                     <div className="foodPref-label">
-                        <label className="signup-label signup4-header" htmlFor="foodPreferencesAllergies">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="foodPreferencesAllergies"
+                        >
                             FOOD PREFERENCES / ALLERGIES
                         </label>
                     </div>
                     <div id="foodAllergies">
-                        {Object.keys(this.props.fieldValues.foodPreferences).map((item, index) => {
+                        {Object.keys(
+                            this.props.fieldValues.foodPreferences
+                        ).map((item, index) => {
                             return (
                                 <div className="boxes" key={index}>
                                     <input
                                         type="checkbox"
                                         id={"box" + index}
                                         className="pref-checkbox"
-                                        checked={this.state.foodPreferences[item]}
+                                        checked={
+                                            this.state.foodPreferences[item]
+                                        }
                                         onChange={() => {
-                                            let foodTemp = this.state.foodPreferences;
+                                            let foodTemp = this.state
+                                                .foodPreferences;
                                             if (foodTemp[item]) {
                                                 foodTemp[item] = false;
                                             } else {
                                                 foodTemp[item] = true;
                                             }
-                                            this.setState({ foodPreferences: foodTemp })
-
-                                        }} />
-                                    <label htmlFor={"box" + index}>{item}</label>
+                                            this.setState({
+                                                foodPreferences: foodTemp
+                                            });
+                                        }}
+                                    />
+                                    <label htmlFor={"box" + index}>
+                                        {item}
+                                    </label>
                                 </div>
                             );
                         })}
@@ -139,11 +152,11 @@ class SignUp4 extends React.Component {
                             max={3}
                             defaultValue={this.state.datePrice}
                             handle={handle}
-                            trackStyle={[{ backgroundColor: '#828282' }]}
+                            trackStyle={[{ backgroundColor: "#828282" }]}
                             handleStyle={[
                                 {
-                                    backgroundColor: '#9BA2FF',
-                                    borderColor: '#9BA2FF'
+                                    backgroundColor: "#9BA2FF",
+                                    borderColor: "#9BA2FF"
                                 }
                             ]}
                             onChange={this.onSliderChange}
@@ -151,16 +164,23 @@ class SignUp4 extends React.Component {
                     </div>
 
                     <br />
-                    <div id="foodLike" >
-                        <label className="signup-label signup4-header" htmlFor="CuisinesYes">
+                    <div id="foodLike">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="CuisinesYes"
+                        >
                             CUISINES I LIKE
-                    </label>
+                        </label>
                         <br />
-                        {Object.keys(this.props.fieldValues.cuisinePreferences).map((food, index) => {
+                        {Object.keys(
+                            this.props.fieldValues.cuisinePreferences
+                        ).map((food, index) => {
                             return (
                                 <button
                                     className={
-                                        this.state.cuisinePreferences[food] ? 'pref-button active' : 'pref-button'
+                                        this.state.cuisinePreferences[food]
+                                            ? "pref-button active"
+                                            : "pref-button"
                                     }
                                     key={index}
                                     onClick={() => {
@@ -170,23 +190,34 @@ class SignUp4 extends React.Component {
                                         } else {
                                             f[food] = true;
                                         }
-                                        this.setState({ cuisinePreferences: f })
-
+                                        this.setState({
+                                            cuisinePreferences: f
+                                        });
                                     }}
-                                >{food}</button>);
+                                >
+                                    {food}
+                                </button>
+                            );
                         })}
                     </div>
-                    <div id="foodHate" >
+                    <div id="foodHate">
                         <br />
-                        <label className="signup-label signup4-header" htmlFor="CuisinesNo">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="CuisinesNo"
+                        >
                             CUISINES I HATE
-                    </label>
+                        </label>
                         <br />
-                        {Object.keys(this.props.fieldValues.cuisineDislikes).map((food, index) => {
+                        {Object.keys(
+                            this.props.fieldValues.cuisineDislikes
+                        ).map((food, index) => {
                             return (
                                 <button
                                     className={
-                                        this.state.cuisineDislikes[food] ? 'pref-button active' : 'pref-button'
+                                        this.state.cuisineDislikes[food]
+                                            ? "pref-button active"
+                                            : "pref-button"
                                     }
                                     key={index}
                                     onClick={() => {
@@ -196,23 +227,32 @@ class SignUp4 extends React.Component {
                                         } else {
                                             f[food] = true;
                                         }
-                                        this.setState({ cuisineDislikes: f })
-
+                                        this.setState({ cuisineDislikes: f });
                                     }}
-                                >{food}</button>);
+                                >
+                                    {food}
+                                </button>
+                            );
                         })}
                     </div>
                     <div id="musicLike">
                         <br />
-                        <label className="signup-label signup4-header" htmlFor="Music">
+                        <label
+                            className="signup-label signup4-header"
+                            htmlFor="Music"
+                        >
                             MUSIC PREFERENCES
-                    </label>
+                        </label>
                         <br />
-                        {Object.keys(this.props.fieldValues.musicPreferences).map((genre, index) => {
+                        {Object.keys(
+                            this.props.fieldValues.musicPreferences
+                        ).map((genre, index) => {
                             return (
                                 <button
                                     className={
-                                        this.state.musicPreferences[genre] ? 'pref-button active' : 'pref-button'
+                                        this.state.musicPreferences[genre]
+                                            ? "pref-button active"
+                                            : "pref-button"
                                     }
                                     key={index}
                                     onClick={() => {
@@ -222,19 +262,19 @@ class SignUp4 extends React.Component {
                                         } else {
                                             m[genre] = true;
                                         }
-                                        this.setState({ musicPreferences: m })
-
+                                        this.setState({ musicPreferences: m });
                                     }}
-                                >{genre}</button>);
+                                >
+                                    {genre}
+                                </button>
+                            );
                         })}
                     </div>
                 </div>
-            </div >
+            </div>
         );
     }
 }
-
-
 
 export default SignUp4;
 

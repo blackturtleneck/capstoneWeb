@@ -38,20 +38,19 @@ class SignUp1 extends React.Component {
     }
 
     render() {
-        const header = this.props.newUser ?
-            (
-                <div>
-                    <div className="signup-header-welcome"> EDIT YOUR </div>
-                    <div className="signup-header-amp">A M P R</div>
-                    <div className="signup-header-welcome-profile">PROFILE</div>
-                </div>
-            ) : (
-                <div>
-                    <div className="signup-header-welcome"> WELCOME TO </div>
-                    <div className="signup-header-amp">A M P R</div>
-                </div>
-            )
-        console.log("s1", this.props.fieldValues)
+        const header = this.props.newUser ? (
+            <div>
+                <div className="signup-header-welcome"> EDIT YOUR </div>
+                <div className="signup-header-amp">A M P R</div>
+                <div className="signup-header-welcome-profile">PROFILE</div>
+            </div>
+        ) : (
+            <div>
+                <div className="signup-header-welcome"> WELCOME TO </div>
+                <div className="signup-header-amp">A M P R</div>
+            </div>
+        );
+        console.log('s1', this.props.fieldValues);
         return (
             <div className="signup-page">
                 <button >click</button>
@@ -158,7 +157,7 @@ class SignUp1 extends React.Component {
                             required
                             name="year"
                             className="inline-form custom-select form-input year"
-                        // defaultValue={this.props.fieldValues.birthday.year}
+                            // defaultValue={this.props.fieldValues.birthday.year}
                         >
                             <option value="select">select</option>
                             <option value="1963">1963</option>
@@ -241,7 +240,6 @@ class SignUp1 extends React.Component {
             </div>
         );
     }
-
 }
 
 export default SignUp1;
