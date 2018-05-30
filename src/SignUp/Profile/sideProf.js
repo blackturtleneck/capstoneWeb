@@ -4,12 +4,14 @@ import './sideProf.css'
 // import FirstDates from '../../Enums'
 let usersDates = []; //allDates
 let usersTopics = []; //allTopics
+let userAge = '';
 class SideProf extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             otherUser: this.props.otherUser
         };
+        this.calcAge = this.calcAge.bind(this);
     }
 
     componentWillMount() {
@@ -49,6 +51,8 @@ class SideProf extends React.Component {
                     })
                     console.log("all users topics", usersTopics)
                     this.setState({ usersTopics: usersTopics })
+                    userAge = this.calcAge.bind(this, doc.data().birthday)
+                    console.log(userAge)
                 }
             })
         console.log("topics outside function", usersTopics)
@@ -95,13 +99,12 @@ class SideProf extends React.Component {
                             }
                         })
                         component.setState({ usersTopics: usersTopics })
-                        this.setState({ usersDates: usersDates, usersTopics: usersTopics })
+                        userAge = this.calcAge.bind(this, doc.data().birthday)
+                        // () => this.calcAge(doc.data().birthday)
+                        console.log(userAge)
                     }
-
                     component.forceUpdate();
                 })
-
-
         }
     }
 
@@ -145,7 +148,7 @@ class SideProf extends React.Component {
                 years--;
             }
         }
-        this.setState({ age: years });
+        userAge = years;
     }
 
     render() {
@@ -164,7 +167,7 @@ class SideProf extends React.Component {
                 {this.state.otherDoc &&
                     <div>
                         <h4 className="other-header" > {this.state.otherDoc.name} </h4 >
-                        {/* <p className="otherProfile-info">{this.state.age}</p> */}
+                        <p className="otherProfile-info">{userAge}</p>
                         <p className="otherProfile-info">{this.state.otherDoc.location}</p>
 
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[0]} alt={this.state.otherDoc.name} />
@@ -196,8 +199,8 @@ class SideProf extends React.Component {
                         <img className="sideProf-img" src={this.state.otherDoc.imgProfile[3]} alt={this.state.otherDoc.name} />
                         <p className="otherProfile-info-type">BIO</p>
                         <p className="otherProfile-info">{this.state.otherDoc.bio}</p>
-                        <div>block</div>
-                        <div>unmatch</div>
+                        <button className="block-button">BLOCK</button>
+                        <button className="unmatch-button">UNMATCH</button>
                     </div>
                 }
             </div>
