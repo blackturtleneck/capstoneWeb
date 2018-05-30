@@ -68,6 +68,7 @@ class Messenger extends React.Component {
                 .then(function(currDates) {
                     if (currDates.length !== 0) {
                         currentComponent.setState(prevState => ({
+                            // eslint-disable-line no-use-before-define
                             dates: currDates,
                             dateExists: false,
                             userSent: currDates[currDates.length - 1].sent,
@@ -78,6 +79,7 @@ class Messenger extends React.Component {
                         }));
                     } else {
                         currentComponent.setState(prevState => ({
+                            // eslint-disable-line no-use-before-define
                             dates: currDates,
                             dateExists: false
                         }));
@@ -364,6 +366,7 @@ class Messenger extends React.Component {
 
     render() {
         const currentMessage = this.state.messages.map((message, i) => {
+            // eslint-disable-line no-use-before-define
             return (
                 <li
                     className={

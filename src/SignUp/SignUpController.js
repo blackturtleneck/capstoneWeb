@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { db } from '../FirestoreConfig';
-import { Redirect } from 'react-router-dom';
-import './SignUp.css';
-import SignUp1 from './SignUp1';
-import SignUp2 from './SignUp2';
-import SignUp3 from './SignUp3';
-import SignUp4 from './SignUp4';
-import SignUpComplete from './SignUpComplete';
+import React, { Component } from "react"; // eslint-disable-line no-use-before-define
+import { db } from "../FirestoreConfig";
+import { Redirect } from "react-router-dom"; // eslint-disable-line no-use-before-define
+import "./SignUp.css";
+import SignUp1 from "./SignUp1"; // eslint-disable-line no-use-before-define
+import SignUp2 from "./SignUp2"; // eslint-disable-line no-use-before-define
+import SignUp3 from "./SignUp3"; // eslint-disable-line no-use-before-define
+import SignUp4 from "./SignUp4"; // eslint-disable-line no-use-before-define
+import SignUpComplete from "./SignUpComplete"; // eslint-disable-line no-use-before-define
 
-let fieldValues = '';
-let existingUser = false;
+let fieldValues = "";
+// let existingUser = false;
 
 class SignUpInController extends Component {
     constructor(props) {
@@ -25,16 +25,16 @@ class SignUpInController extends Component {
 
     componentWillMount() {
         db
-            .collection('users')
+            .collection("users")
             .doc(this.props.user.email)
             .get()
             .then(doc => {
-                console.log('doc', doc.data());
+                console.log("doc", doc.data());
                 // if (doc.exists) {
                 if (!doc.data().newUser) {
                     // existingUser = true;
 
-                    console.log('in if cwm', doc.data());
+                    console.log("in if cwm", doc.data());
                     let ref = doc.data();
                     fieldValues = {
                         name: ref.name,
@@ -66,14 +66,14 @@ class SignUpInController extends Component {
                         foodTypeHATE: ref.foodTypeHATE,
                         music: ref.music
                     };
-                    console.log('fv in cwm', fieldValues);
+                    console.log("fv in cwm", fieldValues);
                     // this.setState({ existingUser: true })
                     // }
                 } else {
-                    console.log('in else cwm', fieldValues);
+                    console.log("in else cwm", fieldValues);
                     fieldValues = {
                         name: null,
-                        gender: '',
+                        gender: "",
                         education: null,
                         religion: null,
                         occupation: null,
@@ -141,10 +141,10 @@ class SignUpInController extends Component {
 
                         dietaryPref: {
                             VEGETARIAN: false,
-                            'GLUTEN-FREE': false,
+                            "GLUTEN-FREE": false,
                             VEGAN: false,
-                            'DAIRY-FREE': false,
-                            'NO RED MEAT': false,
+                            "DAIRY-FREE": false,
+                            "NO RED MEAT": false,
                             KOSHER: false,
                             PALEO: false,
                             RAW: false
@@ -154,18 +154,18 @@ class SignUpInController extends Component {
                         neighborhoods: {
                             BALLARD: false,
                             BELLTOWN: false,
-                            'CAPITOL HILL': false,
+                            "CAPITOL HILL": false,
                             DOWNTOWN: false,
-                            'INTERNATIONAL DISTRICT': false,
-                            'FIRST HILL': false,
+                            "INTERNATIONAL DISTRICT": false,
+                            "FIRST HILL": false,
                             FREMONT: false,
                             GEORGETOWN: false,
-                            'PIONEER SQUARE': false,
-                            'QUEEN ANNE': false,
+                            "PIONEER SQUARE": false,
+                            "QUEEN ANNE": false,
                             SODO: false,
-                            'SOUTH LAKE UNION': false,
+                            "SOUTH LAKE UNION": false,
                             WALLINGFORD: false,
-                            'WEST SEATTLE': false,
+                            "WEST SEATTLE": false,
                             UDISTRICT: false
                         },
                         foodTypeLIKE: {
@@ -183,7 +183,7 @@ class SignUpInController extends Component {
                             MEXICAN: false,
                             PIZZA: false,
                             THAI: false,
-                            'MIDDLE EASTERN': false
+                            "MIDDLE EASTERN": false
                         },
                         foodTypeHATE: {
                             AMERICAN: false,
@@ -200,15 +200,15 @@ class SignUpInController extends Component {
                             MEXICAN: false,
                             PIZZA: false,
                             THAI: false,
-                            'MIDDLE EASTERN': false
+                            "MIDDLE EASTERN": false
                         },
                         music: {
                             POP: false,
                             COUNTRY: false,
                             EDM: false,
-                            'R&B': false,
+                            "R&B": false,
                             LATIN: false,
-                            'HIP HOP': false,
+                            "HIP HOP": false,
                             ALTERNATIVE: false,
                             CLASSICAL: false,
                             INDIE: false,
@@ -223,7 +223,7 @@ class SignUpInController extends Component {
                 }
             })
             .catch(err => {
-                console.log('Error getting document', err);
+                console.log("Error getting document", err);
             });
     }
 
@@ -246,7 +246,7 @@ class SignUpInController extends Component {
     }
 
     submitRegistration() {
-        let userRef = db.collection('users');
+        let userRef = db.collection("users");
         userRef.doc(this.props.user.email).set(
             {
                 name: fieldValues.name,
@@ -284,48 +284,48 @@ class SignUpInController extends Component {
     }
 
     showStep() {
-        console.log('FV in showstep', fieldValues);
+        console.log("FV in showstep", fieldValues);
         switch (this.state.step) {
-        default:
-            return (
-                <SignUp1
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                    newUser={this.props.newUser}
-                />
-            );
-        case 2:
-            return (
-                <SignUp2
-                    nextStep={this.nextStep}
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                />
-            );
-        case 3:
-            return (
-                <SignUp3
-                    previousStep={this.previousStep}
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                />
-            );
-        case 4:
-            return (
-                <SignUp4
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues}
-                    fieldValues={fieldValues}
-                    submitRegistration={this.submitRegistration}
-                />
-            );
-        case 5:
-            return <SignUpComplete nextStep={this.nextStep} />;
-        case 6:
-            return <Redirect to={'/messenger'} />;
+            default:
+                return (
+                    <SignUp1
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                        newUser={this.props.newUser}
+                    />
+                );
+            case 2:
+                return (
+                    <SignUp2
+                        nextStep={this.nextStep}
+                        previousStep={this.previousStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                    />
+                );
+            case 3:
+                return (
+                    <SignUp3
+                        previousStep={this.previousStep}
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                    />
+                );
+            case 4:
+                return (
+                    <SignUp4
+                        previousStep={this.previousStep}
+                        saveValues={this.saveValues}
+                        fieldValues={fieldValues}
+                        submitRegistration={this.submitRegistration}
+                    />
+                );
+            case 5:
+                return <SignUpComplete nextStep={this.nextStep} />;
+            case 6:
+                return <Redirect to={"/messenger"} />;
         }
     }
     render() {
@@ -336,10 +336,10 @@ class SignUpInController extends Component {
             // ) : (
             <div className="signup-wrapper">
                 <div
-                    style={{ width: progress + 'vw' }}
+                    style={{ width: progress + "vw" }}
                     className="progress-bar"
                 >
-                    {' '}
+                    {" "}
                 </div>
                 {this.showStep()}
             </div>
