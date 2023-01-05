@@ -31,11 +31,11 @@
     "eslint-plugin-standard": "^3.1.0",
     "firebase": "^4.9.1",
     "install-peers": "^1.0.2",
-    "jest-cli": "^22.4.3",
+    "jest-cli": "^29.3.1",
     "react-bootstrap": "^0.32.1",
     "react-edit-inline": "^1.0.8",
     "react-google-maps": "^9.4.5",
-    "react-scripts": "1.1.1"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
